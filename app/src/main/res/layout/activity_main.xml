@@ -19,24 +19,25 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="318dp"
-        android:layout_height="137dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="436dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titolo_main" />
 
     <ImageView
         android:id="@+id/sole_rotante_sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="57dp"
         android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.136"
         app:srcCompat="@drawable/ic_icona_sole" />
 </androidx.constraintlayout.widget.ConstraintLayout>
