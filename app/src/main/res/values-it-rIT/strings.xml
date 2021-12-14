@@ -9,4 +9,8 @@
     <string name="bottone_impostazioni_menu">Impostazioni</string>
     <string name="modalita_classica">Classica</string>
     <string name="modalita_reloaded">Reloaded</string>
+    <string name="bottone_impostazioni_audio">Audio</string>
+    <string name="bottone_riconoscimenti">Riconoscimenti</string>
+    <string name="bottone_uscita">Esci</string>
+    <string name="torna_indietro">Torna al menu</string>
 </resources>

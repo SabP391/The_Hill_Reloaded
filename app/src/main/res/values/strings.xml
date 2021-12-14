@@ -8,4 +8,8 @@
     <string name="bottone_impostazioni_menu">Impostazioni</string>
     <string name="modalita_classica">Classica</string>
     <string name="modalita_reloaded">Reloaded</string>
+    <string name="bottone_impostazioni_audio">Sound</string>
+    <string name="bottone_riconoscimenti">Credits</string>
+    <string name="bottone_uscita">Log-out</string>
+    <string name="torna_indietro">Back to menu</string>
 </resources>
