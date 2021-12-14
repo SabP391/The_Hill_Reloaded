@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuestMenuActivity"
+    tools:context=".SettingsActivity"
     android:background="@color/giallo_scuro_background">
 
     <ImageView
@@ -30,10 +30,10 @@
     <Button
         android:id="@+id/bottone_audio"
         style="@style/StileBottoni"
-        android:layout_width="120dp"
+        android:layout_width="135dp"
         android:layout_height="55dp"
         android:layout_marginTop="108dp"
-        android:text="@string/bottone_inizia_partita"
+        android:text="@string/bottone_impostazioni_audio"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
@@ -41,29 +41,44 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bottone_accedi_google"
+        android:id="@+id/bottone_riconoscimenti"
         style="@style/StileBottoni"
-        android:layout_width="120dp"
+        android:layout_width="135dp"
         android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/bottone_accesso_google"
+        android:layout_marginTop="37dp"
+        android:text="@string/bottone_riconoscimenti"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.800"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_audio" />
 
     <Button
-        android:id="@+id/bottone_impostazioni_ospite"
+        android:id="@+id/bottone_esci"
         style="@style/StileBottoni"
-        android:layout_width="120dp"
+        android:layout_width="135dp"
         android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:onClick="onClickImpostazioni"
-        android:text="@string/bottone_impostazioni_menu"
+        android:layout_marginTop="29dp"
+        android:onClick="onClickEsci"
+        android:text="@string/bottone_uscita"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.800"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_riconoscimenti" />
+
+    <ImageButton
+        android:id="@+id/bottone_torna_indietro"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="32dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/torna_indietro"
+        android:contextClickable="false"
+        android:onClick="OnClickTornaIndietro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_freccia" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

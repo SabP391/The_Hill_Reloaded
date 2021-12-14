@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="verde_chiaro">#698b58</color>
     <color name="verde_scuro">#3a512e</color>
+    <color name="giallo_scuro_background">#CCCC63</color>
 </resources>
