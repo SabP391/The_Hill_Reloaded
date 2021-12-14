@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The Hill Reloaded</string>
+    <string name="bottone_continua_no_accesso">Continue without login</string>
+    <string name="bottone_accesso_google">Log-in with Google</string>
+</resources>
