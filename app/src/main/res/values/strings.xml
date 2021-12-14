@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">The Hill Reloaded</string>
-    <string name="">Accedi con Google</string>
     <string name="bottone_continua_no_accesso">Continua senza accedere</string>
     <string name="bottone_accesso_google">Accedi con Google</string>
 </resources>
