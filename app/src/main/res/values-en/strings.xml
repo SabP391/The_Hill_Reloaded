@@ -7,4 +7,6 @@
     <string name="bottone_continua_partita">Continue game</string>
     <string name="bottone_online_game">Online</string>
     <string name="bottone_impostazioni_menu">Settings</string>
+    <string name="modalita_classica">Classic mode</string>
+    <string name="modalita_reloaded">Reloaded mode</string>
 </resources>
