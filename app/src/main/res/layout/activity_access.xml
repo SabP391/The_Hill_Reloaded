@@ -20,26 +20,13 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bg_main" />
 
-    <Button
-        android:id="@+id/bottone_ospite"
-        style="@style/StileBottoni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/bottone_continua_no_accesso"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_google" />
-
     <ImageView
         android:id="@+id/titolo_accesso"
         android:layout_width="436dp"
         android:layout_height="194dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titolo_main" />
@@ -49,12 +36,27 @@
         style="@style/StileBottoni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
+        android:onClick="onClickUtente"
         android:text="@string/bottone_accesso_google"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titolo_accesso" />
+
+    <Button
+        android:id="@+id/bottone_ospite"
+        style="@style/StileBottoni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickOspite"
+        android:text="@string/bottone_continua_no_accesso"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_google" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
