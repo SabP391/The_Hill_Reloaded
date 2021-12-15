@@ -28,7 +28,7 @@
         app:srcCompat="@drawable/titolo_main" />
 
     <Button
-        android:id="@+id/bottone_audio"
+        android:id="@+id/bottone_inizia_ospite"
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="55dp"
@@ -39,7 +39,8 @@
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/verde_scuro" />
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_accedi_google"
@@ -52,7 +53,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_audio" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_ospite"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_impostazioni_ospite"
@@ -66,5 +69,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_modalita_ospite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
