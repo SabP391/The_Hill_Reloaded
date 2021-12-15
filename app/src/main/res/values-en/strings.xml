@@ -16,5 +16,7 @@
     <string name="mod_facile">Easy</string>
     <string name="mod_normale">Normal</string>
     <string name="mod_difficile">Hard</string>
+    <string name="classic_description">Classic mode to enjoy The Hill Reloaded as it was intended</string>
+    <string name="reloaded_description">A new game mode with powerups!!</string>
 
 </resources>
