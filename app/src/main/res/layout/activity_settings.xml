@@ -28,7 +28,7 @@
         app:srcCompat="@drawable/titolo_main" />
 
     <Button
-        android:id="@+id/bottone_audio"
+        android:id="@+id/bottone_inizia_ospite"
         style="@style/StileBottoni"
         android:layout_width="135dp"
         android:layout_height="55dp"
@@ -38,7 +38,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_riconoscimenti"
@@ -51,7 +53,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_audio" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_ospite"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_esci"
@@ -65,7 +69,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_riconoscimenti" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_riconoscimenti"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <ImageButton
         android:id="@+id/bottone_torna_indietro"
