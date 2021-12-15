@@ -12,6 +12,7 @@ import android.widget.Button;
 public class GuestMenuActivity extends AppCompatActivity {
 
     Intent menuImpostazioni;
+    Intent menuAccesso;
     Button nuovaPartita;
     Fragment modalitaGioco;
 
@@ -21,6 +22,7 @@ public class GuestMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guest_menu);
 
         menuImpostazioni = new Intent(this, SettingsActivity.class);
+        menuAccesso = new Intent(this, AccessActivity.class);
 
         nuovaPartita = findViewById(R.id.bottone_inizia_ospite);
         nuovaPartita.setOnClickListener(new View.OnClickListener(){
@@ -47,6 +49,11 @@ public class GuestMenuActivity extends AppCompatActivity {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0)
             getSupportFragmentManager().popBackStackImmediate();
         else super.onBackPressed();
+    }
+
+    public void onClickAccesso(View view) {
+        startActivity(menuAccesso);
+        finish();
     }
 
     public void onClickImpostazioni(View view) { startActivity(menuImpostazioni); }
