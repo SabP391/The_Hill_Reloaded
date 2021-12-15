@@ -18,6 +18,21 @@
         app:srcCompat="@drawable/bg_main" />
 
     <Button
+        android:id="@+id/bottone_inizia_utente"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/bottone_inizia_partita"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.844"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp" />
+
+    <Button
         android:id="@+id/bottone_continua_utente"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -28,7 +43,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_online_utente"
@@ -41,7 +58,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_continua_utente" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_continua_utente"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_impostazioni_utente"
@@ -54,21 +73,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_online_utente" />
-
-    <Button
-        android:id="@+id/bottone_inizia_utente"
-        style="@style/StileBottoni"
-        android:layout_width="120dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="68dp"
-        android:onClick="onClickNuovaPartita"
-        android:text="@string/bottone_inizia_partita"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_online_utente"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <ImageView
         android:id="@+id/imageView4"
@@ -81,7 +88,14 @@
         app:srcCompat="@drawable/titolo_main" />
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/fragment_modalita"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <FrameLayout
+        android:id="@+id/fragment_difficolta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
