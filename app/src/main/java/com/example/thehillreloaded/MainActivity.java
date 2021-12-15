@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         soleRotante.startAnimation(animazioneSole);
 
         //Creazione dell'intent per lanciare la schermata successiva
-        Intent nuovaActivity = new Intent(this, AccessActivity.class);
+        //BISOGNA CAMBIARE USERMENUACTIVITY CON ACCESSACTIVITY ATTENZIONEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        Intent nuovaActivity = new Intent(this, UserMenuActivity.class);
 
         //funzione temporanea che serve a passare alla schermata successiva
         //tappando sul sole

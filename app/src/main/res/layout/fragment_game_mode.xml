@@ -18,7 +18,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/bottone_online_utente3"
@@ -31,6 +33,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente3"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintVertical_bias="0.29"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

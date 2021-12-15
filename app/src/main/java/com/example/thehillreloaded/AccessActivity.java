@@ -1,6 +1,8 @@
 package com.example.thehillreloaded;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ public class AccessActivity extends AppCompatActivity {
         // Creazione degli intent per accedere alle schermate successive
         menuUtente = new Intent(this, UserMenuActivity.class);
         menuOspite = new Intent(this, GuestMenuActivity.class);
+
     }
 
     @Override
