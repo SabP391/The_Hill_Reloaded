@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHillReloaded">
         <activity
+            android:name=".GoogleSignInActivity"
+            android:theme="@style/TransparentActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:screenOrientation="landscape" />

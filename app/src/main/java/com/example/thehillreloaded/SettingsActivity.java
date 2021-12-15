@@ -9,6 +9,7 @@ import android.view.View;
 public class SettingsActivity extends AppCompatActivity {
 
     Intent tornaAdAccesso;
+    GoogleSignInWrapper autenticazione;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void OnClickTornaIndietro(View view){ finish(); }
-    public void onClickEsci(View view) { startActivity(tornaAdAccesso); }
+    public void onClickEsci(View view) {
+        autenticazione.getInstance(this).logout();
+        startActivity(tornaAdAccesso); }
 }
