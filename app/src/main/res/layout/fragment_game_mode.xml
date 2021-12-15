@@ -7,8 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".GameModeFragment">
 
+    <FrameLayout
+        android:id="@+id/fragment_difficolta"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <Button
-        android:id="@+id/bottone_inizia_utente3"
+        android:id="@+id/bottone_classica"
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
@@ -23,7 +30,7 @@
         app:strokeWidth="3dp"/>
 
     <Button
-        android:id="@+id/bottone_online_utente3"
+        android:id="@+id/bottone_reloaded"
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
@@ -32,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente3"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_classica"
         app:layout_constraintVertical_bias="0.29"
         app:strokeColor="#445F36"
         app:strokeWidth="3dp"/>

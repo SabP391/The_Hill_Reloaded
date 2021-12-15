@@ -5,8 +5,9 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_access.xml" value="0.2708333333333333" />
         <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_settings.xml" value="0.5541666666666667" />
-        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_user_menu.xml" value="0.5541666666666667" />
-        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_game_mode.xml" value="0.5541666666666667" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_user_menu.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_classic_difficulty.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_game_mode.xml" value="0.33" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/font/roboto_black.xml" value="0.22239583333333332" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_access.xml" value="0.4" />

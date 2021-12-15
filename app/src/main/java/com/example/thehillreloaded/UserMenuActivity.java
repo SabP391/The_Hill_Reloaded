@@ -17,7 +17,8 @@ public class UserMenuActivity extends AppCompatActivity {
 
     Intent menuImpostazioni;
     Button iniziaPartita;
-    androidx.fragment.app.Fragment modalitaGiocoF;
+    Fragment modalitaGiocoF;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +36,8 @@ public class UserMenuActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                getFragmentManager().beginTransaction().remove(modalitaGiocoF);
-            }
-        };
-        */
+
+
     }
 
     private void selezionaModalitàFragment(Fragment fragment){
@@ -50,6 +45,7 @@ public class UserMenuActivity extends AppCompatActivity {
                 .beginTransaction()
                 .addToBackStack("fragment1")
                 .add(R.id.fragment_modalita, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
 

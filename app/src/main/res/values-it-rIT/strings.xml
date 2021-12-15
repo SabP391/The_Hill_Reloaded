@@ -13,4 +13,7 @@
     <string name="bottone_riconoscimenti">Riconoscimenti</string>
     <string name="bottone_uscita">Esci</string>
     <string name="torna_indietro">Torna al menu</string>
+    <string name="mod_facile">Facile</string>
+    <string name="mod_normale">Normale</string>
+    <string name="mod_difficile">Difficile</string>
 </resources>

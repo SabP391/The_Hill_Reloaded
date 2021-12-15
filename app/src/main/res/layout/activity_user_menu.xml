@@ -68,6 +68,7 @@
         android:layout_width="120dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
+        android:onClick="onClickImpostazioni"
         android:text="@string/bottone_impostazioni_menu"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_online_utente"
         app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        app:strokeWidth="3dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -94,10 +95,4 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <FrameLayout
-        android:id="@+id/fragment_difficolta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

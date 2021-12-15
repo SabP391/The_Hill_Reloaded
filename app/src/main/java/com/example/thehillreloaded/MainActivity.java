@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Creazione dell'intent per lanciare la schermata successiva
         //BISOGNA CAMBIARE USERMENUACTIVITY CON ACCESSACTIVITY ATTENZIONEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-        Intent nuovaActivity = new Intent(this, UserMenuActivity.class);
+        Intent nuovaActivity = new Intent(this, AccessActivity.class);
 
         //funzione temporanea che serve a passare alla schermata successiva
         //tappando sul sole

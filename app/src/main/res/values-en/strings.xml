@@ -13,5 +13,8 @@
     <string name="bottone_riconoscimenti">Credits</string>
     <string name="bottone_uscita">Log-out</string>
     <string name="torna_indietro">Back to menu</string>
+    <string name="mod_facile">Easy</string>
+    <string name="mod_normale">Normal</string>
+    <string name="mod_difficile">Hard</string>
 
 </resources>
