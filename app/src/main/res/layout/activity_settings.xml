@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titolo_main" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_inizia_ospite"
         style="@style/StileBottoni"
         android:layout_width="135dp"
@@ -39,10 +39,9 @@
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_riconoscimenti"
         style="@style/StileBottoni"
         android:layout_width="135dp"
@@ -54,10 +53,9 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_ospite"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_esci"
         style="@style/StileBottoni"
         android:layout_width="135dp"
@@ -70,8 +68,7 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_riconoscimenti"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
     <ImageButton
         android:id="@+id/bottone_torna_indietro"

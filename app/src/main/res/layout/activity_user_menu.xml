@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_main" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_inizia_utente"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -29,10 +29,9 @@
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_continua_utente"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -44,10 +43,9 @@
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_online_utente"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -59,10 +57,9 @@
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_continua_utente"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_impostazioni_utente"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -75,8 +72,7 @@
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_online_utente"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
     <ImageView
         android:id="@+id/imageView4"

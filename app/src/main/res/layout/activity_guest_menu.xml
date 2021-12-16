@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titolo_main" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_inizia_ospite"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -39,10 +39,9 @@
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_accedi_google"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -55,10 +54,9 @@
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_ospite"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_impostazioni_ospite"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -71,8 +69,7 @@
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp"/>
+        android:background="@drawable/bottoni_personalizzati"/>
 
     <FrameLayout
         android:id="@+id/fragment_modalita_ospite"
