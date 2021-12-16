@@ -56,7 +56,7 @@ public class AccessActivity extends AppCompatActivity {
         ospite.setVisibility(View.INVISIBLE);
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
                 .add(R.id.fragment_accesso_ospite, fragment)
                 .addToBackStack("fragment1")
                 .commit();
@@ -68,6 +68,13 @@ public class AccessActivity extends AppCompatActivity {
         Button ospite = findViewById(R.id.bottone_ospite);
         ospite.setVisibility(View.VISIBLE);
         getSupportFragmentManager().popBackStackImmediate();
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+            getSupportFragmentManager().popBackStackImmediate();
+        else super.onBackPressed();
     }
 
     public void onClickUtente(View view) { autenticazione.getInstance(this).login(this);}

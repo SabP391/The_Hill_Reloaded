@@ -79,7 +79,6 @@ public class GameModeFragment extends Fragment {
         getChildFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
-                //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .add(R.id.fragment_difficolta, fragment)
                 .addToBackStack("fragment2")
                 .commit();

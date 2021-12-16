@@ -60,6 +60,7 @@
         android:fontFamily="@font/roboto_black"
         android:text="@string/accesso_senza_login"
         android:textAlignment="center"
+        android:textColor="@color/verde_scuro"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView10"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
