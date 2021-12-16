@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.922" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_facile"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -31,10 +31,9 @@
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_normale"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -46,10 +45,9 @@
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/bottone_facile"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_difficile"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -63,7 +61,6 @@
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/bottone_normale"
         app:layout_constraintVertical_bias="0.055"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

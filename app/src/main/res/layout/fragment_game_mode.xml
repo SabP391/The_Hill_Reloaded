@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.625" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_reloaded"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -31,10 +31,9 @@
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/imageView9"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/bottone_classica"
         style="@style/StileBottoni"
         android:layout_width="120dp"
@@ -46,8 +45,7 @@
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="@+id/imageView9"
-        app:strokeColor="#445F36"
-        app:strokeWidth="3dp" />
+        android:background="@drawable/bottoni_personalizzati"/>
 
     <FrameLayout
         android:id="@+id/fragment_difficolta"
