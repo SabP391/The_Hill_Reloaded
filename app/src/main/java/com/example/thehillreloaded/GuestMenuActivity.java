@@ -38,9 +38,9 @@ public class GuestMenuActivity extends AppCompatActivity {
     private void selezionaModalitàFragment(Fragment fragment){
         getSupportFragmentManager()
                 .beginTransaction()
-                .addToBackStack("fragment1")
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .add(R.id.fragment_modalita_ospite, fragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack("fragment1")
                 .commit();
     }
 
