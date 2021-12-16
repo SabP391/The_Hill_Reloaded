@@ -42,6 +42,7 @@ public class AccessActivity extends AppCompatActivity {
         // per utenti registrati
         if(autenticazione.getInstance(this).isLogged(this)){
             startActivity(menuUtente);
+            finish();
         }
     }
 
@@ -72,14 +73,24 @@ public class AccessActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+            Button google = findViewById(R.id.bottone_google);
+            google.setVisibility(View.VISIBLE);
+            Button ospite = findViewById(R.id.bottone_ospite);
+            ospite.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStackImmediate();
+        }
         else super.onBackPressed();
     }
 
-    public void onClickUtente(View view) { autenticazione.getInstance(this).login(this);}
+    public void onClickUtente(View view) {
+        autenticazione.getInstance(this).login(this);
+        finish();
+    }
+
     public void onClickOspite(View view) {
         startActivity(menuOspite);
+        finish();
     }
 
 }
