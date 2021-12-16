@@ -7,39 +7,83 @@
     android:layout_height="match_parent"
     tools:context=".GameModeFragment">
 
-    <FrameLayout
-        android:id="@+id/fragment_difficolta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <android.widget.Button
-        android:id="@+id/bottone_classica"
-        style="@style/StileBottoni"
-        android:layout_width="120dp"
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="@string/modalita_classica"
-        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:src="@drawable/ic_bg_fragment_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintVertical_bias="0.625" />
 
-    <android.widget.Button
+    <Button
         android:id="@+id/bottone_reloaded"
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:text="@string/modalita_reloaded"
         android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp" />
+
+    <Button
+        android:id="@+id/bottone_classica"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/modalita_classica"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        app:strokeColor="#445F36"
+        app:strokeWidth="3dp" />
+
+    <FrameLayout
+        android:id="@+id/fragment_difficolta"
+        android:layout_width="731dp"
+        android:layout_height="414dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_classica"
-        app:layout_constraintVertical_bias="0.29"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="133dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/classic_description"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_classica" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="148dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/reloaded_description"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_reloaded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
