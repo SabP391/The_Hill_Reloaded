@@ -18,5 +18,8 @@
     <string name="mod_difficile">Hard</string>
     <string name="classic_description">Classic mode to enjoy The Hill Reloaded as it was intended</string>
     <string name="reloaded_description">A new game mode with powerups!!</string>
+    <string name="accesso_senza_login">Guest accounts has limited app functions. Are you sure to continue as guest?</string>
+    <string name="continua_ospite">Continue as guest</string>
+    <string name="back_to_login">Back to login</string>
 
 </resources>

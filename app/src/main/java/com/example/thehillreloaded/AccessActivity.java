@@ -2,11 +2,13 @@ package com.example.thehillreloaded;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -41,6 +43,31 @@ public class AccessActivity extends AppCompatActivity {
         if(autenticazione.getInstance(this).isLogged(this)){
             startActivity(menuUtente);
         }
+    }
+
+    public void ospiteFragment(View view){
+        continuaComeOspiteFragment(new NoLoginAccessFragment());
+    }
+
+    private void continuaComeOspiteFragment(Fragment fragment){
+        Button google = findViewById(R.id.bottone_google);
+        google.setVisibility(View.INVISIBLE);
+        Button ospite = findViewById(R.id.bottone_ospite);
+        ospite.setVisibility(View.INVISIBLE);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .add(R.id.fragment_accesso_ospite, fragment)
+                .addToBackStack("fragment1")
+                .commit();
+    }
+
+    public void chiudiFragment(View view){
+        Button google = findViewById(R.id.bottone_google);
+        google.setVisibility(View.VISIBLE);
+        Button ospite = findViewById(R.id.bottone_ospite);
+        ospite.setVisibility(View.VISIBLE);
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
     public void onClickUtente(View view) { autenticazione.getInstance(this).login(this);}

@@ -3,19 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/drawable/fragment_background.xml" value="0.3828125" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_access.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_google_sign_in.xml" value="0.4234375" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_guest_menu.xml" value="0.4234375" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_main.xml" value="0.4234375" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_user_menu.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_classic_difficulty.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_game_mode.xml" value="0.67" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_no_login_access.xml" value="0.5" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/font/roboto_black.xml" value="0.22239583333333332" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_access.xml" value="0.4" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_settings.xml" value="0.178125" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/drawable/bottoni_personalizzati.xml" value="0.2703125" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/activity_access.xml" value="0.536" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/activity_guest_menu.xml" value="0.4" />
         <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/activity_settings.xml" value="0.4" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/activity_user_menu.xml" value="0.264" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/fragment_classic_difficulty.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/fragment_game_mode.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

@@ -30,46 +30,46 @@
     <android.widget.Button
         android:id="@+id/bottone_inizia_ospite"
         style="@style/StileBottoni"
-        android:layout_width="120dp"
+        android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginTop="108dp"
+        android:background="@drawable/bottoni_personalizzati"
         android:text="@string/bottone_inizia_partita"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
         android:id="@+id/bottone_accedi_google"
         style="@style/StileBottoni"
-        android:layout_width="120dp"
+        android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/bottoni_personalizzati"
         android:onClick="onClickAccesso"
         android:text="@string/bottone_accesso_google"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_ospite"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_ospite" />
 
     <android.widget.Button
         android:id="@+id/bottone_impostazioni_ospite"
         style="@style/StileBottoni"
-        android:layout_width="120dp"
+        android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/bottoni_personalizzati"
         android:onClick="onClickImpostazioni"
         android:text="@string/bottone_impostazioni_menu"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google" />
 
     <FrameLayout
         android:id="@+id/fragment_modalita_ospite"

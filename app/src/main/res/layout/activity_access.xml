@@ -31,34 +31,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titolo_main" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_accesso_ospite"
+        android:layout_width="429dp"
+        android:layout_height="178dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_accesso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/bg_accesso"
+        app:layout_constraintTop_toBottomOf="@+id/titolo_accesso"
+        app:layout_constraintVertical_bias="0.0" />
+
     <android.widget.Button
         android:id="@+id/bottone_google"
         style="@style/StileBottoni"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="@drawable/bottoni_personalizzati"
         android:onClick="onClickUtente"
         android:text="@string/bottone_accesso_google"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titolo_accesso"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toBottomOf="@+id/titolo_accesso" />
 
     <android.widget.Button
         android:id="@+id/bottone_ospite"
         style="@style/StileBottoni"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:onClick="onClickOspite"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="ospiteFragment"
         android:text="@string/bottone_continua_no_accesso"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_google"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottone_google" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
