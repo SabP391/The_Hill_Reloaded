@@ -78,7 +78,8 @@ public class GameModeFragment extends Fragment {
     public void selDiffClassicaFragment(Fragment fragment){
         getChildFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+                //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .add(R.id.fragment_difficolta, fragment)
                 .addToBackStack("fragment2")
                 .commit();
