@@ -24,6 +24,7 @@ public class GoogleSignInWrapper {
         // Creazione dell'oggetto di opzioni di autenticazione
        opzioniAutenticazione = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken("945803891284-9buic6b21l19oq9k8lahirv7m5hurge8.apps.googleusercontent.com")
                 .build();
 
        // Creazione del client di autenticazione
