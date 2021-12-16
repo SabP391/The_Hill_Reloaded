@@ -36,8 +36,6 @@ public class UserMenuActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void selezionaModalitàFragment(Fragment fragment){
@@ -57,4 +55,7 @@ public class UserMenuActivity extends AppCompatActivity {
     }
 
     public void onClickImpostazioni(View view) { startActivity(menuImpostazioni); }
+
+    public void onClickGioco(View view) {
+        Intent intent = new Intent(this, GameActivity.class); startActivity(intent);}
 }

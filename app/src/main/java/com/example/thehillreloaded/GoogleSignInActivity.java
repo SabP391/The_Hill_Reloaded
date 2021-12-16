@@ -34,5 +34,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
         // Lancia il menu per gli utenti che hanno effettuato l'accesso
        Intent menuUtente = new Intent(this, UserMenuActivity.class);
        startActivity(menuUtente);
+       finish();
     }
 }

@@ -85,7 +85,6 @@ public class AccessActivity extends AppCompatActivity {
 
     public void onClickUtente(View view) {
         autenticazione.getInstance(this).login(this);
-        finish();
     }
 
     public void onClickOspite(View view) {

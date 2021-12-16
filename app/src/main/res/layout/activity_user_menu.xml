@@ -37,13 +37,14 @@
         android:layout_width="120dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickGioco"
         android:text="@string/bottone_continua_partita"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottone_inizia_utente" />
 
     <android.widget.Button
         android:id="@+id/bottone_online_utente"
@@ -86,9 +87,9 @@
 
     <FrameLayout
         android:id="@+id/fragment_modalita"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="733dp"
+        android:layout_height="432dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="-20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

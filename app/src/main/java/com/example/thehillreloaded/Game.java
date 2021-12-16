@@ -1,12 +1,21 @@
 package com.example.thehillreloaded;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
 
@@ -25,6 +34,31 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
+    private int x = 10, y = 10;
+
+    private Bitmap getBitmap(VectorDrawable vectorDrawable) {
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        Log.e("ciao", "getBitmap: 1");
+        return bitmap;
+    }
+
+    private Bitmap getBitmap(Context context, int drawableId) {
+        Log.e("ciao", "getBitmap: 2");
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        if (drawable instanceof BitmapDrawable) {
+            return BitmapFactory.decodeResource(context.getResources(), drawableId);
+        } else if (drawable instanceof VectorDrawable) {
+            return getBitmap((VectorDrawable) drawable);
+        } else {
+            throw new IllegalArgumentException("unsupported drawable type");
+        }
+    }
+    private Bitmap bitmap;
+
 
     // Creazione e inizializzazione della classe Game ----------------------------------------------
 
@@ -40,19 +74,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
+        bitmap = getBitmap(context, R.drawable.ic_icona_sole);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 1000, 1000, false);
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
 
     // metodo per il rendering, in questo metodo vanno
     // inserite le cose da mostrare a schermo
-    public void render(Canvas c){
+    public void render(@NonNull Canvas c){
+        c.drawColor(getResources().getColor(R.color.black));
+        c.drawBitmap(bitmap, x, x, null);
 
     }
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-
+        y += 1;
+        x += 1;
     }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
