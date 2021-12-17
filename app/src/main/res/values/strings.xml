@@ -20,6 +20,6 @@
     <string name="accesso_senza_login">Effettuando l\'accesso come ospite le funzioni dell\'applicazione saranno limitate. Sei sicuro di voler continuare come ospite?</string>
     <string name="continua_ospite">Continua come ospite</string>
     <string name="back_to_login">Ritorna al login</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="switch_volume_musica">Musica</string>
+    <string name="switch_volume_suoni">Suoni</string>
 </resources>

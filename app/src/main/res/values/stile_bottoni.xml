@@ -2,6 +2,5 @@
 <resources>
     <style name="StileBottoni" parent="@android:style/TextAppearance.Small">
         <item name="android:fontFamily">@font/roboto_black</item>
-        <item name="android:textColor">@color/verde_scuro</item>
     </style>
 </resources>

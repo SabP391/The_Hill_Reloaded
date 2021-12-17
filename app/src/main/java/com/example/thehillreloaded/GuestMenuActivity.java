@@ -2,7 +2,6 @@ package com.example.thehillreloaded;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +23,7 @@ public class GuestMenuActivity extends AppCompatActivity {
         menuImpostazioni = new Intent(this, SettingsActivity.class);
         menuAccesso = new Intent(this, AccessActivity.class);
 
-        nuovaPartita = findViewById(R.id.bottone_inizia_ospite);
+        nuovaPartita = findViewById(R.id.bottone_impostazioni_volume);
         nuovaPartita.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

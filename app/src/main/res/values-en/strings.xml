@@ -21,5 +21,7 @@
     <string name="accesso_senza_login">Guest accounts has limited app functions. Are you sure to continue as guest?</string>
     <string name="continua_ospite">Continue as guest</string>
     <string name="back_to_login">Back to login</string>
+    <string name="switch_volume_musica">Music</string>
+    <string name="switch_volume_suoni">Sound</string>
 
 </resources>

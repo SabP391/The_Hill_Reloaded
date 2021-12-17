@@ -87,9 +87,9 @@
 
     <FrameLayout
         android:id="@+id/fragment_modalita"
-        android:layout_width="733dp"
-        android:layout_height="432dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-20dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
