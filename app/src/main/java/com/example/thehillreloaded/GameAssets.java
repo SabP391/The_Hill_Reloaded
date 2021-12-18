@@ -29,30 +29,25 @@ public class GameAssets {
     private GameAssets(){
         rand = new Random();
         // Creazione dell'array di sprite per il vetro ---------------------------------------------
-        vetro = new Bitmap[5];
+        vetro = new Bitmap[3];
             vetro[0] = getBitmap(context, R.drawable.asset_vetro_1);
             vetro[1] = getBitmap(context, R.drawable.asset_vetro_2);
             vetro[2] = getBitmap(context, R.drawable.asset_vetro_3);
-            vetro[3] = getBitmap(context, R.drawable.asset_vetro_4);
-            vetro[4] = getBitmap(context, R.drawable.asset_vetro_5);
         // Creazione dell'array di sprite per il alluminio -----------------------------------------
-        alluminio = new Bitmap[4];
+        alluminio = new Bitmap[3];
             alluminio[0] = getBitmap(context, R.drawable.asset_alluminio_1);
             alluminio[1] = getBitmap(context, R.drawable.asset_alluminio_2);
             alluminio[2] = getBitmap(context, R.drawable.asset_alluminio_3);
-            alluminio[3] = getBitmap(context, R.drawable.asset_alluminio_4);
         // Creazione dell'array di sprite per il acciao --------------------------------------------
-        acciaio = new Bitmap[3];
+        acciaio = new Bitmap[2];
             acciaio[0] = getBitmap(context, R.drawable.asset_acciaio_1);
             acciaio[1] = getBitmap(context, R.drawable.asset_acciaio_2);
-            acciaio[2] = getBitmap(context, R.drawable.asset_acciaio_3);
         // Creazione dell'array di sprite per il plastica ------------------------------------------
-        plastica =  new Bitmap[5];
+        plastica =  new Bitmap[4];
             plastica[0] = getBitmap(context, R.drawable.asset_plastica_1);
             plastica[1] = getBitmap(context, R.drawable.asset_plastica_2);
             plastica[2] = getBitmap(context, R.drawable.asset_plastica_3);
             plastica[3] = getBitmap(context, R.drawable.asset_plastica_4);
-            plastica[4] = getBitmap(context, R.drawable.asset_plastica_5);
         // Creazione dell'array di sprite per il carta ---------------------------------------------
         carta = new Bitmap[2];
             carta[0] = getBitmap(context, R.drawable.asset_carta_1);
@@ -62,10 +57,9 @@ public class GameAssets {
             eWaste[0] = getBitmap(context, R.drawable.asset_ewaste_1);
             eWaste[1] = getBitmap(context, R.drawable.asset_ewaste_2);
         // Creazione dell'array di sprite per il umido ---------------------------------------------
-        umido = new Bitmap[3];
+        umido = new Bitmap[2];
             umido[0] = getBitmap(context, R.drawable.asset_umido_1);
             umido[1] = getBitmap(context, R.drawable.asset_umido_2);
-            umido[2] = getBitmap(context, R.drawable.asset_umido_3);
     };
 
     public static GameAssets getInstance(Context context2){
@@ -103,6 +97,66 @@ public class GameAssets {
 
     Bitmap getRandCompost(Point size){
         return(Bitmap.createScaledBitmap(umido[rand.nextInt(umido.length)], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultGlass(Point size){
+        return(Bitmap.createScaledBitmap(vetro[0], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultAl(Point size){
+        return(Bitmap.createScaledBitmap(alluminio[0], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultSteel(Point size){
+        return(Bitmap.createScaledBitmap(acciaio[0], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultPlastic(Point size){
+        return(Bitmap.createScaledBitmap(plastica[0], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultPaper(Point size){
+        return(Bitmap.createScaledBitmap(carta[0], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultEWaste(Point size){
+        return(Bitmap.createScaledBitmap(eWaste[0], size.x, size.y, false));
+    }
+
+    Bitmap getDefaultCompost(Point size){
+        return(Bitmap.createScaledBitmap(umido[0], size.x, size.y, false));
+    }
+
+    Bitmap getRandAsset(Point size){
+        int r = rand.nextInt(6);
+        Bitmap temp;
+        switch(r){
+            case 0:
+                temp =  getRandAl(size);
+                break;
+            case 1:
+                temp =  getRandCompost(size);
+                break;
+            case 2:
+                temp =  getRandEWaste(size);
+                break;
+            case 3:
+                temp = getRandGlass(size);
+                break;
+            case 4:
+                temp =  getRandPaper(size);
+                break;
+            case 5:
+                temp =  getRandPlastic(size);
+                break;
+            case 6:
+                temp = getRandSteel(size);
+                break;
+            default:
+                temp = getRandGlass(size);
+                break;
+        }
+        return temp;
     }
 
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------

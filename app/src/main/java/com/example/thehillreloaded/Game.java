@@ -1,6 +1,5 @@
 package com.example.thehillreloaded;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,7 +8,6 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
-import android.os.Build;
 import android.util.Log;
 import android.view.Display;
 import android.view.SurfaceHolder;
@@ -17,7 +15,6 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
@@ -37,7 +34,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
-    private int x = 10, y = 10;
+    private int x = 0, y = 0;
     private GameAssets ga;
 
     private Bitmap getBitmap(VectorDrawable vectorDrawable) {
@@ -65,6 +62,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private Bitmap bitmap2;
     private Bitmap bitmap3;
     private Point size;
+    private TileMap tileMap;
+
 
 
     // Creazione e inizializzazione della classe Game ----------------------------------------------
@@ -81,16 +80,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
-        Point a = new Point(120, 120);
-        bitmap = GameAssets.getInstance(context).getRandGlass(a);
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
+        tileMap = new TileMap(18, size);
+        Point a = new Point((int)tileMap.tileSize, (int)tileMap.tileSize);
+        bitmap = GameAssets.getInstance(context).getRandAsset(a);
         bitmap2 = getBitmap(context, R.drawable.ic_bg_ingame);
         bitmap2 = Bitmap.createScaledBitmap(bitmap2, size.x, size.y, false);
-        bitmap3 = GameAssets.getInstance(context).getRandPlastic(a);
-
+        x = (int) (6 * tileMap.tileSize);
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -99,14 +98,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         c.drawBitmap(bitmap2, 0, 0, null);
-        c.drawBitmap(bitmap3, size.x - bitmap3.getWidth(), 0, null);
-        c.drawBitmap(bitmap, x, x, null);
+        tileMap.drawTilemap(c);
+        c.drawBitmap(bitmap, x, y, null);
     }
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-        y += 1;
-        x += 1;
+        y += 5;
     }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
