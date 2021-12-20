@@ -1,4 +1,4 @@
-package com.example.thehillreloaded;
+package com.example.thehillreloaded.Game;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,9 +8,10 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
-import android.util.Log;
 
 import androidx.core.content.ContextCompat;
+
+import com.example.thehillreloaded.R;
 
 import java.util.Random;
 

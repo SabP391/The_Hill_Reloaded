@@ -1,4 +1,4 @@
-package com.example.thehillreloaded;
+package com.example.thehillreloaded.Game;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TileMap {
+    public float getTileSize() {
+        return tileSize;
+    }
+
+    public void setTileSize(float tileSize) {
+        this.tileSize = tileSize;
+    }
+
     // Membri della classe -------------------------------------------------------------------------
     // Dimensione delle tile. Essendo le tile quadrate,
     // viene salvato un solo valore per altezza e larghezza
@@ -23,14 +31,17 @@ public class TileMap {
     private Paint occupiedTilePaint;
 
     // Costruttore della classe, prende in input il numero di tile
-    // orizzontali richieste e la dimensione dello schermo
+    // orizzontali richieste (cioé il numero di righe)
+    // e la dimensione dello schermo
     // e inizializza la tilemap
     public TileMap(int horizontalTileCount, Point screenSize) {
         mapSize = new Point();
-        tileSize = (float) screenSize.x / horizontalTileCount;
-        this.mapSize.x = horizontalTileCount + 1;
-        this.mapSize.y = Math.round((screenSize.y / tileSize));
+        tileSize = (float) ((screenSize.y / horizontalTileCount) - 2);
+        this.mapSize.y = horizontalTileCount;
+        this.mapSize.x = Math.round((screenSize.x / tileSize));
         tileMap = new ArrayList<Integer>(Collections.nCopies(mapSize.x * mapSize.y, 0));
+        // Variabili necessare per il metodo drawTilemap,
+        // utili principalmente in fase di debug
         tileGridPaint = new Paint();
         tileGridPaint.setStyle(Paint.Style.STROKE);
         occupiedTilePaint = new Paint();
@@ -63,4 +74,5 @@ public class TileMap {
 
         }
     }
+
 }

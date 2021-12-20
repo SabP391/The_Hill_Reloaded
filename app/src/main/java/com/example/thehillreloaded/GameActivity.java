@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.thehillreloaded.Game.Game;
+
 public class GameActivity extends AppCompatActivity {
 
     @Override

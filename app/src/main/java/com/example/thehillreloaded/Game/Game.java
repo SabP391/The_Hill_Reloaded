@@ -1,21 +1,19 @@
-package com.example.thehillreloaded;
+package com.example.thehillreloaded.Game;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+
+import java.util.Random;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
 
@@ -37,19 +35,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private int x = 0, y = 0;
 
     private Bitmap bitmap;
+    private GameObject obj[];
     private Bitmap backGround;
     private Point size;
     private TileMap tileMap;
-    private int currentTile;
-    private long time;
-    private long elapsedTime = 0;
+    private int currentIndex = 0;
 
 
 
     // Creazione e inizializzazione della classe Game ----------------------------------------------
 
     // Costruttore per la classe Game
-    Game(Context context) {
+    public Game(Context context) {
         super(context);
         init(context);
     }
@@ -67,10 +64,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         tileMap = new TileMap(10, size);
         Point a = new Point((int)tileMap.tileSize, (int)tileMap.tileSize);
         bitmap = GameAssets.getInstance(context).getRandAsset(a);
+        obj = new GameObject[10];
+        Random rand = new Random();
+        for(int i = 0; i < 10; i++){
+            obj[i] = new GameObject(GameAssets.getInstance(context).getRandAsset(a), rand.nextInt(5), tileMap);
+        }
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
-        x = (int) (2 * tileMap.tileSize);
-        currentTile = 2;
-        tileMap.tileMap.set(currentTile, 1);
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -80,17 +79,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void render(@NonNull Canvas c){
         c.drawBitmap(backGround, 0, 0, null);
         tileMap.drawTilemap(c);
-        c.drawBitmap(bitmap, x, y, null);
+        for(int i = 0; i < 10; i++){
+            obj[i].drawObject(c);
+        }
     }
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-        if(currentTile < tileMap.mapSize.y * tileMap.mapSize.x - (tileMap.mapSize.x + x/tileMap.tileSize)){
-            tileMap.tileMap.set(currentTile, 0);
-            y += (int) (tileMap.tileSize);
-            currentTile = currentTile + tileMap.mapSize.x;
-            tileMap.tileMap.set(currentTile, 1);
-       }
+        for(int i = 0; i < 10; i++){
+            obj[i].move();
+        }
     }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
@@ -219,4 +217,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     }
 
     // Metodi per la gestione degli input ----------------------------------------------------------
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        obj[currentIndex].setOnScreen(true);
+        currentIndex++;
+        return true;
+    }
 }
