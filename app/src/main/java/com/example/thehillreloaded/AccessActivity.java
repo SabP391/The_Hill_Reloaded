@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +20,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class AccessActivity extends AppCompatActivity {
+    //variabili per service
+    SoundEffectService soundService;
+    boolean soundServiceBound = false;
+    BGMusicService musicService;
+    Intent effettiSonori;
+    Intent avviaMusica;
+    boolean musicaAttiva = false;
+
     //costante per l'autenticazione
     GoogleSignInWrapper autenticazione;
 
@@ -38,6 +50,10 @@ public class AccessActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        effettiSonori = new Intent(this, SoundEffectService.class);
+        avviaMusica = new Intent(this, BGMusicService.class);
+        startService(avviaMusica);
+        bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
         // Se l'utente ha già effettuato l'accesso viene reindirizzato al menu
         // per utenti registrati
         if(autenticazione.getInstance(this).isLogged(this)){
@@ -46,7 +62,18 @@ public class AccessActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //distrugge bind
+        if(soundServiceBound){
+            unbindService(soundServiceConnection);
+            soundServiceBound = false;
+        }
+    }
+
     public void ospiteFragment(View view){
+        soundService.suonoBottoni();
         continuaComeOspiteFragment(new NoLoginAccessFragment());
     }
 
@@ -84,12 +111,27 @@ public class AccessActivity extends AppCompatActivity {
     }
 
     public void onClickUtente(View view) {
+        soundService.suonoBottoni();
         autenticazione.getInstance(this).login(this);
     }
 
     public void onClickOspite(View view) {
+        soundService.suonoBottoni();
         startActivity(menuOspite);
         finish();
     }
 
+    //Necessari per il service binding
+    private ServiceConnection soundServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            SoundEffectService.LocalBinder binder = (SoundEffectService.LocalBinder) service;
+            soundService = binder.getService();
+            soundServiceBound = true;
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            soundServiceBound = false;
+        }
+    };
 }
