@@ -1,0 +1,90 @@
+package com.example.thehillreloaded.Game;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Point;
+
+
+public class GameItem {
+    // Membri della classe -------------------------------------------------------------------------
+    private final ItemType itemType;
+    private final Bitmap objectSprite;
+    private Point position;
+    private TileMap map;
+    private final int initialTile;
+    private int currentTile;
+    private boolean onScreen = false;
+
+    // Costruttori di classe -----------------------------------------------------------------------
+    public GameItem(int initialTile, TileMap map, Context context, ItemType itemType){
+        this.initialTile = initialTile;
+        this.currentTile = initialTile;
+        this.position = new Point((int) (initialTile * map.getTileSize()), 0);
+        this.map = map;
+        this.itemType = itemType;
+        Point spriteSize = new Point((int) map.getTileSize(), (int) map.getTileSize());
+        switch (itemType){
+            case AllMINIUM:
+                objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
+                break;
+            case COMPOST:
+                objectSprite = GameAssets.getInstance(context).getRandCompost(spriteSize);
+                break;
+            case EWASTE:
+                objectSprite = GameAssets.getInstance(context).getRandEWaste(spriteSize);
+                break;
+            case GLASS:
+                objectSprite = GameAssets.getInstance(context).getRandGlass(spriteSize);
+                break;
+            case PAPER:
+                objectSprite = GameAssets.getInstance(context).getRandPaper(spriteSize);
+                break;
+            case PLASTIC:
+                objectSprite = GameAssets.getInstance(context).getRandPlastic(spriteSize);
+                break;
+            case STEEL:
+                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                break;
+            default:
+                throw new IllegalArgumentException("Non esiste questo tipo di item");
+        }
+    }
+
+    // Metodi per la gestione dell'oggetto in gioco ------------------------------------------------
+    // Metodo per gestire la caduta dell'oggetto sullo schermo
+    // Il metodo permette all'oggetto di cadere solo finchè
+    // non arriva in fondo allo schermo e se la tile
+    // successiva a quella attualmente occupata è libera
+    public void fall(){
+        if(onScreen){
+            if(!isTouchingTheBlueLine()){
+                if(map.isNextTileFree(currentTile)) {
+                    map.setTileValue(currentTile, 0);
+                    position.y += (int) (map.getTileSize());
+                    currentTile = map.getNextTileIndex(currentTile);
+                    map.setTileValue(currentTile, 1);
+                }
+            }
+
+        }
+    }
+
+    // Metodo per disegnare a schermo gli oggetti di gioco
+    public void drawObject(Canvas c){
+        if(onScreen){
+            c.drawBitmap(objectSprite, position.x, position.y, null);
+        }
+    }
+
+    // Metodi utili --------------------------------------------------------------------------------
+    public void setOnScreen(boolean bool){
+        onScreen = bool;
+    }
+
+    // Metodo che controlla se l'oggetto si trova
+    // nell'ultima riga della tilemap
+    public boolean isTouchingTheBlueLine(){
+        return !(currentTile < (map.getMapSize().y * map.getMapSize().x) - (map.getMapSize().x - initialTile));
+    }
+}

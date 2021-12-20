@@ -8,27 +8,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TileMap {
-    public float getTileSize() {
-        return tileSize;
-    }
-
-    public void setTileSize(float tileSize) {
-        this.tileSize = tileSize;
-    }
-
     // Membri della classe -------------------------------------------------------------------------
     // Dimensione delle tile. Essendo le tile quadrate,
     // viene salvato un solo valore per altezza e larghezza
-    public float tileSize;
+    private final float tileSize;
     // Numero di tile che formeranno la mappa
-    public Point mapSize;
+    private final Point mapSize;
     // La tileMap vera è propria viene salvata in un ArrayList
     // di interi, in modo da poter ridurre le coordinate delle tile
     // ad una sola dimensione
-    public ArrayList<Integer> tileMap;
+    private ArrayList<Integer> tileMap;
     // Variabili necessarie per disegnare la tileMap in fase di debug
-    private Paint tileGridPaint;
-    private Paint occupiedTilePaint;
+    private final Paint tileGridPaint;
+    private final Paint occupiedTilePaint;
 
     // Costruttore della classe, prende in input il numero di tile
     // orizzontali richieste (cioé il numero di righe)
@@ -48,6 +40,33 @@ public class TileMap {
         occupiedTilePaint.setStyle(Paint.Style.FILL_AND_STROKE);
     }
 
+    // Metodi utili --------------------------------------------------------------------------------
+    public int getNextTileIndex(int currentTile){
+        return currentTile + mapSize.x;
+    }
+
+    public boolean isNextTileFree(int currentTile){
+        return (tileMap.get((currentTile + mapSize.x)) == 0);
+    }
+
+    // Getter e setter -----------------------------------------------------------------------------
+    public float getTileSize() {
+        return this.tileSize;
+    }
+
+    public Point getMapSize() {
+        return this.mapSize;
+    }
+
+    public void setTileValue(int index, int tileValue){
+        tileMap.set(index, tileValue);
+    }
+
+    public int getTileValue(int index){
+        return tileMap.get(index);
+    }
+
+    // Metodi di utility per il debug --------------------------------------------------------------
     // Metodo di debug, serve a disegnare a schermo la tilemap.
     // Disegna solo i bordi della tilemap quando le tile sono libere,
     // mentre riempe la tile quando è occupata
@@ -74,5 +93,4 @@ public class TileMap {
 
         }
     }
-
 }

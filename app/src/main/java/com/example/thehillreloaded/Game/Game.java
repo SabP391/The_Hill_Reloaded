@@ -28,14 +28,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile booleana per tenere sotto controllo lo stato del renderer
     private boolean isDrawing = false;
     // Tempo per frame per ottenere i 60 FPS
-    private static final int MAX_FRAME_TIME = (int) (1000.0 / 5.0);
+    private static final int MAX_FRAME_TIME = (int) (1000.0 / 60.0);
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
     private int x = 0, y = 0;
 
     private Bitmap bitmap;
-    private GameObject obj[];
+    private GameItem obj[];
     private Bitmap backGround;
     private Point size;
     private TileMap tileMap;
@@ -62,12 +62,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         size = new Point();
         display.getSize(size);
         tileMap = new TileMap(10, size);
-        Point a = new Point((int)tileMap.tileSize, (int)tileMap.tileSize);
+        Point a = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
         bitmap = GameAssets.getInstance(context).getRandAsset(a);
-        obj = new GameObject[10];
+        obj = new GameItem[10];
         Random rand = new Random();
+        ItemType values[] = ItemType.values();
         for(int i = 0; i < 10; i++){
-            obj[i] = new GameObject(GameAssets.getInstance(context).getRandAsset(a), rand.nextInt(5), tileMap);
+            obj[i] = new GameItem(rand.nextInt(15), tileMap, context, values[rand.nextInt(5)]);
         }
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
     }
@@ -87,7 +88,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
         for(int i = 0; i < 10; i++){
-            obj[i].move();
+            obj[i].fall();
         }
     }
 
