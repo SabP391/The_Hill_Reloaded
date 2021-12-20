@@ -1,4 +1,4 @@
-package com.example.thehillreloaded;
+package com.example.thehillreloaded.Services;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
+
+import com.example.thehillreloaded.R;
 
 public class BGMusicService extends Service {
     //binder given to clients
@@ -28,7 +30,7 @@ public class BGMusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mediaPlayer.start();
+        mediaPlayer.stop();
         return START_STICKY;
     }
 

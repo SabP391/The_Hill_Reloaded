@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHillReloaded">
         <service
-            android:name=".SoundEffectService"
+            android:name=".Services.SoundEffectService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
         <service
-            android:name=".BGMusicService"
+            android:name=".Services.BGMusicService"
             android:enabled="true"
             android:exported="true" />
 

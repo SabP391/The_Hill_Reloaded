@@ -1,9 +1,7 @@
 package com.example.thehillreloaded;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -14,10 +12,8 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.example.thehillreloaded.Services.BGMusicService;
+import com.example.thehillreloaded.Services.SoundEffectService;
 
 public class AccessActivity extends AppCompatActivity {
     //variabili per service

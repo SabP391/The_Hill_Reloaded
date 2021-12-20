@@ -12,7 +12,10 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
-public class GuestMenuActivity extends AppCompatActivity {
+import com.example.thehillreloaded.Services.BGMusicService;
+import com.example.thehillreloaded.Services.SoundEffectService;
+
+public class GuestMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX {
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
@@ -104,4 +107,9 @@ public class GuestMenuActivity extends AppCompatActivity {
             soundServiceBound = false;
         }
     };
+
+    @Override
+    public void suonoBottoni() {
+        soundService.suonoBottoni();
+    }
 }

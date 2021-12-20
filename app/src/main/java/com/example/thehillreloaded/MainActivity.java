@@ -10,6 +10,8 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
+import com.example.thehillreloaded.Services.BGMusicService;
+
 public class MainActivity extends AppCompatActivity {
     Intent avviaMusica;
     BGMusicService musicService;

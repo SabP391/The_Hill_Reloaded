@@ -1,4 +1,4 @@
-package com.example.thehillreloaded;
+package com.example.thehillreloaded.Services;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Binder;
 import android.os.IBinder;
+
+import com.example.thehillreloaded.R;
 
 public class SoundEffectService extends Service {
     //Binder per clients
@@ -37,7 +39,7 @@ public class SoundEffectService extends Service {
 
     //Classe usata per client binder
     public class LocalBinder extends Binder {
-        SoundEffectService getService(){
+        public SoundEffectService getService(){
             //Restituisce l'istanza del Service per permettere l'uso dei metodi pubblici
             return SoundEffectService.this;
         }

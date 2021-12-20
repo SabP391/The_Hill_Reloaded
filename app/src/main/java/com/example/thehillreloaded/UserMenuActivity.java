@@ -1,11 +1,7 @@
 package com.example.thehillreloaded;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,7 +12,10 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
-public class UserMenuActivity extends AppCompatActivity {
+import com.example.thehillreloaded.Services.BGMusicService;
+import com.example.thehillreloaded.Services.SoundEffectService;
+
+public class UserMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX {
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
@@ -107,4 +106,9 @@ public class UserMenuActivity extends AppCompatActivity {
             soundServiceBound = false;
         }
     };
+
+    @Override
+    public void suonoBottoni() {
+        soundService.suonoBottoni();
+    }
 }

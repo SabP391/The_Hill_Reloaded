@@ -1,8 +1,10 @@
 package com.example.thehillreloaded;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,6 +20,7 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class GameModeFragment extends Fragment {
+    private SoundFX sfx;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,6 +72,7 @@ public class GameModeFragment extends Fragment {
         selDiffClassica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sfx.suonoBottoni();
                 selDiffClassicaFragment(new ClassicDifficultyFragment());
             }
         });
@@ -83,4 +87,24 @@ public class GameModeFragment extends Fragment {
                 .addToBackStack("fragment2")
                 .commit();
     }
+
+    interface SoundFX {
+        void suonoBottoni();
+    }
+
+    //override dei metodi onAttach e onDetach
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        sfx = (SoundFX) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        sfx = null;
+    }
+
 }
