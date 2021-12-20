@@ -7,13 +7,23 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
 public class UserMenuActivity extends AppCompatActivity {
+    //variabili per service
+    SoundEffectService soundService;
+    boolean soundServiceBound = false;
+    BGMusicService musicService;
+    Intent effettiSonori;
+    Intent avviaMusica;
+    boolean musicaAttiva = false;
 
     Intent menuImpostazioni;
     Button iniziaPartita;
@@ -31,14 +41,33 @@ public class UserMenuActivity extends AppCompatActivity {
         iniziaPartita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundService.suonoBottoni();
                 modalitaGiocoF = new GameModeFragment();
                 selezionaModalitàFragment(modalitaGiocoF);
-
             }
         });
     }
 
-    private void selezionaModalitàFragment(Fragment fragment){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        effettiSonori = new Intent(this, SoundEffectService.class);
+        avviaMusica = new Intent(this, BGMusicService.class);
+        startService(avviaMusica);
+        bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //distrugge bind
+        if(soundServiceBound){
+            unbindService(soundServiceConnection);
+            soundServiceBound = false;
+        }
+    }
+
+    private void selezionaModalitàFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
@@ -48,14 +77,34 @@ public class UserMenuActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0)
             getSupportFragmentManager().popBackStackImmediate();
         else super.onBackPressed();
     }
 
-    public void onClickImpostazioni(View view) { startActivity(menuImpostazioni); }
+    public void onClickImpostazioni(View view) {
+        soundService.suonoBottoni();
+        startActivity(menuImpostazioni);
+    }
 
     public void onClickGioco(View view) {
-        Intent intent = new Intent(this, GameActivity.class); startActivity(intent);}
+        soundService.suonoBottoni();
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    //Necessari per il service binding
+    private ServiceConnection soundServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            SoundEffectService.LocalBinder binder = (SoundEffectService.LocalBinder) service;
+            soundService = binder.getService();
+            soundServiceBound = true;
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            soundServiceBound = false;
+        }
+    };
 }

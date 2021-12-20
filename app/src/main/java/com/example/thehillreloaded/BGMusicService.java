@@ -28,7 +28,7 @@ public class BGMusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mediaPlayer.stop();
+        mediaPlayer.start();
         return START_STICKY;
     }
 

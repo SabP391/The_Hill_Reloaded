@@ -48,7 +48,7 @@ public class SoundEffectService extends Service {
 
     //qui sotto sono da mettere i metodi da chiamare per far partire il suono
     //play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate);
-    public void playTrackOne() {
+    public void suonoBottoni() {
         soundPool.play(track1, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 }
