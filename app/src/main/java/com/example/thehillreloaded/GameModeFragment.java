@@ -93,8 +93,6 @@ public class GameModeFragment extends Fragment {
     }
 
     //override dei metodi onAttach e onDetach
-
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

@@ -1,12 +1,16 @@
 package com.example.thehillreloaded;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class VolumeSettingsFragment extends Fragment {
+    private Switch musicaBottone;
+    private boolean statoMusica;
+    private SoundFX sfx;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +33,10 @@ public class VolumeSettingsFragment extends Fragment {
 
     public VolumeSettingsFragment() {
         // Required empty public constructor
+    }
+
+    public VolumeSettingsFragment(Boolean bool){
+        statoMusica = bool;
     }
 
     /**
@@ -59,6 +70,50 @@ public class VolumeSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_volume_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_volume_settings, container, false);
+        //Imposta lo stato iniziale dello switch in base allo stato della musica
+
+
+        musicaBottone = (Switch) view.findViewById(R.id.switch_musica);
+        switchInitState();
+        musicaBottone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (musicaBottone.isChecked()) {
+                    //apre il music player
+                    sfx.mettiMusica();
+                    statoMusica = false;
+                } else if (!musicaBottone.isChecked()) {
+                    //chiude il music player
+                    sfx.togliMusica();
+                    statoMusica = true;
+                }
+            }
+        });
+
+        return view;
     }
+
+    interface SoundFX {
+        void suonoBottoni();
+        void mettiMusica();
+        void togliMusica();
+    }
+
+    //override dei metodi onAttach e onDetach
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        sfx = (SoundFX) context;
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        sfx = null;
+    }
+
+    public void switchInitState(){
+        musicaBottone.setChecked(statoMusica);
+    }
+
 }

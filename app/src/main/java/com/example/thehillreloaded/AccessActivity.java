@@ -130,4 +130,5 @@ public class AccessActivity extends AppCompatActivity {
             soundServiceBound = false;
         }
     };
+
 }

@@ -1,7 +1,9 @@
 package com.example.thehillreloaded;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -62,4 +64,5 @@ public class NoLoginAccessFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_no_login_access, container, false);
     }
+
 }

@@ -30,7 +30,7 @@ public class BGMusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mediaPlayer.stop();
+        mediaPlayer.start();
         return START_STICKY;
     }
 
@@ -41,8 +41,19 @@ public class BGMusicService extends Service {
         mediaPlayer.release();
     }
 
+    public void startMusic() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.bg_music_track);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+    }
+
+    public void stopMusic() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+    }
+
     public class LocalBinder extends Binder {
-        BGMusicService getService() {
+        public BGMusicService getService() {
             return BGMusicService.this;
         }
     }

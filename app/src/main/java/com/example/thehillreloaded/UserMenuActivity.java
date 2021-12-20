@@ -19,10 +19,8 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
-    BGMusicService musicService;
     Intent effettiSonori;
     Intent avviaMusica;
-    boolean musicaAttiva = false;
 
     Intent menuImpostazioni;
     Button iniziaPartita;
