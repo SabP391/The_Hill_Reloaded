@@ -17,6 +17,7 @@ import java.util.Random;
 public class GameAssets {
     private static GameAssets instance;
     private static Context context;
+    private Bitmap gameBackGround;
     private  Bitmap vetro[];
     private  Bitmap alluminio[];
     private  Bitmap acciaio[];
@@ -27,6 +28,8 @@ public class GameAssets {
     private Random rand;
 
     private GameAssets(){
+        gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
+
         rand = new Random();
         // Creazione dell'array di sprite per il vetro ---------------------------------------------
         vetro = new Bitmap[3];
@@ -159,6 +162,10 @@ public class GameAssets {
         return temp;
     }
 
+    Bitmap getGameBackGround(Point size){
+        return Bitmap.createScaledBitmap(gameBackGround, size.x, size.y, false);
+    }
+
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------
     private Bitmap getBitmap(VectorDrawable vectorDrawable) {
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
@@ -166,12 +173,10 @@ public class GameAssets {
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         vectorDrawable.draw(canvas);
-        Log.e("ciao", "getBitmap: 1");
         return bitmap;
     }
 
     private Bitmap getBitmap(Context context, int drawableId) {
-        Log.e("ciao", "getBitmap: 2");
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
         if (drawable instanceof BitmapDrawable) {
             return BitmapFactory.decodeResource(context.getResources(), drawableId);

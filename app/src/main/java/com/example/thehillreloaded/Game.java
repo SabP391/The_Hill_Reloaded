@@ -30,39 +30,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile booleana per tenere sotto controllo lo stato del renderer
     private boolean isDrawing = false;
     // Tempo per frame per ottenere i 60 FPS
-    private static final int MAX_FRAME_TIME = (int) (1000.0 / 60.0);
+    private static final int MAX_FRAME_TIME = (int) (1000.0 / 5.0);
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
     private int x = 0, y = 0;
-    private GameAssets ga;
 
-    private Bitmap getBitmap(VectorDrawable vectorDrawable) {
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        vectorDrawable.draw(canvas);
-        Log.e("ciao", "getBitmap: 1");
-        return bitmap;
-    }
-
-    private Bitmap getBitmap(Context context, int drawableId) {
-        Log.e("ciao", "getBitmap: 2");
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
-        if (drawable instanceof BitmapDrawable) {
-            return BitmapFactory.decodeResource(context.getResources(), drawableId);
-        } else if (drawable instanceof VectorDrawable) {
-            return getBitmap((VectorDrawable) drawable);
-        } else {
-            throw new IllegalArgumentException("unsupported drawable type");
-        }
-    }
     private Bitmap bitmap;
-    private Bitmap bitmap2;
-    private Bitmap bitmap3;
+    private Bitmap backGround;
     private Point size;
     private TileMap tileMap;
+    private int currentTile;
+    private long time;
+    private long elapsedTime = 0;
 
 
 
@@ -84,12 +64,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         Display display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
-        tileMap = new TileMap(18, size);
+        tileMap = new TileMap(10, size);
         Point a = new Point((int)tileMap.tileSize, (int)tileMap.tileSize);
         bitmap = GameAssets.getInstance(context).getRandAsset(a);
-        bitmap2 = getBitmap(context, R.drawable.ic_bg_ingame);
-        bitmap2 = Bitmap.createScaledBitmap(bitmap2, size.x, size.y, false);
-        x = (int) (6 * tileMap.tileSize);
+        backGround = GameAssets.getInstance(context).getGameBackGround(size);
+        x = (int) (2 * tileMap.tileSize);
+        currentTile = 2;
+        tileMap.tileMap.set(currentTile, 1);
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -97,14 +78,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo per il rendering, in questo metodo vanno
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
-        c.drawBitmap(bitmap2, 0, 0, null);
+        c.drawBitmap(backGround, 0, 0, null);
         tileMap.drawTilemap(c);
         c.drawBitmap(bitmap, x, y, null);
     }
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-        y += 5;
+        if(currentTile < tileMap.mapSize.y * tileMap.mapSize.x - (tileMap.mapSize.x + x/tileMap.tileSize)){
+            tileMap.tileMap.set(currentTile, 0);
+            y += (int) (tileMap.tileSize);
+            currentTile = currentTile + tileMap.mapSize.x;
+            tileMap.tileMap.set(currentTile, 1);
+       }
     }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
@@ -218,7 +204,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 }
             }
 
-            // Calcolo della durata del frame attuame
+            // Calcolo della durata del frame attuale
             frameTime = (System.nanoTime() / frameStartTime) / 1000000;
 
             // Se il frame è stato troppo breve si attende per mantenere
