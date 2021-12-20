@@ -11,6 +11,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+    Intent avviaMusica;
+    BGMusicService musicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         soleRotante.startAnimation(animazioneSole);
 
         //Creazione dell'intent per lanciare la schermata successiva
-        //BISOGNA CAMBIARE USERMENUACTIVITY CON ACCESSACTIVITY ATTENZIONEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         Intent nuovaActivity = new Intent(this, AccessActivity.class);
 
         //funzione temporanea che serve a passare alla schermata successiva
@@ -45,4 +46,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        avviaMusica = new Intent(this, BGMusicService.class);
+        startService(avviaMusica);
+    }
+
 }
