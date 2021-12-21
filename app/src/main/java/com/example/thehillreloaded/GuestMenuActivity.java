@@ -19,10 +19,7 @@ public class GuestMenuActivity extends AppCompatActivity implements GameModeFrag
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
-    BGMusicService musicService;
     Intent effettiSonori;
-    Intent avviaMusica;
-    boolean musicaAttiva = false;
 
     Intent menuImpostazioni;
     Intent menuAccesso;
@@ -52,8 +49,6 @@ public class GuestMenuActivity extends AppCompatActivity implements GameModeFrag
     protected void onStart() {
         super.onStart();
         effettiSonori = new Intent(this, SoundEffectService.class);
-        avviaMusica = new Intent(this, BGMusicService.class);
-        startService(avviaMusica);
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
     }
 

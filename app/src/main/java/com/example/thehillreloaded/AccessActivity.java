@@ -19,10 +19,7 @@ public class AccessActivity extends AppCompatActivity {
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
-    BGMusicService musicService;
     Intent effettiSonori;
-    Intent avviaMusica;
-    boolean musicaAttiva = false;
 
     //costante per l'autenticazione
     GoogleSignInWrapper autenticazione;
@@ -47,8 +44,6 @@ public class AccessActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         effettiSonori = new Intent(this, SoundEffectService.class);
-        avviaMusica = new Intent(this, BGMusicService.class);
-        startService(avviaMusica);
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
         // Se l'utente ha già effettuato l'accesso viene reindirizzato al menu
         // per utenti registrati

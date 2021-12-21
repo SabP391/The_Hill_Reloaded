@@ -49,7 +49,6 @@ public class BGMusicService extends Service {
 
     public void stopMusic() {
         mediaPlayer.stop();
-        mediaPlayer.release();
     }
 
     public class LocalBinder extends Binder {
