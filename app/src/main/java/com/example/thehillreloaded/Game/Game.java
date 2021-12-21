@@ -64,10 +64,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         tileMap = new TileMap(10, size);
         Point a = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
         bitmap = GameAssets.getInstance(context).getRandAsset(a);
-        obj = new GameItem[10];
+        obj = new GameItem[100];
         Random rand = new Random();
         ItemType values[] = ItemType.values();
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100; i++){
             obj[i] = new GameItem(rand.nextInt(15), tileMap, context, values[rand.nextInt(5)]);
         }
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
@@ -81,14 +81,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         c.drawBitmap(backGround, 0, 0, null);
         tileMap.drawHillAreaRectangle(c, ((int) tileMap.getMapSize().x /2) - 3, 6);
        // tileMap.drawTilemap(c);
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100; i++){
             obj[i].drawObject(c);
         }
     }
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100; i++){
             obj[i].fall(System.nanoTime());
         }
     }

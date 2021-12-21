@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
+import android.view.View;
 
 
 public class GameItem {
@@ -90,4 +93,18 @@ public class GameItem {
     public boolean isTouchingTheBlueLine(){
         return !(currentTile < (map.getMapSize().y * map.getMapSize().x) - (map.getMapSize().x - initialTile));
     }
+
+    // Getter e setter -----------------------------------------------------------------------------
+    public Point getPosition(){
+        return position;
+    }
+
+    public void setPosition(Point pos){
+        this.position = pos;
+    }
+
+    public int getCurrentTile(){
+        return currentTile;
+    }
+
 }

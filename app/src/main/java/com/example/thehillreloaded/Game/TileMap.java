@@ -77,6 +77,11 @@ public class TileMap {
         return (tileMap.get((currentTile + mapSize.x)) == 0);
     }
 
+    public int getTileIndexFromPosition(Point position){
+        Point tile = new Point((int) (position.x / tileSize), (int) (position.y /tileSize));
+        return tile.y * mapSize.x + tile.x;
+    }
+
     // Metodo che disegna un rettangolo semi trasparente
     // per evidenziare la zona della collina in cui cadranno gli oggetti.
     // Questo metofo prende come input la canvas su cui disegnare il rettangolo,
