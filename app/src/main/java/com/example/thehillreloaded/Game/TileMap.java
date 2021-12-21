@@ -19,9 +19,20 @@ public class TileMap {
     // di interi, in modo da poter ridurre le coordinate delle tile
     // ad una sola dimensione
     private ArrayList<Integer> tileMap;
+
+    // Costante per determinare lo spessore delle linee
+    private static final float LINE_THICKNESS = 5;
+    //
+    private static final int OFFSET_FROM_BOTTOM = 1;
     // Variabile per disegnare il rettangolo semi trasparente
     // che determina l'area della collina
     private final Paint hillRectanglePaint;
+    // Variabile per disenare la linea blu che delimita
+    // inferiormente l'area della collina
+    private final Paint blueLinePaint;
+    // Variabile per disenare la linea rossa che delimita
+    // superiormente l'area della collina
+    private final Paint redLinePaint;
     // Variabili necessarie per disegnare la tileMap in fase di debug
     private final Paint tileGridPaint;
     private final Paint occupiedTilePaint;
@@ -32,14 +43,23 @@ public class TileMap {
     // e inizializza la tilemap
     public TileMap(int horizontalTileCount, Point screenSize) {
         mapSize = new Point();
-        tileSize = (float) ((screenSize.y / horizontalTileCount) - 2);
+        tileSize = (float) ((screenSize.y / horizontalTileCount) - OFFSET_FROM_BOTTOM);
         this.mapSize.y = horizontalTileCount;
         this.mapSize.x = Math.round((screenSize.x / tileSize));
         tileMap = new ArrayList<Integer>(Collections.nCopies(mapSize.x * mapSize.y, 0));
+
+        // Inizializzazione delle costanti di tipo Paint necessarie
+        // a disegnare gli elementi statici della collina
         hillRectanglePaint = new Paint();
         hillRectanglePaint.setColor(Color.DKGRAY);
         hillRectanglePaint.setStyle(Paint.Style.FILL);
         hillRectanglePaint.setAlpha(50);
+        blueLinePaint = new Paint();
+        blueLinePaint.setColor(Color.BLUE);
+        blueLinePaint.setStrokeWidth(LINE_THICKNESS);
+        redLinePaint = new Paint();
+        redLinePaint.setColor(Color.RED);
+        redLinePaint.setStrokeWidth(LINE_THICKNESS);
         // Variabili necessare per il metodo drawTilemap,
         // utili principalmente in fase di debug
         tileGridPaint = new Paint();
@@ -57,6 +77,11 @@ public class TileMap {
         return (tileMap.get((currentTile + mapSize.x)) == 0);
     }
 
+    // Metodo che disegna un rettangolo semi trasparente
+    // per evidenziare la zona della collina in cui cadranno gli oggetti.
+    // Questo metofo prende come input la canvas su cui disegnare il rettangolo,
+    // l'idice della tile da cui far partire il rettangolo
+    // e il numero di colonne per cui si vuole che il rettangolo si estenda
     public void drawHillAreaRectangle(Canvas c, int inialTileIndex, int numberOfTiles){
         int rectWidth = (int) (numberOfTiles * tileSize);
         int rectHeight = (int) (tileSize) * mapSize.y;
@@ -65,6 +90,16 @@ public class TileMap {
                 (inialTileIndex * tileSize) + rectWidth,
                 rectHeight,
                 hillRectanglePaint);
+        c.drawLine((inialTileIndex * tileSize),
+                rectHeight + 4,
+                (inialTileIndex * tileSize) + rectWidth,
+                rectHeight + 4,
+                blueLinePaint);
+        c.drawLine((inialTileIndex * tileSize),
+                0 + tileSize,
+                (inialTileIndex * tileSize) + rectWidth,
+                0 + tileSize,
+                redLinePaint);
     }
 
     // Getter e setter -----------------------------------------------------------------------------

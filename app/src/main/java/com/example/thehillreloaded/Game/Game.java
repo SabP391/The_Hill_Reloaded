@@ -79,7 +79,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         c.drawBitmap(backGround, 0, 0, null);
-        tileMap.drawHillAreaRectangle(c, 5, 6);
+        tileMap.drawHillAreaRectangle(c, ((int) tileMap.getMapSize().x /2) - 3, 6);
        // tileMap.drawTilemap(c);
         for(int i = 0; i < 10; i++){
             obj[i].drawObject(c);
