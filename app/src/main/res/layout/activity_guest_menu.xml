@@ -56,20 +56,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_impostazioni_volume" />
 
-    <android.widget.Button
-        android:id="@+id/bottone_impostazioni_ospite"
-        style="@style/StileBottoni"
-        android:layout_width="130dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
+    <ImageButton
+        android:id="@+id/bottone_impostazioni"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="160dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:contentDescription="@string/bottone_impostazioni_menu"
         android:onClick="onClickImpostazioni"
-        android:text="@string/bottone_impostazioni_menu"
-        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.800"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi_google"
+        app:srcCompat="@drawable/ic_impostazioni" />
 
     <FrameLayout
         android:id="@+id/fragment_modalita_ospite"

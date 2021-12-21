@@ -52,28 +52,42 @@
         android:layout_width="120dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
+        android:background="@drawable/bottoni_personalizzati"
         android:text="@string/bottone_online_game"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_continua_utente"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottone_continua_utente" />
 
-    <android.widget.Button
-        android:id="@+id/bottone_impostazioni_utente"
-        style="@style/StileBottoni"
-        android:layout_width="120dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
+    <ImageButton
+        android:id="@+id/bottone_impostazioni"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="68dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:contentDescription="@string/bottone_impostazioni_menu"
         android:onClick="onClickImpostazioni"
-        android:text="@string/bottone_impostazioni_menu"
-        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottone_online_utente"
-        android:background="@drawable/bottoni_personalizzati"/>
+        app:srcCompat="@drawable/ic_impostazioni" />
+
+    <ImageButton
+        android:id="@+id/bottone_punteggi"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_impostazioni"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_online_utente"
+        app:srcCompat="@drawable/ic_punteggi"
+        android:contentDescription="@string/bottone_punteggi"/>
 
     <ImageView
         android:id="@+id/imageView4"
@@ -90,6 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp" >
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

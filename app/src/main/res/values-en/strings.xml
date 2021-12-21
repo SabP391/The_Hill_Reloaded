@@ -23,5 +23,6 @@
     <string name="back_to_login">Back to login</string>
     <string name="switch_volume_musica">Music</string>
     <string name="switch_volume_suoni">Sound</string>
+    <string name="bottone_punteggi">Scoreboard</string>
 
 </resources>

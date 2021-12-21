@@ -22,4 +22,5 @@
     <string name="back_to_login">Ritorna al login</string>
     <string name="switch_volume_musica">Musica</string>
     <string name="switch_volume_suoni">Suoni</string>
+    <string name="bottone_punteggi">Punteggi</string>
 </resources>
