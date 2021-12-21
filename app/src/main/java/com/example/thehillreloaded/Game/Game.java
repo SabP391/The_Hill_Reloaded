@@ -88,7 +88,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
         for(int i = 0; i < 10; i++){
-            obj[i].fall();
+            obj[i].fall(System.nanoTime());
         }
     }
 

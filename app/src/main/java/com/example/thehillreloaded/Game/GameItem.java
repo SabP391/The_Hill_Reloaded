@@ -15,6 +15,8 @@ public class GameItem {
     private final int initialTile;
     private int currentTile;
     private boolean onScreen = false;
+    private long startTime = 0;
+    private static final int FALLING_SPEED = (int) (1000.0 / 15.0);
 
     // Costruttori di classe -----------------------------------------------------------------------
     public GameItem(int initialTile, TileMap map, Context context, ItemType itemType){
@@ -56,8 +58,9 @@ public class GameItem {
     // Il metodo permette all'oggetto di cadere solo finchè
     // non arriva in fondo allo schermo e se la tile
     // successiva a quella attualmente occupata è libera
-    public void fall(){
-        if(onScreen){
+    public void fall(long currentTime){
+        long tempTime = (currentTime - startTime) / 10000000;
+        if(onScreen && tempTime > FALLING_SPEED){
             if(!isTouchingTheBlueLine()){
                 if(map.isNextTileFree(currentTile)) {
                     map.setTileValue(currentTile, 0);
@@ -66,7 +69,7 @@ public class GameItem {
                     map.setTileValue(currentTile, 1);
                 }
             }
-
+            startTime = currentTime;
         }
     }
 
