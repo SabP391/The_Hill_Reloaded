@@ -1,7 +1,7 @@
 package com.example.thehillreloaded.Game;
 
 public enum ItemType {
-    AllMINIUM,
+    ALLUMINIUM,
     COMPOST,
     EWASTE,
     GLASS,

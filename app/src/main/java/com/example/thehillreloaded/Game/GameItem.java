@@ -25,7 +25,7 @@ public class GameItem {
         this.itemType = itemType;
         Point spriteSize = new Point((int) map.getTileSize(), (int) map.getTileSize());
         switch (itemType){
-            case AllMINIUM:
+            case ALLUMINIUM:
                 objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
                 break;
             case COMPOST:
