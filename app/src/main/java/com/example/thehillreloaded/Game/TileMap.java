@@ -1,6 +1,7 @@
 package com.example.thehillreloaded.Game;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
@@ -18,6 +19,9 @@ public class TileMap {
     // di interi, in modo da poter ridurre le coordinate delle tile
     // ad una sola dimensione
     private ArrayList<Integer> tileMap;
+    // Variabile per disegnare il rettangolo semi trasparente
+    // che determina l'area della collina
+    private final Paint hillRectanglePaint;
     // Variabili necessarie per disegnare la tileMap in fase di debug
     private final Paint tileGridPaint;
     private final Paint occupiedTilePaint;
@@ -32,6 +36,10 @@ public class TileMap {
         this.mapSize.y = horizontalTileCount;
         this.mapSize.x = Math.round((screenSize.x / tileSize));
         tileMap = new ArrayList<Integer>(Collections.nCopies(mapSize.x * mapSize.y, 0));
+        hillRectanglePaint = new Paint();
+        hillRectanglePaint.setColor(Color.DKGRAY);
+        hillRectanglePaint.setStyle(Paint.Style.FILL);
+        hillRectanglePaint.setAlpha(50);
         // Variabili necessare per il metodo drawTilemap,
         // utili principalmente in fase di debug
         tileGridPaint = new Paint();
@@ -47,6 +55,16 @@ public class TileMap {
 
     public boolean isNextTileFree(int currentTile){
         return (tileMap.get((currentTile + mapSize.x)) == 0);
+    }
+
+    public void drawHillAreaRectangle(Canvas c, int inialTileIndex, int numberOfTiles){
+        int rectWidth = (int) (numberOfTiles * tileSize);
+        int rectHeight = (int) (tileSize) * mapSize.y;
+        c.drawRect(inialTileIndex * tileSize,
+                0,
+                (inialTileIndex * tileSize) + rectWidth,
+                rectHeight,
+                hillRectanglePaint);
     }
 
     // Getter e setter -----------------------------------------------------------------------------
