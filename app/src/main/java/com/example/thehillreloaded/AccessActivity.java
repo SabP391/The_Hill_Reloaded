@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -21,6 +22,12 @@ public class AccessActivity extends AppCompatActivity {
     boolean soundServiceBound = false;
     Intent effettiSonori;
 
+    //variabili per le SharedPreferences
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    //boolean per controllare lo stato degli effetti sonori nelle shared preferences
+    boolean SFXattivi;
+
     //costante per l'autenticazione
     GoogleSignInWrapper autenticazione;
 
@@ -34,6 +41,7 @@ public class AccessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_access);
 
+        effettiSonori = new Intent(this, SoundEffectService.class);
         // Creazione degli intent per accedere alle schermate successive
         menuUtente = new Intent(this, UserMenuActivity.class);
         menuOspite = new Intent(this, GuestMenuActivity.class);
@@ -43,7 +51,12 @@ public class AccessActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        effettiSonori = new Intent(this, SoundEffectService.class);
+
+        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
+        pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
+        editor = pref.edit();
+        SFXattivi = pref.getBoolean("SFX_attivi", true);
+        //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
         // Se l'utente ha già effettuato l'accesso viene reindirizzato al menu
         // per utenti registrati
@@ -64,7 +77,7 @@ public class AccessActivity extends AppCompatActivity {
     }
 
     public void ospiteFragment(View view){
-        soundService.suonoBottoni();
+        if(SFXattivi){ soundService.suonoBottoni(); }
         continuaComeOspiteFragment(new NoLoginAccessFragment());
     }
 
@@ -102,12 +115,12 @@ public class AccessActivity extends AppCompatActivity {
     }
 
     public void onClickUtente(View view) {
-        soundService.suonoBottoni();
+        if(SFXattivi){ soundService.suonoBottoni(); }
         autenticazione.getInstance(this).login(this);
     }
 
     public void onClickOspite(View view) {
-        soundService.suonoBottoni();
+        if(SFXattivi){ soundService.suonoBottoni(); }
         startActivity(menuOspite);
         finish();
     }

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -19,8 +20,14 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
-    Intent effettiSonori;
 
+    //variabili per le SharedPreferences
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    //boolean per controllare lo stato degli effetti sonori nelle shared preferences
+    boolean SFXattivi;
+
+    Intent effettiSonori;
     Intent menuImpostazioni;
     Button iniziaPartita;
     Fragment modalitaGiocoF;
@@ -32,23 +39,30 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
         setContentView(R.layout.activity_user_menu);
 
         menuImpostazioni = new Intent(this, SettingsActivity.class);
-
+        effettiSonori = new Intent(this, SoundEffectService.class);
         iniziaPartita = findViewById(R.id.bottone_inizia_utente);
-        iniziaPartita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                soundService.suonoBottoni();
-                modalitaGiocoF = new GameModeFragment();
-                selezionaModalitàFragment(modalitaGiocoF);
-            }
-        });
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        effettiSonori = new Intent(this, SoundEffectService.class);
+
+        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
+        pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
+        editor = pref.edit();
+        SFXattivi = pref.getBoolean("SFX_attivi", true);
+        //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
+
+        iniziaPartita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(SFXattivi){ soundService.suonoBottoni(); }
+                modalitaGiocoF = new GameModeFragment();
+                selezionaModalitàFragment(modalitaGiocoF);
+            }
+        });
     }
 
     @Override
@@ -78,12 +92,12 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
     }
 
     public void onClickImpostazioni(View view) {
-        soundService.suonoBottoni();
+        if(SFXattivi){ soundService.suonoBottoni(); }
         startActivity(menuImpostazioni);
     }
 
     public void onClickGioco(View view) {
-        soundService.suonoBottoni();
+        if(SFXattivi){ soundService.suonoBottoni(); }
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
