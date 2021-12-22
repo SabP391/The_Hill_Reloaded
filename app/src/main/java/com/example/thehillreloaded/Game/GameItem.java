@@ -63,7 +63,7 @@ public class GameItem {
     // successiva a quella attualmente occupata è libera
     public void fall(long currentTime){
         long tempTime = (currentTime - startTime) / 10000000;
-        if(onScreen && tempTime > FALLING_SPEED){
+        if(tempTime > FALLING_SPEED){
             if(!isTouchingTheBlueLine()){
                 if(map.isNextTileFree(currentTile)) {
                     map.setTileValue(currentTile, 0);
@@ -78,9 +78,7 @@ public class GameItem {
 
     // Metodo per disegnare a schermo gli oggetti di gioco
     public void drawObject(Canvas c){
-        if(onScreen){
-            c.drawBitmap(objectSprite, position.x, position.y, null);
-        }
+        c.drawBitmap(objectSprite, position.x, position.y, null);
     }
 
     // Metodi utili --------------------------------------------------------------------------------

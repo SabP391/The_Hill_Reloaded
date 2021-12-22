@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
@@ -36,12 +37,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap tileMap;
     private GameItem movingItem = null;
-    private Bitmap bitmap;
-    private GameItem obj[];
     private Bitmap backGround;
     private Point size;
-
+    private LinkedList<GameItem> itemsOnScreen;
+    private long elapsedTime;
+    private Random rand;
     private int currentIndex = 0;
+    ItemType values[];
 
 
 
@@ -64,16 +66,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         size = new Point();
         display.getSize(size);
         tileMap = new TileMap(10, size);
-        Point a = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
-        bitmap = GameAssets.getInstance(context).getRandAsset(a);
-        obj = new GameItem[100];
-        Random rand = new Random();
-        ItemType values[] = ItemType.values();
-        for(int i = 0; i < 100; i++){
-            obj[i] = new GameItem(rand.nextInt(15), tileMap, context, values[rand.nextInt(5)]);
-        }
-        obj[0].setOnScreen(true);
+        itemsOnScreen = new LinkedList<GameItem>();
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
+        elapsedTime = 0;
+        rand = new Random();
+        values = ItemType.values();
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -84,17 +81,21 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         c.drawBitmap(backGround, 0, 0, null);
         tileMap.drawHillAreaRectangle(c, ((int) tileMap.getMapSize().x /2) - 3, 6);
        // tileMap.drawTilemap(c);
-        for(int i = 0; i < 100; i++){
-            obj[i].drawObject(c);
+        for(GameItem i : itemsOnScreen){
+            i.drawObject(c);
         }
     }
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-        for(int i = 0; i < 100; i++){
-            if(movingItem != obj[i]){
-                obj[i].fall(System.nanoTime());
-            }
+        long time = (System.nanoTime() / 1000000);
+        if((time - elapsedTime)/1000000 > 10){
+            Log.d(LOGTAG, String.valueOf(time));
+            time = System.nanoTime();
+            itemsOnScreen.add(new GameItem(rand.nextInt(15), tileMap, context, values[rand.nextInt(values.length)]));
+        }
+        for(GameItem i : itemsOnScreen){
+            i.fall(System.nanoTime());
         }
     }
 
@@ -226,28 +227,48 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Metodi per la gestione degli input ----------------------------------------------------------
     @Override
     public boolean onTouchEvent(MotionEvent event){
+        // Recupera le coordinate su cui è stato effettuato il tocco
         float x = event.getRawX();
         float y = event.getRawY();
-        Point a = new Point((int) x, (int) y);
-        int tile = tileMap.getTileIndexFromPosition(a);
+        // Incapsula le coordinate del tocco in un point
+        Point touchPosition = new Point((int) x, (int) y);
+        // Trova l'indice della tile all'interno della quale è
+        // stato rilevto il tocco
+        int tile = tileMap.getTileIndexFromPosition(touchPosition);
         switch(event.getAction()){
+            // Al primo tocco sullo schermo controlla che il tocco
+            // sia avvenuto su uno degli oggetti in gioco
             case MotionEvent.ACTION_DOWN:
-
-                for(GameItem i : obj){
+                for(GameItem i : itemsOnScreen){
+                    // Il controllo viene effettuato confrontando
+                    // la tile in cui è effettuato il tocco con la current tile
+                    // di ogniuno degli oggetti in gioco
                     if(i.getCurrentTile() == tile){
+                        // Se viene trovato un oggetto viene assegnato alla
+                        // variabile moving item
                         movingItem = i;
                     }
                 }
                 break;
+            // Se non è il primo tocco ma c'è un movimento del dito
+            // sullo schermo controlla che sia stato preso un oggetto
+            // nella fase precedente
             case MotionEvent.ACTION_MOVE:
                 if(movingItem != null){
-                    movingItem.setPosition(a);
+                    // Se un oggetto è in movimento, modifica le sue coordinate
+                    // in base alla posizione del dito sullo schermo
+                    movingItem.setPosition(touchPosition);
                 }
                 break;
+            // Quando il dito viene sollevato o viene portato fuori dallo schermo
+            // controlla che un oggetto si stesse spostando
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_OUTSIDE:
                 if(movingItem != null){
+                    // Se c'era un oggetto in movimento,
+                    // lo riporta alla tile in cui si trovava prima del tocco
+                    // e reimposta a null la variabile movingItem
                     movingItem.setPosition(tileMap.getPositionFromTileIndex(movingItem.getCurrentTile()));
                     movingItem = null;
                 }
