@@ -17,7 +17,7 @@ import android.widget.Button;
 import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
-public class GuestMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX {
+public class GuestMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX, DifficultyFragment.SoundFX {
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;

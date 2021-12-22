@@ -16,7 +16,7 @@ import android.widget.Button;
 import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
-public class UserMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX {
+public class UserMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX, DifficultyFragment.SoundFX {
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
@@ -117,7 +117,5 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
     };
 
     @Override
-    public void suonoBottoni() {
-        soundService.suonoBottoni();
-    }
+    public void suonoBottoni() { if(SFXattivi){ soundService.suonoBottoni(); }}
 }

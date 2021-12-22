@@ -3,16 +3,12 @@ package com.example.thehillreloaded;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,12 +64,30 @@ public class GameModeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game_mode, container, false);
-        View selDiffClassica = view.findViewById(R.id.bottone_classica);
-        selDiffClassica.setOnClickListener(new View.OnClickListener() {
+        //gestione del bottone della modalità CLASSICA (apre fragment delle difficoltà)
+        View selModClassica = view.findViewById(R.id.bottone_classica);
+        selModClassica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sfx.suonoBottoni();
-                selDiffClassicaFragment(new ClassicDifficultyFragment());
+                DifficultyFragment modalitaClassica = new DifficultyFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("GAME_MODE",24);
+                modalitaClassica.setArguments(bundle);
+                selDiffClassicaFragment(modalitaClassica);
+            }
+        });
+        //gestione del bottone della modalità RELOADED (apre fragment delle difficoltà)
+        View selModReloaded = view.findViewById(R.id.bottone_reloaded);
+        selModReloaded.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sfx.suonoBottoni();
+                DifficultyFragment modalitaReloaded = new DifficultyFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("GAME_MODE",42);
+                modalitaReloaded.setArguments(bundle);
+                selDiffReloadedFragment(modalitaReloaded);
             }
         });
         return view;
@@ -84,7 +98,16 @@ public class GameModeFragment extends Fragment {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
                 .add(R.id.fragment_difficolta, fragment)
-                .addToBackStack("fragment2")
+                .addToBackStack("FragmentClassic")
+                .commit();
+    }
+
+    public void selDiffReloadedFragment(Fragment fragment){
+        getChildFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+                .add(R.id.fragment_difficolta, fragment)
+                .addToBackStack("FragmentReloaded")
                 .commit();
     }
 
