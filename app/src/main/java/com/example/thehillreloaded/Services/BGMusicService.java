@@ -1,6 +1,7 @@
 package com.example.thehillreloaded.Services;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -14,7 +15,7 @@ public class BGMusicService extends Service {
     private IBinder binder = new LocalBinder();
 
     private MediaPlayer mediaPlayer;
-    private AudioManager audioManager;
+    //private AudioManager audioManager;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -39,16 +40,6 @@ public class BGMusicService extends Service {
         super.onDestroy();
         mediaPlayer.stop();
         mediaPlayer.release();
-    }
-
-    public void startMusic() {
-        mediaPlayer = MediaPlayer.create(this, R.raw.bg_music_track);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
-    }
-
-    public void stopMusic() {
-        mediaPlayer.stop();
     }
 
     public class LocalBinder extends Binder {
