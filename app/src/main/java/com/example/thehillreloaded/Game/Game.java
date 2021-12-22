@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
 
-    // Membri della classe -------------------------------------------------------------------------
+    // Variabili necessarie per il rendering e il gamloop ------------------------------------------
 
     // Holder necessario per accedere alla surfaceView in cui verrà renderizzato il gioco
     private SurfaceHolder holder;
@@ -32,13 +32,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
-    private int x = 0, y = 0;
 
+    // Variabili relative al gioco e alla sua logica -----------------------------------------------
+    private TileMap tileMap;
+    private GameItem movingItem = null;
     private Bitmap bitmap;
     private GameItem obj[];
     private Bitmap backGround;
     private Point size;
-    private TileMap tileMap;
+
     private int currentIndex = 0;
 
 
@@ -70,6 +72,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         for(int i = 0; i < 100; i++){
             obj[i] = new GameItem(rand.nextInt(15), tileMap, context, values[rand.nextInt(5)]);
         }
+        obj[0].setOnScreen(true);
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
     }
 
@@ -89,7 +92,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
         for(int i = 0; i < 100; i++){
-            obj[i].fall(System.nanoTime());
+            if(movingItem != obj[i]){
+                obj[i].fall(System.nanoTime());
+            }
         }
     }
 
@@ -221,8 +226,33 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Metodi per la gestione degli input ----------------------------------------------------------
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        obj[currentIndex].setOnScreen(true);
-        currentIndex++;
+        float x = event.getRawX();
+        float y = event.getRawY();
+        Point a = new Point((int) x, (int) y);
+        int tile = tileMap.getTileIndexFromPosition(a);
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+
+                for(GameItem i : obj){
+                    if(i.getCurrentTile() == tile){
+                        movingItem = i;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(movingItem != null){
+                    movingItem.setPosition(a);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_OUTSIDE:
+                if(movingItem != null){
+                    movingItem.setPosition(tileMap.getPositionFromTileIndex(movingItem.getCurrentTile()));
+                    movingItem = null;
+                }
+                break;
+        }
         return true;
     }
 }

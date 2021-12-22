@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,17 +70,30 @@ public class TileMap {
     }
 
     // Metodi utili --------------------------------------------------------------------------------
+
+    // Metodo che prende in input l'indice di una tile
+    // e ritorna quello della tile subito sotto di essa
     public int getNextTileIndex(int currentTile){
         return currentTile + mapSize.x;
     }
 
+    // Metodo che prende in input l'indice di una tile
+    // e ritorna true se la tile subito sotto di essa è libera
     public boolean isNextTileFree(int currentTile){
         return (tileMap.get((currentTile + mapSize.x)) == 0);
     }
 
+    // Metodo che prende in input una posizione e calcola
+    // l'indice della tile con quella posizione
     public int getTileIndexFromPosition(Point position){
         Point tile = new Point((int) (position.x / tileSize), (int) (position.y /tileSize));
         return tile.y * mapSize.x + tile.x;
+    }
+
+    // Metodo che prende in input un indice e ritorna
+    // la posizione della tile con tale indice
+    public Point getPositionFromTileIndex(int index){
+        return new Point((int)((index % mapSize.x) * tileSize), (int)((index / mapSize.x) * tileSize));
     }
 
     // Metodo che disegna un rettangolo semi trasparente
@@ -90,16 +104,19 @@ public class TileMap {
     public void drawHillAreaRectangle(Canvas c, int inialTileIndex, int numberOfTiles){
         int rectWidth = (int) (numberOfTiles * tileSize);
         int rectHeight = (int) (tileSize) * mapSize.y;
+        // Disegna il rettangolo semi trasparente che delimita la collina
         c.drawRect(inialTileIndex * tileSize,
                 0,
                 (inialTileIndex * tileSize) + rectWidth,
                 rectHeight,
                 hillRectanglePaint);
+        // Disegna la linea blu che delimita inferiormente la collina
         c.drawLine((inialTileIndex * tileSize),
                 rectHeight + 4,
                 (inialTileIndex * tileSize) + rectWidth,
                 rectHeight + 4,
                 blueLinePaint);
+        // Disegna la linea rossa che delimita superiormente la collina
         c.drawLine((inialTileIndex * tileSize),
                 0 + tileSize,
                 (inialTileIndex * tileSize) + rectWidth,
