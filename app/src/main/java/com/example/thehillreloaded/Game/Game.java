@@ -36,6 +36,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap tileMap;
+    private int firsTileOfTheHill;
+    private int numberOfilesOfTheHill;
     private GameItem movingItem = null;
     private Bitmap backGround;
     private Point size;
@@ -61,11 +63,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
+        GameManager.getInstance().initInstance();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
         tileMap = new TileMap(10, size);
+        numberOfilesOfTheHill = 6;
+        firsTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfilesOfTheHill / 2));
         itemsOnScreen = new LinkedList<GameItem>();
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
         elapsedTime = 0;
@@ -79,8 +84,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         c.drawBitmap(backGround, 0, 0, null);
-        tileMap.drawHillAreaRectangle(c, ((int) tileMap.getMapSize().x /2) - 3, 6);
-       // tileMap.drawTilemap(c);
+        tileMap.drawHillAreaRectangle( c, firsTileOfTheHill , numberOfilesOfTheHill);
+        //tileMap.drawTilemap(c);
         for(GameItem i : itemsOnScreen){
             i.drawObject(c);
         }
@@ -88,14 +93,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
-        long time = (System.nanoTime() / 1000000);
-        if((time - elapsedTime)/1000000 > 10){
-            Log.d(LOGTAG, String.valueOf(time));
-            time = System.nanoTime();
-            itemsOnScreen.add(new GameItem(rand.nextInt(15), tileMap, context, values[rand.nextInt(values.length)]));
+        if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
+            int initialTile = rand.nextInt(numberOfilesOfTheHill) + firsTileOfTheHill;
+            Log.d(LOGTAG, String.valueOf(initialTile));
+            Log.d(LOGTAG, String.valueOf(firsTileOfTheHill));
+            itemsOnScreen.add(new GameItem(initialTile, tileMap, context, values[rand.nextInt(values.length)]));
         }
         for(GameItem i : itemsOnScreen){
-            i.fall(System.nanoTime());
+           if(i != movingItem){
+               i.fall(System.nanoTime());
+           }
         }
     }
 

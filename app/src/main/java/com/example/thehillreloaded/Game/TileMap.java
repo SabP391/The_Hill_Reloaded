@@ -23,7 +23,8 @@ public class TileMap {
 
     // Costante per determinare lo spessore delle linee
     private static final float LINE_THICKNESS = 5;
-    //
+    // Costante per determninare la distanza della linea blu
+    // dal fondo dello schermo
     private static final int OFFSET_FROM_BOTTOM = 1;
     // Variabile per disegnare il rettangolo semi trasparente
     // che determina l'area della collina
