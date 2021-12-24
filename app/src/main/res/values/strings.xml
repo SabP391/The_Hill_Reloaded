@@ -25,4 +25,9 @@
     <string name="bottone_punteggi">Punteggi</string>
     <string name="host_match">Ospita una partita</string>
     <string name="join_match">Unisciti ad una partita</string>
+    <string name="bottone_torna_a_gioco">Torna al gioco</string>
+    <string name="bottone_salva_partita">Salva partita</string>
+    <string name="bottne_torna_a_menu">Torna al menù principale</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

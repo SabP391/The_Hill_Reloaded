@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PauseMenuFragment">
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="590dp"
+        android:layout_height="302dp"
+        android:src="@drawable/bg_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center_horizontal"/>
+
+    <android.widget.Button
+        android:id="@+id/b_torna_a_gioco"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/bottone_torna_a_gioco"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+    <android.widget.Button
+        android:id="@+id/b_torna_a_menuP"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/bottne_torna_a_menu"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/b_salva_partita" />
+
+    <android.widget.Button
+        android:id="@+id/b_salva_partita"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/bottone_salva_partita"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/b_torna_a_gioco" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

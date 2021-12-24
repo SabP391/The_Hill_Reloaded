@@ -26,5 +26,8 @@
     <string name="bottone_punteggi">Scoreboard</string>
     <string name="host_match">Host match</string>
     <string name="join_match">Join match</string>
+    <string name="bottone_torna_a_gioco">Back to the game</string>
+    <string name="bottone_salva_partita">Save game</string>
+    <string name="bottne_torna_a_menu">Back to main menu</string>
 
 </resources>
