@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_access.xml" value="0.2708333333333333" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_main.xml" value="0.33177083333333335" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_multiplayer.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_settings.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_user_menu.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/activity_user_menu.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/device_adapter_view.xml" value="0.4234375" />
         <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_classic_difficulty.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/layout/fragment_game_mode.xml" value="0.33" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/The_Hill_Reloaded/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18802083333333333" />

@@ -53,6 +53,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMultiplayer"
         android:text="@string/bottone_online_game"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,10 +102,11 @@
 
     <FrameLayout
         android:id="@+id/fragment_modalita"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" >
-    </FrameLayout>
+        android:layout_width="641dp"
+        android:layout_height="361dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

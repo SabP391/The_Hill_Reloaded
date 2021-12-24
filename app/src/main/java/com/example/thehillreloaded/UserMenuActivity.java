@@ -91,6 +91,12 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
         else super.onBackPressed();
     }
 
+    // Metodo che avvia la nuova activity per il multiplayer
+    public void onClickMultiplayer(View view){
+        Intent intent = new Intent(this, MultiplayerActivity.class);
+        startActivity(intent);
+    }
+
     public void onClickImpostazioni(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
         startActivity(menuImpostazioni);

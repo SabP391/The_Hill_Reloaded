@@ -5,7 +5,7 @@
     <string name="bottone_accesso_google">Log-in with Google</string>
     <string name="bottone_inizia_partita">New game</string>
     <string name="bottone_continua_partita">Continue game</string>
-    <string name="bottone_online_game">Online</string>
+    <string name="bottone_online_game">Multiplayer</string>
     <string name="bottone_impostazioni_menu">Settings</string>
     <string name="modalita_classica">Classic mode</string>
     <string name="modalita_reloaded">Reloaded mode</string>
@@ -24,5 +24,7 @@
     <string name="switch_volume_musica">Music</string>
     <string name="switch_volume_suoni">Sound</string>
     <string name="bottone_punteggi">Scoreboard</string>
+    <string name="host_match">Host match</string>
+    <string name="join_match">Join match</string>
 
 </resources>
