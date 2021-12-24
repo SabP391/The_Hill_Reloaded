@@ -68,7 +68,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         Display display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
-        tileMap = new TileMap(10, size);
+        tileMap = new TileMap(8, size);
         numberOfilesOfTheHill = 6;
         firsTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfilesOfTheHill / 2));
         itemsOnScreen = new LinkedList<GameItem>();

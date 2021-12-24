@@ -1,6 +1,7 @@
 package com.example.thehillreloaded.Game;
 
 public class GameManager {
+    private boolean isPaused = false;
     private static GameManager instance;
     private long timeAtGameStart;
     private long timeFromLastSpawn;
@@ -28,6 +29,18 @@ public class GameManager {
             return true;
         }
         return false;
+    }
+
+    public boolean isPaused(){
+        return isPaused;
+    }
+
+    public void pause(){
+        isPaused = true;
+    }
+
+    public void unPause(){
+        isPaused = false;
     }
 
 }

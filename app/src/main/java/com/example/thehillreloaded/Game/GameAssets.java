@@ -131,37 +131,6 @@ public class GameAssets {
         return(Bitmap.createScaledBitmap(umido[0], size.x, size.y, false));
     }
 
-    Bitmap getRandAsset(Point size){
-        int r = rand.nextInt(6);
-        Bitmap temp;
-        switch(r){
-            case 0:
-                temp =  getRandAl(size);
-                break;
-            case 1:
-                temp =  getRandCompost(size);
-                break;
-            case 2:
-                temp =  getRandEWaste(size);
-                break;
-            case 3:
-                temp = getRandGlass(size);
-                break;
-            case 4:
-                temp =  getRandPaper(size);
-                break;
-            case 5:
-                temp =  getRandPlastic(size);
-                break;
-            case 6:
-                temp = getRandSteel(size);
-                break;
-            default:
-                temp = getRandGlass(size);
-                break;
-        }
-        return temp;
-    }
 
     Bitmap getGameBackGround(Point size){
         return Bitmap.createScaledBitmap(gameBackGround, size.x, size.y, false);
