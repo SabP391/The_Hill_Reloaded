@@ -19,13 +19,14 @@ public class GameAssets {
     private static GameAssets instance;
     private static Context context;
     private Bitmap gameBackGround;
-    private  Bitmap vetro[];
-    private  Bitmap alluminio[];
-    private  Bitmap acciaio[];
-    private  Bitmap plastica[];
-    private  Bitmap carta[];
-    private  Bitmap eWaste[];
-    private  Bitmap umido[];
+    private Bitmap vetro[];
+    private Bitmap alluminio[];
+    private Bitmap acciaio[];
+    private Bitmap plastica[];
+    private Bitmap carta[];
+    private Bitmap eWaste[];
+    private Bitmap umido[];
+    private Bitmap misto;
     private Random rand;
 
     private GameAssets(){
@@ -64,6 +65,8 @@ public class GameAssets {
         umido = new Bitmap[2];
             umido[0] = getBitmap(context, R.drawable.asset_umido_1);
             umido[1] = getBitmap(context, R.drawable.asset_umido_2);
+        // Creazione di un bitmap per il misto------------------------------------------------------
+        misto = getBitmap(context, R.drawable.asset_misto);
     };
 
     public static GameAssets getInstance(Context context2){
@@ -75,6 +78,10 @@ public class GameAssets {
     }
 
     // Metodi per ritornare le sprite --------------------------------------------------------------
+    Bitmap getMixed(Point size){
+        return(Bitmap.createScaledBitmap(misto, size.x, size.y, false));
+    }
+
     Bitmap getRandGlass(Point size){
         return(Bitmap.createScaledBitmap(vetro[rand.nextInt(vetro.length)], size.x, size.y, false));
     }
