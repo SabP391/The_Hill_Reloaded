@@ -11,53 +11,106 @@
         android:id="@+id/imageView12"
         android:layout_width="590dp"
         android:layout_height="302dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/stile_fragment_background"
+        android:paddingHorizontal="9dp"
         android:src="@drawable/bg_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center_horizontal"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
         android:id="@+id/b_torna_a_gioco"
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/bottoni_personalizzati"
         android:fontFamily="@font/roboto_black"
         android:text="@string/bottone_torna_a_gioco"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toTopOf="@+id/imageView12" />
-
-    <android.widget.Button
-        android:id="@+id/b_torna_a_menuP"
-        style="@style/StileBottoni"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bottoni_personalizzati"
-        android:fontFamily="@font/roboto_black"
-        android:text="@string/bottne_torna_a_menu"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="@+id/imageView12"
-        app:layout_constraintStart_toStartOf="@+id/imageView12"
-        app:layout_constraintTop_toBottomOf="@+id/b_salva_partita" />
 
     <android.widget.Button
         android:id="@+id/b_salva_partita"
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/bottoni_personalizzati"
         android:fontFamily="@font/roboto_black"
         android:text="@string/bottone_salva_partita"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/b_torna_a_gioco" />
+
+    <android.widget.Button
+        android:id="@+id/b_torna_a_menuP"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/bottne_torna_a_menu"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/imageView12" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="114dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bottoni_personalizzati"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+    <Switch
+        android:id="@+id/switch_musica_ingame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView17"
+        app:layout_constraintTop_toTopOf="@+id/imageView17" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="31dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_musica"
+        app:layout_constraintEnd_toStartOf="@+id/switch_musica_ingame"
+        app:layout_constraintTop_toTopOf="@+id/imageView17" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="32dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_icona_suoni"
+        app:layout_constraintEnd_toStartOf="@+id/switch_sfx_ingame"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+    <Switch
+        android:id="@+id/switch_sfx_ingame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView17"
+        app:layout_constraintTop_toBottomOf="@+id/switch_musica_ingame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
