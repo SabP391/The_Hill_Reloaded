@@ -1,7 +1,9 @@
 package com.example.thehillreloaded;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
  * create an instance of this fragment.
  */
 public class InGameMenuFragment extends Fragment {
+    private SoundFX sfx;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,5 +73,24 @@ public class InGameMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_in_game_menu, container, false);
+    }
+
+    interface SoundFX {
+        void suonoBottoni();
+
+        //quando saranno attivi i bottoni, aggiungere -> sfx.suonoBottoni(); <-
+    }
+
+    //override dei metodi onAttach e onDetach
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        sfx = (InGameMenuFragment.SoundFX) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        sfx = null;
     }
 }
