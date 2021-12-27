@@ -6,6 +6,7 @@ public class GameManager {
     private long timeAtGameStart;
     private long timeFromLastSpawn;
     private float spawnSpeed;
+    private int sunnyPoints;
 
     private GameManager(){
         spawnSpeed = (float) (1000.0);
@@ -19,8 +20,10 @@ public class GameManager {
     }
 
     public void initInstance(){
+
         timeAtGameStart = System.nanoTime();
         timeFromLastSpawn = (long)spawnSpeed;
+        sunnyPoints = 0;
     }
 
     public boolean isTimeToSpawn(long currentTime){

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -36,10 +37,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap tileMap;
-    private int firsTileOfTheHill;
+    private int firstTileOfTheHill;
     private int numberOfilesOfTheHill;
     private GameItem movingItem = null;
     private Bitmap backGround;
+    private Bitmap mixedArray[];
     private Point size;
     private LinkedList<GameItem> itemsOnScreen;
     private long elapsedTime;
@@ -65,15 +67,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.holder.addCallback(this);
         setFocusable(true);
         GameManager.getInstance().initInstance();
+        mixedArray = new Bitmap[60];
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
         tileMap = new TileMap(8, size);
         numberOfilesOfTheHill = 6;
-        firsTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfilesOfTheHill / 2));
+        firstTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfilesOfTheHill / 2));
         itemsOnScreen = new LinkedList<GameItem>();
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
+        Point tileSize = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
+        for(int i = 0; i < Array.getLength(mixedArray); i++){
+            mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
+        }
         elapsedTime = 0;
         rand = new Random();
         values = ItemType.values();
@@ -87,13 +94,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void render(@NonNull Canvas c){
         if(GameManager.getInstance().isPaused()){
             c.drawBitmap(backGround, 0, 0, null);
-            tileMap.drawPaused(c);
-            for(GameItem i : itemsOnScreen){
-                c.drawBitmap(GameAssets.getInstance(context).getMixed(spriteSize), i.getPosition().x, i.getPosition().y, null);
+            tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
+            for(int i = 0; i < itemsOnScreen.size(); i++){
+                c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
             c.drawBitmap(backGround, 0, 0, null);
-            tileMap.drawHillAreaRectangle( c, firsTileOfTheHill , numberOfilesOfTheHill);
+            tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
             //tileMap.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
@@ -105,9 +112,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                int initialTile = rand.nextInt(numberOfilesOfTheHill) + firsTileOfTheHill;
+                int initialTile = rand.nextInt(numberOfilesOfTheHill) + firstTileOfTheHill;
                 Log.d(LOGTAG, String.valueOf(initialTile));
-                Log.d(LOGTAG, String.valueOf(firsTileOfTheHill));
+                Log.d(LOGTAG, String.valueOf(firstTileOfTheHill));
                 itemsOnScreen.add(new GameItem(initialTile, tileMap, context, values[rand.nextInt(values.length)]));
             }
             for(GameItem i : itemsOnScreen){

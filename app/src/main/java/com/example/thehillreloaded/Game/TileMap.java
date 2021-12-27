@@ -125,10 +125,6 @@ public class TileMap {
                 redLinePaint);
     }
 
-    public void drawPaused(Canvas c){
-        c.drawRect(0, 0, tileSize * mapSize.x, tileSize * mapSize.y, hillRectanglePaint);
-    }
-
     // Getter e setter -----------------------------------------------------------------------------
     public float getTileSize() {
         return this.tileSize;
