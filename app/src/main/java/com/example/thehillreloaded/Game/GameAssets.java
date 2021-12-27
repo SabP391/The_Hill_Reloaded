@@ -20,6 +20,14 @@ public class GameAssets {
     private static Context context;
     private Bitmap sunnyPointsIcon;
     private Bitmap gameBackGround;
+    private Bitmap inceneritore;
+    private Bitmap centraleVetro;
+    private Bitmap centraleAlluminio;
+    private Bitmap centraleAcciaio;
+    private Bitmap centralePlastica;
+    private Bitmap centraleCarta;
+    private Bitmap centraleEWaste;
+    private Bitmap centraleUmido;
     private Bitmap vetro[];
     private Bitmap alluminio[];
     private Bitmap acciaio[];
@@ -33,6 +41,16 @@ public class GameAssets {
     private GameAssets(){
         gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
         sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
+
+        // Creazione delle sprite delle centrali ---------------------------------------------------
+        inceneritore = getBitmap(context, R.drawable.asset2_inceneritore);
+        centraleVetro = getBitmap(context, R.drawable.asset2_fab_verde_vetro);
+        centraleAlluminio = getBitmap(context, R.drawable.asset2_fab_viola_alluminio);
+        centraleAcciaio = getBitmap(context, R.drawable.asset2_fab_celeste_acciaio);
+        centralePlastica = getBitmap(context, R.drawable.asset2_fab_giallo_plastica);
+        centraleCarta = getBitmap(context, R.drawable.asset2_fab_blu_carta);
+        centraleEWaste = getBitmap(context, R.drawable.asset2_fab_rosa_ewaste);
+        centraleUmido = getBitmap(context, R.drawable.asset2_fab_marrone_umido);
 
         rand = new Random();
         // Creazione dell'array di sprite per il vetro ---------------------------------------------
@@ -80,7 +98,25 @@ public class GameAssets {
     }
 
     // Metodi per ritornare le sprite --------------------------------------------------------------
-    Bitmap getSunnyPointsIcon(Point size){return(Bitmap.createScaledBitmap(sunnyPointsIcon, size.x, size.y, false)); }
+    Bitmap getGameBackGround(Point size){return Bitmap.createScaledBitmap(gameBackGround, size.x, size.y, false);}
+
+    Bitmap getGlassUnit(Point size){return Bitmap.createScaledBitmap(centraleVetro, size.x, size.y, false);}
+
+    Bitmap getAlUnit(Point size){return Bitmap.createScaledBitmap(centraleAlluminio, size.x, size.y, false);}
+
+    Bitmap getSteelUnit(Point size){return Bitmap.createScaledBitmap(centraleAcciaio, size.x, size.y, false);}
+
+    Bitmap getPlasticUnit(Point size){return Bitmap.createScaledBitmap(centralePlastica, size.x, size.y, false);}
+
+    Bitmap getPaperUnit(Point size){return Bitmap.createScaledBitmap(centraleCarta, size.x, size.y, false);}
+
+    Bitmap getEwasteUnit(Point size){return Bitmap.createScaledBitmap(centraleEWaste, size.x, size.y, false);}
+
+    Bitmap getCompostUnit(Point size){return Bitmap.createScaledBitmap(centraleUmido, size.x, size.y, false);}
+
+    Bitmap getIncineratorUnit(Point size){return Bitmap.createScaledBitmap(inceneritore, size.x, size.y, false);}
+
+    Bitmap getSunnyPointsIcon(Point size){return(Bitmap.createScaledBitmap(sunnyPointsIcon, size.x, size.y, false));}
 
     Bitmap getMixed(Point size){
         return(Bitmap.createScaledBitmap(misto, size.x, size.y, false));
@@ -140,11 +176,6 @@ public class GameAssets {
 
     Bitmap getDefaultCompost(Point size){
         return(Bitmap.createScaledBitmap(umido[0], size.x, size.y, false));
-    }
-
-
-    Bitmap getGameBackGround(Point size){
-        return Bitmap.createScaledBitmap(gameBackGround, size.x, size.y, false);
     }
 
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------
