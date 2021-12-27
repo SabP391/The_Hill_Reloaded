@@ -189,9 +189,10 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
-        else super.onBackPressed();
+            GameManager.getInstance().unPause();
+        } else super.onBackPressed();
     }
 
     //Necessari per il service binding
