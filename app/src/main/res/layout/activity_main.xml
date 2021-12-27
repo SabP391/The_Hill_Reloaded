@@ -41,5 +41,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.136"
-        app:srcCompat="@drawable/ic_icona_sole" />
+        app:srcCompat="@drawable/ic_sole" />
 </androidx.constraintlayout.widget.ConstraintLayout>

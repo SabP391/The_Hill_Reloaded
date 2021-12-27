@@ -109,7 +109,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/switch_effetti"
         app:layout_constraintTop_toBottomOf="@+id/imageView15"
-        app:srcCompat="@drawable/ic_icona_suoni" />
+        app:srcCompat="@drawable/ic_suoni" />
 
     <ImageView
         android:id="@+id/imageView15"

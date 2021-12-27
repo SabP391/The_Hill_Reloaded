@@ -11,7 +11,7 @@
         android:id="@+id/imageView6"
         android:layout_width="151dp"
         android:layout_height="205dp"
-        android:src="@drawable/ic_bg_fragment_menu"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"
