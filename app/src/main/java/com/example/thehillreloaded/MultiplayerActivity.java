@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -67,9 +68,10 @@ public class MultiplayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 69);
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
 
         discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
@@ -127,13 +129,12 @@ public class MultiplayerActivity extends AppCompatActivity {
                 if (bluetoothAdapter.isDiscovering()){
                     bluetoothAdapter.cancelDiscovery();
                     Log.d("Log BT:", "Canceling discovery");
-
                     mBTDevices.clear();
                     bluetoothAdapter.startDiscovery();
                     titoloHost.setText("Lista host");
                     Log.d("Log BT:", "Starting discovery");
-
                     registerReceiver(mBroadcastReceiver, discoverDevicesIntent);
+                    Log.d("Log BT:", "Calling broadcast receiver");
                 }
                 if (!bluetoothAdapter.isDiscovering()){
                     mBTDevices.clear();
@@ -141,6 +142,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     titoloHost.setText("Lista host");
                     Log.d("Log BT:", "Starting discovery");
                     registerReceiver(mBroadcastReceiver, discoverDevicesIntent);
+                    Log.d("Log BT:", "Calling broadcast receiver");
                 }
             }
         });
@@ -202,7 +204,6 @@ public class MultiplayerActivity extends AppCompatActivity {
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            Log.d("Sono il broadcast receiver e ", "sto facendo cose");
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 BluetoothClass deviceClass = device.getBluetoothClass();
