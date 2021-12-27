@@ -28,6 +28,15 @@
     <string name="bottone_torna_a_gioco">Torna al gioco</string>
     <string name="bottone_salva_partita">Salva partita</string>
     <string name="bottne_torna_a_menu">Torna al menù principale</string>
+    <string name="titolo_lista_host">Lista host</string>
+    <string name="titolo_risultato_partita">Risultato partita</string>
+    <string name="connection_listening">In attesa di connessioni</string>
+    <string name="connection_connecting">Connessione</string>
+    <string name="connection_connected">Connesso</string>
+    <string name="connection_failed">Connessione non riuscita</string>
+    <string name="messaggio_gps">Il GPS è disattivato. Vuoi attivarlo?</string>
+    <string name="vai_impostazioni">Vai alle impostazioni</string>
+    <string name="annulla">Annulla</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

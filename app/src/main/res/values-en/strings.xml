@@ -29,5 +29,14 @@
     <string name="bottone_torna_a_gioco">Back to the game</string>
     <string name="bottone_salva_partita">Save game</string>
     <string name="bottne_torna_a_menu">Back to main menu</string>
+    <string name="titolo_lista_host">Host list</string>
+    <string name="titolo_risultato_partita">Match result</string>
+    <string name="connection_listening">Listening</string>
+    <string name="connection_connecting">Connecting</string>
+    <string name="connection_connected">Connected</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="messaggio_gps">GPS is disabled. Do you want to activate it?</string>
+    <string name="vai_impostazioni">Go to settings</string>
+    <string name="annulla">Cancel</string>
 
 </resources>

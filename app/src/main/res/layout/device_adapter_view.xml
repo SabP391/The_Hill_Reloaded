@@ -10,23 +10,11 @@
         android:layout_width="170dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:textColor="@color/teal_200"
+        android:textColor="@color/verde_scuro"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/BTDeviceAddress"
-        android:layout_width="170dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/teal_200"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.719"
-        app:layout_constraintStart_toEndOf="@+id/BTDeviceName"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

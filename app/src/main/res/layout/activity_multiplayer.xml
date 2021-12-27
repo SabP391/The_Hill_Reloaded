@@ -13,8 +13,10 @@
         android:layout_height="372dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487"
         app:srcCompat="@drawable/bg_main" />
 
     <android.widget.Button
@@ -51,6 +53,7 @@
         android:id="@+id/stato_connessione"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintBottom_toTopOf="@+id/bottone_hostMatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
@@ -62,29 +65,45 @@
         android:id="@+id/lista_host"
         android:layout_width="230dp"
         android:layout_height="140dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bottone_hostMatch"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/risultato_match"
+        android:id="@+id/box_risultato_match"
         android:layout_width="230dp"
         android:layout_height="140dp"
-        android:text="Qui viene il risultato"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toEndOf="@+id/bottone_hostMatch"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/questa_lista_host"
+        android:id="@+id/titiolo_lista_host"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/titolo_lista_host"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintBottom_toTopOf="@+id/lista_host"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lista_host"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/lista_host"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" />
+        app:layout_constraintVertical_bias="0.991" />
+
+    <TextView
+        android:id="@+id/titolo_risultato_partita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titolo_risultato_partita"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintBottom_toTopOf="@+id/box_risultato_match"
+        app:layout_constraintEnd_toEndOf="@+id/box_risultato_match"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/box_risultato_match"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982" />
 </androidx.constraintlayout.widget.ConstraintLayout>

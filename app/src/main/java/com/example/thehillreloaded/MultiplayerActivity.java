@@ -3,8 +3,6 @@ package com.example.thehillreloaded;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
@@ -17,7 +15,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,26 +38,29 @@ public class MultiplayerActivity extends AppCompatActivity {
     int punteggio;
 
     // Elementi del layout
-    private Button host, connect, send;
+    private Button bottoneHost, bottoneJoin, send;
     private ListView devicesList;
-    private TextView messBox, status, titoloHost;
+    private TextView matchResultBox, connectionStatus, titoloDeviceList, titoloResultBox;
+
     private BluetoothAdapter bluetoothAdapter;
     public ArrayList<BluetoothDevice> mBTDevices;
     private BTDeviceListAdapter mDeviceListAdapter;
     private SendReceive sendReceive;
     private IntentFilter discoverDevicesIntent;
 
+    private static final String APP_NAME = "TheHillReloaded";
+    private static final UUID MY_UUID= UUID.fromString("c1d8f695-0874-443f-9dec-754f5cafe6a4");
     static final int STATE_LISTENING = 1;
     static final int STATE_CONNECTING = 2;
     static final int STATE_CONNECTED = 3;
     static final int STATE_CONNECTION_FAILED = 4;
     static final int STATE_MESSAGE_RECEIVED = 5;
+    static final String SMARTPHONE_CODE = "5a020c";
 
     int REQUEST_ENABLE_BLUETOOTH = 1;
     int DISCOVERABLE_ENABLED = 1;
 
-    private static final String APP_NAME = "TheHillReloaded";
-    private static final UUID MY_UUID= UUID.fromString("c1d8f695-0874-443f-9dec-754f5cafe6a4");
+
 
 
     @Override
@@ -76,13 +76,20 @@ public class MultiplayerActivity extends AppCompatActivity {
         discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
         // Tutte le findViewById per gli elementi nell'activity
-        host = (Button) findViewById(R.id.bottone_hostMatch);
-        connect = (Button) findViewById(R.id.bottone_joinMatch);
+        bottoneHost = (Button) findViewById(R.id.bottone_hostMatch);
+        bottoneJoin = (Button) findViewById(R.id.bottone_joinMatch);
         //send = (Button) findViewById(R.id.button_send);
+
+        titoloDeviceList = (TextView) findViewById(R.id.titiolo_lista_host);
+        titoloDeviceList.setVisibility(View.INVISIBLE);
         devicesList = (ListView) findViewById(R.id.lista_host);
-        messBox = (TextView) findViewById(R.id.risultato_match);
-        status = (TextView) findViewById(R.id.stato_connessione);
-        titoloHost = (TextView) findViewById(R.id.questa_lista_host);
+        devicesList.setVisibility(View.INVISIBLE);
+
+        titoloResultBox = (TextView) findViewById(R.id.titolo_risultato_partita);
+        titoloResultBox.setVisibility(View.INVISIBLE);
+        matchResultBox = (TextView) findViewById(R.id.box_risultato_match);
+        matchResultBox.setVisibility(View.INVISIBLE);
+        connectionStatus = (TextView) findViewById(R.id.stato_connessione);
 
         // Inizializzo l'ArrayList dei dispositivi bluetooth
         mBTDevices = new ArrayList<BluetoothDevice>();
@@ -112,34 +119,30 @@ public class MultiplayerActivity extends AppCompatActivity {
         punteggio = (int) (Math.random() * 201);
 
         // IMPLEMENTAZIONE LISTENER DEI BOTTONI-----------------------------------------------------
-
-        if(connect == null)
-        Log.d("Connect:", "è NULL");
-
-        if(host == null)
-            Log.d("Host:", "è NULL");
         /*
             ---Pulsante per la ricerca dei dispositivi---
             Avvia la ricerca dei dispositivi tramite bluetooth
             e chiama il BroadcastReceiver.
          */
-        connect.setOnClickListener(new View.OnClickListener() {
+        bottoneJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (bluetoothAdapter.isDiscovering()){
+                    devicesList.setVisibility(View.VISIBLE);
+                    titoloDeviceList.setVisibility(View.VISIBLE);
                     bluetoothAdapter.cancelDiscovery();
                     Log.d("Log BT:", "Canceling discovery");
                     mBTDevices.clear();
                     bluetoothAdapter.startDiscovery();
-                    titoloHost.setText("Lista host");
                     Log.d("Log BT:", "Starting discovery");
                     registerReceiver(mBroadcastReceiver, discoverDevicesIntent);
                     Log.d("Log BT:", "Calling broadcast receiver");
                 }
                 if (!bluetoothAdapter.isDiscovering()){
+                    devicesList.setVisibility(View.VISIBLE);
+                    titoloDeviceList.setVisibility(View.VISIBLE);
                     mBTDevices.clear();
                     bluetoothAdapter.startDiscovery();
-                    titoloHost.setText("Lista host");
                     Log.d("Log BT:", "Starting discovery");
                     registerReceiver(mBroadcastReceiver, discoverDevicesIntent);
                     Log.d("Log BT:", "Calling broadcast receiver");
@@ -153,9 +156,11 @@ public class MultiplayerActivity extends AppCompatActivity {
             per 60 secondi e crea un oggetto di classe serverClass per
             poter gestire la comunicazione.
          */
-        host.setOnClickListener(new View.OnClickListener() {
+        bottoneHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                devicesList.setVisibility(View.INVISIBLE);
+                titoloDeviceList.setVisibility(View.INVISIBLE);
                 Intent discoverableIntent =
                         new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 60);
@@ -175,7 +180,7 @@ public class MultiplayerActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ClientClass clientClass = new ClientClass(mBTDevices.get(i));
                 clientClass.start();
-                status.setText("Connecting");
+                connectionStatus.setText("Connecting");
             }
         });
 
@@ -207,7 +212,7 @@ public class MultiplayerActivity extends AppCompatActivity {
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 BluetoothClass deviceClass = device.getBluetoothClass();
-                if(deviceClass.toString().equals("5a020c") && !mBTDevices.contains(device)) {
+                if(deviceClass.toString().equals(SMARTPHONE_CODE) && !mBTDevices.contains(device)) {
                     Log.d("Dispositivo trovato: ", device.getName() + " " + deviceClass.toString() + " " + device.getAddress());
                     mBTDevices.add(device);
                 }
@@ -229,9 +234,9 @@ public class MultiplayerActivity extends AppCompatActivity {
      */
     private void showGPSDisabledAlertToUser(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Il GPS è disattivato. Vuoi attivarlo?")
+        alertDialogBuilder.setMessage(R.string.messaggio_gps)
                 .setCancelable(false)
-                .setPositiveButton("Abilita GPS nelle impostazioni",
+                .setPositiveButton(R.string.vai_impostazioni,
                         new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int id){
                                 Intent callGPSSettingIntent = new Intent(
@@ -239,7 +244,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                                 startActivity(callGPSSettingIntent);
                             }
                         });
-        alertDialogBuilder.setNegativeButton("Annulla",
+        alertDialogBuilder.setNegativeButton(R.string.annulla,
                 new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         dialog.cancel();
@@ -266,16 +271,16 @@ public class MultiplayerActivity extends AppCompatActivity {
         public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what){
                 case STATE_LISTENING:
-                    status.setText("Listening");
+                    connectionStatus.setText(R.string.connection_listening);
                     break;
                 case STATE_CONNECTING:
-                    status.setText("Connecting");
+                    connectionStatus.setText(R.string.connection_connecting);
                     break;
                 case STATE_CONNECTED:
-                    status.setText("Connected");
+                    connectionStatus.setText(R.string.connection_connected);
                     break;
                 case STATE_CONNECTION_FAILED:
-                    status.setText("Connection Failed");
+                    connectionStatus.setText(R.string.connection_failed);
                     break;
                 case STATE_MESSAGE_RECEIVED:
                     byte[] readBuffer = (byte[]) msg.obj;
@@ -283,7 +288,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     int punteggioP1 = punteggio;
                     int punteggioP2 = Integer.parseInt(tempMsg);
                     String risultato = matchResult(punteggioP1, punteggioP2);
-                    messBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
+                    matchResultBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
                     break;
             }
 
@@ -298,16 +303,16 @@ public class MultiplayerActivity extends AppCompatActivity {
         public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what){
                 case STATE_LISTENING:
-                    status.setText("Listening");
+                    connectionStatus.setText(R.string.connection_listening);
                     break;
                 case STATE_CONNECTING:
-                    status.setText("Connecting");
+                    connectionStatus.setText(R.string.connection_connecting);
                     break;
                 case STATE_CONNECTED:
-                    status.setText("Connected");
+                    connectionStatus.setText(R.string.connection_connected);
                     break;
                 case STATE_CONNECTION_FAILED:
-                    status.setText("Connection Failed");
+                    connectionStatus.setText(R.string.connection_failed);
                     break;
                 case STATE_MESSAGE_RECEIVED:
                     byte[] readBuffer = (byte[]) msg.obj;
@@ -315,7 +320,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     int punteggioP2 = punteggio;
                     int punteggioP1 = Integer.parseInt(tempMsg);
                     String risultato = matchResult(punteggioP1, punteggioP2);
-                    messBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
+                    matchResultBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
                     break;
             }
 
