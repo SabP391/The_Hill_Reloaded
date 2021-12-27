@@ -18,6 +18,7 @@ import java.util.Random;
 public class GameAssets {
     private static GameAssets instance;
     private static Context context;
+    private Bitmap sunnyPointsIcon;
     private Bitmap gameBackGround;
     private Bitmap vetro[];
     private Bitmap alluminio[];
@@ -31,6 +32,7 @@ public class GameAssets {
 
     private GameAssets(){
         gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
+        sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
 
         rand = new Random();
         // Creazione dell'array di sprite per il vetro ---------------------------------------------
@@ -78,6 +80,8 @@ public class GameAssets {
     }
 
     // Metodi per ritornare le sprite --------------------------------------------------------------
+    Bitmap getSunnyPointsIcon(Point size){return(Bitmap.createScaledBitmap(sunnyPointsIcon, size.x, size.y, false)); }
+
     Bitmap getMixed(Point size){
         return(Bitmap.createScaledBitmap(misto, size.x, size.y, false));
     }

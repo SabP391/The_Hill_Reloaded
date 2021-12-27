@@ -46,4 +46,9 @@ public class GameManager {
         isPaused = false;
     }
 
+    // Getter e setter -----------------------------------------------------------------------------
+    public int getSunnyPoints(){
+        return sunnyPoints;
+    }
+
 }

@@ -37,6 +37,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap tileMap;
+    private SunnyPointsCounter sPC;
     private int firstTileOfTheHill;
     private int numberOfilesOfTheHill;
     private GameItem movingItem = null;
@@ -81,6 +82,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
         }
+        sPC = new SunnyPointsCounter(tileMap, context);
         elapsedTime = 0;
         rand = new Random();
         values = ItemType.values();
@@ -92,15 +94,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo per il rendering, in questo metodo vanno
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
+        c.drawBitmap(backGround, 0, 0, null);
+        tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
+        sPC.draw(c);
         if(GameManager.getInstance().isPaused()){
-            c.drawBitmap(backGround, 0, 0, null);
-            tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
             for(int i = 0; i < itemsOnScreen.size(); i++){
                 c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
-            c.drawBitmap(backGround, 0, 0, null);
-            tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
             //tileMap.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
