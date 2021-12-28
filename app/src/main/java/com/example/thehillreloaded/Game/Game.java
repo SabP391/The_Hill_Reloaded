@@ -49,6 +49,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private Random rand;
     private int currentIndex = 0;
     private Point spriteSize;
+    private LinkedList<RecycleUnit> unitsOnScreen;
     ItemType values[];
 
 
@@ -74,7 +75,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         size = new Point();
         display.getSize(size);
         tileMap = new TileMap(8, size);
-        numberOfilesOfTheHill = 6;
+        numberOfilesOfTheHill = 5;
         firstTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfilesOfTheHill / 2));
         itemsOnScreen = new LinkedList<GameItem>();
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
@@ -87,6 +88,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         rand = new Random();
         values = ItemType.values();
         spriteSize = new Point((int) (tileMap.getTileSize()), (int) (tileMap.getTileSize()));
+        unitsOnScreen = new LinkedList<RecycleUnit>();
+        unitsOnScreen.add(new GlassRecycleUnit(tileMap, context));
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -102,6 +105,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
+            for(RecycleUnit i : unitsOnScreen){
+                i.drawUnit(c);
+            }
             //tileMap.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
@@ -114,8 +120,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
                 int initialTile = rand.nextInt(numberOfilesOfTheHill) + firstTileOfTheHill;
-                Log.d(LOGTAG, String.valueOf(initialTile));
-                Log.d(LOGTAG, String.valueOf(firstTileOfTheHill));
                 itemsOnScreen.add(new GameItem(initialTile, tileMap, context, values[rand.nextInt(values.length)]));
             }
             for(GameItem i : itemsOnScreen){
