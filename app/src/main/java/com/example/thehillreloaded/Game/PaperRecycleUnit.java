@@ -8,7 +8,7 @@ public class PaperRecycleUnit extends RecycleUnit{
     public PaperRecycleUnit(TileMap map, Context context){
         super(map, context);
         this.sprite = GameAssets.getInstance(context).getPaperUnit(size);
-        position = new Point((int)((map.getMapSize().x * map.getTileSize()) - (4 * map.getTileSize())), 0);
+        position = new Point((int)((map.getMapSize().x * map.getTileSize()) - (4 * map.getTileSize())), (int)((map.getTileSize())));
 
     }
 }
