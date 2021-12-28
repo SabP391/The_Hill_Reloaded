@@ -131,8 +131,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
             @Override
             public void onClick(View v) {
                 if(SFXattivi){ soundService.suonoBottoni(); }
-                //DA MODIFICARE LE CONDIZIONI : if (!GameManager.getInstance().isPaused())
-                if (menuFragment.getVisibility() == View.GONE){
+                if (!GameManager.getInstance().isPaused()){
                     GameManager.getInstance().pause();
                     menuFragment.setVisibility(View.VISIBLE);
                     creaMenuInGame(menuFragment, new InGameMenuFragment());
@@ -148,8 +147,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
             @Override
             public void onClick(View v) {
                 if(SFXattivi){ soundService.suonoBottoni(); }
-                //DA MODIFICARE LE CONDIZIONI : if (!GameManager.getInstance().isPaused())
-                if (pauseFragment.getVisibility() == View.GONE){
+                if (!GameManager.getInstance().isPaused()){
                     GameManager.getInstance().pause();
                     pauseFragment.setVisibility(View.VISIBLE);
                     creaMenuPausa(pauseFragment, new PauseMenuFragment());
@@ -205,6 +203,9 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
             GameManager.getInstance().unPause();
+            if(findViewById(menuBottID).getVisibility() == View.GONE){
+                findViewById(menuBottID).setVisibility(View.VISIBLE);
+            }
         } else super.onBackPressed();
     }
 
@@ -229,6 +230,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
     public void onClickMenuVetro(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
         FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
         fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
         fmt.replace(menuFragID, new GlassUnitFragment());
@@ -238,12 +240,9 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
 
     public void onClickEsciDaMenu(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.VISIBLE);
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
-            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
-                getSupportFragmentManager().popBackStackImmediate();
-            }
-            findViewById(menuBottID).setVisibility(View.VISIBLE);
             GameManager.getInstance().unPause();
         }
     }
