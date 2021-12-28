@@ -12,6 +12,8 @@ public abstract class RecycleUnit {
     protected Bitmap sprite;
     protected Point size;
     protected Point position;
+    protected int offsetFromLeft = 0;
+    protected int offsetFromRight = 0;
     protected int myTiles[];
     protected int cost;
     protected ItemType acceptedItemType;
