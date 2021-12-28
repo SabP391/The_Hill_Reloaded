@@ -240,6 +240,9 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportFragmentManager().popBackStackImmediate();
+            }
             findViewById(menuBottID).setVisibility(View.VISIBLE);
             GameManager.getInstance().unPause();
         }
