@@ -27,6 +27,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
@@ -56,6 +57,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuAcciaio"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
@@ -70,6 +72,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuEwaste"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
@@ -84,6 +87,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuAlluminio"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
@@ -98,6 +102,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuCarta"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
@@ -107,9 +112,81 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mission_frag_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="165dp"
+        android:layout_height="194dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        android:text="@string/unita_riciclo_plastica"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_plastica"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        android:text="@string/unita_riciclo_vetro"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        android:text="@string/unita_riciclo_ewaste"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="51dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/unita_riciclo_acciaio"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/bottone_acciaio"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="78dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/unita_riciclo_alluminio"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/bottone_alluminio"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="73dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/unita_riciclo_carta"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/bottone_carta"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

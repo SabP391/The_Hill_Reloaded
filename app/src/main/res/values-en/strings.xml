@@ -38,5 +38,12 @@
     <string name="messaggio_gps">GPS is disabled. Do you want to activate it?</string>
     <string name="vai_impostazioni">Go to settings</string>
     <string name="annulla">Cancel</string>
+    <string name="unita_riciclo_plastica">Plastic</string>
+    <string name="unita_riciclo_vetro">Glass</string>
+    <string name="unita_riciclo_carta">Paper</string>
+    <string name="unita_riciclo_alluminio">Aluminium</string>
+    <string name="unita_riciclo_ewaste">E-waste</string>
+    <string name="unita_riciclo_acciaio">Metal</string>
+    <string name="unita_riciclo_organico">Organic</string>
 
 </resources>

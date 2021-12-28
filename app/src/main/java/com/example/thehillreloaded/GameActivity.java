@@ -238,6 +238,72 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         fmt.commit();
     }
 
+    public void onClickMenuCarta(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new PaperUnitFragment());
+        fmt.addToBackStack("carta");
+        fmt.commit();
+    }
+
+    public void onClickMenuPlastica(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new PlasticUnitFragment());
+        fmt.addToBackStack("plastica");
+        fmt.commit();
+    }
+
+    public void onClickMenuAlluminio(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new AluminiumUnitFragment());
+        fmt.addToBackStack("alluminio");
+        fmt.commit();
+    }
+
+    public void onClickMenuEwaste(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new EwasteUnitFragment());
+        fmt.addToBackStack("ewaste");
+        fmt.commit();
+    }
+
+    public void onClickMenuAcciaio(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new MetalUnitFragment());
+        fmt.addToBackStack("acciaio");
+        fmt.commit();
+    }
+
+    public void onClickMenuOrganico(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        getSupportFragmentManager().popBackStackImmediate();
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new OrganicUnitFragment());
+        fmt.addToBackStack("organico");
+        fmt.commit();
+    }
+
     public void onClickEsciDaMenu(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         findViewById(menuBottID).setVisibility(View.VISIBLE);
