@@ -90,6 +90,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         spriteSize = new Point((int) (tileMap.getTileSize()), (int) (tileMap.getTileSize()));
         unitsOnScreen = new LinkedList<RecycleUnit>();
         unitsOnScreen.add(new GlassRecycleUnit(tileMap, context));
+        unitsOnScreen.add(new PlasticRecycleUnit(tileMap, context));
+        unitsOnScreen.add(new PaperRecycleUnit(tileMap, context));
+        unitsOnScreen.add(new AluminiumRecycleUnit(tileMap, context));
+        unitsOnScreen.add(new SteelRecycleUnit(tileMap, context));
+        unitsOnScreen.add(new IncineratorUnit(tileMap, context));
+        unitsOnScreen.add(new EWasteRecycleUnit(tileMap, context));
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------

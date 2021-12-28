@@ -3,11 +3,11 @@ package com.example.thehillreloaded.Game;
 import android.content.Context;
 import android.graphics.Point;
 
-public class AlluminiumRecycleUnit extends RecycleUnit{
+public class IncineratorUnit extends RecycleUnit{
 
-    public AlluminiumRecycleUnit(TileMap map, Context context){
+    public IncineratorUnit(TileMap map, Context context){
         super(map, context);
-        this.sprite = GameAssets.getInstance(context).getAlUnit(size);
+        this.sprite = GameAssets.getInstance(context).getIncineratorUnit(size);
         position = new Point(0, (int)(map.getTileSize()));
 
     }
