@@ -22,7 +22,10 @@ public abstract class RecycleUnit {
         this.gameMode = GameManager.getInstance().getGameMode();
         this.context = context;
         this.map = map;
-        this.offsetFromLeft = (int) ((map.getFirstTileOfTheHill() * map.getTileSize()) - (4 * map.getTileSize()));
+        this.offsetFromLeft = (int) (((map.getFirstTileOfTheHill() - 4) * map.getTileSize()) - map.getTileSize());
+        if(this.offsetFromLeft < 0){
+            this.offsetFromLeft = 0;
+        }
         size = new Point((int) (map.getTileSize() * 2), (int) (map.getTileSize() * 2));
     }
 

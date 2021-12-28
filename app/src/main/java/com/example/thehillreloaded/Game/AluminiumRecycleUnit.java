@@ -9,7 +9,7 @@ public class AluminiumRecycleUnit extends RecycleUnit{
         super(map, context);
         this.sprite = GameAssets.getInstance(context).getAlUnit(size);
         position = new Point((int)((map.getMapSize().x * map.getTileSize()) -
-                (4 * map.getTileSize())), (int)(map.getTileSize() * 4));
+                (4 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 4));
 
     }
 }

@@ -96,7 +96,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         unitsOnScreen.add(new SteelRecycleUnit(tileMap, context));
         unitsOnScreen.add(new IncineratorUnit(tileMap, context));
         unitsOnScreen.add(new EWasteRecycleUnit(tileMap, context));
-        unitsOnScreen.add(new CompostRecycleUnit(tileMap, context));
+        //unitsOnScreen.add(new CompostRecycleUnit(tileMap, context));
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -115,7 +115,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
-            //tileMap.drawTilemap(c);
+            tileMap.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }

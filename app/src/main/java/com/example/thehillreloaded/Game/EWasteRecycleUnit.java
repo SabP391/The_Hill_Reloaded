@@ -9,7 +9,7 @@ public class EWasteRecycleUnit extends RecycleUnit{
         super(map, context);
         this.sprite = GameAssets.getInstance(context).getEwasteUnit(size);
         position = new Point((int)((map.getMapSize().x * map.getTileSize()) -
-                (2 * map.getTileSize())), (int)(map.getTileSize() * 2));
+                (2 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 2));
 
     }
 }
