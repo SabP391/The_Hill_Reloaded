@@ -7,6 +7,7 @@ public class GameManager {
     private long timeFromLastSpawn;
     private float spawnSpeed;
     private int sunnyPoints;
+    private GameMode gameMode;
 
     private GameManager(){
         spawnSpeed = (float) (1000.0);
@@ -19,8 +20,9 @@ public class GameManager {
         return instance;
     }
 
-    public void initInstance(){
+    public void initInstance(GameMode gameMode){
 
+        this.gameMode = gameMode;
         timeAtGameStart = System.nanoTime();
         timeFromLastSpawn = (long)spawnSpeed;
         sunnyPoints = 0;
@@ -50,5 +52,7 @@ public class GameManager {
     public int getSunnyPoints(){
         return sunnyPoints;
     }
+
+    public GameMode getGameMode(){ return  gameMode; }
 
 }

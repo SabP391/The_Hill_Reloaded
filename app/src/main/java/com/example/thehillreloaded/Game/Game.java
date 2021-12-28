@@ -68,7 +68,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
-        GameManager.getInstance().initInstance();
+        GameManager.getInstance().initInstance(GameMode.CLASSIC);
         mixedArray = new Bitmap[60];
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -96,6 +96,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         unitsOnScreen.add(new SteelRecycleUnit(tileMap, context));
         unitsOnScreen.add(new IncineratorUnit(tileMap, context));
         unitsOnScreen.add(new EWasteRecycleUnit(tileMap, context));
+        unitsOnScreen.add(new CompostRecycleUnit(tileMap, context));
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -106,14 +107,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         c.drawBitmap(backGround, 0, 0, null);
         tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
         sPC.draw(c);
+        for(RecycleUnit i : unitsOnScreen){
+            i.drawUnit(c);
+        }
         if(GameManager.getInstance().isPaused()){
             for(int i = 0; i < itemsOnScreen.size(); i++){
                 c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
-            for(RecycleUnit i : unitsOnScreen){
-                i.drawUnit(c);
-            }
             //tileMap.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);

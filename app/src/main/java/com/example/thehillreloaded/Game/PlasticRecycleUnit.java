@@ -8,7 +8,7 @@ public class PlasticRecycleUnit extends RecycleUnit{
     public PlasticRecycleUnit(TileMap map, Context context){
         super(map, context);
         this.sprite = GameAssets.getInstance(context).getPlasticUnit(size);
-        position = new Point((int)(map.getTileSize())*2, (int)(map.getTileSize())*5);
+        position = new Point(0, (int)(map.getTileSize())*4);
 
     }
 }

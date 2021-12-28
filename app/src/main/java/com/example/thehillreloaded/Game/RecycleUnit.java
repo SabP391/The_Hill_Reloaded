@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 
 public abstract class RecycleUnit {
+    protected GameMode gameMode;
     protected Context context;
     protected TileMap map;
     protected Bitmap sprite;
@@ -16,6 +17,7 @@ public abstract class RecycleUnit {
     protected ItemType acceptedItemType;
 
     public RecycleUnit(TileMap map, Context context){
+        this.gameMode = GameManager.getInstance().getGameMode();
         this.context = context;
         this.map = map;
         size = new Point((int) (map.getTileSize() * 2), (int) (map.getTileSize() * 2));
