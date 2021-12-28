@@ -38,12 +38,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap tileMap;
     private SunnyPointsCounter sPC;
-    private int firstTileOfTheHill;
-    private int numberOfTilesOfTheHill;
     private GameItem movingItem = null;
-    private Bitmap backGround;
     private Bitmap mixedArray[];
-    private Point size;
     private LinkedList<GameItem> itemsOnScreen;
     private long elapsedTime;
     private Random rand;
@@ -68,17 +64,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
-        GameManager.getInstance().initInstance(GameMode.CLASSIC);
         mixedArray = new Bitmap[60];
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        size = new Point();
-        display.getSize(size);
         tileMap = new TileMap(context);
-        numberOfTilesOfTheHill = 5;
-        firstTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfTilesOfTheHill / 2));
         itemsOnScreen = new LinkedList<GameItem>();
-        backGround = GameAssets.getInstance(context).getGameBackGround(size);
+        //backGround = GameAssets.getInstance(context).getGameBackGround(size);
         Point tileSize = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
@@ -104,8 +93,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo per il rendering, in questo metodo vanno
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
-        c.drawBitmap(backGround, 0, 0, null);
-        tileMap.drawHillAreaRectangle(c);
+        tileMap.drawBackground(c);
         sPC.draw(c);
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c);
@@ -126,7 +114,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                int initialTile = rand.nextInt(numberOfTilesOfTheHill) + firstTileOfTheHill;
+                int initialTile = rand.nextInt(tileMap.getNumberOfTileSOfTheHill()) + tileMap.getFirstTileOfTheHill();
                 itemsOnScreen.add(new GameItem(initialTile, tileMap, context, values[rand.nextInt(values.length)]));
             }
             for(GameItem i : itemsOnScreen){

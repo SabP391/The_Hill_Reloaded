@@ -11,6 +11,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +21,13 @@ import android.widget.LinearLayout;
 
 import com.example.thehillreloaded.Game.Game;
 import com.example.thehillreloaded.Game.GameManager;
+import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 
 public class GameActivity extends AppCompatActivity implements InGameMenuFragment.SoundFX{
+    GameMode gameMode;
+
     //variabili per service
     SoundEffectService soundService;
     boolean soundServiceBound = false;
@@ -42,6 +46,24 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         effettiSonori = new Intent(this, SoundEffectService.class);
+
+        // Inizializzazione dei manager per game
+        Intent intent = getIntent();
+        Bundle initInformation = intent.getExtras();
+        int mode = initInformation.getInt("GAME_MODE");
+        int difficulty = initInformation.getInt("GAME_DIFF");
+
+        switch(mode){
+            case 24:
+                gameMode = GameMode.CLASSIC;
+                GameManager.getInstance().initInstance(gameMode);
+                break;
+            case 42:
+                gameMode = GameMode.RELOADED;
+                GameManager.getInstance().initInstance(GameMode.RELOADED);
+                break;
+        }
+
 
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
         //dichiarazione layout generale
@@ -128,6 +150,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
 
         // AZIONI DEI BOTTONI ----------------------------------------------------------------------
         bottoneMenu.setOnClickListener(new View.OnClickListener() {
+            //gameMode == GameMode.CLASSIC oppure gameMode == GameMode.RELOADED
             @Override
             public void onClick(View v) {
                 if(SFXattivi){ soundService.suonoBottoni(); }

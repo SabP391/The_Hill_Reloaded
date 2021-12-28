@@ -1,6 +1,7 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +25,9 @@ public class TileMap {
     // di interi, in modo da poter ridurre le coordinate delle tile
     // ad una sola dimensione
     private ArrayList<Integer> tileMap;
+
+    // Background di gioco
+    private final Bitmap backGround;
 
     // Costanti che determinano la dimensione delle collina su cui
     // cadono gli oggetti
@@ -66,6 +70,7 @@ public class TileMap {
         this.mapSize.x = Math.round((screenSize.x / tileSize));
         tileMap = new ArrayList<Integer>(Collections.nCopies(mapSize.x * mapSize.y, 0));
         FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (NUMBER_OF_TILES_OF_THE_HILL / 2));
+        backGround = GameAssets.getInstance(context).getGameBackGround(screenSize);
 
         // Inizializzazione delle costanti di tipo Paint necessarie
         // a disegnare gli elementi statici della collina ------------------------------------------
@@ -119,9 +124,11 @@ public class TileMap {
     // Questo metofo prende come input la canvas su cui disegnare il rettangolo,
     // l'idice della tile da cui far partire il rettangolo
     // e il numero di colonne per cui si vuole che il rettangolo si estenda
-    public void drawHillAreaRectangle(Canvas c){
+    public void drawBackground(Canvas c){
         int rectWidth = (int) (NUMBER_OF_TILES_OF_THE_HILL * tileSize);
         int rectHeight = (int) (tileSize) * mapSize.y;
+        // Disegna il background
+        c.drawBitmap(backGround, 0, 0, null);
         // Disegna il rettangolo semi trasparente che delimita la collina
         c.drawRect(FIRST_TILE_OF_THE_HILL * tileSize,
                 0,
