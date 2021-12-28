@@ -41,6 +41,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuVetro"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"

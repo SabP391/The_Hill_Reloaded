@@ -33,6 +33,9 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
     //boolean per controllare lo stato degli effetti sonori nelle shared preferences
     boolean SFXattivi;
 
+    int menuFragID;
+    int menuBottID;
+
     Intent effettiSonori;
 
     @Override
@@ -58,6 +61,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         LinearLayout menuLayout = new LinearLayout(this);
         FragmentContainerView menuFragment = new FragmentContainerView(this);
         menuFragment.setId(View.generateViewId());
+        menuFragID = menuFragment.getId();
         LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         menuFragment.setLayoutParams(pr);
@@ -73,7 +77,18 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         pauseFragment.setLayoutParams(pr1);
         pauseFragment.setVisibility(View.GONE);
         pauseLayout.addView(pauseFragment);
+        //fragment menu gestione centrali di riciclo
+        LinearLayout manageLayout = new LinearLayout(this);
+        FragmentContainerView manageFragment = new FragmentContainerView(this);
+        manageFragment.setId(View.generateViewId());
+        LinearLayout.LayoutParams pr4 = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        pr4.gravity = Gravity.BOTTOM;
+        manageFragment.setLayoutParams(pr4);
+        manageFragment.setVisibility(View.GONE);
+        manageLayout.addView(manageFragment);
 
+        // PARAMETRI BOTTONI -----------------------------------------------------------------------
         //parametri bottoneMenu
         LinearLayout.LayoutParams pr2 = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -83,6 +98,8 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         bottoneMenu.setPadding(30, 30, 30, 40);
         bottoneMenu.setBackgroundResource(R.drawable.bottoni_personalizzati);
         bottoneMenu.setLayoutParams(pr2);
+        bottoneMenu.setId(View.generateViewId());
+        menuBottID = bottoneMenu.getId();
         //parametri bottonePausa
         LinearLayout.LayoutParams pr3 = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -107,8 +124,6 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
 
         //impostazione contentView al FrameLayout (contiene gli altri elementi)
         setContentView(frame);
-
-
 
 
         // AZIONI DEI BOTTONI ----------------------------------------------------------------------
@@ -151,14 +166,12 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
     @Override
     protected void onStart() {
         super.onStart();
-
         //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
         //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
-
     }
 
     @Override
@@ -211,4 +224,24 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
 
     @Override
     public void suonoBottoni() {  if(SFXattivi){ soundService.suonoBottoni(); } }
+
+    //Metodi OnClick per le diverse centrali
+    public void onClickMenuVetro(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.GONE);
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(menuFragID, new GlassUnitFragment());
+        fmt.addToBackStack("vetro");
+        fmt.commit();
+    }
+
+    public void onClickEsciDaMenu(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+            findViewById(menuBottID).setVisibility(View.VISIBLE);
+            GameManager.getInstance().unPause();
+        }
+    }
 }
