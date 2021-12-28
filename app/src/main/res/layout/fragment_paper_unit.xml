@@ -84,7 +84,7 @@
         android:background="@drawable/bottoni_personalizzati"
         android:onClick="onClickEsciDaMenu"
         android:src="@android:drawable/ic_delete"
-        android:tint="@color/verde_scuro"
+        app:tint="@color/verde_scuro"
         app:layout_constraintBottom_toBottomOf="@+id/bg_paper_frag"
         app:layout_constraintStart_toStartOf="@+id/bg_paper_frag"/>
 
