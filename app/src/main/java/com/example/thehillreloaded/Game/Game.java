@@ -39,7 +39,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private TileMap tileMap;
     private SunnyPointsCounter sPC;
     private int firstTileOfTheHill;
-    private int numberOfilesOfTheHill;
+    private int numberOfTilesOfTheHill;
     private GameItem movingItem = null;
     private Bitmap backGround;
     private Bitmap mixedArray[];
@@ -74,9 +74,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         Display display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
-        tileMap = new TileMap(8, size);
-        numberOfilesOfTheHill = 5;
-        firstTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfilesOfTheHill / 2));
+        tileMap = new TileMap(context);
+        numberOfTilesOfTheHill = 5;
+        firstTileOfTheHill = (int)((tileMap.getMapSize().x / 2) - (numberOfTilesOfTheHill / 2));
         itemsOnScreen = new LinkedList<GameItem>();
         backGround = GameAssets.getInstance(context).getGameBackGround(size);
         Point tileSize = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
@@ -105,7 +105,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         c.drawBitmap(backGround, 0, 0, null);
-        tileMap.drawHillAreaRectangle( c, firstTileOfTheHill, numberOfilesOfTheHill);
+        tileMap.drawHillAreaRectangle(c);
         sPC.draw(c);
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c);
@@ -126,7 +126,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                int initialTile = rand.nextInt(numberOfilesOfTheHill) + firstTileOfTheHill;
+                int initialTile = rand.nextInt(numberOfTilesOfTheHill) + firstTileOfTheHill;
                 itemsOnScreen.add(new GameItem(initialTile, tileMap, context, values[rand.nextInt(values.length)]));
             }
             for(GameItem i : itemsOnScreen){

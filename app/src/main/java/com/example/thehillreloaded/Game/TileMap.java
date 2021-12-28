@@ -1,16 +1,20 @@
 package com.example.thehillreloaded.Game;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class TileMap {
     // Membri della classe -------------------------------------------------------------------------
+    private Context context;
     // Dimensione delle tile. Essendo le tile quadrate,
     // viene salvato un solo valore per altezza e larghezza
     private final float tileSize;
@@ -20,6 +24,12 @@ public class TileMap {
     // di interi, in modo da poter ridurre le coordinate delle tile
     // ad una sola dimensione
     private ArrayList<Integer> tileMap;
+
+    // Costanti che determinano la dimensione delle collina su cui
+    // cadono gli oggetti
+    private final int FIRST_TILE_OF_THE_HILL;
+    private final int NUMBER_OF_TILES_OF_THE_HILL = 5;
+    private final int HORIZONTAL_TILE_COUNT = 8;
 
     // Costante per determinare lo spessore delle linee
     private static final float LINE_THICKNESS = 5;
@@ -43,15 +53,22 @@ public class TileMap {
     // orizzontali richieste (cioé il numero di righe)
     // e la dimensione dello schermo
     // e inizializza la tilemap
-    public TileMap(int horizontalTileCount, Point screenSize) {
+    public TileMap(Context context) {
+        // Inizializzazione della tilemap ----------------------------------------------------------
+        this.context = context;
+        Point screenSize = new Point();
         mapSize = new Point();
-        tileSize = (float) ((screenSize.y / horizontalTileCount) - OFFSET_FROM_BOTTOM);
-        this.mapSize.y = horizontalTileCount;
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        display.getSize(screenSize);
+        tileSize = (float) ((screenSize.y / HORIZONTAL_TILE_COUNT) - OFFSET_FROM_BOTTOM);
+        this.mapSize.y = HORIZONTAL_TILE_COUNT;
         this.mapSize.x = Math.round((screenSize.x / tileSize));
         tileMap = new ArrayList<Integer>(Collections.nCopies(mapSize.x * mapSize.y, 0));
+        FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (NUMBER_OF_TILES_OF_THE_HILL / 2));
 
         // Inizializzazione delle costanti di tipo Paint necessarie
-        // a disegnare gli elementi statici della collina
+        // a disegnare gli elementi statici della collina ------------------------------------------
         hillRectanglePaint = new Paint();
         hillRectanglePaint.setColor(Color.DKGRAY);
         hillRectanglePaint.setStyle(Paint.Style.FILL);
@@ -102,25 +119,25 @@ public class TileMap {
     // Questo metofo prende come input la canvas su cui disegnare il rettangolo,
     // l'idice della tile da cui far partire il rettangolo
     // e il numero di colonne per cui si vuole che il rettangolo si estenda
-    public void drawHillAreaRectangle(Canvas c, int inialTileIndex, int numberOfTiles){
-        int rectWidth = (int) (numberOfTiles * tileSize);
+    public void drawHillAreaRectangle(Canvas c){
+        int rectWidth = (int) (NUMBER_OF_TILES_OF_THE_HILL * tileSize);
         int rectHeight = (int) (tileSize) * mapSize.y;
         // Disegna il rettangolo semi trasparente che delimita la collina
-        c.drawRect(inialTileIndex * tileSize,
+        c.drawRect(FIRST_TILE_OF_THE_HILL * tileSize,
                 0,
-                (inialTileIndex * tileSize) + rectWidth,
+                (FIRST_TILE_OF_THE_HILL * tileSize) + rectWidth,
                 rectHeight,
                 hillRectanglePaint);
         // Disegna la linea blu che delimita inferiormente la collina
-        c.drawLine((inialTileIndex * tileSize),
+        c.drawLine((FIRST_TILE_OF_THE_HILL * tileSize),
                 rectHeight + 4,
-                (inialTileIndex * tileSize) + rectWidth,
+                (FIRST_TILE_OF_THE_HILL * tileSize) + rectWidth,
                 rectHeight + 4,
                 blueLinePaint);
         // Disegna la linea rossa che delimita superiormente la collina
-        c.drawLine((inialTileIndex * tileSize),
+        c.drawLine((FIRST_TILE_OF_THE_HILL * tileSize),
                 0 + tileSize,
-                (inialTileIndex * tileSize) + rectWidth,
+                (FIRST_TILE_OF_THE_HILL * tileSize) + rectWidth,
                 0 + tileSize,
                 redLinePaint);
     }
@@ -140,6 +157,13 @@ public class TileMap {
 
     public int getTileValue(int index){
         return tileMap.get(index);
+    }
+
+    public int getFirstTileOfTheHill(){
+        return FIRST_TILE_OF_THE_HILL;
+    }
+    public int getNumberOfTileSOfTheHill(){
+        return NUMBER_OF_TILES_OF_THE_HILL;
     }
 
     // Metodi di utility per il debug --------------------------------------------------------------
