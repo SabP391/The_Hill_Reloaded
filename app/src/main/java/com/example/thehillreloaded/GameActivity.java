@@ -51,6 +51,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         effettiSonori = new Intent(this, SoundEffectService.class);
+        map = new TileMap(this);
 
         // Inizializzazione del GameManager --------------------------------------------------------
         // Recupero della modalità di gioco e della
@@ -87,11 +88,10 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
                 break;
         }
         // Inizializzazione vera e propria del GameManager
-        GameManager.getInstance().initInstance(gameMode, difficulty);
+        GameManager.getInstance().initInstance(gameMode, difficulty, this, map);
 
-        // Inizializzazione della classe game e delle
-        // variabili necessarie per il gioco -------------------------------------------------------
-        map = new TileMap(this);
+        // Inizializzazione della classe game e del
+        // manager delle centrali ------------------------------------------------------------------
         RecycleUnitsManager.getInstance().initInstance(this, map);
         Game game = new Game(this, map);
 

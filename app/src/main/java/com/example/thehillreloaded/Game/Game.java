@@ -42,7 +42,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap map;
-    private SunnyPointsCounter sPC;
     private GameItem movingItem = null;
     private Bitmap mixedArray[];
     private LinkedList<GameItem> itemsOnScreen;
@@ -85,8 +84,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
         }
-        sPC = new SunnyPointsCounter(map, context);
-
         elapsedTime = 0;
         rand = new Random();
         values = ItemType.values();
@@ -101,7 +98,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         map.drawBackground(c);
-        sPC.draw(c);
+        GameManager.getInstance().getSunnyPointsCounter().draw(c);
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c);
         }
