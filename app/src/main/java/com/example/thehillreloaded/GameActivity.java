@@ -19,14 +19,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
+import com.example.thehillreloaded.Game.RecycleUnitsManager;
+import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 
 public class GameActivity extends AppCompatActivity implements ClassicInGameMenuFragment.SoundFX{
-    GameMode gameMode;
+    private GameMode gameMode;
+    private Difficulty difficulty;
+    private TileMap map;
 
     //variabili per service
     SoundEffectService soundService;
@@ -47,22 +52,48 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         super.onCreate(savedInstanceState);
         effettiSonori = new Intent(this, SoundEffectService.class);
 
-        // Inizializzazione dei manager per game
+        // Inizializzazione del GameManager --------------------------------------------------------
+        // Recupero della modalità di gioco e della
+        // difficoltà dall'intent lanciato nel menu
         Intent intent = getIntent();
         Bundle initInformation = intent.getExtras();
         int mode = initInformation.getInt("GAME_MODE");
-        int difficulty = initInformation.getInt("GAME_DIFF");
+        int diff = initInformation.getInt("GAME_DIFF");
 
+        // Assegnazione della modalità di gioco
         switch(mode){
             case 24:
                 gameMode = GameMode.CLASSIC;
-                GameManager.getInstance().initInstance(gameMode);
                 break;
             case 42:
                 gameMode = GameMode.RELOADED;
-                GameManager.getInstance().initInstance(GameMode.RELOADED);
+                break;
+            default:
                 break;
         }
+
+        // Assegnazione della difficoltà di gioco
+        switch(diff){
+            case 1:
+                difficulty = Difficulty.EASY;
+                break;
+            case 2:
+                difficulty = Difficulty.NORMAL;
+                break;
+            case 3:
+                difficulty = Difficulty.HARD;
+                break;
+            default:
+                break;
+        }
+        // Inizializzazione vera e propria del GameManager
+        GameManager.getInstance().initInstance(gameMode, difficulty);
+
+        // Inizializzazione della classe game e delle
+        // variabili necessarie per il gioco -------------------------------------------------------
+        map = new TileMap(this);
+        RecycleUnitsManager.getInstance().initInstance(this, map);
+        Game game = new Game(this, map);
 
 
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
@@ -72,8 +103,6 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         LinearLayout inGameMenu = new LinearLayout(this);
         LinearLayout pauseMenu = new LinearLayout(this);
         pauseMenu.setOrientation(LinearLayout.VERTICAL);
-        //inizializza la classe di gioco
-        Game game = new Game(this);
         //dichiarazione elementi (bottoni)
         ImageButton bottoneMenu = new ImageButton(this);
         ImageButton bottonePausa = new ImageButton(this);

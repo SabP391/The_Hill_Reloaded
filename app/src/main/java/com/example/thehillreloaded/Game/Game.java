@@ -36,7 +36,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private static final String LOGTAG = "surface";
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
-    private TileMap tileMap;
+    private TileMap map;
     private SunnyPointsCounter sPC;
     private GameItem movingItem = null;
     private Bitmap mixedArray[];
@@ -53,39 +53,33 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Creazione e inizializzazione della classe Game ----------------------------------------------
 
     // Costruttore per la classe Game
-    public Game(Context context) {
+    public Game(Context context, TileMap map) {
         super(context);
-        init(context);
+        this.map = map;
+        this.context = context;
+        init();
     }
 
     // Inizializza la classe Game
-    public void init(Context context){
-        this.context = context;
+    public void init(){
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
+
         mixedArray = new Bitmap[60];
-        tileMap = new TileMap(context);
         itemsOnScreen = new LinkedList<GameItem>();
-        //backGround = GameAssets.getInstance(context).getGameBackGround(size);
-        Point tileSize = new Point((int)tileMap.getTileSize(), (int)tileMap.getTileSize());
+        Point tileSize = new Point((int)map.getTileSize(), (int)map.getTileSize());
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
         }
-        sPC = new SunnyPointsCounter(tileMap, context);
+        sPC = new SunnyPointsCounter(map, context);
+
         elapsedTime = 0;
         rand = new Random();
         values = ItemType.values();
-        spriteSize = new Point((int) (tileMap.getTileSize()), (int) (tileMap.getTileSize()));
-        unitsOnScreen = new LinkedList<RecycleUnit>();
-        unitsOnScreen.add(new GlassRecycleUnit(tileMap, context));
-        unitsOnScreen.add(new PlasticRecycleUnit(tileMap, context));
-        unitsOnScreen.add(new PaperRecycleUnit(tileMap, context));
-        unitsOnScreen.add(new AluminiumRecycleUnit(tileMap, context));
-        unitsOnScreen.add(new SteelRecycleUnit(tileMap, context));
-        unitsOnScreen.add(new IncineratorUnit(tileMap, context));
-        unitsOnScreen.add(new EWasteRecycleUnit(tileMap, context));
-        //unitsOnScreen.add(new CompostRecycleUnit(tileMap, context));
+        spriteSize = new Point((int) (map.getTileSize()), (int) (map.getTileSize()));
+        unitsOnScreen = RecycleUnitsManager.getInstance().getUnlockedUnits();
+
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -93,7 +87,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo per il rendering, in questo metodo vanno
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
-        tileMap.drawBackground(c);
+        map.drawBackground(c);
         sPC.draw(c);
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c);
@@ -103,7 +97,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
-            tileMap.drawTilemap(c);
+            map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -114,8 +108,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                int initialTile = rand.nextInt(tileMap.getNumberOfTileSOfTheHill()) + tileMap.getFirstTileOfTheHill();
-                itemsOnScreen.add(new GameItem(initialTile, tileMap, context, values[rand.nextInt(values.length)]));
+                int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
+                itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
             }
             for(GameItem i : itemsOnScreen){
                 if(i != movingItem){
@@ -261,7 +255,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
            Point touchPosition = new Point((int) x, (int) y);
            // Trova l'indice della tile all'interno della quale è
            // stato rilevto il tocco
-           int tile = tileMap.getTileIndexFromPosition(touchPosition);
+           int tile = map.getTileIndexFromPosition(touchPosition);
            switch(event.getAction()){
                // Al primo tocco sullo schermo controlla che il tocco
                // sia avvenuto su uno degli oggetti in gioco
@@ -296,7 +290,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                        // Se c'era un oggetto in movimento,
                        // lo riporta alla tile in cui si trovava prima del tocco
                        // e reimposta a null la variabile movingItem
-                       movingItem.setPosition(tileMap.getPositionFromTileIndex(movingItem.getCurrentTile()));
+                       movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
                        movingItem = null;
                    }
                    break;
