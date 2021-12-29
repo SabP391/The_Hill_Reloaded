@@ -96,6 +96,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         Game game = new Game(this, map);
 
 
+
+
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
         //dichiarazione layout generale
         FrameLayout frame = new FrameLayout(this);
@@ -169,9 +171,9 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         //aggiunta elementi al layout (frame) -> ordine importante! GAME DEVE ESSERE IL PRIMO!! <-
         frame.addView(game);
         frame.addView(pauseMenu);
-        frame.addView(pauseLayout);
         frame.addView(menuLayout);
         frame.addView(inGameMenu);
+        frame.addView(pauseLayout);
 
         //impostazione contentView al FrameLayout (contiene gli altri elementi)
         setContentView(frame);
@@ -184,9 +186,15 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             public void onClick(View v) {
                 if(SFXattivi){ soundService.suonoBottoni(); }
                 if (!GameManager.getInstance().isPaused()){
-                    GameManager.getInstance().pause();
-                    menuFragment.setVisibility(View.VISIBLE);
-                    creaMenuInGame(menuFragment, new ClassicInGameMenuFragment());
+                    if(gameMode == GameMode.CLASSIC) {
+                        GameManager.getInstance().pause();
+                        menuFragment.setVisibility(View.VISIBLE);
+                        creaMenuInGameClassic(menuFragment, new ClassicInGameMenuFragment());
+                    } else if (gameMode == GameMode.RELOADED) {
+                        GameManager.getInstance().pause();
+                        menuFragment.setVisibility(View.VISIBLE);
+                        creaMenuInGameReloaded(menuFragment, new ReloadedInGameMenuFragment());
+                    }
                 } else {
                     menuFragment.setVisibility(View.GONE);
                     GameManager.getInstance().unPause();
@@ -204,10 +212,18 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
                     pauseFragment.setVisibility(View.VISIBLE);
                     creaMenuPausa(pauseFragment, new PauseMenuFragment());
                 } else {
-                    pauseFragment.setVisibility(View.GONE);
-                    GameManager.getInstance().unPause();
-                    if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+                    if(pauseFragment.getVisibility() == View.GONE) {
+                        //gioco in pausa e fragment di pausa non attivo = chiude altri fragment e apre menu di pausa
+                        pauseFragment.setVisibility(View.VISIBLE);
+                        creaMenuPausa(pauseFragment, new PauseMenuFragment());
+                    } else if(pauseFragment.getVisibility() == View.VISIBLE) {
+                        //gioco in pausa e fragment attivo = chiude fragment e toglie pausa
+                        pauseFragment.setVisibility(View.GONE);
                         getSupportFragmentManager().popBackStackImmediate();
+                        if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+                            GameManager.getInstance().unPause();
+                        }
+                    }
                 }
             }
         });
@@ -234,11 +250,19 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         }
     }
 
-    public void creaMenuInGame(FragmentContainerView container, ClassicInGameMenuFragment fragment){
+    public void creaMenuInGameClassic(FragmentContainerView container, ClassicInGameMenuFragment fragment){
         FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
         fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(container.getId(), fragment, "inGameFrag");
-        fmt.addToBackStack("inGameFrag");
+        fmt.replace(container.getId(), fragment, "c_inGameFrag");
+        fmt.addToBackStack("c_inGameFrag");
+        fmt.commit();
+    }
+
+    public void creaMenuInGameReloaded(FragmentContainerView container, ReloadedInGameMenuFragment fragment){
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(container.getId(), fragment, "r_inGameFrag");
+        fmt.addToBackStack("r_inGameFrag");
         fmt.commit();
     }
 

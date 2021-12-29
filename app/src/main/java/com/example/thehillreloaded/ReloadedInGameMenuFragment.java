@@ -3,6 +3,8 @@ package com.example.thehillreloaded;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,13 @@ public class ReloadedInGameMenuFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        FragmentManager childFM = getChildFragmentManager();
+        FragmentTransaction ft = childFM.beginTransaction();
+        ft.replace(R.id.mission_frag_layout_r, new MissionsFragment() );
+        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
     @Override
