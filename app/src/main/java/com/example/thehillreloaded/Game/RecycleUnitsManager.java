@@ -11,14 +11,19 @@ public class RecycleUnitsManager {
     private static final int COST_OF_PAPER_UNIT = 12;
     private static final int COST_OF_COMPOST_UNIT = 20;
     private static final int COST_OF_ALUMINIUM_UNIT = 25;
-
-    public static int getCostOfPaperUnit() {
-        return COST_OF_PAPER_UNIT;
-    }
-
     private static final int COST_OF_STEEL_UNIT = 30;
     private static final int COST_OF_PLASTIC_UNIT = 35;
     private static final int COST_OF_EWASTE_UNIT = 40;
+
+    // Variabili che controllano quali centrali
+    // siano state sbloccate -----------------------------------------------------------------------
+    private boolean isPaperUnitUnlocked = false;
+    private boolean isCompostUnlocked = false;
+    private boolean isAluminiumUnitUnlocked = false;
+    private boolean isSteelUnitUnlocked = false;
+    private boolean isPlasticUnitUnlocked = false;
+    private boolean isEwasteUnitUnlocked = false;
+    private boolean isGlassUnitUnlocked = false;
 
     // Attributi della classe ----------------------------------------------------------------------
     private static RecycleUnitsManager instance;
@@ -135,5 +140,9 @@ public class RecycleUnitsManager {
 
     public static int getCostOfEwasteUnit() {
         return COST_OF_EWASTE_UNIT;
+    }
+
+    public static int getCostOfPaperUnit() {
+        return COST_OF_PAPER_UNIT;
     }
 }

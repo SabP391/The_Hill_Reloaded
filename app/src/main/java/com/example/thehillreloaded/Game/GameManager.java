@@ -7,6 +7,7 @@ public class GameManager {
     private long timeFromLastSpawn;
     private float spawnSpeed;
     private int sunnyPoints;
+    private int totalSunnyPoints;
     private GameMode gameMode;
     private Difficulty difficulty;
 
