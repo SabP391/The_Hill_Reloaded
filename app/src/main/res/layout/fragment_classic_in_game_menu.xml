@@ -110,13 +110,6 @@
         app:layout_constraintTop_toBottomOf="@+id/bottone_alluminio_c"
         app:tint="#4443be" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mission_frag_layout_c"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/txt_plastica_c"
         android:layout_width="wrap_content"
@@ -124,8 +117,8 @@
         android:layout_marginTop="51dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_black"
-        android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_plastica"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintEnd_toStartOf="@+id/bottone_plastica_c"
         app:layout_constraintTop_toTopOf="@+id/bg_classic_igm" />
 
@@ -136,8 +129,8 @@
         android:layout_marginTop="78dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_black"
-        android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_vetro"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_plastica_c" />
 
@@ -148,8 +141,8 @@
         android:layout_marginTop="73dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_black"
-        android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_ewaste"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_vetro_c" />
 
@@ -188,5 +181,72 @@
         android:textColor="@color/verde_scuro"
         app:layout_constraintStart_toEndOf="@+id/bottone_carta_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_alluminio_c" />
+
+    <TextView
+        android:id="@+id/txt_costo_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_plastica_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_plastica_c" />
+
+    <TextView
+        android:id="@+id/txt_costo2_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vetro_c" />
+
+    <TextView
+        android:id="@+id/txt_costo3_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ewaste_c" />
+
+    <TextView
+        android:id="@+id/txt_costo4_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_acciaio_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_acciaio_c" />
+
+    <TextView
+        android:id="@+id/txt_costo5_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_alluminio_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_alluminio_c" />
+
+    <TextView
+        android:id="@+id/txt_costo6_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_carta_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_carta_c" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mission_frag_layout_c"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

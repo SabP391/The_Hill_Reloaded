@@ -203,10 +203,80 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="55dp"
         android:fontFamily="@font/roboto_black"
-        android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_organico"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintStart_toEndOf="@+id/bottone_organico_r"
         app:layout_constraintTop_toBottomOf="@+id/txt_carta_r" />
+
+    <TextView
+        android:id="@+id/txt_costo_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_plastica_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_plastica_r" />
+
+    <TextView
+        android:id="@+id/txt_costo2_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vetro_r" />
+
+    <TextView
+        android:id="@+id/txt_costo3_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ewaste_r" />
+
+    <TextView
+        android:id="@+id/txt_costo4_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_acciaio_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_acciaio_r" />
+
+    <TextView
+        android:id="@+id/txt_costo5_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_alluminio_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_alluminio_r" />
+
+    <TextView
+        android:id="@+id/txt_costo6_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_carta_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_carta_r" />
+
+    <TextView
+        android:id="@+id/txt_costo7_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/bottone_organico_r"
+        app:layout_constraintTop_toBottomOf="@+id/txt_organico_r" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mission_frag_layout_r"
