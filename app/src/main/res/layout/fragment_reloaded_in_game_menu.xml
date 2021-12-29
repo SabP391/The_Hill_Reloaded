@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout14"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReloadedInGameMenuFragment" >
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/stile_fragment_background"
+        android:paddingHorizontal="170dp"
+        android:paddingVertical="160dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:tint="#f5d615" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:tint="#f5d615"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="289dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:tint="#f5d615"
+        tools:layout_editor_absoluteX="205dp"
+        tools:layout_editor_absoluteY="289dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:tint="#f5d615"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="208dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:tint="#f5d615"
+        tools:layout_editor_absoluteX="205dp"
+        tools:layout_editor_absoluteY="208dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:tint="#f5d615"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="132dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="onClickMenuPlastica"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_menu_di_gioco"
+        app:tint="#f5d615"
+        tools:layout_editor_absoluteX="205dp"
+        tools:layout_editor_absoluteY="132dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

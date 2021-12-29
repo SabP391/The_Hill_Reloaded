@@ -25,7 +25,7 @@ import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 
-public class GameActivity extends AppCompatActivity implements InGameMenuFragment.SoundFX{
+public class GameActivity extends AppCompatActivity implements ClassicInGameMenuFragment.SoundFX{
     GameMode gameMode;
 
     //variabili per service
@@ -157,7 +157,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
                 if (!GameManager.getInstance().isPaused()){
                     GameManager.getInstance().pause();
                     menuFragment.setVisibility(View.VISIBLE);
-                    creaMenuInGame(menuFragment, new InGameMenuFragment());
+                    creaMenuInGame(menuFragment, new ClassicInGameMenuFragment());
                 } else {
                     menuFragment.setVisibility(View.GONE);
                     GameManager.getInstance().unPause();
@@ -205,7 +205,7 @@ public class GameActivity extends AppCompatActivity implements InGameMenuFragmen
         }
     }
 
-    public void creaMenuInGame(FragmentContainerView container, InGameMenuFragment fragment){
+    public void creaMenuInGame(FragmentContainerView container, ClassicInGameMenuFragment fragment){
         FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
         fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
         fmt.replace(container.getId(), fragment, "inGameFrag");

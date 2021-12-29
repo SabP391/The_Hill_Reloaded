@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context=".InGameMenuFragment">
+    tools:context=".ClassicInGameMenuFragment">
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/bg_classic_igm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/bottone_plastica"
+        android:id="@+id/bottone_plastica_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
@@ -31,12 +31,12 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/bg_classic_igm"
+        app:layout_constraintTop_toTopOf="@+id/bg_classic_igm"
         app:tint="#f5d615" />
 
     <ImageButton
-        android:id="@+id/bottone_vetro"
+        android:id="@+id/bottone_vetro_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
@@ -46,12 +46,12 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_plastica"
+        app:layout_constraintStart_toStartOf="@+id/bg_classic_igm"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_plastica_c"
         app:tint="#8ebf12" />
 
     <ImageButton
-        android:id="@+id/bottone_acciaio"
+        android:id="@+id/bottone_acciaio_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -61,12 +61,12 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
-        app:layout_constraintStart_toEndOf="@+id/bottone_plastica"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/bottone_plastica_c"
+        app:layout_constraintTop_toTopOf="@+id/bg_classic_igm"
         app:tint="#4ad2ca" />
 
     <ImageButton
-        android:id="@+id/bottone_ewaste"
+        android:id="@+id/bottone_ewaste_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
@@ -76,12 +76,12 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_vetro"
+        app:layout_constraintStart_toStartOf="@+id/bg_classic_igm"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_vetro_c"
         app:tint="#d61a8f" />
 
     <ImageButton
-        android:id="@+id/bottone_alluminio"
+        android:id="@+id/bottone_alluminio_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -91,12 +91,12 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
-        app:layout_constraintStart_toEndOf="@+id/bottone_vetro"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_acciaio"
+        app:layout_constraintStart_toEndOf="@+id/bottone_vetro_c"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_acciaio_c"
         app:tint="#bc45c8" />
 
     <ImageButton
-        android:id="@+id/bottone_carta"
+        android:id="@+id/bottone_carta_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -106,19 +106,19 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
         android:src="@drawable/ic_menu_di_gioco"
-        app:layout_constraintStart_toEndOf="@+id/bottone_ewaste"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_alluminio"
+        app:layout_constraintStart_toEndOf="@+id/bottone_ewaste_c"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_alluminio_c"
         app:tint="#4443be" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mission_frag_layout"
+        android:id="@+id/mission_frag_layout_c"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/txt_plastica_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
@@ -126,11 +126,11 @@
         android:fontFamily="@font/roboto_black"
         android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_plastica"
-        app:layout_constraintEnd_toStartOf="@+id/bottone_plastica"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintEnd_toStartOf="@+id/bottone_plastica_c"
+        app:layout_constraintTop_toTopOf="@+id/bg_classic_igm" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/txt_vetro_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="78dp"
@@ -138,11 +138,11 @@
         android:fontFamily="@font/roboto_black"
         android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_vetro"
-        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_plastica_c" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txt_ewaste_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="73dp"
@@ -150,11 +150,11 @@
         android:fontFamily="@font/roboto_black"
         android:textColor="@color/verde_scuro"
         android:text="@string/unita_riciclo_ewaste"
-        app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vetro_c" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/txt_acciaio_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -162,11 +162,11 @@
         android:fontFamily="@font/roboto_black"
         android:text="@string/unita_riciclo_acciaio"
         android:textColor="@color/verde_scuro"
-        app:layout_constraintStart_toEndOf="@+id/bottone_acciaio"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintStart_toEndOf="@+id/bottone_acciaio_c"
+        app:layout_constraintTop_toTopOf="@+id/bg_classic_igm" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/txt_alluminio_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -174,11 +174,11 @@
         android:fontFamily="@font/roboto_black"
         android:text="@string/unita_riciclo_alluminio"
         android:textColor="@color/verde_scuro"
-        app:layout_constraintStart_toEndOf="@+id/bottone_alluminio"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintStart_toEndOf="@+id/bottone_alluminio_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_acciaio_c" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/txt_carta_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -186,7 +186,7 @@
         android:fontFamily="@font/roboto_black"
         android:text="@string/unita_riciclo_carta"
         android:textColor="@color/verde_scuro"
-        app:layout_constraintStart_toEndOf="@+id/bottone_carta"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintStart_toEndOf="@+id/bottone_carta_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_alluminio_c" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
