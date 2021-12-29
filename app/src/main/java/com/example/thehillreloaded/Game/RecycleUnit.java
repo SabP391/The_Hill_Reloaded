@@ -22,7 +22,7 @@ public abstract class RecycleUnit {
         this.gameMode = GameManager.getInstance().getGameMode();
         this.context = context;
         this.map = map;
-
+        this.cost = 0;
         this.offsetFromLeft = (int) (((map.getFirstTileOfTheHill() - 4) * map.getTileSize()) - map.getTileSize());
         if(this.offsetFromLeft < 0){
             this.offsetFromLeft = 0;
@@ -36,5 +36,8 @@ public abstract class RecycleUnit {
     }
 
     protected void drawUnit(Canvas c){c.drawBitmap(sprite, position.x, position.y, null);}
+
+    // Getter e setter------------------------------------------------------------------------------
+    public int getCost(){return this.cost;}
 
 }

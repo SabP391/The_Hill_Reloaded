@@ -32,16 +32,42 @@ public class RecycleUnitsManager {
         return unlockedUnits;
     }
 
-    public void unlockPlasticUnit(){unlockedUnits.add(new PlasticRecycleUnit(map, context));}
 
-    public void unlockPaperUnit(){unlockedUnits.add(new PaperRecycleUnit(map, context));}
+    // Metodi per sbloccare le centrali-------------------------------------------------------------
+    public void unlockPlasticUnit(){
+        PlasticRecycleUnit unitToAdd = new PlasticRecycleUnit(map, context);
+        unlockedUnits.add(unitToAdd);
+        GameManager.getInstance().setSunnyPoints(GameManager.getInstance().getSunnyPoints() - unitToAdd.getCost());
+    }
 
-    public void unlockAluminiumUnit(){unlockedUnits.add(new AluminiumRecycleUnit(map, context));}
+    public void unlockPaperUnit(){
+        PaperRecycleUnit unitToAdd = new PaperRecycleUnit(map, context);
+        unlockedUnits.add(unitToAdd);
+        GameManager.getInstance().setSunnyPoints(GameManager.getInstance().getSunnyPoints() - unitToAdd.getCost());
+    }
 
-    public void unlockSteelUnit(){unlockedUnits.add(new SteelRecycleUnit(map, context));}
+    public void unlockAluminiumUnit(){
+        AluminiumRecycleUnit unitToAdd = new AluminiumRecycleUnit(map, context);
+        unlockedUnits.add(unitToAdd);
+        GameManager.getInstance().setSunnyPoints(GameManager.getInstance().getSunnyPoints() - unitToAdd.getCost());
+    }
 
-    public void unlockEWasteUnit(){unlockedUnits.add(new EWasteRecycleUnit(map, context));}
+    public void unlockSteelUnit(){
+        SteelRecycleUnit unitToAdd = new SteelRecycleUnit(map, context);
+        unlockedUnits.add(unitToAdd);
+        GameManager.getInstance().setSunnyPoints(GameManager.getInstance().getSunnyPoints() - unitToAdd.getCost());
+    }
 
-    public void unlockCompostUnit(){unlockedUnits.add(new CompostRecycleUnit(map, context));}
+    public void unlockEWasteUnit(){
+        EWasteRecycleUnit unitToAdd = new EWasteRecycleUnit(map, context);
+        unlockedUnits.add(unitToAdd);
+        GameManager.getInstance().setSunnyPoints(GameManager.getInstance().getSunnyPoints() - unitToAdd.getCost());
+    }
+
+    public void unlockCompostUnit(){
+        CompostRecycleUnit unitToAdd = new CompostRecycleUnit(map, context);
+        unlockedUnits.add(unitToAdd);
+        GameManager.getInstance().setSunnyPoints(GameManager.getInstance().getSunnyPoints() - unitToAdd.getCost());
+    }
 
 }
