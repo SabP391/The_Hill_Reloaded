@@ -4,12 +4,17 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -48,6 +53,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private LinkedList<RecycleUnit> unitsOnScreen;
     ItemType values[];
 
+    private final static int SHAKE_SENSITIVITY = 10;
+    private float accelerationVal, accelerationLast, shake;
 
 
     // Creazione e inizializzazione della classe Game ----------------------------------------------
@@ -58,6 +65,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.map = map;
         this.context = context;
         init();
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), sensorManager.SENSOR_DELAY_GAME);
+
+        accelerationVal = SensorManager.GRAVITY_EARTH;
+        accelerationLast = SensorManager.GRAVITY_EARTH;
+        shake = 0.00f;
     }
 
     // Inizializza la classe Game
@@ -298,4 +311,31 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
        }
         return true;
     }
+
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+            accelerationLast = accelerationVal;
+            accelerationVal = (float) Math.sqrt((double) (x*x) + (y*y) + (z*z));
+            float delta = accelerationVal - accelerationLast;
+            shake = shake * 0.9f + delta;
+
+            if(shake > 5) {
+                String shakeValue = String.valueOf(shake);
+                Log.d("Shaking value", shakeValue);
+            }
+
+            if(shake > SHAKE_SENSITIVITY){
+                Log.d("Shaking value", "Sta shakeandoooooooooo");
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
 }
