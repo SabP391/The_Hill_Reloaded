@@ -32,7 +32,7 @@ public class GameManager {
         this.difficulty = difficulty;
         timeAtGameStart = System.nanoTime();
         timeFromLastSpawn = (long)spawnSpeed;
-        sunnyPoints = 0;
+        sunnyPoints = 100;
         sunnyPointsCounter = new SunnyPointsCounter(map, context);
     }
 

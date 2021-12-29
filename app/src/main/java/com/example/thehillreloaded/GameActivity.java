@@ -316,6 +316,9 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
     public void onClickMenuCarta(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
+
+        RecycleUnitsManager.getInstance().unlockPaperUnit();
+
         findViewById(menuBottID).setVisibility(View.GONE);
         getSupportFragmentManager().popBackStackImmediate();
         FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();

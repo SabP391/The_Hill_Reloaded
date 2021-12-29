@@ -188,7 +188,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/bottone_plastica_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_plastica_c" />
 
@@ -198,7 +197,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_vetro_c" />
 
@@ -208,7 +206,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/bottone_ewaste_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_ewaste_c" />
 
@@ -218,7 +215,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/bottone_acciaio_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_acciaio_c" />
 
@@ -228,7 +224,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/bottone_alluminio_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_alluminio_c" />
 
@@ -238,7 +233,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="3dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/bottone_carta_c"
         app:layout_constraintTop_toBottomOf="@+id/txt_carta_c" />
 
