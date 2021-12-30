@@ -46,5 +46,6 @@
     <string name="unita_riciclo_acciaio">Metal</string>
     <string name="unita_riciclo_organico">Organic</string>
     <string name="sunny_non_sufficienti">You don\'t have enough Sunny Points</string>
+    <string name="nessun_rifiuto">No litter to burn</string>
 
 </resources>

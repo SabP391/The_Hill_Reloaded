@@ -114,7 +114,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
             }
         }else{
-            map.drawTilemap(c);
+            //map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -146,7 +146,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                                 Log.d("Sono dentro!", "il run.....");
                                 switch (inc){
                                     case 0:
-                                        Toast.makeText(context, R.string.sunnyp_insufficienti, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
                                         break;
                                     case 1:
                                         Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
