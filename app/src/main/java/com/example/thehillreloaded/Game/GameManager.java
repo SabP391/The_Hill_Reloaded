@@ -54,7 +54,7 @@ public class GameManager {
 
     public boolean isTimeToSpawn(long currentTime){
         long timeElapsed = (currentTime - timeAtGameStart) / 1000000000;
-        if((timeElapsed > TIME_TO_INCREASE_DIFFICULTY + timeToGetThingsSpicy) && (timeElapsed < 600)){
+        if((timeElapsed > TIME_TO_INCREASE_DIFFICULTY + timeToGetThingsSpicy) && (timeElapsed <= 600)){
             timeToGetThingsSpicy += TIME_TO_INCREASE_DIFFICULTY;
             spawnSpeed -= SPAWN_SPEED_INCREASE;
             Log.d("Time elapsed", String.valueOf(timeToGetThingsSpicy));
