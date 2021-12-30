@@ -152,4 +152,67 @@ public class RecycleUnitsManager {
     public boolean isEwasteUnitUnlocked() { return isEwasteUnitUnlocked; }
 
     public boolean isGlassUnitUnlocked() { return isGlassUnitUnlocked; }
+
+    public CompostRecycleUnit getCompostUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof CompostRecycleUnit){
+                return (CompostRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public AluminiumRecycleUnit getAluminiumUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof AluminiumRecycleUnit){
+                return (AluminiumRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public SteelRecycleUnit getSteelUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof SteelRecycleUnit){
+                return (SteelRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public PlasticRecycleUnit getPlasticUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof PlasticRecycleUnit){
+                return (PlasticRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public EWasteRecycleUnit getEWasteUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof EWasteRecycleUnit){
+                return (EWasteRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public GlassRecycleUnit getGlassUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof GlassRecycleUnit){
+                return (GlassRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public IncineratorUnit getIncineratorUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof IncineratorUnit){
+                return (IncineratorUnit) i;
+            }
+        }
+        return null;
+    }
 }
