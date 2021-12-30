@@ -56,6 +56,11 @@ public class GameManager {
         isPaused = false;
     }
 
+    public void subtractSunnyPoints(int pointsToSubtract){
+        this.sunnyPoints = this.sunnyPoints - pointsToSubtract;
+        sunnyPointsCounter.updateCounter(sunnyPoints);
+    }
+
     // Getter e setter -----------------------------------------------------------------------------
     public int getSunnyPoints(){
         return sunnyPoints;

@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -17,6 +18,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import com.example.thehillreloaded.R;
 
 import java.lang.reflect.Array;
 import java.util.LinkedList;
@@ -39,6 +42,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
+    private boolean timeToDestroy;
+    private Handler messageHandler;
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap map;
@@ -52,7 +57,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private LinkedList<RecycleUnit> unitsOnScreen;
     ItemType values[];
 
-    private final static int SHAKE_SENSITIVITY = 10;
+    private final static int SHAKE_SENSITIVITY = 14;
     private float accelerationVal, accelerationLast, shake;
 
 
@@ -90,6 +95,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         spriteSize = new Point((int) (map.getTileSize()), (int) (map.getTileSize()));
         unitsOnScreen = RecycleUnitsManager.getInstance().getUnlockedUnits();
 
+        messageHandler = new Handler();
+
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -117,15 +124,46 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
-            if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
-                itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
-            }
-            for(GameItem i : itemsOnScreen){
-                if(i != movingItem){
-                    i.fall(System.nanoTime());
+            try{
+                synchronized (itemsOnScreen){
+                    if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
+                        int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
+                        itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
+                    }
+                    for(GameItem i : itemsOnScreen){
+                        if(i != movingItem){
+                            i.fall(System.nanoTime());
+                        }
+                    }
+                    if(timeToDestroy){
+                        IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
+                        int inc = incinerator.destroyFirstLine(itemsOnScreen);
+                        timeToDestroy = false;
+                        Log.d("Inc value", String.valueOf(inc));
+                        messageHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d("Sono dentro!", "il run.....");
+                                switch (inc){
+                                    case 0:
+                                        Toast.makeText(context, R.string.sunnyp_insufficienti, Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 1:
+                                        Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 2:
+                                        //Questo toast è da eliminare!!
+                                        Toast.makeText(context, "Prima riga incenerita", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
                 }
+            }catch (Exception e) {
+                Log.d("E mo?", e.toString());
             }
+
+
         }
     }
 
@@ -312,27 +350,27 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-            accelerationLast = accelerationVal;
-            accelerationVal = (float) Math.sqrt((double) (x*x) + (y*y) + (z*z));
-            float delta = accelerationVal - accelerationLast;
-            shake = shake * 0.9f + delta;
+            if(!timeToDestroy) {
+                float x = sensorEvent.values[0];
+                float y = sensorEvent.values[1];
+                float z = sensorEvent.values[2];
+                accelerationLast = accelerationVal;
+                accelerationVal = (float) Math.sqrt((double) (x * x) + (y * y) + (z * z));
+                float delta = accelerationVal - accelerationLast;
+                shake = shake * 0.9f + delta;
 
-            if(shake > 5) {
-                String shakeValue = String.valueOf(shake);
-                Log.d("Shaking value", shakeValue);
-            }
-
-            if(shake > SHAKE_SENSITIVITY){
-                Log.d("Shaking value", "Sta shakeandoooooooooo");
+                if (shake > 14) {
+                    Log.d("Shake force", String.valueOf(shake));
+                }
+                if (shake > SHAKE_SENSITIVITY) {
+                    timeToDestroy = true;
+                }
             }
         }
 
         @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {
-
-        }
+        public void onAccuracyChanged(Sensor sensor, int i) { }
     };
+
+
 }
