@@ -28,6 +28,7 @@
         android:layout_marginTop="56dp"
         android:background="@drawable/bottoni_personalizzati"
         android:fontFamily="@font/roboto_black"
+        android:onClick="onClickEsciDaMenu"
         android:text="@string/bottone_torna_a_gioco"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"

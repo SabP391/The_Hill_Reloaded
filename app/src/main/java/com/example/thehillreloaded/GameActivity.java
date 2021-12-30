@@ -45,6 +45,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
     int menuFragID;
     int menuBottID;
+    int menuPausaID;
 
     Intent effettiSonori;
 
@@ -125,6 +126,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         LinearLayout pauseLayout = new LinearLayout(this);
         FragmentContainerView pauseFragment = new FragmentContainerView(this);
         pauseFragment.setId(View.generateViewId());
+        menuPausaID = pauseFragment.getId();
         LinearLayout.LayoutParams pr1 = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         pr1.gravity = Gravity.CENTER;
@@ -283,7 +285,12 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             if(findViewById(menuBottID).getVisibility() == View.GONE){
                 findViewById(menuBottID).setVisibility(View.VISIBLE);
             }
-        } else super.onBackPressed();
+        } else {
+            GameManager.getInstance().pause();
+            findViewById(menuPausaID).setVisibility(View.VISIBLE);
+            creaMenuPausa(findViewById(menuPausaID), new PauseMenuFragment());
+            //super.onBackPressed();
+        }
     }
 
     //Necessari per il service binding
