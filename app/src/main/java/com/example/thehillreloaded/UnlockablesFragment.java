@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.thehillreloaded.Game.ItemType;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UnlockablesFragment#newInstance} factory method to
@@ -54,9 +56,7 @@ public class UnlockablesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            Log.d("Bundle :", " FUNZIONA");
             tipo_unita = bundle.getString("tipo_unita");
-            Log.d("Stringa: ", bundle.toString());
             num_unlockable = bundle.getInt("num_unlockable");
         }
     }
@@ -65,15 +65,32 @@ public class UnlockablesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_unlockables, container, false);
+        TextView testo = (TextView) view.findViewById(R.id.unlockable_txt);
+        ImageView img = view.findViewById(R.id.unlockable_img);
 
         if (tipo_unita.equals("PLASTICA")) {
-            if (num_unlockable == 1) {
-                TextView testo = (TextView) view.findViewById(R.id.unlockable_txt);
-                testo.setText("Testo da inserire");
-                ImageView img = view.findViewById(R.id.unlockable_img);
-                img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_1));
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_4));
+                    break;
             }
         }
+
+        // if per ogni tipo di unità di riciclo
+        // switch in ogni if per i 4 tipi di unlockables
 
         return view;
     }

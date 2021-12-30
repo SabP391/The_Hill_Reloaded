@@ -67,43 +67,50 @@ public class PlasticUnitFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_plastic_unit, container, false);
 
         ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.plastic_unlockable1);
+        ImageButton sblocco2 = (ImageButton) view.findViewById(R.id.plastic_unlockable2);
+        ImageButton sblocco3 = (ImageButton) view.findViewById(R.id.plastic_unlockable3);
+        ImageButton sblocco4 = (ImageButton) view.findViewById(R.id.plastic_unlockable4);
+
         sblocco1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("tipo_unita", "PLASTICA");
-                bundle.putInt("num_unlockable", 1);
-                FragmentManager childFM = getChildFragmentManager();
-                FragmentTransaction ft = childFM.beginTransaction();
-                UnlockablesFragment sblocca_1 = new UnlockablesFragment();
-                sblocca_1.setArguments(bundle);
-                ft.replace(R.id.unlockable_plastica, sblocca_1);
-                ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                ft.addToBackStack(null);
-                ft.commit();
+                sblocco(1);
             }
         });
-        /*
-        plastic_unlockable1
-
-        Bundle bundle = new Bundle();
-        bundle.putString("tipo_unita", "PLASTICA");
-        bundle.putInt("num_unlockable", 1);
-        FragmentManager childFM = getChildFragmentManager();
-        FragmentTransaction ft = childFM.beginTransaction();
-        UnlockablesFragment sblocca_1 = new UnlockablesFragment();
-        sblocca_1.setArguments(bundle);
-        ft.replace(R.id.unlockable_plastica, sblocca_1);
-        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        ft.addToBackStack(null);
-        ft.commit();
-         */
+        sblocco2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(2);
+            }
+        });
+        sblocco3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(3);
+            }
+        });
+        sblocco4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(4);
+            }
+        });
 
         return view;
     }
 
-    public void sblocca_n1(View view){
-
+    public void sblocco(int valore){
+        Bundle bundle = new Bundle();
+        bundle.putString("tipo_unita", "PLASTICA");
+        bundle.putInt("num_unlockable", valore);
+        FragmentManager childFM = getChildFragmentManager();
+        FragmentTransaction ft = childFM.beginTransaction();
+        UnlockablesFragment sbloccato = new UnlockablesFragment();
+        sbloccato.setArguments(bundle);
+        ft.replace(R.id.unlockable_plastica, sbloccato);
+        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 }
