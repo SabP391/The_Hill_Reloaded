@@ -316,71 +316,104 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
     public void onClickMenuCarta(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-
-        RecycleUnitsManager.getInstance().unlockPaperUnit();
-
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new PaperUnitFragment());
-        fmt.addToBackStack("carta");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isPaperUnitUnlocked()) {
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new PaperUnitFragment());
+            fmt.addToBackStack("carta");
+            fmt.commit();
+        } else {
+            RecycleUnitsManager.getInstance().unlockPaperUnit();
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
     }
 
     public void onClickMenuPlastica(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new PlasticUnitFragment());
-        fmt.addToBackStack("plastica");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()) {
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new PlasticUnitFragment());
+            fmt.addToBackStack("plastica");
+            fmt.commit();
+        } else {
+            RecycleUnitsManager.getInstance().unlockPlasticUnit();
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
     }
 
     public void onClickMenuAlluminio(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new AluminiumUnitFragment());
-        fmt.addToBackStack("alluminio");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()) {
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new AluminiumUnitFragment());
+            fmt.addToBackStack("alluminio");
+            fmt.commit();
+        } else {
+            RecycleUnitsManager.getInstance().unlockAluminiumUnit();
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
     }
 
     public void onClickMenuEwaste(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new EwasteUnitFragment());
-        fmt.addToBackStack("ewaste");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()) {
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new EwasteUnitFragment());
+            fmt.addToBackStack("ewaste");
+            fmt.commit();
+        } else {
+            RecycleUnitsManager.getInstance().unlockEWasteUnit();
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
     }
 
     public void onClickMenuAcciaio(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new MetalUnitFragment());
-        fmt.addToBackStack("acciaio");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new MetalUnitFragment());
+            fmt.addToBackStack("acciaio");
+            fmt.commit();
+        } else {
+            RecycleUnitsManager.getInstance().unlockSteelUnit();
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
     }
 
     public void onClickMenuOrganico(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new OrganicUnitFragment());
-        fmt.addToBackStack("organico");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new OrganicUnitFragment());
+            fmt.addToBackStack("organico");
+            fmt.commit();
+        } else {
+            RecycleUnitsManager.getInstance().unlockCompostUnit();
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
     }
 
     public void onClickEsciDaMenu(View view){
