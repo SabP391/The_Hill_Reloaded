@@ -37,11 +37,12 @@ public abstract class RecycleUnit {
         }
     }
 
-    protected void drawUnit(Canvas c){
+    public void drawUnit(Canvas c){
         c.drawBitmap(sprite, position.x, position.y, null);
-        c.drawBitmap(unitPointsIcon, (int)(position.x + 2 * map.getTileSize()), position.y, null);
+        drawUnitPoints(c);
     }
 
+    public abstract void drawUnitPoints(Canvas c);
     // Getter e setter------------------------------------------------------------------------------
 
 }
