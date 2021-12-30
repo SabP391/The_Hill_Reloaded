@@ -3,6 +3,7 @@ package com.example.thehillreloaded.Game;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 
 public abstract class RecycleUnit {
@@ -18,6 +19,8 @@ public abstract class RecycleUnit {
     protected int offsetFromRight = 0;
     protected int myTiles[];
     protected ItemType acceptedItemType;
+
+    protected Paint unitPointPaint;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -35,6 +38,9 @@ public abstract class RecycleUnit {
         if(this.offsetFromRight < 0){
             this.offsetFromRight = 0;
         }
+
+        this.unitPointPaint = new Paint();
+        unitPointPaint.setTextSize(30);
     }
 
     public void drawUnit(Canvas c){

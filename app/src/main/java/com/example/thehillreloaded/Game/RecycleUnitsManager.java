@@ -56,7 +56,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             PlasticRecycleUnit unitToAdd = new PlasticRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_PLASTIC_UNIT);
             isPlasticUnitUnlocked = true;
             return true;
         }
@@ -68,7 +68,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             PaperRecycleUnit unitToAdd = new PaperRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_PAPER_UNIT);
             isPaperUnitUnlocked = true;
             return true;
         }
@@ -80,7 +80,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             AluminiumRecycleUnit unitToAdd = new AluminiumRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_ALUMINIUM_UNIT);
             isAluminiumUnitUnlocked = true;
             return true;
         }
@@ -92,7 +92,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             SteelRecycleUnit unitToAdd = new SteelRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_STEEL_UNIT);
             isSteelUnitUnlocked = true;
             return true;
         }
@@ -104,7 +104,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             EWasteRecycleUnit unitToAdd = new EWasteRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_EWASTE_UNIT);
             isEwasteUnitUnlocked = true;
             return true;
         }
@@ -116,7 +116,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             CompostRecycleUnit unitToAdd = new CompostRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_COMPOST_UNIT);
             isCompostUnlocked = true;
             return true;
         }

@@ -16,6 +16,9 @@ public class EWasteRecycleUnit extends RecycleUnit{
 
     @Override
     public void drawUnitPoints(Canvas c) {
-
+        int xPositionUnitPointIcon = position.x - unitPointsIcon.getWidth() * 2;
+        int yPositionUnitPointIcon = position.y + (int) map.getTileSize();;
+        c.drawBitmap(unitPointsIcon, (int)(xPositionUnitPointIcon), position.y + (int) map.getTileSize(), null);
+        c.drawText(String.valueOf(unitPoints), xPositionUnitPointIcon + unitPointsIcon.getWidth(),yPositionUnitPointIcon + (unitPointsIcon.getHeight() / 2), unitPointPaint);
     }
 }

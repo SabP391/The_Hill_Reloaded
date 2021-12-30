@@ -20,11 +20,14 @@ public class PlasticRecycleUnit extends RecycleUnit{
 
     @Override
     public void drawUnitPoints(Canvas c) {
+        int xPositionUnitPointIcon;
+        int yPositionUnitPointIcon = yPositionUnitPointIcon = position.y + (int) map.getTileSize();;
         if(gameMode == GameMode.RELOADED){
-            c.drawBitmap(unitPointsIcon, (int)(position.x + 2 * map.getTileSize()) + 2, position.y + (int) map.getTileSize() - unitPointsIcon.getHeight(), null);
-
+            xPositionUnitPointIcon = (int)(position.x + 2 * map.getTileSize()) + 2;
         } else{
-            c.drawBitmap(unitPointsIcon, (int)(position.x - unitPointsIcon.getWidth() * 3), position.y + (int) map.getTileSize(), null);
+            xPositionUnitPointIcon = (int)(position.x - unitPointsIcon.getWidth() * 3);
         }
+        c.drawBitmap(unitPointsIcon, (int)(xPositionUnitPointIcon), position.y + (int) map.getTileSize(), null);
+        c.drawText(String.valueOf(unitPoints), xPositionUnitPointIcon + unitPointsIcon.getWidth(),yPositionUnitPointIcon + (unitPointsIcon.getHeight() / 2), unitPointPaint);
     }
 }

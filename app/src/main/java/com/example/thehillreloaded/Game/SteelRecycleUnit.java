@@ -2,6 +2,7 @@ package com.example.thehillreloaded.Game;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 
 public class SteelRecycleUnit extends RecycleUnit{
@@ -19,11 +20,15 @@ public class SteelRecycleUnit extends RecycleUnit{
 
     @Override
     public void drawUnitPoints(Canvas c) {
+        int xPositionUnitPointIcon;
+        int yPositionUnitPointIcon = position.y + (int) map.getTileSize();;
         if(gameMode == GameMode.RELOADED){
-            c.drawBitmap(unitPointsIcon, (int)(position.x - unitPointsIcon.getWidth() * 2), position.y + (int) map.getTileSize(), null);
+            xPositionUnitPointIcon = position.x - unitPointsIcon.getWidth() * 2;
         } else{
-            c.drawBitmap(unitPointsIcon, (int)(position.x + 2 * map.getTileSize()) + 2, position.y + (int) map.getTileSize() - unitPointsIcon.getHeight(), null);
+            xPositionUnitPointIcon = (int)(position.x + 2 * map.getTileSize()) + 2;
         }
+        c.drawBitmap(unitPointsIcon, (int)(xPositionUnitPointIcon), position.y + (int) map.getTileSize(), null);
+        c.drawText(String.valueOf(unitPoints), xPositionUnitPointIcon + unitPointsIcon.getWidth(),yPositionUnitPointIcon + (unitPointsIcon.getHeight() / 2), unitPointPaint);
     }
 
 }
