@@ -45,5 +45,6 @@
     <string name="unita_riciclo_ewaste">E-waste</string>
     <string name="unita_riciclo_acciaio">Metal</string>
     <string name="unita_riciclo_organico">Organic</string>
+    <string name="sunny_non_sufficienti">You don\'t have enough Sunny Points</string>
 
 </resources>

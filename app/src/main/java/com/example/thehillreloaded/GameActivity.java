@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
@@ -325,9 +326,13 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.addToBackStack("carta");
             fmt.commit();
         } else {
-            RecycleUnitsManager.getInstance().unlockPaperUnit();
-            getSupportFragmentManager().popBackStackImmediate();
-            GameManager.getInstance().unPause();
+            if (RecycleUnitsManager.getInstance().unlockPaperUnit()){
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
@@ -342,9 +347,13 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.addToBackStack("plastica");
             fmt.commit();
         } else {
-            RecycleUnitsManager.getInstance().unlockPlasticUnit();
-            getSupportFragmentManager().popBackStackImmediate();
-            GameManager.getInstance().unPause();
+            if (RecycleUnitsManager.getInstance().unlockPlasticUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
@@ -359,9 +368,13 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.addToBackStack("alluminio");
             fmt.commit();
         } else {
-            RecycleUnitsManager.getInstance().unlockAluminiumUnit();
-            getSupportFragmentManager().popBackStackImmediate();
-            GameManager.getInstance().unPause();
+            if (RecycleUnitsManager.getInstance().unlockAluminiumUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
@@ -376,9 +389,13 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.addToBackStack("ewaste");
             fmt.commit();
         } else {
-            RecycleUnitsManager.getInstance().unlockEWasteUnit();
-            getSupportFragmentManager().popBackStackImmediate();
-            GameManager.getInstance().unPause();
+            if (RecycleUnitsManager.getInstance().unlockEWasteUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
@@ -393,9 +410,13 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.addToBackStack("acciaio");
             fmt.commit();
         } else {
-            RecycleUnitsManager.getInstance().unlockSteelUnit();
-            getSupportFragmentManager().popBackStackImmediate();
-            GameManager.getInstance().unPause();
+            if (RecycleUnitsManager.getInstance().unlockSteelUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
@@ -410,9 +431,13 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.addToBackStack("organico");
             fmt.commit();
         } else {
-            RecycleUnitsManager.getInstance().unlockCompostUnit();
-            getSupportFragmentManager().popBackStackImmediate();
-            GameManager.getInstance().unPause();
+            if (RecycleUnitsManager.getInstance().unlockCompostUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
