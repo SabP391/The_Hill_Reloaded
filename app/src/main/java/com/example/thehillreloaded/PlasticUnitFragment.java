@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
@@ -107,7 +106,7 @@ public class PlasticUnitFragment extends Fragment {
         FragmentTransaction ft = childFM.beginTransaction();
         UnlockablesFragment sbloccato = new UnlockablesFragment();
         sbloccato.setArguments(bundle);
-        ft.replace(R.id.unlockable_plastica, sbloccato);
+        ft.replace(R.id.unlockable_plastic, sbloccato);
         ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         ft.addToBackStack(null);
         ft.commit();

@@ -19,6 +19,7 @@ public abstract class RecycleUnit {
     protected int offsetFromRight = 0;
     protected int myTiles[];
     protected ItemType acceptedItemType;
+    protected UnlockableObject unlockable[];
 
     protected Paint unitPointPaint;
 
@@ -41,6 +42,12 @@ public abstract class RecycleUnit {
 
         this.unitPointPaint = new Paint();
         unitPointPaint.setTextSize(30);
+
+        this.unlockable = new UnlockableObject[4];
+        unlockable[0] = new UnlockableObject(2, 1);
+        unlockable[1] = new UnlockableObject(4, 3);
+        unlockable[2] = new UnlockableObject(7, 6);
+        unlockable[3] = new UnlockableObject(12, 11);
     }
 
     public void drawUnit(Canvas c){

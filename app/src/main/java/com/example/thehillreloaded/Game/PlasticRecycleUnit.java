@@ -15,7 +15,6 @@ public class PlasticRecycleUnit extends RecycleUnit{
             this.sprite = GameAssets.getInstance(context).getPlasticUnit(size);
             position = new Point((((int) (map.getTileSize()) * 2) + offsetFromLeft), (int) (map.getTileSize()) * 6);
         }
-
     }
 
     @Override

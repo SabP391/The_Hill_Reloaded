@@ -78,7 +78,7 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .add(R.id.unlockable_plastica, fragment)
+                .add(R.id.fragment_contanier, fragment)
                 .addToBackStack("fragment1")
                 .commit();
     }

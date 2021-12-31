@@ -101,7 +101,7 @@
         app:srcCompat="@drawable/titolo_main" />
 
     <FrameLayout
-        android:id="@+id/unlockable_plastica"
+        android:id="@+id/fragment_contanier"
         android:layout_width="641dp"
         android:layout_height="361dp"
         app:layout_constraintBottom_toBottomOf="parent"
