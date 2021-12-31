@@ -32,7 +32,6 @@ public class GameManager {
     }
 
     public void initInstance(GameMode gameMode, Difficulty difficulty, Context context, TileMap map){
-        timeAtGameStart = System.nanoTime();
         this.gameMode = gameMode;
         this.difficulty = difficulty;
         timeAtGameStart = System.nanoTime();
@@ -41,6 +40,7 @@ public class GameManager {
         sunnyPointsCounter = new SunnyPointsCounter(map, context);
         timeToGetThingsSpicy = 0;
 
+        // Imposta l'intervallo di spawn degli oggetti in base alla difficoltà
         if(difficulty == Difficulty.EASY){
             spawnSpeed = (float) (1000.0);
         }
@@ -53,9 +53,13 @@ public class GameManager {
     }
 
     public boolean isTimeToSpawn(long currentTime){
+        // Calcola il tempo trascorso dall'inizio della partita in secondi
         long timeElapsed = (currentTime - timeAtGameStart) / 1000000000;
-        if((timeElapsed > TIME_TO_INCREASE_DIFFICULTY + timeToGetThingsSpicy) && (timeElapsed < 600)){
+        // Se è maggiore del tempo previsto per l'aumento della difficoltà e minore di 600 secondi (10 minuti)
+        if((timeElapsed > TIME_TO_INCREASE_DIFFICULTY + timeToGetThingsSpicy) && (timeElapsed <= 600)){
+            // Conta quante volte è stato aumentato il tempo
             timeToGetThingsSpicy += TIME_TO_INCREASE_DIFFICULTY;
+            // Aumenta la velocità di spawn
             spawnSpeed -= SPAWN_SPEED_INCREASE;
             Log.d("Time elapsed", String.valueOf(timeToGetThingsSpicy));
             Log.d( "Current Spanw speed", String.valueOf(spawnSpeed));

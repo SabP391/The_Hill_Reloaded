@@ -142,11 +142,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
                         int inc = incinerator.destroyFirstLine(itemsOnScreen);
                         timeToDestroy = false;
-                        Log.d("Inc value", String.valueOf(inc));
                         messageHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Log.d("Sono dentro!", "il run.....");
                                 switch (inc){
                                     case 0:
                                         Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
@@ -163,7 +161,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                     }
                 }
             }catch (Exception e) {
-                Log.d("E mo?", e.toString());
+                Log.d("Errore nella gameLogic()", e.toString());
             }
 
 
@@ -362,9 +360,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 float delta = accelerationVal - accelerationLast;
                 shake = shake * 0.9f + delta;
 
-                if (shake > 14) {
-                    Log.d("Shake force", String.valueOf(shake));
-                }
                 if (shake > SHAKE_SENSITIVITY) {
                     timeToDestroy = true;
                 }

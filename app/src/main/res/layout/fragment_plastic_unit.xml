@@ -43,9 +43,9 @@
         android:layout_width="98dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintEnd_toStartOf="@+id/plastic_unlockable2"
-        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag" />
 
     <ImageButton
         android:id="@+id/plastic_unlockable2"
@@ -98,5 +98,14 @@
         android:text="UPGRADE"
         app:layout_constraintStart_toEndOf="@+id/ic_plastic_unit"
         app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag"/>
+
+    <FrameLayout
+        android:id="@+id/unlockable_plastica"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

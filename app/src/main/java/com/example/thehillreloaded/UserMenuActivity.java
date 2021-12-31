@@ -13,7 +13,6 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 public class UserMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX, DifficultyFragment.SoundFX {
@@ -79,7 +78,7 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .add(R.id.fragment_modalita, fragment)
+                .add(R.id.unlockable_plastica, fragment)
                 .addToBackStack("fragment1")
                 .commit();
     }

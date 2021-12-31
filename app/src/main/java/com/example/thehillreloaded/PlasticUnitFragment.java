@@ -3,10 +3,14 @@ package com.example.thehillreloaded;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class PlasticUnitFragment extends Fragment {
+
+    Boolean num1 = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +64,53 @@ public class PlasticUnitFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plastic_unit, container, false);
+        View view = inflater.inflate(R.layout.fragment_plastic_unit, container, false);
+
+        ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.plastic_unlockable1);
+        ImageButton sblocco2 = (ImageButton) view.findViewById(R.id.plastic_unlockable2);
+        ImageButton sblocco3 = (ImageButton) view.findViewById(R.id.plastic_unlockable3);
+        ImageButton sblocco4 = (ImageButton) view.findViewById(R.id.plastic_unlockable4);
+
+        sblocco1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(1);
+            }
+        });
+        sblocco2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(2);
+            }
+        });
+        sblocco3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(3);
+            }
+        });
+        sblocco4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sblocco(4);
+            }
+        });
+
+        return view;
     }
+
+    public void sblocco(int valore){
+        Bundle bundle = new Bundle();
+        bundle.putString("tipo_unita", "PLASTICA");
+        bundle.putInt("num_unlockable", valore);
+        FragmentManager childFM = getChildFragmentManager();
+        FragmentTransaction ft = childFM.beginTransaction();
+        UnlockablesFragment sbloccato = new UnlockablesFragment();
+        sbloccato.setArguments(bundle);
+        ft.replace(R.id.unlockable_plastica, sbloccato);
+        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
 }
