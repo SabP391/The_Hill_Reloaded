@@ -47,4 +47,5 @@
     <string name="unita_riciclo_organico">Organico</string>
     <string name="sunny_non_sufficienti">Non hai abbastanza Sunny Points</string>
     <string name="nessun_rifiuto">Nessun rifiuto da incenerire</string>
+    <string name="unit_non_sufficienti">Non hai abbastanza Unit Points</string>
 </resources>

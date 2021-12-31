@@ -143,6 +143,66 @@ public class RecycleUnitsManager {
         return false;
     }
 
+    public boolean unlockPaperObject(int index){
+        PaperRecycleUnit unit = getPaperUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockGlassObject(int index){
+        GlassRecycleUnit unit = getGlassUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockAluminiumObject(int index){
+        AluminiumRecycleUnit unit = getAluminiumUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockSteelObject(int index){
+        SteelRecycleUnit unit = getSteelUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockEwasteObject(int index){
+        EWasteRecycleUnit unit = getEWasteUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockCompostObject(int index){
+        CompostRecycleUnit unit = getCompostUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
 
     // Getter e setter -----------------------------------------------------------------------------
 
@@ -173,6 +233,15 @@ public class RecycleUnitsManager {
     public boolean isEwasteUnitUnlocked() { return isEwasteUnitUnlocked; }
 
     public boolean isGlassUnitUnlocked() { return isGlassUnitUnlocked; }
+
+    public PaperRecycleUnit getPaperUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof PaperRecycleUnit){
+                return (PaperRecycleUnit) i;
+            }
+        }
+        return null;
+    }
 
     public CompostRecycleUnit getCompostUnit(){
         for(RecycleUnit i : unlockedUnits){

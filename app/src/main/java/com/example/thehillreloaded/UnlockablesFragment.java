@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class UnlockablesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_unlockables, container, false);
+        Button close = (Button) view.findViewById(R.id.unlockable_close);
         TextView testo = (TextView) view.findViewById(R.id.unlockable_txt);
         ImageView img = view.findViewById(R.id.unlockable_img);
 
@@ -91,6 +93,13 @@ public class UnlockablesFragment extends Fragment {
 
         // if per ogni tipo di unità di riciclo
         // switch in ogni if per i 4 tipi di unlockables
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //getChildFragmentManager().popBackStackImmediate();
+            }
+        });
 
         return view;
     }

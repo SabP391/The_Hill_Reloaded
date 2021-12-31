@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 
@@ -75,29 +76,49 @@ public class PlasticUnitFragment extends Fragment {
         sblocco1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sblocco(1);
-                RecycleUnitsManager.getInstance().unlockPlasticObject(0);
+                if (RecycleUnitsManager.getInstance().unlockPlasticObject(0)) {
+                    sblocco(1);
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
         sblocco2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sblocco(2);
-                RecycleUnitsManager.getInstance().unlockPlasticObject(1);
+                if (RecycleUnitsManager.getInstance().unlockPlasticObject(1)) {
+                    sblocco(2);
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
         sblocco3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sblocco(3);
-                RecycleUnitsManager.getInstance().unlockPlasticObject(2);
+                if (RecycleUnitsManager.getInstance().unlockPlasticObject(2)) {
+                    sblocco(3);
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
         sblocco4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sblocco(4);
-                RecycleUnitsManager.getInstance().unlockPlasticObject(3);
+                if (RecycleUnitsManager.getInstance().unlockPlasticObject(3)) {
+                    sblocco(4);
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
 
@@ -117,5 +138,4 @@ public class PlasticUnitFragment extends Fragment {
         ft.addToBackStack(null);
         ft.commit();
     }
-
 }
