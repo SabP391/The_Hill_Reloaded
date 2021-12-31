@@ -18,17 +18,4 @@ public class SteelRecycleUnit extends RecycleUnit{
         }
     }
 
-    @Override
-    public void drawUnitPoints(Canvas c) {
-        int xPositionUnitPointIcon;
-        int yPositionUnitPointIcon = position.y + (int) map.getTileSize();;
-        if(gameMode == GameMode.RELOADED){
-            xPositionUnitPointIcon = position.x - unitPointsIcon.getWidth() * 2;
-        } else{
-            xPositionUnitPointIcon = (int)(position.x + 2 * map.getTileSize()) + 2;
-        }
-        c.drawBitmap(unitPointsIcon, (int)(xPositionUnitPointIcon), position.y + (int) map.getTileSize(), null);
-        c.drawText(String.valueOf(unitPoints), xPositionUnitPointIcon + unitPointsIcon.getWidth(),yPositionUnitPointIcon + (unitPointsIcon.getHeight() / 2), unitPointPaint);
-    }
-
 }

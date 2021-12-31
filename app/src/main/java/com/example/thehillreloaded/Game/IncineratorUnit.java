@@ -21,11 +21,6 @@ public class IncineratorUnit extends RecycleUnit{
 
     }
 
-    @Override
-    public void drawUnitPoints(Canvas c) {
-
-    }
-
     // Distrugge gli oggetti sulla linea blu
     public int destroyFirstLine(ConcurrentLinkedQueue<GameItem> itemOnScreenList){
         int itemOnFloor = 0;

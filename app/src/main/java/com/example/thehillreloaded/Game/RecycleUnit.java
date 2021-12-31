@@ -20,7 +20,7 @@ public abstract class RecycleUnit {
     protected int myTiles[];
     protected ItemType acceptedItemType;
 
-    protected Paint unitPointPaint;
+    protected RecycleUnitStatus unitStatus;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -38,17 +38,12 @@ public abstract class RecycleUnit {
         if(this.offsetFromRight < 0){
             this.offsetFromRight = 0;
         }
-
-        this.unitPointPaint = new Paint();
-        unitPointPaint.setTextSize(30);
     }
 
     public void drawUnit(Canvas c){
         c.drawBitmap(sprite, position.x, position.y, null);
-        drawUnitPoints(c);
     }
 
-    public abstract void drawUnitPoints(Canvas c);
     // Getter e setter------------------------------------------------------------------------------
 
     public int getUnitPoints() {
