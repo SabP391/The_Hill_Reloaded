@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.util.Log;
 
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class IncineratorUnit extends RecycleUnit{
 
@@ -25,7 +26,7 @@ public class IncineratorUnit extends RecycleUnit{
 
     }
 
-    public int destroyFirstLine(LinkedList<GameItem> itemOnScreenList){
+    public int destroyFirstLine(ConcurrentLinkedQueue<GameItem> itemOnScreenList){
         int itemOnFloor = 0;
         if(GameManager.getInstance().getSunnyPoints() < LINE_COST) {
             return 0;

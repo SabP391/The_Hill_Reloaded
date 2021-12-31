@@ -3,6 +3,7 @@ package com.example.thehillreloaded.Game;
 import android.content.Context;
 
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RecycleUnitsManager {
 
@@ -29,11 +30,11 @@ public class RecycleUnitsManager {
     private static RecycleUnitsManager instance;
     private Context context;
     private TileMap map;
-    private LinkedList<RecycleUnit> unlockedUnits;
+    private ConcurrentLinkedQueue<RecycleUnit> unlockedUnits;
 
     // Metodi per l'inizializzazione della classe --------------------------------------------------
     private RecycleUnitsManager(){
-        this.unlockedUnits = new LinkedList<RecycleUnit>();
+        this.unlockedUnits = new ConcurrentLinkedQueue<RecycleUnit>();
     }
 
     public static RecycleUnitsManager getInstance(){
@@ -125,7 +126,7 @@ public class RecycleUnitsManager {
 
     // Getter e setter -----------------------------------------------------------------------------
 
-    public LinkedList<RecycleUnit> getUnlockedUnits(){ return unlockedUnits; }
+    public ConcurrentLinkedQueue<RecycleUnit> getUnlockedUnits(){ return unlockedUnits; }
 
     public static int getCostOfCompostUnit() { return COST_OF_COMPOST_UNIT; }
 
