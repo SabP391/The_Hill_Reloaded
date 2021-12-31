@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RecycleUnitsManager {
+    private UnlockableObject unlockable[];
 
     // Costanti che determinano il prezzo in sunny points
     // delle diverse centrali ----------------------------------------------------------------------
@@ -49,6 +50,12 @@ public class RecycleUnitsManager {
         this.map = map;
         unlockedUnits.add(new GlassRecycleUnit(map, context));
         unlockedUnits.add(new IncineratorUnit(map, context));
+
+        this.unlockable = new UnlockableObject[4];
+        unlockable[0] = new UnlockableObject(2, 1);
+        unlockable[1] = new UnlockableObject(4, 3);
+        unlockable[2] = new UnlockableObject(7, 6);
+        unlockable[3] = new UnlockableObject(12, 11);
     }
 
     // Metodi per sbloccare le centrali-------------------------------------------------------------
@@ -123,6 +130,19 @@ public class RecycleUnitsManager {
         }
         return false;
     }
+
+    // Metodi per gli sbloccabili ------------------------------------------------------------------
+
+    public boolean unlockPlasticObject(int index){
+        PlasticRecycleUnit unit = getPlasticUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
 
     // Getter e setter -----------------------------------------------------------------------------
 

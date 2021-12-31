@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.example.thehillreloaded.Game.RecycleUnitsManager;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PlasticUnitFragment#newInstance} factory method to
@@ -74,24 +76,28 @@ public class PlasticUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sblocco(1);
+                RecycleUnitsManager.getInstance().unlockPlasticObject(0);
             }
         });
         sblocco2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sblocco(2);
+                RecycleUnitsManager.getInstance().unlockPlasticObject(1);
             }
         });
         sblocco3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sblocco(3);
+                RecycleUnitsManager.getInstance().unlockPlasticObject(2);
             }
         });
         sblocco4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sblocco(4);
+                RecycleUnitsManager.getInstance().unlockPlasticObject(3);
             }
         });
 

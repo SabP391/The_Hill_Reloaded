@@ -88,6 +88,13 @@ public class GameManager {
         sunnyPointsCounter.updateCounter(sunnyPoints);
     }
 
+    public void addSunnyPoint(int pointsToAdd){
+        this.sunnyPoints = this.sunnyPoints + pointsToAdd;
+        this.totalSunnyPoints = this.totalSunnyPoints + pointsToAdd;
+        sunnyPointsCounter.updateCounter(sunnyPoints);
+    }
+
+
     // Getter e setter -----------------------------------------------------------------------------
     public int getSunnyPoints(){
         return sunnyPoints;

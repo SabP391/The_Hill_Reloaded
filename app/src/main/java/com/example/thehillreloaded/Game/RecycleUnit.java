@@ -12,14 +12,13 @@ public abstract class RecycleUnit {
     protected TileMap map;
     protected Bitmap sprite;
     protected Bitmap unitPointsIcon;
-    protected int unitPoints = 0;
+    protected int unitPoints = 50;
     protected Point size;
     protected Point position;
     protected int offsetFromLeft = 0;
     protected int offsetFromRight = 0;
     protected int myTiles[];
     protected ItemType acceptedItemType;
-    protected UnlockableObject unlockable[];
 
     protected Paint unitPointPaint;
 
@@ -42,12 +41,6 @@ public abstract class RecycleUnit {
 
         this.unitPointPaint = new Paint();
         unitPointPaint.setTextSize(30);
-
-        this.unlockable = new UnlockableObject[4];
-        unlockable[0] = new UnlockableObject(2, 1);
-        unlockable[1] = new UnlockableObject(4, 3);
-        unlockable[2] = new UnlockableObject(7, 6);
-        unlockable[3] = new UnlockableObject(12, 11);
     }
 
     public void drawUnit(Canvas c){
@@ -58,4 +51,11 @@ public abstract class RecycleUnit {
     public abstract void drawUnitPoints(Canvas c);
     // Getter e setter------------------------------------------------------------------------------
 
+    public int getUnitPoints() {
+        return unitPoints;
+    }
+
+    public void setUnitPoints(int unitPoints) {
+        this.unitPoints = unitPoints;
+    }
 }
