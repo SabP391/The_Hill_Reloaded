@@ -24,6 +24,7 @@ import com.example.thehillreloaded.R;
 import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
 
@@ -49,12 +50,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private TileMap map;
     private GameItem movingItem = null;
     private Bitmap mixedArray[];
-    private LinkedList<GameItem> itemsOnScreen;
+    private ConcurrentLinkedQueue<GameItem> itemsOnScreen;
     private long elapsedTime;
     private Random rand;
     private int currentIndex = 0;
     private Point spriteSize;
-    private LinkedList<RecycleUnit> unitsOnScreen;
+    private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
     ItemType values[];
 
     private final static int SHAKE_SENSITIVITY = 14;
@@ -84,7 +85,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         setFocusable(true);
 
         mixedArray = new Bitmap[60];
-        itemsOnScreen = new LinkedList<GameItem>();
+        itemsOnScreen = new ConcurrentLinkedQueue<GameItem>();
         Point tileSize = new Point((int)map.getTileSize(), (int)map.getTileSize());
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
@@ -110,8 +111,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
             i.drawUnit(c);
         }
         if(GameManager.getInstance().isPaused()){
-            for(int i = 0; i < itemsOnScreen.size(); i++){
-                c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
+            int index = 0;
+            for(GameItem i : itemsOnScreen){
+                c.drawBitmap(mixedArray[index], i.getPosition().x, i.getPosition().y, null);
+                index++;
             }
         }else{
             //map.drawTilemap(c);
@@ -136,6 +139,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         }
                     }
                     if(timeToDestroy){
+                        // questa parte dovremmo poterla spostare
                         IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
                         int inc = incinerator.destroyFirstLine(itemsOnScreen);
                         timeToDestroy = false;
