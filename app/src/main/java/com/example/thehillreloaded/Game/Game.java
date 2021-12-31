@@ -139,6 +139,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         }
                     }
                     if(timeToDestroy){
+                        // questa parte dovremmo poterla spostare
                         IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
                         int inc = incinerator.destroyFirstLine(itemsOnScreen);
                         timeToDestroy = false;
