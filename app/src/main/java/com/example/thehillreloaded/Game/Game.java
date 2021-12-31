@@ -137,7 +137,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         if(i != movingItem){
                                 i.fall(System.nanoTime());
                             }
-                        }
                     }
                     if(timeToDestroy){
                         // questa parte dovremmo poterla spostare
