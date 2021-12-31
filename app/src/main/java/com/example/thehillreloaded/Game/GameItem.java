@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class GameItem {
@@ -90,6 +91,12 @@ public class GameItem {
     // nell'ultima riga della tilemap
     public boolean isTouchingTheBlueLine(){
         return !(currentTile < (map.getMapSize().y * map.getMapSize().x) - (map.getMapSize().x - initialTile));
+    }
+
+    public boolean isOverTheRedLine(){
+        if((currentTile >= map.getFirstTileOfTheHill()) && (currentTile <= map.getFirstTileOfTheHill() + map.getNumberOfTileSOfTheHill())){
+            return true;
+        }else return false;
     }
 
     // Getter e setter -----------------------------------------------------------------------------

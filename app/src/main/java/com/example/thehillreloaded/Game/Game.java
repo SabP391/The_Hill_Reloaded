@@ -117,7 +117,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 index++;
             }
         }else{
-            //map.drawTilemap(c);
+            map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -135,7 +135,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                     }
                     for(GameItem i : itemsOnScreen){
                         if(i != movingItem){
-                            i.fall(System.nanoTime());
+                                i.fall(System.nanoTime());
+                            }
                         }
                     }
                     if(timeToDestroy){
