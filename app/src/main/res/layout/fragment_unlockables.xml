@@ -44,6 +44,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="closeChildFrag"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="@+id/unlockable_bg"
         app:layout_constraintEnd_toEndOf="@+id/unlockable_bg" />

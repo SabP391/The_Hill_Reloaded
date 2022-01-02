@@ -1,7 +1,9 @@
 package com.example.thehillreloaded;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ComponentName;
@@ -456,4 +458,20 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             GameManager.getInstance().unPause();
         }
     }
+
+    //metodo per la chiusura dei fragment innestati
+    public void closeChildFrag(View view){
+        //chiusura fragment fattibile solo da activity, gestione del backstack sconsigliata nei fragment
+        FragmentManager fm = getSupportFragmentManager();
+        for (Fragment frag : fm.getFragments()) {
+            if (frag.isVisible()) {
+                FragmentManager childFm = frag.getChildFragmentManager();
+                if (childFm.getBackStackEntryCount() > 0) {
+                    childFm.popBackStack();
+                    return;
+                }
+            }
+        }
+    }
+
 }

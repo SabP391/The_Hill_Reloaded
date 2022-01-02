@@ -135,7 +135,7 @@ public class PlasticUnitFragment extends Fragment {
         sbloccato.setArguments(bundle);
         ft.replace(R.id.unlockable_plastic, sbloccato);
         ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        ft.addToBackStack(null);
+        ft.addToBackStack("fragment_sbloccabili");
         ft.commit();
     }
 }

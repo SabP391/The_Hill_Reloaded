@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.ItemType;
 
 /**
@@ -94,13 +95,7 @@ public class UnlockablesFragment extends Fragment {
         // if per ogni tipo di unità di riciclo
         // switch in ogni if per i 4 tipi di unlockables
 
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //getChildFragmentManager().popBackStackImmediate();
-            }
-        });
-
         return view;
     }
+
 }
