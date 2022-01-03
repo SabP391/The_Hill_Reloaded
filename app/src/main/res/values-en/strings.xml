@@ -53,9 +53,10 @@
     <string name="bottone_torna_indietro">Go back</string>
     <string name="quest1">Build all the recycle units</string>
     <string name="quest2">Earn 100 Sunny Points</string>
-    <string name="quest3">Create 3 golden objects in the Ewaste unit</string>
-    <string name="quest4">Recycle 50 organic wastes</string>
+    <string name="quest3">Create 3 objects of highest level in the Ewaste unit</string>
+    <string name="quest4">Recycle 50 organic objects</string>
     <string name="quest5">Unlock level 3 of the Glass Recycle Unit</string>
     <string name="quest6">Earn 20 UnitPoints in the Paper Recycle Unit</string>
+    <string name="text_usura">"Wear: "</string>
 
 </resources>
