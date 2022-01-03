@@ -474,4 +474,9 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         }
     }
 
+    //chiusura gioco senza salvataggio
+    public void closeGameNotSaving(View view){
+        finish();
+    }
+
 }

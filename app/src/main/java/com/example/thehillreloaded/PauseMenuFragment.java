@@ -7,10 +7,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -78,8 +81,21 @@ public class PauseMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pause_menu, container, false);
-
+        Button esci = (Button) view.findViewById(R.id.b_torna_a_menuP);
         avviaMusica = new Intent(getActivity().getApplicationContext(), BGMusicService.class);
+
+        esci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager childFM = getChildFragmentManager();
+                FragmentTransaction ft = childFM.beginTransaction();
+                ConfirmExitFragment popUp = new ConfirmExitFragment();
+                ft.add(R.id.conferma_uscita, popUp);
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                ft.addToBackStack("pop_up_conferma");
+                ft.commit();
+            }
+        });
 
         return view;
     }

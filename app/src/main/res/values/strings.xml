@@ -47,4 +47,7 @@
     <string name="sunny_non_sufficienti">Non hai abbastanza Sunny Points</string>
     <string name="nessun_rifiuto">Nessun rifiuto da incenerire</string>
     <string name="unit_non_sufficienti">Non hai abbastanza Unit Points</string>
+    <string name="conferma_uscita_partita">Sei sicuro di voler uscire? I progressi non salvati andranno persi.</string>
+    <string name="bottone_conferma">Ok</string>
+    <string name="bottone_torna_indietro">Torna indietro</string>
 </resources>

@@ -48,5 +48,8 @@
     <string name="sunny_non_sufficienti">You don\'t have enough Sunny Points</string>
     <string name="nessun_rifiuto">No litter to burn</string>
     <string name="unit_non_sufficienti">You don\'t have enough Unit Points</string>
+    <string name="conferma_uscita_partita">Are you scure you want to exit?\nUnsaved progress will be lost.</string>
+    <string name="bottone_conferma">Ok</string>
+    <string name="bottone_torna_indietro">Go back</string>
 
 </resources>

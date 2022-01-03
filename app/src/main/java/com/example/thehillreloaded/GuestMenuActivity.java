@@ -10,11 +10,9 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 public class GuestMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX, DifficultyFragment.SoundFX {
@@ -42,7 +40,7 @@ public class GuestMenuActivity extends AppCompatActivity implements GameModeFrag
         effettiSonori = new Intent(this, SoundEffectService.class);
         menuImpostazioni = new Intent(this, SettingsActivity.class);
         menuAccesso = new Intent(this, AccessActivity.class);
-        nuovaPartita = findViewById(R.id.bottone_impostazioni_volume);
+        nuovaPartita = findViewById(R.id.bottone_inizia_guest);
     }
 
     @Override
