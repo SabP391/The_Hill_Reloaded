@@ -92,6 +92,132 @@ public class UnlockablesFragment extends Fragment {
             }
         }
 
+        if (tipo_unita.equals("CARTA")) {
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_4));
+                    break;
+            }
+        }
+
+        if (tipo_unita.equals("VETRO")) {
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_4));
+                    break;
+            }
+        }
+
+        if (tipo_unita.equals("ALLUMINIO")) {
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_4));
+                    break;
+            }
+        }
+
+        if (tipo_unita.equals("ACCIAIO")) {
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_4));
+                    break;
+            }
+        }
+
+        if (tipo_unita.equals("EWASTE")) {
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_4));
+                    break;
+            }
+        }
+
+        if (tipo_unita.equals("ORGANICO")) {
+            switch (num_unlockable) {
+                case 1:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_1));
+                    break;
+                case 2:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_2));
+                    break;
+                case 3:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_3));
+                    break;
+                case 4:
+                    testo.setText("Testo da inserire");
+                    img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_4));
+                    break;
+            }
+        }
+
         // if per ogni tipo di unità di riciclo
         // switch in ogni if per i 4 tipi di unlockables
 
