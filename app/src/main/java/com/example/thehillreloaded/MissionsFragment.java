@@ -7,6 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.thehillreloaded.Game.GameManager;
+import com.example.thehillreloaded.Game.GameMode;
+import com.example.thehillreloaded.Game.QuestManager;
+
+import java.util.zip.Inflater;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,8 @@ public class MissionsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView q1, q2, q3, q4, q5, q6;
+    private ImageView check1, check2, check3, check4, check5, check6;
 
     public MissionsFragment() {
         // Required empty public constructor
@@ -59,6 +69,34 @@ public class MissionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_missions, container, false);
+        View view = inflater.inflate(R.layout.fragment_missions, container, false);
+        q1 = (TextView) view.findViewById(R.id.quest1_text);
+        q2 = (TextView) view.findViewById(R.id.quest2_text);
+        q3 = (TextView) view.findViewById(R.id.quest3_text);
+        q4 = (TextView) view.findViewById(R.id.quest4_text);
+        q5 = (TextView) view.findViewById(R.id.quest5_text);
+        q6 = (TextView) view.findViewById(R.id.quest6_text);
+        check1 = (ImageView) view.findViewById(R.id.quest1_check);
+        if(QuestManager.getInstance().isQuest1Complete()){
+            check1.setVisibility(View.VISIBLE);
+        }else{
+            check1.setVisibility(View.INVISIBLE);
+        }
+        check2 = (ImageView) view.findViewById(R.id.quest2_check);
+        //check2.setVisibility(View.INVISIBLE);
+        check3 = (ImageView) view.findViewById(R.id.quest3_check);
+        //check3.setVisibility(View.INVISIBLE);
+        check4 = (ImageView) view.findViewById(R.id.quest4_check);
+        //check4.setVisibility(View.INVISIBLE);
+        check5 = (ImageView) view.findViewById(R.id.quest5_check);
+        //check5.setVisibility(View.INVISIBLE);
+        check6 = (ImageView) view.findViewById(R.id.quest6_check);
+        //check6.setVisibility(View.INVISIBLE);
+        if(GameManager.getInstance().getGameMode() == GameMode.CLASSIC){
+            q4.setVisibility(View.INVISIBLE);
+            q5.setVisibility(View.INVISIBLE);
+            q6.setVisibility(View.INVISIBLE);
+        }
+        return view;
     }
 }

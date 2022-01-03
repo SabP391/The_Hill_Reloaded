@@ -41,31 +41,8 @@ public class QuestManager {
         this.counterQuest6 ++;
     }
 
-    public boolean isQuest1() {
-        return quest1;
-    }
-
-    public boolean isQuest2() {
-        return quest2;
-    }
-
-    public boolean isQuest3() {
-        return quest3;
-    }
-
-    public boolean isQuest4() {
-        return quest4;
-    }
-
-    public boolean isQuest5() {
-        return quest5;
-    }
-
-    public boolean isQuest6() {
-        return quest6;
-    }
-
-    public void isQuest1Complete(){
+    //Chiamato quando viene costruita una centrale
+    public boolean isQuest1Complete(){
         if(GameManager.getInstance().getGameMode() == GameMode.CLASSIC) {
             if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
                     && RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()
@@ -74,7 +51,8 @@ public class QuestManager {
                     && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
                     && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
                 quest1 = true;
-            }
+                return true;
+            }else return false;
         } else {
             if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
                     && RecycleUnitsManager.getInstance().isCompostUnlocked()
@@ -84,14 +62,16 @@ public class QuestManager {
                     && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
                     && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
                 quest1 = true;
-            }
+                return true;
+            } else return false;
         }
     }
 
-    public void isQuest2Complete(){
+    public boolean isQuest2Complete(){
             if (GameManager.getInstance().getSunnyPoints() > 100){
                 quest2 = true;
-            }
+                return true;
+            }else return false;
     }
 
     public void isQuest3Complete(){
@@ -115,6 +95,18 @@ public class QuestManager {
     public void isQuest6Complete(){
         if (counterQuest6 >= 19){
             quest6 = true;
+        }
+    }
+
+    public boolean isGameWon(){
+        if(GameManager.getInstance().getGameMode() == GameMode.CLASSIC){
+            if(quest1 && quest2 && quest3){
+                return true;
+            }else return false;
+        } else{
+            if(quest1 && quest2 && quest3 && quest4 && quest5 && quest6){
+                return true;
+            }else return false;
         }
     }
 }

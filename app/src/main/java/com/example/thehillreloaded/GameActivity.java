@@ -20,12 +20,14 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
+import com.example.thehillreloaded.Game.QuestManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
@@ -327,6 +329,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     public void onClickMenuCarta(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isPaperUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -348,6 +351,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     public void onClickMenuPlastica(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -369,6 +373,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     public void onClickMenuAlluminio(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -390,6 +395,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     public void onClickMenuEwaste(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -411,6 +417,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     public void onClickMenuAcciaio(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -432,6 +439,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     public void onClickMenuOrganico(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();

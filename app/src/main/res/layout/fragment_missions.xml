@@ -36,4 +36,151 @@
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11" />
+
+    <TextView
+        android:id="@+id/quest1_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="188dp"
+        android:lines="2"
+        android:maxLines="3"
+        android:text="@string/quest1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/quest2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="12dp"
+        android:lines="2"
+        android:maxLines="3"
+        android:text="@string/quest2"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/quest1_text" />
+
+    <TextView
+        android:id="@+id/quest3_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="12dp"
+        android:lines="3"
+        android:maxLines="3"
+        android:text="@string/quest3"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/quest2_text" />
+
+    <TextView
+        android:id="@+id/quest4_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:lines="2"
+        android:maxLines="3"
+        android:text="@string/quest4"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/quest3_text" />
+
+    <TextView
+        android:id="@+id/quest5_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:lines="2"
+        android:maxLines="3"
+        android:text="@string/quest5"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/quest4_text" />
+
+    <TextView
+        android:id="@+id/quest6_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="12dp"
+        android:lines="3"
+        android:maxLines="3"
+        android:text="@string/quest6"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/quest5_text" />
+
+    <ImageView
+        android:id="@+id/quest1_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="8dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="@+id/quest1_text"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/quest1_text" />
+
+    <ImageView
+        android:id="@+id/quest2_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="8dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="@+id/quest2_text"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/quest2_text" />
+
+    <ImageView
+        android:id="@+id/quest3_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="16dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="@+id/quest3_text"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/quest3_text" />
+
+    <ImageView
+        android:id="@+id/quest4_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="9dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="@+id/quest4_text"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/quest4_text" />
+
+    <ImageView
+        android:id="@+id/quest5_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="9dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="@+id/quest5_text"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/quest5_text" />
+
+    <ImageView
+        android:id="@+id/quest6_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="16dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="@+id/quest6_text"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/quest6_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
