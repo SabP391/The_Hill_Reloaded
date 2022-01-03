@@ -17,6 +17,19 @@ public class PlasticRecycleUnit extends RecycleUnit{
             position = new Point((((int) (map.getTileSize()) * 2) + offsetFromLeft), (int) (map.getTileSize()) * 6);
         }
         initMyTiles();
+        setProcessSlotsPosition();
+    }
+
+    @Override
+    public void setProcessSlotsPosition() {
+        if(gameMode == GameMode.CLASSIC){
+            slotsXPosition = position.x - (int) map.getTileSize();
+        }else{
+            slotsXPosition = position.x + 2 * (int) map.getTileSize() + 5;
+        }
+        firstSlotLineYPosition = position.y + (int)((grayLine.getStrokeWidth() / 2) + (map.getTileSize() / 2));
+        secondSlotLineYPosition = firstSlotLineYPosition + (int)grayLine.getStrokeWidth() + 5;
+        thirdSlotLineYPosition = secondSlotLineYPosition + (int)grayLine.getStrokeWidth() + 5;
     }
 
 }
