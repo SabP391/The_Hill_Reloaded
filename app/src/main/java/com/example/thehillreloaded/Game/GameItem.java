@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class GameItem {
@@ -76,6 +77,13 @@ public class GameItem {
         }
     }
 
+    public boolean checkForGameOverPosition(){
+        if(isOverTheRedLine() && !map.isNextTileFree(currentTile)){
+            return true;
+        }
+        return false;
+    }
+
     // Metodo per disegnare a schermo gli oggetti di gioco
     public void drawObject(Canvas c){
         c.drawBitmap(objectSprite, position.x, position.y, null);
@@ -92,6 +100,12 @@ public class GameItem {
         return !(currentTile < (map.getMapSize().y * map.getMapSize().x) - (map.getMapSize().x - initialTile));
     }
 
+    public boolean isOverTheRedLine(){
+        if((currentTile >= map.getFirstTileOfTheHill()) && (currentTile <= map.getFirstTileOfTheHill() + map.getNumberOfTileSOfTheHill())){
+            return true;
+        }else return false;
+    }
+
     // Getter e setter -----------------------------------------------------------------------------
     public Point getPosition(){
         return position;
@@ -105,4 +119,5 @@ public class GameItem {
         return currentTile;
     }
 
+    public ItemType getItemType() { return itemType; }
 }

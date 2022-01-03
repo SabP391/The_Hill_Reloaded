@@ -45,4 +45,19 @@
     <string name="unita_riciclo_ewaste">E-waste</string>
     <string name="unita_riciclo_acciaio">Acciaio</string>
     <string name="unita_riciclo_organico">Organico</string>
+    <string name="sunny_non_sufficienti">Non hai abbastanza Sunny Points</string>
+    <string name="nessun_rifiuto">Nessun rifiuto da incenerire</string>
+    <string name="unit_non_sufficienti">Non hai abbastanza Unit Points</string>
+    <string name="conferma_uscita_partita">Sei sicuro di voler uscire? I progressi non salvati andranno persi.</string>
+    <string name="bottone_torna_indietro">Torna indietro</string>
+    <string name="bottone_conferma">Ok</string>
+    <string name="quest1">Costruisci tutte \nle unità di riciclo</string>
+    <string name="quest2">Guadagna 100 \nSunny Points</string>
+    <string name="quest3">Produci 3 oggetti di \nlivello massimo \nda Ewaste</string>
+    <string name="quest4">Ricicla 50 rifiuti \ndi organico</string>
+    <string name="quest5">Sblocca l\'unità di riciclo \ndi Vetro di livello 3</string>
+    <string name="quest6">Guadagna 20 Unit \nPoints nell\'unità \ndella carta</string>
+    <string name="text_usura">"Usura: %1$d / %2$d"</string>
+    <string name="text_unit_points">Unit Points: %1$d</string>
+    <string name="text_status">Upgrade: %1$d</string>
 </resources>

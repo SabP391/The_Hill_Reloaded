@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.thehillreloaded.Game.RecycleUnitsManager;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ClassicInGameMenuFragment#newInstance} factory method to
@@ -75,8 +77,26 @@ public class ClassicInGameMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_classic_in_game_menu, container, false);
 
-        TextView costo = (TextView) view.findViewById(R.id.txt_costo_c);
-        costo.setText("tanti soldi");
+        if (!RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()){
+            TextView costo_plastica = (TextView) view.findViewById(R.id.txt_costo_c);
+            costo_plastica.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_plastica.setText(" " + RecycleUnitsManager.getInstance().getCostOfPlasticUnit()); }
+        if (!RecycleUnitsManager.getInstance().isPaperUnitUnlocked()) {
+            TextView costo_carta = (TextView) view.findViewById(R.id.txt_costo6_c);
+            costo_carta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_carta.setText(" " + RecycleUnitsManager.getInstance().getCostOfPaperUnit()); }
+        if (!RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+            TextView costo_acciaio = (TextView) view.findViewById(R.id.txt_costo4_c);
+            costo_acciaio.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_acciaio.setText(" " + RecycleUnitsManager.getInstance().getCostOfSteelUnit()); }
+        if (!RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()) {
+            TextView costo_alluminio = (TextView) view.findViewById(R.id.txt_costo5_c);
+            costo_alluminio.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_alluminio.setText(" " + RecycleUnitsManager.getInstance().getCostOfAluminiumUnit()); }
+        if (!RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()) {
+            TextView costo_ewaste = (TextView) view.findViewById(R.id.txt_costo3_c);
+            costo_ewaste.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_ewaste.setText(" " + RecycleUnitsManager.getInstance().getCostOfEwasteUnit()); }
 
         return view;
     }

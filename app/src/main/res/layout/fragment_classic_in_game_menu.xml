@@ -192,15 +192,6 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_plastica_c" />
 
     <TextView
-        android:id="@+id/txt_costo2_c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_c"
-        app:layout_constraintTop_toBottomOf="@+id/txt_vetro_c" />
-
-    <TextView
         android:id="@+id/txt_costo3_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

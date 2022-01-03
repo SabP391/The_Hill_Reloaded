@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -18,9 +19,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.thehillreloaded.R;
+
 import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnable{
 
@@ -39,20 +43,22 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
+    private boolean timeToDestroy;
+    private Handler messageHandler;
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     private TileMap map;
     private GameItem movingItem = null;
     private Bitmap mixedArray[];
-    private LinkedList<GameItem> itemsOnScreen;
+    private ConcurrentLinkedQueue<GameItem> itemsOnScreen;
     private long elapsedTime;
     private Random rand;
     private int currentIndex = 0;
     private Point spriteSize;
-    private LinkedList<RecycleUnit> unitsOnScreen;
+    private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
     ItemType values[];
 
-    private final static int SHAKE_SENSITIVITY = 10;
+    private final static int SHAKE_SENSITIVITY = 14;
     private float accelerationVal, accelerationLast, shake;
 
 
@@ -79,7 +85,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         setFocusable(true);
 
         mixedArray = new Bitmap[60];
-        itemsOnScreen = new LinkedList<GameItem>();
+        itemsOnScreen = new ConcurrentLinkedQueue<GameItem>();
         Point tileSize = new Point((int)map.getTileSize(), (int)map.getTileSize());
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
@@ -89,6 +95,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         values = ItemType.values();
         spriteSize = new Point((int) (map.getTileSize()), (int) (map.getTileSize()));
         unitsOnScreen = RecycleUnitsManager.getInstance().getUnlockedUnits();
+
+        messageHandler = new Handler();
 
     }
 
@@ -103,11 +111,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
             i.drawUnit(c);
         }
         if(GameManager.getInstance().isPaused()){
-            for(int i = 0; i < itemsOnScreen.size(); i++){
-                c.drawBitmap(mixedArray[i], itemsOnScreen.get(i).getPosition().x, itemsOnScreen.get(i).getPosition().y, null);
+            int index = 0;
+            for(GameItem i : itemsOnScreen){
+                c.drawBitmap(mixedArray[index], i.getPosition().x, i.getPosition().y, null);
+                index++;
             }
         }else{
-            map.drawTilemap(c);
+            //map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -117,17 +127,26 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
-            if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
-                itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
-            }
-            for(GameItem i : itemsOnScreen){
-                if(i != movingItem){
-                    i.fall(System.nanoTime());
+                    if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
+                        int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
+                        //itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
+                        itemsOnScreen.add(new GameItem(initialTile, map, context, ItemType.GLASS));
+                    }
+                    for(GameItem i : itemsOnScreen){
+                        if(i != movingItem){
+                                if(i.checkForGameOverPosition()){
+                                    messageHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(context, "Game over", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                                i.fall(System.nanoTime());
+                            }
+                    }
                 }
-            }
         }
-    }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
 
@@ -300,8 +319,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                        // Se c'era un oggetto in movimento,
                        // lo riporta alla tile in cui si trovava prima del tocco
                        // e reimposta a null la variabile movingItem
-                       movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
-                       movingItem = null;
+
+                       if(RecycleUnitsManager.getInstance().processItemOnScreen(movingItem)){
+                           map.setTileValue(movingItem.getCurrentTile(), 0);
+                           itemsOnScreen.remove(movingItem);
+                           movingItem = null;
+                       }else{
+                           movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
+                           movingItem = null;
+                       }
                    }
                    break;
            }
@@ -312,27 +338,30 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-            accelerationLast = accelerationVal;
-            accelerationVal = (float) Math.sqrt((double) (x*x) + (y*y) + (z*z));
-            float delta = accelerationVal - accelerationLast;
-            shake = shake * 0.9f + delta;
+            if(!timeToDestroy) {
+                float x = sensorEvent.values[0];
+                float y = sensorEvent.values[1];
+                float z = sensorEvent.values[2];
+                accelerationLast = accelerationVal;
+                accelerationVal = (float) Math.sqrt((double) (x * x) + (y * y) + (z * z));
+                float delta = accelerationVal - accelerationLast;
+                shake = shake * 0.9f + delta;
 
-            if(shake > 5) {
-                String shakeValue = String.valueOf(shake);
-                Log.d("Shaking value", shakeValue);
-            }
-
-            if(shake > SHAKE_SENSITIVITY){
-                Log.d("Shaking value", "Sta shakeandoooooooooo");
+                if (shake > SHAKE_SENSITIVITY) {
+                    IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
+                    int inc = incinerator.destroyFirstLine(itemsOnScreen);
+                       if(inc == 0) {
+                           Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
+                       }else if(inc == 1) {
+                           Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
+                       }
+                }
             }
         }
 
         @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {
-
-        }
+        public void onAccuracyChanged(Sensor sensor, int i) { }
     };
+
+
 }

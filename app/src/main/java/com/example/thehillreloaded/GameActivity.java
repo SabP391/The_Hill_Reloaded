@@ -1,7 +1,9 @@
 package com.example.thehillreloaded;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ComponentName;
@@ -18,11 +20,14 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
+import com.example.thehillreloaded.Game.QuestManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
@@ -44,6 +49,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
     int menuFragID;
     int menuBottID;
+    int menuPausaID;
 
     Intent effettiSonori;
 
@@ -124,6 +130,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         LinearLayout pauseLayout = new LinearLayout(this);
         FragmentContainerView pauseFragment = new FragmentContainerView(this);
         pauseFragment.setId(View.generateViewId());
+        menuPausaID = pauseFragment.getId();
         LinearLayout.LayoutParams pr1 = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         pr1.gravity = Gravity.CENTER;
@@ -282,7 +289,12 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             if(findViewById(menuBottID).getVisibility() == View.GONE){
                 findViewById(menuBottID).setVisibility(View.VISIBLE);
             }
-        } else super.onBackPressed();
+        } else {
+            GameManager.getInstance().pause();
+            findViewById(menuPausaID).setVisibility(View.VISIBLE);
+            creaMenuPausa(findViewById(menuPausaID), new PauseMenuFragment());
+            //super.onBackPressed();
+        }
     }
 
     //Necessari per il service binding
@@ -316,71 +328,134 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
     public void onClickMenuCarta(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-
-        RecycleUnitsManager.getInstance().unlockPaperUnit();
-
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new PaperUnitFragment());
-        fmt.addToBackStack("carta");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isPaperUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new PaperUnitFragment());
+            fmt.addToBackStack("carta");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockPaperUnit()){
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
     }
 
     public void onClickMenuPlastica(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new PlasticUnitFragment());
-        fmt.addToBackStack("plastica");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new PlasticUnitFragment());
+            fmt.addToBackStack("plastica");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockPlasticUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
     }
 
     public void onClickMenuAlluminio(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new AluminiumUnitFragment());
-        fmt.addToBackStack("alluminio");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new AluminiumUnitFragment());
+            fmt.addToBackStack("alluminio");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockAluminiumUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
     }
 
     public void onClickMenuEwaste(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new EwasteUnitFragment());
-        fmt.addToBackStack("ewaste");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new EwasteUnitFragment());
+            fmt.addToBackStack("ewaste");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockEWasteUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
     }
 
     public void onClickMenuAcciaio(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new MetalUnitFragment());
-        fmt.addToBackStack("acciaio");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new MetalUnitFragment());
+            fmt.addToBackStack("acciaio");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockSteelUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
     }
 
     public void onClickMenuOrganico(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new OrganicUnitFragment());
-        fmt.addToBackStack("organico");
-        fmt.commit();
+        if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new OrganicUnitFragment());
+            fmt.addToBackStack("organico");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockCompostUnit()) {
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
     }
 
     public void onClickEsciDaMenu(View view){
@@ -391,4 +466,25 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             GameManager.getInstance().unPause();
         }
     }
+
+    //metodo per la chiusura dei fragment innestati
+    public void closeChildFrag(View view){
+        //chiusura fragment fattibile solo da activity, gestione del backstack sconsigliata nei fragment
+        FragmentManager fm = getSupportFragmentManager();
+        for (Fragment frag : fm.getFragments()) {
+            if (frag.isVisible()) {
+                FragmentManager childFm = frag.getChildFragmentManager();
+                if (childFm.getBackStackEntryCount() > 0) {
+                    childFm.popBackStack();
+                    return;
+                }
+            }
+        }
+    }
+
+    //chiusura gioco senza salvataggio
+    public void closeGameNotSaving(View view){
+        finish();
+    }
+
 }

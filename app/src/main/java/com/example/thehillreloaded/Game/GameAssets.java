@@ -20,6 +20,8 @@ public class GameAssets {
     private static Context context;
     private Bitmap sunnyPointsIcon;
     private Bitmap gameBackGround;
+    private Bitmap misto;
+    private Bitmap unitPointsIcon;
     private Bitmap inceneritore;
     private Bitmap centraleVetro;
     private Bitmap centraleAlluminio;
@@ -35,12 +37,13 @@ public class GameAssets {
     private Bitmap carta[];
     private Bitmap eWaste[];
     private Bitmap umido[];
-    private Bitmap misto;
+
     private Random rand;
 
     private GameAssets(){
         gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
         sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
+        unitPointsIcon = getBitmap(context, R.drawable.ic_unit_points);
 
         // Creazione delle sprite delle centrali ---------------------------------------------------
         inceneritore = getBitmap(context, R.drawable.asset2_inceneritore);
@@ -117,6 +120,8 @@ public class GameAssets {
     Bitmap getIncineratorUnit(Point size){return Bitmap.createScaledBitmap(inceneritore, size.x, size.y, false);}
 
     Bitmap getSunnyPointsIcon(Point size){return(Bitmap.createScaledBitmap(sunnyPointsIcon, size.x, size.y, false));}
+
+    Bitmap getUnitPointsIcon(Point size){return(Bitmap.createScaledBitmap(unitPointsIcon, size.x, size.y, false));}
 
     Bitmap getMixed(Point size){
         return(Bitmap.createScaledBitmap(misto, size.x, size.y, false));

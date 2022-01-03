@@ -3,10 +3,17 @@ package com.example.thehillreloaded;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.thehillreloaded.Game.RecycleUnitsManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +65,104 @@ public class EwasteUnitFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ewaste_unit, container, false);
+        View view = inflater.inflate(R.layout.fragment_ewaste_unit, container, false);
+
+        // Caratteristiche unità -------------------------------------------------------------------
+        TextView unitPoints = (TextView) view.findViewById(R.id.ewaste_up);
+        TextView unitStatus = (TextView) view.findViewById(R.id.ewaste_status);
+        TextView unitWear = (TextView) view.findViewById(R.id.ewaste_wear);
+
+        int uPoints = RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints();
+        unitPoints.setText(getString(R.string.text_unit_points, uPoints));
+        switch (RecycleUnitsManager.getInstance().getEWasteUnit().getUnitStatus()){
+            case BASE: unitStatus.setText(getString(R.string.text_status, 0));
+                break;
+            case UPGRADED_ONCE: unitStatus.setText(getString(R.string.text_status, 1));
+                break;
+            case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
+                break;
+        }
+        int wear = RecycleUnitsManager.getInstance().getEWasteUnit().getCurrentWearLevel();
+        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getEWasteUnit().getMaximumWearLevel()));
+
+
+        // Sblocco oggetti in unità ----------------------------------------------------------------
+        ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.ewaste_unlockable1);
+        ImageButton sblocco2 = (ImageButton) view.findViewById(R.id.ewaste_unlockable2);
+        ImageButton sblocco3 = (ImageButton) view.findViewById(R.id.ewaste_unlockable3);
+        ImageButton sblocco4 = (ImageButton) view.findViewById(R.id.ewaste_unlockable4);
+
+        sblocco1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RecycleUnitsManager.getInstance().unlockEwasteObject(0)) {
+                    sblocco(1);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+        sblocco2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RecycleUnitsManager.getInstance().unlockEwasteObject(1)) {
+                    sblocco(2);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+        sblocco3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RecycleUnitsManager.getInstance().unlockEwasteObject(2)) {
+                    sblocco(3);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+        sblocco4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RecycleUnitsManager.getInstance().unlockEwasteObject(3)) {
+                    sblocco(4);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
+                } else {
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+        return view;
+    }
+
+    public void sblocco(int valore){
+        Bundle bundle = new Bundle();
+        bundle.putString("tipo_unita", "EWASTE");
+        bundle.putInt("num_unlockable", valore);
+        FragmentManager childFM = getChildFragmentManager();
+        FragmentTransaction ft = childFM.beginTransaction();
+        UnlockablesFragment sbloccato = new UnlockablesFragment();
+        sbloccato.setArguments(bundle);
+        ft.replace(R.id.unlockable_ewaste, sbloccato);
+        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        ft.addToBackStack("fragment_sbloccabili");
+        ft.commit();
     }
 }

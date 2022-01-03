@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout15"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmExitFragment">
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="370dp"
+        android:layout_height="230dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/stile_fragment_background"
+        android:paddingHorizontal="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/conferma_uscita_ok"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:onClick="closeGameNotSaving"
+        android:text="@string/bottone_conferma"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12" />
+
+    <android.widget.Button
+        android:id="@+id/conferma_uscita_no"
+        style="@style/StileBottoni"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:onClick="closeChildFrag"
+        android:text="@string/bottone_torna_indietro"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="167dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/conferma_uscita_partita"
+        android:textAlignment="center"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

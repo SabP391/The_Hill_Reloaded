@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/bg_organic_frag"
         android:layout_width="match_parent"
-        android:layout_height="159dp"
+        android:layout_height="180dp"
         android:background="@drawable/stile_fragment_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,13 +21,13 @@
         android:layout_width="105dp"
         android:layout_height="125dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/asset2_fab_marrone_umido"
         app:layout_constraintStart_toStartOf="@+id/bg_organic_frag"
         app:layout_constraintTop_toTopOf="@+id/bg_organic_frag" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -80,23 +80,66 @@
         android:layout_width="50dp"
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="150dp"
         android:background="@drawable/bottoni_personalizzati"
         android:onClick="onClickEsciDaMenu"
         android:src="@android:drawable/ic_delete"
-        app:tint="@color/verde_scuro"
         app:layout_constraintBottom_toBottomOf="@+id/bg_organic_frag"
-        app:layout_constraintStart_toStartOf="@+id/bg_organic_frag" />
+        app:layout_constraintStart_toStartOf="@+id/bg_organic_frag"
+        app:tint="@color/verde_scuro" />
 
     <android.widget.Button
         android:id="@+id/organic_upgrade_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/bottoni_personalizzati"
         android:text="UPGRADE"
         app:layout_constraintStart_toEndOf="@+id/ic_organic_unit"
-        app:layout_constraintTop_toTopOf="@+id/bg_organic_frag" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"  />
+
+    <TextView
+        android:id="@+id/organic_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/ic_organic_unit"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/organic_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/ic_organic_unit"
+        app:layout_constraintTop_toBottomOf="@+id/organic_up" />
+
+    <TextView
+        android:id="@+id/organic_wear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/ic_organic_unit"
+        app:layout_constraintTop_toBottomOf="@+id/organic_status" />
+
+    <FrameLayout
+        android:id="@+id/unlockable_organic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/bg_plastic_frag"
         android:layout_width="match_parent"
-        android:layout_height="159dp"
+        android:layout_height="180dp"
         android:background="@drawable/stile_fragment_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,10 +21,10 @@
         android:layout_width="105dp"
         android:layout_height="125dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/asset2_fab_giallo_plastica"
         app:layout_constraintStart_toStartOf="@+id/bg_plastic_frag"
-        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag"/>
+        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag" />
 
     <TextView
         android:id="@+id/textView7"
@@ -43,9 +43,9 @@
         android:layout_width="98dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintEnd_toStartOf="@+id/plastic_unlockable2"
-        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag" />
 
     <ImageButton
         android:id="@+id/plastic_unlockable2"
@@ -80,23 +80,66 @@
         android:layout_width="50dp"
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="150dp"
         android:background="@drawable/bottoni_personalizzati"
         android:onClick="onClickEsciDaMenu"
         android:src="@android:drawable/ic_delete"
-        app:tint="@color/verde_scuro"
         app:layout_constraintBottom_toBottomOf="@+id/bg_plastic_frag"
-        app:layout_constraintStart_toStartOf="@+id/bg_plastic_frag"/>
+        app:layout_constraintStart_toStartOf="@+id/bg_plastic_frag"
+        app:tint="@color/verde_scuro" />
 
     <android.widget.Button
         android:id="@+id/plastic_upgrade_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/bottoni_personalizzati"
         android:text="UPGRADE"
         app:layout_constraintStart_toEndOf="@+id/ic_plastic_unit"
-        app:layout_constraintTop_toTopOf="@+id/bg_plastic_frag"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/plastic_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/ic_plastic_unit"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/plastic_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/ic_plastic_unit"
+        app:layout_constraintTop_toBottomOf="@+id/plastic_up" />
+
+    <TextView
+        android:id="@+id/plastic_wear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintStart_toEndOf="@+id/ic_plastic_unit"
+        app:layout_constraintTop_toBottomOf="@+id/plastic_status" />
+
+    <FrameLayout
+        android:id="@+id/unlockable_plastic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

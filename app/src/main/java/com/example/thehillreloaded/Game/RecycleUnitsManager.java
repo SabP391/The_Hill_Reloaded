@@ -3,8 +3,10 @@ package com.example.thehillreloaded.Game;
 import android.content.Context;
 
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RecycleUnitsManager {
+    private UnlockableObject unlockable[];
 
     // Costanti che determinano il prezzo in sunny points
     // delle diverse centrali ----------------------------------------------------------------------
@@ -29,11 +31,13 @@ public class RecycleUnitsManager {
     private static RecycleUnitsManager instance;
     private Context context;
     private TileMap map;
-    private LinkedList<RecycleUnit> unlockedUnits;
+    private ConcurrentLinkedQueue<RecycleUnit> unlockedUnits;
+
+    private int quest3Counter = 0;
 
     // Metodi per l'inizializzazione della classe --------------------------------------------------
     private RecycleUnitsManager(){
-        this.unlockedUnits = new LinkedList<RecycleUnit>();
+        this.unlockedUnits = new ConcurrentLinkedQueue<RecycleUnit>();
     }
 
     public static RecycleUnitsManager getInstance(){
@@ -48,6 +52,24 @@ public class RecycleUnitsManager {
         this.map = map;
         unlockedUnits.add(new GlassRecycleUnit(map, context));
         unlockedUnits.add(new IncineratorUnit(map, context));
+
+        this.unlockable = new UnlockableObject[4];
+        unlockable[0] = new UnlockableObject(2, 1);
+        unlockable[1] = new UnlockableObject(4, 3);
+        unlockable[2] = new UnlockableObject(7, 6);
+        unlockable[3] = new UnlockableObject(12, 11);
+    }
+
+    public boolean processItemOnScreen(GameItem item){
+        int tileToCheck = map.getTileIndexFromPosition(item.getPosition());
+        for(RecycleUnit i : unlockedUnits){
+            if(i.isOneOfMyTiles(tileToCheck)){
+                if(i.processItem(item)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // Metodi per sbloccare le centrali-------------------------------------------------------------
@@ -56,7 +78,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             PlasticRecycleUnit unitToAdd = new PlasticRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_PLASTIC_UNIT);
             isPlasticUnitUnlocked = true;
             return true;
         }
@@ -68,7 +90,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             PaperRecycleUnit unitToAdd = new PaperRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_PAPER_UNIT);
             isPaperUnitUnlocked = true;
             return true;
         }
@@ -80,7 +102,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             AluminiumRecycleUnit unitToAdd = new AluminiumRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_ALUMINIUM_UNIT);
             isAluminiumUnitUnlocked = true;
             return true;
         }
@@ -92,7 +114,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             SteelRecycleUnit unitToAdd = new SteelRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_STEEL_UNIT);
             isSteelUnitUnlocked = true;
             return true;
         }
@@ -104,7 +126,7 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             EWasteRecycleUnit unitToAdd = new EWasteRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_EWASTE_UNIT);
             isEwasteUnitUnlocked = true;
             return true;
         }
@@ -116,16 +138,90 @@ public class RecycleUnitsManager {
         if(sunnyPoints >= 0){
             CompostRecycleUnit unitToAdd = new CompostRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
-            GameManager.getInstance().setSunnyPoints(sunnyPoints);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_COMPOST_UNIT);
             isCompostUnlocked = true;
             return true;
         }
         return false;
     }
 
+    // Metodi per gli sbloccabili ------------------------------------------------------------------
+
+    public boolean unlockPlasticObject(int index){
+        PlasticRecycleUnit unit = getPlasticUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockPaperObject(int index){
+        PaperRecycleUnit unit = getPaperUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockGlassObject(int index){
+        GlassRecycleUnit unit = getGlassUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockAluminiumObject(int index){
+        AluminiumRecycleUnit unit = getAluminiumUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockSteelObject(int index){
+        SteelRecycleUnit unit = getSteelUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockEwasteObject(int index){
+        EWasteRecycleUnit unit = getEWasteUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            QuestManager.getInstance().increaseCounterQuest3();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unlockCompostObject(int index){
+        CompostRecycleUnit unit = getCompostUnit();
+        if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
+            unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
+            GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            return true;
+        }
+        return false;
+    }
+
+
     // Getter e setter -----------------------------------------------------------------------------
 
-    public LinkedList<RecycleUnit> getUnlockedUnits(){ return unlockedUnits; }
+    public ConcurrentLinkedQueue<RecycleUnit> getUnlockedUnits(){ return unlockedUnits; }
 
     public static int getCostOfCompostUnit() { return COST_OF_COMPOST_UNIT; }
 
@@ -152,4 +248,76 @@ public class RecycleUnitsManager {
     public boolean isEwasteUnitUnlocked() { return isEwasteUnitUnlocked; }
 
     public boolean isGlassUnitUnlocked() { return isGlassUnitUnlocked; }
+
+    public PaperRecycleUnit getPaperUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof PaperRecycleUnit){
+                return (PaperRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public CompostRecycleUnit getCompostUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof CompostRecycleUnit){
+                return (CompostRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public AluminiumRecycleUnit getAluminiumUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof AluminiumRecycleUnit){
+                return (AluminiumRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public SteelRecycleUnit getSteelUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof SteelRecycleUnit){
+                return (SteelRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public PlasticRecycleUnit getPlasticUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof PlasticRecycleUnit){
+                return (PlasticRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public EWasteRecycleUnit getEWasteUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof EWasteRecycleUnit){
+                return (EWasteRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public GlassRecycleUnit getGlassUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof GlassRecycleUnit){
+                return (GlassRecycleUnit) i;
+            }
+        }
+        return null;
+    }
+
+    public IncineratorUnit getIncineratorUnit(){
+        for(RecycleUnit i : unlockedUnits){
+            if(i instanceof IncineratorUnit){
+                return (IncineratorUnit) i;
+            }
+        }
+        return null;
+    }
 }
