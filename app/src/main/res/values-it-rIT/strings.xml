@@ -51,4 +51,10 @@
     <string name="conferma_uscita_partita">Sei sicuro di voler uscire? I progressi non salvati andranno persi.</string>
     <string name="bottone_torna_indietro">Torna indietro</string>
     <string name="bottone_conferma">Ok</string>
+    <string name="quest1">Costruisci tutte le unità di riciclo</string>
+    <string name="quest2">Guadagna 100 Sunny Points</string>
+    <string name="quest3">Produci 3 oggetti golden da Ewaste</string>
+    <string name="quest4">Ricicla 50 rifiuti di organico</string>
+    <string name="quest5">Sblocca l\'unità di riciclo di Vetro di livello 3</string>
+    <string name="quest6">Guadagna 20 UnitPoints nell\'unità della carta</string>
 </resources>
