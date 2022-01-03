@@ -77,6 +77,13 @@ public class GameItem {
         }
     }
 
+    public boolean checkForGameOverPosition(){
+        if(isOverTheRedLine() && !map.isNextTileFree(currentTile)){
+            return true;
+        }
+        return false;
+    }
+
     // Metodo per disegnare a schermo gli oggetti di gioco
     public void drawObject(Canvas c){
         c.drawBitmap(objectSprite, position.x, position.y, null);

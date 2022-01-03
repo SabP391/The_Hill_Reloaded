@@ -127,14 +127,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
         if(!GameManager.getInstance().isPaused()){
-            try{
-                synchronized (itemsOnScreen){
                     if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
                         int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
                         itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
                     }
                     for(GameItem i : itemsOnScreen){
                         if(i != movingItem){
+                                if(i.checkForGameOverPosition()){
+                                    messageHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(context, "Game over", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                                 i.fall(System.nanoTime());
                             }
                     }
@@ -161,13 +167,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         });
                     }
                 }
-            }catch (Exception e) {
-                Log.d("Errore nella gameLogic()", e.toString());
-            }
-
-
         }
-    }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
 
