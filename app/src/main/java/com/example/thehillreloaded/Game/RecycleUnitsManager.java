@@ -33,6 +33,8 @@ public class RecycleUnitsManager {
     private TileMap map;
     private ConcurrentLinkedQueue<RecycleUnit> unlockedUnits;
 
+    private int quest3Counter = 0;
+
     // Metodi per l'inizializzazione della classe --------------------------------------------------
     private RecycleUnitsManager(){
         this.unlockedUnits = new ConcurrentLinkedQueue<RecycleUnit>();
@@ -188,6 +190,7 @@ public class RecycleUnitsManager {
         if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
             unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
             GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
+            quest3Counter++;
             return true;
         }
         return false;

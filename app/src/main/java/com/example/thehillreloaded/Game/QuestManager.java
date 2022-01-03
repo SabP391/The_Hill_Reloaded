@@ -3,23 +3,31 @@ package com.example.thehillreloaded.Game;
 public class QuestManager {
     /*
     DA FARE
-
-    3 - sblocca 3 oggetti golden da Ewaste
     4 - ricicla 50 oggetti di organico
     5 - sblocca livello 3 della unità Vetro
     6 - guadagna 20 Unit Points sull'unità della Carta
      */
 
+    private static QuestManager instance;
     private boolean quest1; //1 - costruisci tutte le unità di riciclo
     private boolean quest2; //2 - guadagna almeno 100 Sunny Points
-    private boolean quest3;
-    private int counterQuest3;
+    private boolean quest3; //3 - sblocca 3 oggetti golden da Ewaste
+    private int counterQuest3 = 0;
     private boolean quest4;
     private int counterQuest4;
     private boolean quest5;
     private boolean quest6;
     private int counterQuest6;
 
+    private QuestManager(){
+    }
+
+    public static QuestManager getInstance(){
+        if(instance == null){
+            instance = new QuestManager();
+        }
+        return instance;
+    }
 
     public boolean isQuest1() {
         return quest1;
@@ -75,7 +83,12 @@ public class QuestManager {
     }
 
     public void isQuest3Complete(){
-
+        if (RecycleUnitsManager.getInstance().unlockEwasteObject(3)){
+            counterQuest3++;
+        }
+        if(counterQuest3 >= 3){
+            quest3 = true;
+        }
     }
 
     public void isQuest4Complete(){
