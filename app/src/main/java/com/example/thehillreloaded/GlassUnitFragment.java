@@ -73,17 +73,17 @@ public class GlassUnitFragment extends Fragment {
         TextView unitWear = (TextView) view.findViewById(R.id.glass_wear);
 
         int uPoints = RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints();
-        unitPoints.setText("Unit Points: " + uPoints);
+        unitPoints.setText(getString(R.string.text_unit_points, uPoints));
         switch (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus()){
-            case BASE: unitStatus.setText("Upgrade: 0");
+            case BASE: unitStatus.setText(getString(R.string.text_status, 0));
                 break;
-            case UPGRADED_ONCE: unitStatus.setText("Upgrade: 1");
+            case UPGRADED_ONCE: unitStatus.setText(getString(R.string.text_status, 1));
                 break;
-            case UPGRADED_TWICE: unitStatus.setText("Upgrade: 2");
+            case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
                 break;
         }
         int wear = RecycleUnitsManager.getInstance().getGlassUnit().getCurrentWearLevel();
-        unitWear.setText("Usura " + wear + "/" + RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel());
+        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel()));
 
 
         // Sblocco oggetti in unità ----------------------------------------------------------------

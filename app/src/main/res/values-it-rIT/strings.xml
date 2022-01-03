@@ -57,5 +57,7 @@
     <string name="quest4">Ricicla 50 rifiuti di organico</string>
     <string name="quest5">Sblocca l\'unità di riciclo di Vetro di livello 3</string>
     <string name="quest6">Guadagna 20 UnitPoints nell\'unità della carta</string>
-    <string name="text_usura">"Usura: "</string>
+    <string name="text_usura">"Usura: %1$d / %2$d"</string>
+    <string name="text_unit_points">Unit Points: %1$d</string>
+    <string name="text_status">Upgrade: %1$d</string>
 </resources>

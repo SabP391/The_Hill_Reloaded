@@ -57,6 +57,8 @@
     <string name="quest4">Recycle 50 organic objects</string>
     <string name="quest5">Unlock level 3 of the Glass Recycle Unit</string>
     <string name="quest6">Earn 20 UnitPoints in the Paper Recycle Unit</string>
-    <string name="text_usura">"Wear: "</string>
+    <string name="text_usura">"Wear: %1$d / %2$d"</string>
+    <string name="text_unit_points">Unit Points: %1$d</string>
+    <string name="text_status">Upgrade: %1$d</string>
 
 </resources>
