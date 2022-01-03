@@ -8,13 +8,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.thehillreloaded.Model.GoogleLoggedDataAccount;
 import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
 
 public class AccessActivity extends AppCompatActivity {
     //variabili per service
@@ -25,11 +37,15 @@ public class AccessActivity extends AppCompatActivity {
     //variabili per le SharedPreferences
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    //oggetto di tipo Gson che verrà salvato nelle Shared Preferences
+    Gson gson = new Gson();
     //boolean per controllare lo stato degli effetti sonori nelle shared preferences
     boolean SFXattivi;
 
     //costante per l'autenticazione
-    GoogleSignInWrapper autenticazione;
+    //GoogleSignInWrapper autenticazione;
+    GoogleSignInClient mGoogleSignInClient;
+    private static int RC_SIGN_IN = 100;
 
     //Creazione dell'intent per lanciare il menu con autenticazione
     Intent menuUtente;
@@ -46,7 +62,76 @@ public class AccessActivity extends AppCompatActivity {
         menuUtente = new Intent(this, UserMenuActivity.class);
         menuOspite = new Intent(this, GuestMenuActivity.class);
 
+        //Autenticazione Google - i commenti a seguire sono quelli della guida ufficiale-
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        // Set the dimensions of the sign-in button.
+        Button signInButton = findViewById(R.id.bottone_google);
+        //signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    //viene creato un oggetto di tipo GoogleLoggedDataAccount che contiene le credenziali utenti poi castato a gson
+    //e memorizzato su shared preferences con chiave "account-untente-loggato"
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            if (acct != null) {
+                GoogleLoggedDataAccount googleLoggedDataAccount = new GoogleLoggedDataAccount(acct.getId(),
+                        acct.getIdToken(), acct.getDisplayName(), acct.getGivenName(),
+                        acct.getFamilyName(), acct.getEmail(), acct.getServerAuthCode(), true);
+                editor.putString("account-utente-loggato", gson.toJson(googleLoggedDataAccount));
+                editor.commit();
+
+                Toast.makeText(this, "Utente Loggato: ".concat(acct.getEmail()), Toast.LENGTH_SHORT).show();
+            }
+
+            startActivity(menuUtente);
+            // Signed in successfully, show authenticated UI.
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.d("Messaggio", e.toString());
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    //--fine autenticazione--
+
 
     @Override
     public void onStart() {
@@ -56,14 +141,15 @@ public class AccessActivity extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
+
         //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
         // Se l'utente ha già effettuato l'accesso viene reindirizzato al menu
         // per utenti registrati
-        if(autenticazione.getInstance(this).isLogged(this)){
+        /*if(autenticazione.getInstance(this).isLogged(this)){
             startActivity(menuUtente);
             finish();
-        }
+        }*/
     }
 
     @Override
@@ -116,7 +202,7 @@ public class AccessActivity extends AppCompatActivity {
 
     public void onClickUtente(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
-        autenticazione.getInstance(this).login(this);
+        //autenticazione.getInstance(this).login(this);
     }
 
     public void onClickOspite(View view) {

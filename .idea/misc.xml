@@ -32,6 +32,23 @@
         <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/fragment_game_mode.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/fragment_no_login_access.xml" value="0.4" />
         <entry key="..\:/Users/sabry/AndroidStudioProjects/TheHillReloaded/app/src/main/res/layout/fragment_volume_settings.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_access.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/activity_google_sign_in.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/activity_guest_menu.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/activity_multiplayer.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/activity_user_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/device_adapter_view.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_aluminium_unit.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_auth.xml" value="0.2914653784219002" />
+        <entry key="app/src/main/res/layout/fragment_metal_unit.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_missions.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_no_login_access.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_pause_menu.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/layout/fragment_plastic_unit.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_reloaded_in_game_menu.xml" value="0.12907608695652173" />
       </map>
     </option>
   </component>

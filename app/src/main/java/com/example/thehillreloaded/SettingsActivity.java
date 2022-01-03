@@ -37,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity{
     boolean statoMusica;
     private Switch effettiBottone;
     boolean SFXattivi;
+    AuthFragment authFragment = new AuthFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,8 @@ public class SettingsActivity extends AppCompatActivity{
         musicaBottone = (Switch) findViewById(R.id.switch_musica);
 
         tornaAdAccesso = new Intent(this, AccessActivity.class);
-        if(!autenticazione.getInstance(this).isLogged(this)){
+        //if(!autenticazione.getInstance(this).isLogged(this)){
+        if(!authFragment.checkIfUserIsLogged()){
             View bottoneImpostazioni = findViewById(R.id.bottone_esci);
             bottoneImpostazioni.setVisibility(View.GONE);
         }
@@ -123,7 +125,8 @@ public class SettingsActivity extends AppCompatActivity{
 
     public void onClickEsci(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
-        autenticazione.getInstance(this).logout();
+        //autenticazione.getInstance(this).logout();
+        authFragment.logout(view);
         startActivity(tornaAdAccesso);
     }
 

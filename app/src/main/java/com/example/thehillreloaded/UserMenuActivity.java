@@ -2,6 +2,8 @@ package com.example.thehillreloaded;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,7 +15,6 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 public class UserMenuActivity extends AppCompatActivity implements GameModeFragment.SoundFX, DifficultyFragment.SoundFX {
@@ -42,6 +43,12 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
         effettiSonori = new Intent(this, SoundEffectService.class);
         iniziaPartita = findViewById(R.id.bottone_inizia_utente);
 
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction tx = fm.beginTransaction();
+        //fragment credenziali utente logato
+        AuthFragment authFragment = new AuthFragment();
+        tx.add(R.id.fragment_auth_container, authFragment);
+        tx.commit();
     }
 
     @Override

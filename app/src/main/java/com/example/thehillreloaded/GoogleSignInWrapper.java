@@ -18,6 +18,7 @@ public class GoogleSignInWrapper {
     private GoogleSignInClient clientAutenticazioneGoogle;
     private GoogleSignInAccount account;
 
+
     // Costruttore privato: è possibile accedervi solo tramite instance
     private GoogleSignInWrapper(Context context)
     {
