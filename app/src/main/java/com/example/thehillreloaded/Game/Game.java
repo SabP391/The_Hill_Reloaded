@@ -144,28 +144,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                                 i.fall(System.nanoTime());
                             }
                     }
-                    if(timeToDestroy){
-                        // questa parte dovremmo poterla spostare
-                        IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
-                        int inc = incinerator.destroyFirstLine(itemsOnScreen);
-                        timeToDestroy = false;
-                        messageHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                switch (inc){
-                                    case 0:
-                                        Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case 1:
-                                        Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case 2:
-                                        //Questo toast è da eliminare!!
-                                        Toast.makeText(context, "Prima riga incenerita", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
                 }
         }
 
@@ -362,7 +340,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 shake = shake * 0.9f + delta;
 
                 if (shake > SHAKE_SENSITIVITY) {
-                    timeToDestroy = true;
+                    IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
+                    int inc = incinerator.destroyFirstLine(itemsOnScreen);
+                       if(inc == 0) {
+                           Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
+                       }else if(inc == 1) {
+                           Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
+                       }
                 }
             }
         }
