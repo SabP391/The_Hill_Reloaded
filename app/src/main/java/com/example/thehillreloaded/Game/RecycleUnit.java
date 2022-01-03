@@ -158,6 +158,9 @@ public abstract class RecycleUnit {
         }
         else{
             result = processItemReloaded(item);
+            if (item.getItemType() == ItemType.COMPOST) {
+                QuestManager.getInstance().increaseCounterQuest4();
+            }
         }
         return result;
     }

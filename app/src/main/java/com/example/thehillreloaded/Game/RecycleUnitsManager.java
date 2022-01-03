@@ -202,7 +202,7 @@ public class RecycleUnitsManager {
         if (unlockable[index].getUpCost() <= unit.getUnitPoints()) {
             unit.setUnitPoints(unit.getUnitPoints()-unlockable[index].getUpCost());
             GameManager.getInstance().addSunnyPoint(unlockable[index].getSpReward());
-            quest3Counter++;
+            QuestManager.getInstance().increaseCounterQuest3();
             return true;
         }
         return false;
