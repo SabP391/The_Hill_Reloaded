@@ -97,6 +97,8 @@ public class GlassUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(0)) {
                     sblocco(1);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -109,6 +111,8 @@ public class GlassUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(1)) {
                     sblocco(2);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -121,6 +125,8 @@ public class GlassUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(2)) {
                     sblocco(3);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);

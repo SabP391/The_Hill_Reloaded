@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
@@ -68,6 +69,26 @@ public class PlasticUnitFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plastic_unit, container, false);
 
+        // Caratteristiche unità -------------------------------------------------------------------
+        TextView unitPoints = (TextView) view.findViewById(R.id.plastic_up);
+        TextView unitStatus = (TextView) view.findViewById(R.id.plastic_status);
+        TextView unitWear = (TextView) view.findViewById(R.id.plastic_wear);
+
+        int uPoints = RecycleUnitsManager.getInstance().getPlasticUnit().getUnitPoints();
+        unitPoints.setText(getString(R.string.text_unit_points, uPoints));
+        switch (RecycleUnitsManager.getInstance().getPlasticUnit().getUnitStatus()){
+            case BASE: unitStatus.setText(getString(R.string.text_status, 0));
+                break;
+            case UPGRADED_ONCE: unitStatus.setText(getString(R.string.text_status, 1));
+                break;
+            case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
+                break;
+        }
+        int wear = RecycleUnitsManager.getInstance().getPlasticUnit().getCurrentWearLevel();
+        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getPlasticUnit().getMaximumWearLevel()));
+
+
+        // Sblocco oggetti in unità ----------------------------------------------------------------
         ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.plastic_unlockable1);
         ImageButton sblocco2 = (ImageButton) view.findViewById(R.id.plastic_unlockable2);
         ImageButton sblocco3 = (ImageButton) view.findViewById(R.id.plastic_unlockable3);
@@ -78,6 +99,8 @@ public class PlasticUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPlasticObject(0)) {
                     sblocco(1);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getPlasticUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -90,6 +113,8 @@ public class PlasticUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPlasticObject(1)) {
                     sblocco(2);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getPlasticUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -102,6 +127,8 @@ public class PlasticUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPlasticObject(2)) {
                     sblocco(3);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getPlasticUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -114,6 +141,8 @@ public class PlasticUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPlasticObject(3)) {
                     sblocco(4);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getPlasticUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);

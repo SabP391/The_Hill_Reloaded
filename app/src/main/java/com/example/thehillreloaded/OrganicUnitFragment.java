@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
@@ -66,6 +67,26 @@ public class OrganicUnitFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organic_unit, container, false);
 
+        // Caratteristiche unità -------------------------------------------------------------------
+        TextView unitPoints = (TextView) view.findViewById(R.id.organic_up);
+        TextView unitStatus = (TextView) view.findViewById(R.id.organic_status);
+        TextView unitWear = (TextView) view.findViewById(R.id.organic_wear);
+
+        int uPoints = RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints();
+        unitPoints.setText(getString(R.string.text_unit_points, uPoints));
+        switch (RecycleUnitsManager.getInstance().getCompostUnit().getUnitStatus()){
+            case BASE: unitStatus.setText(getString(R.string.text_status, 0));
+                break;
+            case UPGRADED_ONCE: unitStatus.setText(getString(R.string.text_status, 1));
+                break;
+            case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
+                break;
+        }
+        int wear = RecycleUnitsManager.getInstance().getCompostUnit().getCurrentWearLevel();
+        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getCompostUnit().getMaximumWearLevel()));
+
+
+        // Sblocco oggetti in unità ----------------------------------------------------------------
         ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.organic_unlockable1);
         ImageButton sblocco2 = (ImageButton) view.findViewById(R.id.organic_unlockable2);
         ImageButton sblocco3 = (ImageButton) view.findViewById(R.id.organic_unlockable3);
@@ -76,6 +97,8 @@ public class OrganicUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(0)) {
                     sblocco(1);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -88,6 +111,8 @@ public class OrganicUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(1)) {
                     sblocco(2);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -100,6 +125,8 @@ public class OrganicUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(2)) {
                     sblocco(3);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
@@ -112,6 +139,8 @@ public class OrganicUnitFragment extends Fragment {
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(3)) {
                     sblocco(4);
+                    unitPoints.setText(getString(R.string.text_unit_points,
+                            RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
