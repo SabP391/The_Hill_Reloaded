@@ -13,6 +13,7 @@ public abstract class RecycleUnit {
     protected static final int COST_OF_FIRST_UPGRADE = 4;
     protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 8;
     protected static final int UNIT_POINT_GAIN = 1;
+    protected static final int MAXIMUM_WEAR_LEVEL = 30;
 
     protected GameMode gameMode;
     protected Context context;
@@ -30,6 +31,7 @@ public abstract class RecycleUnit {
     protected boolean isFirstSlotFree = true;
     protected boolean isSecondSlotFree = true;
     protected boolean isThirdSlotFree = true;
+    protected int currentWearLevel = 0;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -123,32 +125,67 @@ public abstract class RecycleUnit {
         }
     }
 
-    public boolean isUnitFree(){
+    public int firstFreeSlot(){
+        int freeSlot = 0;
         switch (unitStatus){
             case BASE:
-                return isFirstSlotFree;
+                if(isFirstSlotFree){
+                    freeSlot = 1;
+                }
             case UPGRADED_ONCE:
-                return (isFirstSlotFree || isSecondSlotFree);
+                if(isFirstSlotFree){
+                    freeSlot = 1;
+                }else{
+                    freeSlot = 2;
+                }
             case UPGRADED_TWICE:
-                return (isFirstSlotFree || isSecondSlotFree || isThirdSlotFree);
+                if(isFirstSlotFree){
+                    freeSlot = 1;
+                }else if(isSecondSlotFree){
+                    freeSlot = 2;
+                }else {
+                    freeSlot = 3;
+                }
         }
-        return false;
+        return freeSlot;
     }
 
     // Metodi per il processamento degli item di gioco ---------------------------------------------
     public boolean processItemClassic(GameItem item){
-        if(item.getItemType() == this.acceptedItemType){
-            if(isUnitFree()){
-                this.unitPoints += UNIT_POINT_GAIN;
-                return true;
+        if(item.getItemType() == this.acceptedItemType) {
+            switch (firstFreeSlot()){
+                case 0:
+                    return false;
+                case 1:
+                    isFirstSlotFree = false;
+                    unitPoints += UNIT_POINT_GAIN;
+                    break;
+                case 2:
+                    isSecondSlotFree = false;
+                    unitPoints += UNIT_POINT_GAIN;
+                    break;
+                case 3:
+                    isSecondSlotFree = false;
+                    unitPoints += UNIT_POINT_GAIN;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
             }
-            else return false;
+            return true;
         }
         else return false;
     }
 
     public boolean processItemReloaded(GameItem item){
-        return false;
+        if(item.getItemType() == this.acceptedItemType) {
+            switch(unitStatus){
+                case BASE:
+                case UPGRADED_ONCE:
+                case UPGRADED_TWICE:
+                default:
+            }
+        }
+        return true;
     }
 
     public boolean processItem(GameItem item){
@@ -173,5 +210,17 @@ public abstract class RecycleUnit {
 
     public void setUnitPoints(int unitPoints) {
         this.unitPoints = unitPoints;
+    }
+
+    public static int getMaximumWearLevel() {
+        return MAXIMUM_WEAR_LEVEL;
+    }
+
+    public int getCurrentWearLevel() {
+        return currentWearLevel;
+    }
+
+    public RecycleUnitStatus getUnitStatus() {
+        return unitStatus;
     }
 }
