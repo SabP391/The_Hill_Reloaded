@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
@@ -66,6 +67,26 @@ public class GlassUnitFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_glass_unit, container, false);
 
+        // Caratteristiche unità -------------------------------------------------------------------
+        TextView unitPoints = (TextView) view.findViewById(R.id.glass_up);
+        TextView unitStatus = (TextView) view.findViewById(R.id.glass_status);
+        TextView unitWear = (TextView) view.findViewById(R.id.glass_wear);
+
+        int uPoints = RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints();
+        unitPoints.setText("Unit Points: " + uPoints);
+        switch (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus()){
+            case BASE: unitStatus.setText("Upgrade: 0");
+                break;
+            case UPGRADED_ONCE: unitStatus.setText("Upgrade: 1");
+                break;
+            case UPGRADED_TWICE: unitStatus.setText("Upgrade: 2");
+                break;
+        }
+        int wear = RecycleUnitsManager.getInstance().getGlassUnit().getCurrentWearLevel();
+        unitWear.setText("Usura " + wear + "/" + RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel());
+
+
+        // Sblocco oggetti in unità ----------------------------------------------------------------
         ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.glass_unlockable1);
         ImageButton sblocco2 = (ImageButton) view.findViewById(R.id.glass_unlockable2);
         ImageButton sblocco3 = (ImageButton) view.findViewById(R.id.glass_unlockable3);
