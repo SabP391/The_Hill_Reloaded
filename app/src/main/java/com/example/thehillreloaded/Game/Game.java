@@ -318,8 +318,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                        // Se c'era un oggetto in movimento,
                        // lo riporta alla tile in cui si trovava prima del tocco
                        // e reimposta a null la variabile movingItem
-                       movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
-                       movingItem = null;
+
+                       if(RecycleUnitsManager.getInstance().processItemOnScreen(movingItem)){
+                           map.setTileValue(movingItem.getCurrentTile(), 0);
+                           itemsOnScreen.remove(movingItem);
+                           movingItem = null;
+                       }else{
+                           movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
+                           movingItem = null;
+                       }
                    }
                    break;
            }

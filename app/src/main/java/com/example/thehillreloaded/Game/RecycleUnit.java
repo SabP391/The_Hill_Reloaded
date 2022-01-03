@@ -6,10 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import java.lang.reflect.Array;
+
 public abstract class RecycleUnit {
 
     protected static final int COST_OF_FIRST_UPGRADE = 4;
     protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 8;
+    protected static final int UNIT_POINT_GAIN = 1;
 
     protected GameMode gameMode;
     protected Context context;
@@ -24,6 +27,9 @@ public abstract class RecycleUnit {
     protected int myTiles[];
     protected RecycleUnitStatus unitStatus = RecycleUnitStatus.BASE;
     protected ItemType acceptedItemType;
+    protected boolean isFirstSlotFree = true;
+    protected boolean isSecondSlotFree = true;
+    protected boolean isThirdSlotFree = true;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -54,9 +60,23 @@ public abstract class RecycleUnit {
         this.myTiles[3] = this.myTiles[2] + 1;
     }
 
+    // Metodo per controllare che un valore passato
+    // come argomento sia una delle tile occupata dall'unità
+    public boolean isOneOfMyTiles(int tileIndex){
+        for(int i = 0; i < Array.getLength(myTiles); i++){
+            if(myTiles[i] == tileIndex){
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Metodo per disegnare a schermo le unità di riciclo
     public void drawUnit(Canvas c){
+        Paint paint = new Paint();
+        paint.setTextSize(30);
         c.drawBitmap(sprite, position.x, position.y, null);
+        c.drawText(String.valueOf(unitPoints), (int) map.getTileSize(), map.getTileSize(), paint);
     }
 
     // Metodo per effettuare l'upgrade dell'unità
@@ -101,6 +121,45 @@ public abstract class RecycleUnit {
             default:
                 throw new IllegalStateException("Unexpected value: " + unitStatus);
         }
+    }
+
+    public boolean isUnitFree(){
+        switch (unitStatus){
+            case BASE:
+                return isFirstSlotFree;
+            case UPGRADED_ONCE:
+                return (isFirstSlotFree || isSecondSlotFree);
+            case UPGRADED_TWICE:
+                return (isFirstSlotFree || isSecondSlotFree || isThirdSlotFree);
+        }
+        return false;
+    }
+
+    // Metodi per il processamento degli item di gioco ---------------------------------------------
+    public boolean processItemClassic(GameItem item){
+        if(item.getItemType() == this.acceptedItemType){
+            if(isUnitFree()){
+                this.unitPoints += UNIT_POINT_GAIN;
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
+
+    public boolean processItemReloaded(GameItem item){
+        return false;
+    }
+
+    public boolean processItem(GameItem item){
+        boolean result;
+        if(gameMode == GameMode.CLASSIC){
+            result = processItemClassic(item);
+        }
+        else{
+            result = processItemReloaded(item);
+        }
+        return result;
     }
 
     // Getter e setter------------------------------------------------------------------------------

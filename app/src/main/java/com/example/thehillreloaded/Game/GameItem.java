@@ -119,4 +119,5 @@ public class GameItem {
         return currentTile;
     }
 
+    public ItemType getItemType() { return itemType; }
 }

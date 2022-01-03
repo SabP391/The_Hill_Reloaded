@@ -60,6 +60,18 @@ public class RecycleUnitsManager {
         unlockable[3] = new UnlockableObject(12, 11);
     }
 
+    public boolean processItemOnScreen(GameItem item){
+        int tileToCheck = map.getTileIndexFromPosition(item.getPosition());
+        for(RecycleUnit i : unlockedUnits){
+            if(i.isOneOfMyTiles(tileToCheck)){
+                if(i.processItem(item)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Metodi per sbloccare le centrali-------------------------------------------------------------
     public boolean unlockPlasticUnit(){
         int sunnyPoints = GameManager.getInstance().getSunnyPoints() - COST_OF_PLASTIC_UNIT;
