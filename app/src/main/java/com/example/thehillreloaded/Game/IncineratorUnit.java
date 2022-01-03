@@ -18,6 +18,7 @@ public class IncineratorUnit extends RecycleUnit{
         this.sprite = GameAssets.getInstance(context).getIncineratorUnit(size);
         position = new Point((int)((map.getMapSize().x * map.getTileSize()) -
                 (2 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 6));
+        initMyTiles();
 
     }
 

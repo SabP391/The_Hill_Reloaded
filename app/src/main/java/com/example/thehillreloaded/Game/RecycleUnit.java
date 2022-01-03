@@ -29,6 +29,7 @@ public abstract class RecycleUnit {
         this.gameMode = GameManager.getInstance().getGameMode();
         this.context = context;
         this.map = map;
+        this.myTiles = new int[4];
         Point unitPointIconSize = new Point((int)(map.getTileSize() / 4), (int)(map.getTileSize() / 4));
         this.unitPointsIcon = GameAssets.getInstance(context).getUnitPointsIcon(unitPointIconSize);
         this.offsetFromLeft = (int) (((map.getFirstTileOfTheHill() - 4) * map.getTileSize()) - map.getTileSize());
@@ -41,7 +42,18 @@ public abstract class RecycleUnit {
         if(this.offsetFromRight < 0){
             this.offsetFromRight = 0;
         }
+
     }
+    // Metodi utili --------------------------------------------------------------------------------
+
+    // Metodo per inizializzare le tile su cui si trova l'unità
+    public void initMyTiles(){
+        this.myTiles[0] = map.getTileIndexFromPosition(position);
+        this.myTiles[1] = this.myTiles[0] + 1;
+        this.myTiles[2] = this.myTiles[0] + map.getMapSize().x;
+        this.myTiles[3] = this.myTiles[2] + 1;
+    }
+
     // Metodo per disegnare a schermo le unità di riciclo
     public void drawUnit(Canvas c){
         c.drawBitmap(sprite, position.x, position.y, null);

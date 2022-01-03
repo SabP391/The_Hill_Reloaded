@@ -9,6 +9,7 @@ public class SteelRecycleUnit extends RecycleUnit{
 
     public SteelRecycleUnit(TileMap map, Context context){
         super(map, context);
+        this.acceptedItemType = ItemType.STEEL;
         if(gameMode == GameMode.RELOADED) {
             this.sprite = GameAssets.getInstance(context).getSteelUnit(size);
             position = new Point(((int) (map.getTileSize()) * 2 + offsetFromLeft), (int) (map.getTileSize()) * 2);
@@ -16,6 +17,7 @@ public class SteelRecycleUnit extends RecycleUnit{
             this.sprite = GameAssets.getInstance(context).getSteelUnit(size);
             position = new Point((0 + offsetFromLeft), (int) (map.getTileSize()) * 4);
         }
+        initMyTiles();
     }
 
 }

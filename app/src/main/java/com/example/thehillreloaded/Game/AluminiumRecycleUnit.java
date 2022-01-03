@@ -8,9 +8,11 @@ public class AluminiumRecycleUnit extends RecycleUnit{
 
     public AluminiumRecycleUnit(TileMap map, Context context){
         super(map, context);
+        this.acceptedItemType = ItemType.ALUMINIUM;
         this.sprite = GameAssets.getInstance(context).getAlUnit(size);
         position = new Point((int)((map.getMapSize().x * map.getTileSize()) -
                 (4 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 4));
+        initMyTiles();
 
     }
 
