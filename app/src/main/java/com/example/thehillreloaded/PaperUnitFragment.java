@@ -127,7 +127,10 @@ public class PaperUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(0)) {
-                    sblocco(1);
+                    if (!sbloccato1) {
+                        sblocco(1);
+                        sbloccato1 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
@@ -141,7 +144,10 @@ public class PaperUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(1)) {
-                    sblocco(2);
+                    if (!sbloccato2) {
+                        sblocco(2);
+                        sbloccato2 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
@@ -155,7 +161,10 @@ public class PaperUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(2)) {
-                    sblocco(3);
+                    if (!sbloccato3) {
+                        sblocco(3);
+                        sbloccato3 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
@@ -169,7 +178,10 @@ public class PaperUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(3)) {
-                    sblocco(4);
+                    if (!sbloccato4) {
+                        sblocco(4);
+                        sbloccato4 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
