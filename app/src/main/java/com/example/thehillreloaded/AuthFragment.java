@@ -80,6 +80,7 @@ public class AuthFragment extends Fragment {
         boolean test = pref.getAll().containsKey("account-utente-loggato");
         Toast.makeText(getActivity(), "Logout Eseguito Correttamente!", Toast.LENGTH_SHORT).show();
         //Redirect al menu
+        //getActivity().getSupportFragmentManager().popBackStack();
     }
 
     public boolean checkIfUserIsLogged() {

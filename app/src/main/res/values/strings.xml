@@ -44,12 +44,8 @@
     <string name="unita_riciclo_ewaste">E-waste</string>
     <string name="unita_riciclo_acciaio">Acciaio</string>
     <string name="unita_riciclo_organico">Organico</string>
-<<<<<<< HEAD
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textview">TextView</string>
-    <string name="logout">Logout</string>
-=======
+    <string name="email_auth" translatable="false">TextView</string>
+    <string name="logout" translatable="false">Logout</string>
     <string name="sunny_non_sufficienti">Non hai abbastanza Sunny Points</string>
     <string name="nessun_rifiuto">Nessun rifiuto da incenerire</string>
     <string name="unit_non_sufficienti">Non hai abbastanza Unit Points</string>

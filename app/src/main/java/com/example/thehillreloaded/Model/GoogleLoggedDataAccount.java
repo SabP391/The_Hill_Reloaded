@@ -1,6 +1,6 @@
 package com.example.thehillreloaded.Model;
 
-//classe
+
 public class GoogleLoggedDataAccount {
 
     private String personId;
