@@ -22,6 +22,7 @@ public class GameAssets {
     private Bitmap gameBackGround;
     private Bitmap misto;
     private Bitmap unitPointsIcon;
+    private Bitmap wearWarningIcon;
     private Bitmap inceneritore;
     private Bitmap centraleVetro;
     private Bitmap centraleAlluminio;
@@ -45,6 +46,7 @@ public class GameAssets {
         gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
         sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
         unitPointsIcon = getBitmap(context, R.drawable.ic_unit_points);
+        wearWarningIcon = getBitmap(context, R.drawable.ic_exclamation_mark);
 
         // Creazione delle sprite delle centrali ---------------------------------------------------
         inceneritore = getBitmap(context, R.drawable.asset2_inceneritore);
@@ -124,6 +126,8 @@ public class GameAssets {
     Bitmap getSunnyPointsIcon(Point size){return(Bitmap.createScaledBitmap(sunnyPointsIcon, size.x, size.y, false));}
 
     Bitmap getUnitPointsIcon(Point size){return(Bitmap.createScaledBitmap(unitPointsIcon, size.x, size.y, false));}
+
+    Bitmap getWearWarningIcon(Point size){return(Bitmap.createScaledBitmap(wearWarningIcon, size.x, size.y, false));}
 
     Bitmap getMixed(Point size){
         return(Bitmap.createScaledBitmap(misto, size.x, size.y, false));

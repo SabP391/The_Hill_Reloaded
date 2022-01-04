@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.example.thehillreloaded.R;
+
 import java.lang.reflect.Array;
 
 public abstract class RecycleUnit {
@@ -16,7 +18,7 @@ public abstract class RecycleUnit {
     protected static final int COST_OF_FIRST_UPGRADE = 4;
     protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 8;
     protected static final int UNIT_POINT_GAIN = 1;
-    protected static final int MAXIMUM_WEAR_LEVEL = 30;
+    protected static final int MAXIMUM_WEAR_LEVEL = 15;
     protected static final long PROCESSING_TIME = 5;
 
     // Attributi di classe -------------------------------------------------------------------------
@@ -24,6 +26,7 @@ public abstract class RecycleUnit {
     protected Context context;
     protected TileMap map;
     protected Bitmap sprite;
+    protected Bitmap wearWarning;
     protected int unitPoints = 20;
     protected Point size;
     protected Point position;
@@ -53,6 +56,7 @@ public abstract class RecycleUnit {
     protected int thirdSlotLineYPosition;
     protected Paint grayLine;
     protected Paint redLine;
+    protected Point warningIconSize;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -78,6 +82,9 @@ public abstract class RecycleUnit {
         redLine = new Paint();
         redLine.setColor(Color.RED);
         redLine.setStrokeWidth(15);
+
+        warningIconSize = new Point((int) map.getTileSize()/2, (int) map.getTileSize()/2);
+        wearWarning = GameAssets.getInstance(context).getWearWarningIcon(warningIconSize);
     }
     // Metodi utili --------------------------------------------------------------------------------
 
@@ -108,6 +115,13 @@ public abstract class RecycleUnit {
     public void drawUnit(Canvas c, long currentTime){
         c.drawBitmap(sprite, position.x, position.y, null);
         drawProcessSlots(c, currentTime);
+        drawWearWarning(c);
+    }
+
+    public void drawWearWarning(Canvas c){
+        if(currentWearLevel >= MAXIMUM_WEAR_LEVEL-10) {
+            c.drawBitmap(wearWarning, position.x, position.y, null);
+        }
     }
 
     // Metodo per disegnare a schermo gli slot di lavoro
@@ -307,7 +321,6 @@ public abstract class RecycleUnit {
     public void wearLevelCalculator(){
         if(unitStatus == RecycleUnitStatus.UPGRADED_ONCE || unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
             currentWearLevel++;
-
             if (currentWearLevel == MAXIMUM_WEAR_LEVEL) {
                 downgradeUnit();
             }
