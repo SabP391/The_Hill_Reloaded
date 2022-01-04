@@ -47,23 +47,83 @@
         app:layout_constraintEnd_toStartOf="@+id/glass_unlockable2"
         app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
 
+    <TextView
+        android:id="@+id/glass_costo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glass_costo2"
+        app:layout_constraintTop_toBottomOf="@+id/glass_unlockable1" />
+
+    <TextView
+        android:id="@+id/glass_ricavo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glass_ricavo2"
+        app:layout_constraintTop_toBottomOf="@+id/glass_costo1" />
+
     <ImageButton
         android:id="@+id/glass_unlockable2"
         android:layout_width="98dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintEnd_toStartOf="@+id/glass_unlockable3"
-        app:layout_constraintTop_toTopOf="@+id/bg_glass_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
+
+    <TextView
+        android:id="@+id/glass_costo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="43dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glass_costo3"
+        app:layout_constraintTop_toBottomOf="@+id/glass_unlockable2" />
+
+    <TextView
+        android:id="@+id/glass_ricavo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="43dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glass_ricavo3"
+        app:layout_constraintTop_toBottomOf="@+id/glass_costo2" />
 
     <ImageButton
         android:id="@+id/glass_unlockable3"
         android:layout_width="98dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintEnd_toStartOf="@+id/glass_unlockable4"
-        app:layout_constraintTop_toTopOf="@+id/bg_glass_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
+
+    <TextView
+        android:id="@+id/glass_costo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="37dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glass_costo4"
+        app:layout_constraintTop_toBottomOf="@+id/glass_unlockable3" />
+
+    <TextView
+        android:id="@+id/glass_ricavo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="37dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/glass_ricavo4"
+        app:layout_constraintTop_toBottomOf="@+id/glass_costo3" />
 
     <ImageButton
         android:id="@+id/glass_unlockable4"
@@ -71,9 +131,29 @@
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
-        app:layout_constraintTop_toTopOf="@+id/bg_glass_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
+
+    <TextView
+        android:id="@+id/glass_costo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
+        app:layout_constraintTop_toBottomOf="@+id/glass_unlockable4" />
+
+    <TextView
+        android:id="@+id/glass_ricavo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
+        app:layout_constraintTop_toBottomOf="@+id/glass_costo4" />
 
     <ImageButton
         android:id="@+id/glass_close_frag"
@@ -134,12 +214,14 @@
 
     <FrameLayout
         android:id="@+id/unlockable_glass"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="462dp"
+        android:layout_height="58dp"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

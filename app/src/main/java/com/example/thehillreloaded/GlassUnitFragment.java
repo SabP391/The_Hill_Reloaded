@@ -21,6 +21,11 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
  * create an instance of this fragment.
  */
 public class GlassUnitFragment extends Fragment {
+    //controllo oggetti sbloccati
+    private boolean sbloccato1 = false;
+    private boolean sbloccato2 = false;
+    private boolean sbloccato3 = false;
+    private boolean sbloccato4 = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,6 +90,43 @@ public class GlassUnitFragment extends Fragment {
         int wear = RecycleUnitsManager.getInstance().getGlassUnit().getCurrentWearLevel();
         unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel()));
 
+        // Caratteristiche oggetti sbloccabili -----------------------------------------------------
+        TextView costo1 = (TextView) view.findViewById(R.id.glass_costo1);
+        TextView costo2 = (TextView) view.findViewById(R.id.glass_costo2);
+        TextView costo3 = (TextView) view.findViewById(R.id.glass_costo3);
+        TextView costo4 = (TextView) view.findViewById(R.id.glass_costo4);
+        TextView ricavo1 = (TextView) view.findViewById(R.id.glass_ricavo1);
+        TextView ricavo2 = (TextView) view.findViewById(R.id.glass_ricavo2);
+        TextView ricavo3 = (TextView) view.findViewById(R.id.glass_ricavo3);
+        TextView ricavo4 = (TextView) view.findViewById(R.id.glass_ricavo4);
+
+        costo1.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable1()));
+        costo1.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+        costo1.setCompoundDrawablePadding(5);
+        ricavo1.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable1()));
+        ricavo1.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
+        ricavo1.setCompoundDrawablePadding(5);
+
+        costo2.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable2()));
+        costo2.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+        costo2.setCompoundDrawablePadding(5);
+        ricavo2.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable2()));
+        ricavo2.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
+        ricavo2.setCompoundDrawablePadding(5);
+
+        costo3.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable3()));
+        costo3.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+        costo3.setCompoundDrawablePadding(5);
+        ricavo3.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable3()));
+        ricavo3.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
+        ricavo3.setCompoundDrawablePadding(5);
+
+        costo4.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable4()));
+        costo4.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+        costo4.setCompoundDrawablePadding(5);
+        ricavo4.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable4()));
+        ricavo4.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
+        ricavo4.setCompoundDrawablePadding(5);
 
         // Sblocco oggetti in unità ----------------------------------------------------------------
         ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.glass_unlockable1);
@@ -96,7 +138,10 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(0)) {
-                    sblocco(1);
+                    if (!sbloccato1) {
+                        sblocco(1);
+                        sbloccato1 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
@@ -110,7 +155,10 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(1)) {
-                    sblocco(2);
+                    if (!sbloccato2){
+                        sblocco(2);
+                        sbloccato2 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
@@ -124,7 +172,10 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(2)) {
-                    sblocco(3);
+                    if (!sbloccato3) {
+                        sblocco(3);
+                        sbloccato3 = true;
+                    }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
@@ -138,7 +189,10 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(3)) {
-                    sblocco(4);
+                    if (!sbloccato4){
+                        sblocco(4);
+                        sbloccato4 = true;
+                    }
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
