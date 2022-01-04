@@ -24,7 +24,7 @@ public abstract class RecycleUnit {
     protected Context context;
     protected TileMap map;
     protected Bitmap sprite;
-    protected int unitPoints = 0;
+    protected int unitPoints = 20;
     protected Point size;
     protected Point position;
     protected int offsetFromLeft = 0;
@@ -294,6 +294,26 @@ public abstract class RecycleUnit {
         }
     }
 
+    public void downgradeUnit() {
+        if (unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
+            this.unitStatus = RecycleUnitStatus.UPGRADED_ONCE;
+            this.currentWearLevel = 0;
+        } else if (unitStatus == RecycleUnitStatus.UPGRADED_ONCE) {
+            this.unitStatus = RecycleUnitStatus.BASE;
+            this.currentWearLevel = 0;
+        }
+    }
+
+    public void wearLevelCalculator(){
+        if(unitStatus == RecycleUnitStatus.UPGRADED_ONCE || unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
+            currentWearLevel++;
+
+            if (currentWearLevel == MAXIMUM_WEAR_LEVEL) {
+                downgradeUnit();
+            }
+        }
+    }
+
     // Metodi per il processamento degli item di gioco ---------------------------------------------
 
     // Metodo che ritorna un intero tra 0 e 3 per
@@ -441,9 +461,11 @@ public abstract class RecycleUnit {
         boolean result;
         if(gameMode == GameMode.CLASSIC){
             result = processItemClassic(item);
+            wearLevelCalculator();
         }
         else{
             result = processItemReloaded(item);
+            wearLevelCalculator();
             if (item.getItemType() == ItemType.COMPOST) {
                 QuestManager.getInstance().increaseCounterQuest4();
             }
