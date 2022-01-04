@@ -60,5 +60,7 @@
     <string name="text_usura">"Wear: %1$d / %2$d"</string>
     <string name="text_unit_points">Unit Points: %1$d</string>
     <string name="text_status">Upgrade: %1$d</string>
+    <string name="text_costo_sbloccabili">Cost: %1$d</string>
+    <string name="text_ricavo_sbloccabili">Gain: %1$d</string>
 
 </resources>

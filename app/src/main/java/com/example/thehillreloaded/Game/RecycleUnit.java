@@ -17,19 +17,20 @@ public abstract class RecycleUnit {
     protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 8;
     protected static final int UNIT_POINT_GAIN = 1;
     protected static final int MAXIMUM_WEAR_LEVEL = 30;
+    protected static final long PROCESSING_TIME = 5;
 
     // Attributi di classe -------------------------------------------------------------------------
     protected GameMode gameMode;
     protected Context context;
     protected TileMap map;
     protected Bitmap sprite;
-    protected int unitPoints = 0;
+    protected int unitPoints = 20;
     protected Point size;
     protected Point position;
     protected int offsetFromLeft = 0;
     protected int offsetFromRight = 0;
     protected int myTiles[];
-    protected RecycleUnitStatus unitStatus = RecycleUnitStatus.UPGRADED_TWICE;
+    protected RecycleUnitStatus unitStatus = RecycleUnitStatus.BASE;
     protected ItemType acceptedItemType;
     protected int currentWearLevel = 0;
 
@@ -101,13 +102,20 @@ public abstract class RecycleUnit {
         return false;
     }
 
+    // Metodi per il rendering delle centrali ------------------------------------------------------
+
     // Metodo per disegnare a schermo le unità di riciclo
-    public void drawUnit(Canvas c){
+    public void drawUnit(Canvas c, long currentTime){
         c.drawBitmap(sprite, position.x, position.y, null);
-        drawProcessSlots(c);
+        drawProcessSlots(c, currentTime);
     }
 
-    public void drawProcessSlots(Canvas c){
+    // Metodo per disegnare a schermo gli slot di lavoro
+    // delle unità di riciclo
+    public void drawProcessSlots(Canvas c, long currentTime){
+        // Controllo sullo stato dell'unità:
+        // disegna a schermo un numero diverso di linee
+        // in base a quanti upgrade sono stati eseguiti
         switch (unitStatus){
             case BASE:
                 c.drawLine(slotsXPosition,
@@ -115,37 +123,132 @@ public abstract class RecycleUnit {
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition,
                         grayLine);
+                // Metodo per disegnare la linea rossa quando
+                // il primo slot di lavoro è occupato
+                drawFirstSlotProgress(c, currentTime);
                 break;
             case UPGRADED_ONCE:
                 c.drawLine(slotsXPosition,
                         firstSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition, grayLine);
+                drawFirstSlotProgress(c, currentTime);
                 c.drawLine(slotsXPosition,
                         secondSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         secondSlotLineYPosition,
                         grayLine);
+                // Metodo per disegnare la linea rossa quando
+                // il primo secondo di lavoro è occupato
+                drawSecondSlotProgress(c, currentTime);
                 break;
             case UPGRADED_TWICE:
                 c.drawLine(slotsXPosition,
                         firstSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition, grayLine);
+                drawFirstSlotProgress(c, currentTime);
                 c.drawLine(slotsXPosition,
                         secondSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         secondSlotLineYPosition,
                         grayLine);
+                drawSecondSlotProgress(c, currentTime);
                 c.drawLine(slotsXPosition,
                         thirdSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         thirdSlotLineYPosition,
                         grayLine);
+                // Metodo per disegnare la linea rossa quando
+                // il terzo slot di lavoro è occupato
+                drawThirdSlotProgress(c, currentTime);
                 break;
         }
     }
 
+    // Metodo per disegnare la linea rossa quando
+    // il primo slot di lavoro è occupato
+    public void drawFirstSlotProgress(Canvas c, long currentTime) {
+        if(!isFirstSlotFree){
+            long elapsedTime = (currentTime - timeAtFirstSlotProcessStart) / 1000000000;
+            // il moltiplicatore della linea rossa viene normalizzato
+            // tramite il metodo redLineMultiplier
+            float redLineM = redLineMultiplier(elapsedTime);
+            // Se lo slot di lavoro è occupato disegna la linea rossa
+            if(elapsedTime < PROCESSING_TIME){
+                c.drawLine(slotsXPosition,
+                        firstSlotLineYPosition,
+                        slotsXPosition + (map.getTileSize() * redLineM),
+                        firstSlotLineYPosition,
+                        redLine);
+            }
+            // Altrimenti reimposta a true la variabile di controllo
+            // per liberare lo slot di lavoro
+            else{
+                isFirstSlotFree = true;
+            }
+        }
+    }
+
+    // Metodo per disegnare la linea rossa quando
+    // il seondo slot di lavoro è occupato
+    public void drawSecondSlotProgress(Canvas c, long currentTime) {
+        if(!isSecondSlotFree){
+            long elapsedTime = (currentTime - timeAtSecondSlotProcessStart) / 1000000000;
+            // il moltiplicatore della linea rossa viene normalizzato
+            // tramite il metodo redLineMultiplier
+            float redLineM = redLineMultiplier(elapsedTime);
+            // Se lo slot di lavoro è occupato disegna la linea rossa
+            if(elapsedTime < PROCESSING_TIME){
+                c.drawLine(slotsXPosition,
+                        secondSlotLineYPosition,
+                        slotsXPosition + (map.getTileSize() * redLineM),
+                        secondSlotLineYPosition,
+                        redLine);
+            }
+            // Altrimenti reimposta a true la variabile di controllo
+            // per liberare lo slot di lavoro
+            else{
+                isSecondSlotFree = true;
+            }
+        }
+    }
+
+    // Metodo per disegnare la linea rossa quando
+    // il seondo slot di lavoro è occupato
+    public void drawThirdSlotProgress(Canvas c, long currentTime) {
+        if(!isThirdSlotFree){
+            long elapsedTime = (currentTime - timeAtThirdSlotProcessStart) / 1000000000;
+            // il moltiplicatore della linea rossa viene normalizzato
+            // tramite il metodo redLineMultiplier
+            float redLineM = redLineMultiplier(elapsedTime);
+            // Se lo slot di lavoro è occupato disegna la linea rossa
+            if(elapsedTime < PROCESSING_TIME){
+                c.drawLine(slotsXPosition,
+                        thirdSlotLineYPosition,
+                        slotsXPosition + (map.getTileSize() * redLineM),
+                        thirdSlotLineYPosition,
+                        redLine);
+            }
+            // Altrimenti reimposta a true la variabile di controllo
+            // per liberare lo slot di lavoro
+            else{
+                isThirdSlotFree = true;
+            }
+        }
+    }
+
+
+    // Metodo per calcolare il moltiplicatore della linea rossa
+    // disegnata a schermo per mostrare l'avanzamento del lavoro.
+    // Prende in input il tempo di lavoro trascorso e ritorna
+    // un valore tra 0 e 1 che verrà moltiplicato alla posizione x finale
+    // della linea rossa
+    public float redLineMultiplier(double elapsedTime){
+        return (float)((elapsedTime / (PROCESSING_TIME)) + (1.0 / PROCESSING_TIME));
+    }
+
+    // Metodi per l'upgrade delle centrali ---------------------------------------------------------
 
     // Metodo per effettuare l'upgrade dell'unità
     public boolean upgradeUnit(){
@@ -191,6 +294,28 @@ public abstract class RecycleUnit {
         }
     }
 
+    public void downgradeUnit() {
+        if (unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
+            this.unitStatus = RecycleUnitStatus.UPGRADED_ONCE;
+            this.currentWearLevel = 0;
+        } else if (unitStatus == RecycleUnitStatus.UPGRADED_ONCE) {
+            this.unitStatus = RecycleUnitStatus.BASE;
+            this.currentWearLevel = 0;
+        }
+    }
+
+    public void wearLevelCalculator(){
+        if(unitStatus == RecycleUnitStatus.UPGRADED_ONCE || unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
+            currentWearLevel++;
+
+            if (currentWearLevel == MAXIMUM_WEAR_LEVEL) {
+                downgradeUnit();
+            }
+        }
+    }
+
+    // Metodi per il processamento degli item di gioco ---------------------------------------------
+
     // Metodo che ritorna un intero tra 0 e 3 per
     // indicare qual è il primo slot di lavoro disponibile
     // in una recicle unit. Questo metodo effettua anche il controllo
@@ -224,8 +349,6 @@ public abstract class RecycleUnit {
         return freeSlot;
     }
 
-    // Metodi per il processamento degli item di gioco ---------------------------------------------
-
     // Metodo per processare gli oggetti nella modalità classica
     // Controlla che ci sia uno slot libero e nel caso cio` sia vero
     // inizia il processamento, imposta tale slot come occupato
@@ -240,18 +363,27 @@ public abstract class RecycleUnit {
                     timeAtFirstSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "1");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 2:
                     isSecondSlotFree = false;
                     Log.d("free slot", "2");
                     timeAtSecondSlotProcessStart = System.nanoTime();
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 3:
                     isThirdSlotFree = false;
                     Log.d("free slot", "3");
                     timeAtThirdSlotProcessStart = System.nanoTime();
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
@@ -271,18 +403,27 @@ public abstract class RecycleUnit {
                     timeAtFirstSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "1");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 2:
                     isSecondSlotFree = false;
                     timeAtSecondSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "2");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 3:
                     isThirdSlotFree = false;
                     timeAtThirdSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "3");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
@@ -320,9 +461,11 @@ public abstract class RecycleUnit {
         boolean result;
         if(gameMode == GameMode.CLASSIC){
             result = processItemClassic(item);
+            wearLevelCalculator();
         }
         else{
             result = processItemReloaded(item);
+            wearLevelCalculator();
             if (item.getItemType() == ItemType.COMPOST) {
                 QuestManager.getInstance().increaseCounterQuest4();
             }

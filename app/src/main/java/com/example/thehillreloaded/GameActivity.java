@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
+import com.example.thehillreloaded.Game.GameItemsManager;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Game.QuestManager;
@@ -98,6 +99,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
         // Inizializzazione della classe game e del
         // manager delle centrali ------------------------------------------------------------------
+        GameItemsManager.getInstance().initInstance(map, this, difficulty, gameMode);
         RecycleUnitsManager.getInstance().initInstance(this, map);
         Game game = new Game(this, map);
 

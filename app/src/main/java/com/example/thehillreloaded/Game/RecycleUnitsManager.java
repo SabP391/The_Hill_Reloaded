@@ -218,6 +218,31 @@ public class RecycleUnitsManager {
         return false;
     }
 
+    //Getter costi e ricavi oggetti sbloccabili-----------------------------------------------------
+    public int getCostOfUnlockable1(){
+        return unlockable[0].getUpCost();
+    }
+    public int getCostOfUnlockable2(){
+        return unlockable[1].getUpCost();
+    }
+    public int getCostOfUnlockable3(){
+        return unlockable[2].getUpCost();
+    }
+    public int getCostOfUnlockable4(){
+        return unlockable[3].getUpCost();
+    }
+    public int getGainOfUnlockable1(){
+        return unlockable[0].getSpReward();
+    }
+    public int getGainOfUnlockable2(){
+        return unlockable[1].getSpReward();
+    }
+    public int getGainOfUnlockable3(){
+        return unlockable[2].getSpReward();
+    }
+    public int getGainOfUnlockable4(){
+        return unlockable[3].getSpReward();
+    }
 
     // Getter e setter -----------------------------------------------------------------------------
 

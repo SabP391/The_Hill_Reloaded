@@ -19,6 +19,8 @@ public class GameItem {
     private final int initialTile;
     private int currentTile;
     private boolean onScreen = false;
+    private boolean isABuff = false;
+    private boolean isADebuff = false;
     private long startTime = 0;
     private static final int FALLING_SPEED = (int) (1000.0 / 15.0);
 
@@ -50,6 +52,9 @@ public class GameItem {
                 objectSprite = GameAssets.getInstance(context).getRandPlastic(spriteSize);
                 break;
             case STEEL:
+                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                break;
+            case RADIOACTIVE:
                 objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
                 break;
             default:
