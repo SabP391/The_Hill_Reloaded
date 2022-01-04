@@ -183,4 +183,36 @@
         app:layout_constraintBottom_toBottomOf="@+id/quest6_text"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/quest6_text" />
+
+    <TextView
+        android:id="@+id/counter_4"
+        android:layout_width="51dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="5dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/quest4_text"
+        app:layout_constraintEnd_toStartOf="@+id/quest4_check" />
+
+    <TextView
+        android:id="@+id/counter_6"
+        android:layout_width="46dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="7dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/quest6_text"
+        app:layout_constraintEnd_toStartOf="@+id/quest6_check" />
+
+    <TextView
+        android:id="@+id/counter_3"
+        android:layout_width="36dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/quest3_text"
+        app:layout_constraintEnd_toStartOf="@+id/quest3_check"
+        app:layout_constraintTop_toTopOf="@+id/quest3_text"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

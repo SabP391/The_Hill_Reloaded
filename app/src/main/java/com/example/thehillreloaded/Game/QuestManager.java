@@ -9,15 +9,19 @@ public class QuestManager {
      */
 
     private static QuestManager instance;
-    private boolean quest1; //1 - costruisci tutte le unità di riciclo
-    private boolean quest2; //2 - guadagna almeno 100 Sunny Points
-    private boolean quest3; //3 - sblocca 3 oggetti golden da Ewaste
+    private boolean quest1 = false; //1 - costruisci tutte le unità di riciclo
+    private boolean quest2 = false; //2 - guadagna almeno 100 Sunny Points
+    private boolean quest3 = false; //3 - sblocca 3 oggetti golden da Ewaste
     private int counterQuest3 = 0;
-    private boolean quest4; //4 - ricicla 50 oggetti di organico
+    private boolean quest4 = false; //4 - ricicla 50 oggetti di organico
     private int counterQuest4 = 0;
-    private boolean quest5;
-    private boolean quest6;
+    private boolean quest5 = false;
+    private boolean quest6 = false;
     private int counterQuest6 = 0;
+
+    private static int Q2_COMPLETION = 100;
+    private static int Q4_COMPLETION = 35;
+    private static int Q6_COMPLETION = 20;
 
     private QuestManager(){
     }
@@ -43,59 +47,87 @@ public class QuestManager {
 
     //Chiamato quando viene costruita una centrale
     public boolean isQuest1Complete(){
-        if(GameManager.getInstance().getGameMode() == GameMode.CLASSIC) {
-            if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isGlassUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isPaperUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
-                quest1 = true;
-                return true;
-            }else return false;
-        } else {
-            if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isCompostUnlocked()
-                    && RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isGlassUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isPaperUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
-                    && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
-                quest1 = true;
-                return true;
-            } else return false;
-        }
+        if(!quest1) {
+            if (GameManager.getInstance().getGameMode() == GameMode.CLASSIC) {
+                if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isGlassUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isPaperUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+                    quest1 = true;
+                    return true;
+                } else return false;
+            } else {
+                if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isCompostUnlocked()
+                        && RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isGlassUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isPaperUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
+                        && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+                    quest1 = true;
+                    return true;
+                } else return false;
+            }
+        }else return true;
     }
 
     public boolean isQuest2Complete(){
-            if (GameManager.getInstance().getSunnyPoints() > 100){
+        if(!quest2) {
+            if (GameManager.getInstance().getSunnyPoints() >= Q2_COMPLETION) {
                 quest2 = true;
                 return true;
+            } else return false;
+        }else return true;
+    }
+
+    public boolean isQuest3Complete(){
+        if(!quest3) {
+            if (counterQuest3 >= 3) {
+                quest3 = true;
+                return true;
             }else return false;
+        }else return true;
     }
 
-    public void isQuest3Complete(){
-        if (RecycleUnitsManager.getInstance().unlockEwasteObject(3)){
-        }
-        if(counterQuest3 >= 2){
-            quest3 = true;
-        }
+    public boolean isQuest4Complete(){
+        if(!quest4) {
+            if (counterQuest4 >= Q4_COMPLETION) {
+                quest4 = true;
+                return true;
+            }else return false;
+        }else return true;
     }
 
-    public void isQuest4Complete(){
-        if (counterQuest4 >= 49){
-            quest4 = true;
-        }
+    public boolean isQuest5Complete(){
+        if(!quest5){
+            if(RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == RecycleUnitStatus.UPGRADED_TWICE){
+                quest5 = true;
+                return true;
+            }else return false;
+        }return true;
     }
 
-    public void isQuest5Complete(){
-
+    public boolean isQuest6Complete(){
+        if(!quest6) {
+            if (counterQuest6 >= Q6_COMPLETION) {
+                quest6 = true;
+                return true;
+            }return false;
+        }else return true;
     }
 
-    public void isQuest6Complete(){
-        if (counterQuest6 >= 19){
-            quest6 = true;
-        }
+    public int getCounterQuest3() {
+        return counterQuest3;
+    }
+
+    public int getCounterQuest4() {
+        return counterQuest4;
+    }
+
+    public int getCounterQuest6() {
+        return counterQuest6;
     }
 
     public boolean isGameWon(){
