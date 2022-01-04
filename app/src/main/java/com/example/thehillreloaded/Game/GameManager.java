@@ -42,13 +42,13 @@ public class GameManager {
 
         // Imposta l'intervallo di spawn degli oggetti in base alla difficoltà
         if(difficulty == Difficulty.EASY){
-            spawnSpeed = (float) (1000.0);
-        }
-        if(difficulty == Difficulty.NORMAL){
             spawnSpeed = (float) (800.0);
         }
+        if(difficulty == Difficulty.NORMAL){
+            spawnSpeed = (float) (600.0);
+        }
         if(difficulty == Difficulty.HARD){
-            spawnSpeed = (float) (500.0);
+            spawnSpeed = (float) (400.0);
         }
     }
 

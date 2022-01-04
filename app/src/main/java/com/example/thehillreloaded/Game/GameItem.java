@@ -55,7 +55,7 @@ public class GameItem {
                 objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
                 break;
             case RADIOACTIVE:
-                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getRadioactive(spriteSize);
                 break;
             default:
                 throw new IllegalArgumentException("Non esiste questo tipo di item");
