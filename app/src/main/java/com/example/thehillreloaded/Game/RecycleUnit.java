@@ -304,18 +304,27 @@ public abstract class RecycleUnit {
                     timeAtFirstSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "1");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 2:
                     isSecondSlotFree = false;
                     Log.d("free slot", "2");
                     timeAtSecondSlotProcessStart = System.nanoTime();
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 3:
                     isThirdSlotFree = false;
                     Log.d("free slot", "3");
                     timeAtThirdSlotProcessStart = System.nanoTime();
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
@@ -335,18 +344,27 @@ public abstract class RecycleUnit {
                     timeAtFirstSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "1");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 2:
                     isSecondSlotFree = false;
                     timeAtSecondSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "2");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 3:
                     isThirdSlotFree = false;
                     timeAtThirdSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "3");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
