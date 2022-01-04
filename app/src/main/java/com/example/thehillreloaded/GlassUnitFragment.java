@@ -197,8 +197,6 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(RecycleUnitsManager.getInstance().getGlassUnit().upgradeUnit()){
-                    unitPoints.setText(getString(R.string.text_unit_points,
-                            RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                     setLayoutElements();
                     setUnitDetails();
                 } else {
