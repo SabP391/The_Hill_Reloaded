@@ -40,11 +40,12 @@
 
     <ImageButton
         android:id="@+id/glass_unlockable1"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="320dp"
         android:background="@drawable/bottoni_personalizzati"
-        app:layout_constraintEnd_toStartOf="@+id/glass_unlockable2"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
 
     <TextView
@@ -52,9 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="40dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/glass_costo2"
+        android:layout_marginEnd="330dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_unlockable1" />
 
     <TextView
@@ -62,18 +64,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="40dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/glass_ricavo2"
+        android:layout_marginEnd="330dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_costo1" />
 
     <ImageButton
         android:id="@+id/glass_unlockable2"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="220dp"
         android:background="@drawable/bottoni_personalizzati"
-        app:layout_constraintEnd_toStartOf="@+id/glass_unlockable3"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
 
     <TextView
@@ -81,9 +85,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="43dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/glass_costo3"
+        android:layout_marginEnd="230dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_unlockable2" />
 
     <TextView
@@ -91,18 +96,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="43dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/glass_ricavo3"
+        android:layout_marginEnd="230dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_costo2" />
 
     <ImageButton
         android:id="@+id/glass_unlockable3"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
         android:background="@drawable/bottoni_personalizzati"
-        app:layout_constraintEnd_toStartOf="@+id/glass_unlockable4"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toTopOf="@+id/bg_glass_frag" />
 
     <TextView
@@ -110,9 +117,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="37dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/glass_costo4"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_unlockable3" />
 
     <TextView
@@ -120,14 +128,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="37dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/glass_ricavo4"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_costo3" />
 
     <ImageButton
         android:id="@+id/glass_unlockable4"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
@@ -141,7 +150,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="30dp"
-        android:text="TextView"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_unlockable4" />
 
@@ -151,7 +161,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="30dp"
-        android:text="TextView"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
         app:layout_constraintEnd_toEndOf="@+id/bg_glass_frag"
         app:layout_constraintTop_toBottomOf="@+id/glass_costo4" />
 
@@ -214,8 +225,8 @@
 
     <FrameLayout
         android:id="@+id/unlockable_glass"
-        android:layout_width="462dp"
-        android:layout_height="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
