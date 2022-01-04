@@ -30,6 +30,7 @@ public class GameAssets {
     private Bitmap centraleCarta;
     private Bitmap centraleEWaste;
     private Bitmap centraleUmido;
+    private Bitmap radioattivo;
     private Bitmap vetro[];
     private Bitmap alluminio[];
     private Bitmap acciaio[];
@@ -55,6 +56,7 @@ public class GameAssets {
         centraleEWaste = getBitmap(context, R.drawable.asset2_fab_rosa_ewaste);
         centraleUmido = getBitmap(context, R.drawable.asset2_fab_marrone_umido);
 
+        radioattivo = getBitmap(context, R.drawable.asset_radioattivo);
         rand = new Random();
         // Creazione dell'array di sprite per il vetro ---------------------------------------------
         vetro = new Bitmap[3];
@@ -126,6 +128,8 @@ public class GameAssets {
     Bitmap getMixed(Point size){
         return(Bitmap.createScaledBitmap(misto, size.x, size.y, false));
     }
+
+    Bitmap getRadioactive(Point size){ return(Bitmap.createScaledBitmap(radioattivo, size.x, size.y, false));}
 
     Bitmap getRandGlass(Point size){
         return(Bitmap.createScaledBitmap(vetro[rand.nextInt(vetro.length)], size.x, size.y, false));
