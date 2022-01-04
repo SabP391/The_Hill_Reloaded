@@ -102,6 +102,8 @@ public abstract class RecycleUnit {
         return false;
     }
 
+    // Metodi per il rendering delle centrali ------------------------------------------------------
+
     // Metodo per disegnare a schermo le unità di riciclo
     public void drawUnit(Canvas c, long currentTime){
         c.drawBitmap(sprite, position.x, position.y, null);
@@ -111,6 +113,9 @@ public abstract class RecycleUnit {
     // Metodo per disegnare a schermo gli slot di lavoro
     // delle unità di riciclo
     public void drawProcessSlots(Canvas c, long currentTime){
+        // Controllo sullo stato dell'unità:
+        // disegna a schermo un numero diverso di linee
+        // in base a quanti upgrade sono stati eseguiti
         switch (unitStatus){
             case BASE:
                 c.drawLine(slotsXPosition,
@@ -118,6 +123,8 @@ public abstract class RecycleUnit {
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition,
                         grayLine);
+                // Metodo per disegnare la linea rossa quando
+                // il primo slot di lavoro è occupato
                 drawFirstSlotProgress(c, currentTime);
                 break;
             case UPGRADED_ONCE:
@@ -131,6 +138,8 @@ public abstract class RecycleUnit {
                         slotsXPosition + map.getTileSize(),
                         secondSlotLineYPosition,
                         grayLine);
+                // Metodo per disegnare la linea rossa quando
+                // il primo secondo di lavoro è occupato
                 drawSecondSlotProgress(c, currentTime);
                 break;
             case UPGRADED_TWICE:
@@ -150,15 +159,22 @@ public abstract class RecycleUnit {
                         slotsXPosition + map.getTileSize(),
                         thirdSlotLineYPosition,
                         grayLine);
+                // Metodo per disegnare la linea rossa quando
+                // il terzo slot di lavoro è occupato
                 drawThirdSlotProgress(c, currentTime);
                 break;
         }
     }
 
-    private void drawFirstSlotProgress(Canvas c, long currentTime) {
+    // Metodo per disegnare la linea rossa quando
+    // il primo slot di lavoro è occupato
+    public void drawFirstSlotProgress(Canvas c, long currentTime) {
         if(!isFirstSlotFree){
             long elapsedTime = (currentTime - timeAtFirstSlotProcessStart) / 1000000000;
+            // il moltiplicatore della linea rossa viene normalizzato
+            // tramite il metodo redLineMultiplier
             float redLineM = redLineMultiplier(elapsedTime);
+            // Se lo slot di lavoro è occupato disegna la linea rossa
             if(elapsedTime < PROCESSING_TIME){
                 c.drawLine(slotsXPosition,
                         firstSlotLineYPosition,
@@ -166,16 +182,23 @@ public abstract class RecycleUnit {
                         firstSlotLineYPosition,
                         redLine);
             }
+            // Altrimenti reimposta a true la variabile di controllo
+            // per liberare lo slot di lavoro
             else{
                 isFirstSlotFree = true;
             }
         }
     }
 
-    private void drawSecondSlotProgress(Canvas c, long currentTime) {
+    // Metodo per disegnare la linea rossa quando
+    // il seondo slot di lavoro è occupato
+    public void drawSecondSlotProgress(Canvas c, long currentTime) {
         if(!isSecondSlotFree){
             long elapsedTime = (currentTime - timeAtSecondSlotProcessStart) / 1000000000;
+            // il moltiplicatore della linea rossa viene normalizzato
+            // tramite il metodo redLineMultiplier
             float redLineM = redLineMultiplier(elapsedTime);
+            // Se lo slot di lavoro è occupato disegna la linea rossa
             if(elapsedTime < PROCESSING_TIME){
                 c.drawLine(slotsXPosition,
                         secondSlotLineYPosition,
@@ -183,16 +206,23 @@ public abstract class RecycleUnit {
                         secondSlotLineYPosition,
                         redLine);
             }
+            // Altrimenti reimposta a true la variabile di controllo
+            // per liberare lo slot di lavoro
             else{
                 isSecondSlotFree = true;
             }
         }
     }
 
-    private void drawThirdSlotProgress(Canvas c, long currentTime) {
+    // Metodo per disegnare la linea rossa quando
+    // il seondo slot di lavoro è occupato
+    public void drawThirdSlotProgress(Canvas c, long currentTime) {
         if(!isThirdSlotFree){
             long elapsedTime = (currentTime - timeAtThirdSlotProcessStart) / 1000000000;
+            // il moltiplicatore della linea rossa viene normalizzato
+            // tramite il metodo redLineMultiplier
             float redLineM = redLineMultiplier(elapsedTime);
+            // Se lo slot di lavoro è occupato disegna la linea rossa
             if(elapsedTime < PROCESSING_TIME){
                 c.drawLine(slotsXPosition,
                         thirdSlotLineYPosition,
@@ -200,6 +230,8 @@ public abstract class RecycleUnit {
                         thirdSlotLineYPosition,
                         redLine);
             }
+            // Altrimenti reimposta a true la variabile di controllo
+            // per liberare lo slot di lavoro
             else{
                 isThirdSlotFree = true;
             }
@@ -207,9 +239,16 @@ public abstract class RecycleUnit {
     }
 
 
+    // Metodo per calcolare il moltiplicatore della linea rossa
+    // disegnata a schermo per mostrare l'avanzamento del lavoro.
+    // Prende in input il tempo di lavoro trascorso e ritorna
+    // un valore tra 0 e 1 che verrà moltiplicato alla posizione x finale
+    // della linea rossa
     public float redLineMultiplier(double elapsedTime){
         return (float)((elapsedTime / (PROCESSING_TIME)) + (1.0 / PROCESSING_TIME));
     }
+
+    // Metodi per l'upgrade delle centrali ---------------------------------------------------------
 
     // Metodo per effettuare l'upgrade dell'unità
     public boolean upgradeUnit(){
@@ -255,6 +294,8 @@ public abstract class RecycleUnit {
         }
     }
 
+    // Metodi per il processamento degli item di gioco ---------------------------------------------
+
     // Metodo che ritorna un intero tra 0 e 3 per
     // indicare qual è il primo slot di lavoro disponibile
     // in una recicle unit. Questo metodo effettua anche il controllo
@@ -288,8 +329,6 @@ public abstract class RecycleUnit {
         return freeSlot;
     }
 
-    // Metodi per il processamento degli item di gioco ---------------------------------------------
-
     // Metodo per processare gli oggetti nella modalità classica
     // Controlla che ci sia uno slot libero e nel caso cio` sia vero
     // inizia il processamento, imposta tale slot come occupato
@@ -304,18 +343,27 @@ public abstract class RecycleUnit {
                     timeAtFirstSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "1");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 2:
                     isSecondSlotFree = false;
                     Log.d("free slot", "2");
                     timeAtSecondSlotProcessStart = System.nanoTime();
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 3:
                     isThirdSlotFree = false;
                     Log.d("free slot", "3");
                     timeAtThirdSlotProcessStart = System.nanoTime();
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
@@ -335,18 +383,27 @@ public abstract class RecycleUnit {
                     timeAtFirstSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "1");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 2:
                     isSecondSlotFree = false;
                     timeAtSecondSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "2");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 case 3:
                     isThirdSlotFree = false;
                     timeAtThirdSlotProcessStart = System.nanoTime();
                     Log.d("free slot", "3");
                     unitPoints += UNIT_POINT_GAIN;
+                    if(item.getItemType() == ItemType.PAPER){
+                        QuestManager.getInstance().increaseCounterQuest6();
+                    }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
