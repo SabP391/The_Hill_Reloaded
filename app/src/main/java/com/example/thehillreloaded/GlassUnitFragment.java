@@ -49,6 +49,9 @@ public class GlassUnitFragment extends Fragment {
     ImageButton sblocco2;
     ImageButton sblocco3;
     ImageButton sblocco4;
+    TextView unitPoints;
+    TextView unitStatus;
+    TextView unitWear;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,20 +99,11 @@ public class GlassUnitFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_glass_unit, container, false);
 
         // Caratteristiche unità -------------------------------------------------------------------
-        TextView unitPoints = (TextView) view.findViewById(R.id.glass_up);
-        TextView unitStatus = (TextView) view.findViewById(R.id.glass_status);
-        TextView unitWear = (TextView) view.findViewById(R.id.glass_wear);
+        unitPoints = (TextView) view.findViewById(R.id.glass_up);
+        unitStatus = (TextView) view.findViewById(R.id.glass_status);
+        unitWear = (TextView) view.findViewById(R.id.glass_wear);
 
-        int uPoints = RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints();
-        unitPoints.setText(getString(R.string.text_unit_points, uPoints));
-        switch (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus()){
-            case BASE: unitStatus.setText(getString(R.string.text_status, 0));
-                break;
-            case UPGRADED_ONCE: unitStatus.setText(getString(R.string.text_status, 1));
-                break;
-            case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
-                break;
-        }
+        setUnitDetails();
         int wear = RecycleUnitsManager.getInstance().getGlassUnit().getCurrentWearLevel();
         unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel()));
 
@@ -206,6 +200,7 @@ public class GlassUnitFragment extends Fragment {
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                     setLayoutElements();
+                    setUnitDetails();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Non puoi fare cose.", Toast.LENGTH_SHORT).show();
                 }
@@ -296,6 +291,18 @@ public class GlassUnitFragment extends Fragment {
             ricavo4.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
             ricavo4.setCompoundDrawablePadding(5);
         }
+    }
 
+    public void setUnitDetails(){
+        int uPoints = RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints();
+        unitPoints.setText(getString(R.string.text_unit_points, uPoints));
+        switch (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus()){
+            case BASE: unitStatus.setText(getString(R.string.text_status, 0));
+                break;
+            case UPGRADED_ONCE: unitStatus.setText(getString(R.string.text_status, 1));
+                break;
+            case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
+                break;
+        }
     }
 }
