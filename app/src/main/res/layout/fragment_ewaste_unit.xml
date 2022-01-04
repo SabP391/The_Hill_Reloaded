@@ -40,40 +40,131 @@
 
     <ImageButton
         android:id="@+id/ewaste_unlockable1"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/ewaste_unlockable2"
-        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        android:layout_marginEnd="320dp"
+        android:background="@drawable/bottoni_personalizzati"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag" />
+
+    <TextView
+        android:id="@+id/ewaste_costo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="330dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_unlockable1" />
+
+    <TextView
+        android:id="@+id/ewaste_ricavo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="330dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_costo1" />
 
     <ImageButton
         android:id="@+id/ewaste_unlockable2"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/ewaste_unlockable3"
-        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        android:layout_marginEnd="220dp"
+        android:background="@drawable/bottoni_personalizzati"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag" />
+
+    <TextView
+        android:id="@+id/ewaste_costo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="230dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_unlockable2" />
+
+    <TextView
+        android:id="@+id/ewaste_ricavo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="230dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_costo2" />
 
     <ImageButton
         android:id="@+id/ewaste_unlockable3"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/ewaste_unlockable4"
-        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/bottoni_personalizzati"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag" />
+
+    <TextView
+        android:id="@+id/ewaste_costo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_unlockable3" />
+
+    <TextView
+        android:id="@+id/ewaste_ricavo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_costo3" />
 
     <ImageButton
         android:id="@+id/ewaste_unlockable4"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
-        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag"
-        android:background="@drawable/bottoni_personalizzati" />
+        app:layout_constraintTop_toTopOf="@+id/bg_ewaste_frag" />
+
+    <TextView
+        android:id="@+id/ewaste_costo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_unlockable4" />
+
+    <TextView
+        android:id="@+id/ewaste_ricavo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
+        app:layout_constraintEnd_toEndOf="@+id/bg_ewaste_frag"
+        app:layout_constraintTop_toBottomOf="@+id/ewaste_costo4" />
 
     <ImageButton
         android:id="@+id/ewaste_close_frag"
