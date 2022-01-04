@@ -17,6 +17,7 @@ public abstract class RecycleUnit {
     protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 8;
     protected static final int UNIT_POINT_GAIN = 1;
     protected static final int MAXIMUM_WEAR_LEVEL = 30;
+    protected static final long PROCESSING_TIME = 5;
 
     // Attributi di classe -------------------------------------------------------------------------
     protected GameMode gameMode;
@@ -102,12 +103,14 @@ public abstract class RecycleUnit {
     }
 
     // Metodo per disegnare a schermo le unità di riciclo
-    public void drawUnit(Canvas c){
+    public void drawUnit(Canvas c, long currentTime){
         c.drawBitmap(sprite, position.x, position.y, null);
-        drawProcessSlots(c);
+        drawProcessSlots(c, currentTime);
     }
 
-    public void drawProcessSlots(Canvas c){
+    // Metodo per disegnare a schermo gli slot di lavoro
+    // delle unità di riciclo
+    public void drawProcessSlots(Canvas c, long currentTime){
         switch (unitStatus){
             case BASE:
                 c.drawLine(slotsXPosition,
@@ -115,37 +118,98 @@ public abstract class RecycleUnit {
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition,
                         grayLine);
+                drawFirstSlotProgress(c, currentTime);
                 break;
             case UPGRADED_ONCE:
                 c.drawLine(slotsXPosition,
                         firstSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition, grayLine);
+                drawFirstSlotProgress(c, currentTime);
                 c.drawLine(slotsXPosition,
                         secondSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         secondSlotLineYPosition,
                         grayLine);
+                drawSecondSlotProgress(c, currentTime);
                 break;
             case UPGRADED_TWICE:
                 c.drawLine(slotsXPosition,
                         firstSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         firstSlotLineYPosition, grayLine);
+                drawFirstSlotProgress(c, currentTime);
                 c.drawLine(slotsXPosition,
                         secondSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         secondSlotLineYPosition,
                         grayLine);
+                drawSecondSlotProgress(c, currentTime);
                 c.drawLine(slotsXPosition,
                         thirdSlotLineYPosition,
                         slotsXPosition + map.getTileSize(),
                         thirdSlotLineYPosition,
                         grayLine);
+                drawThirdSlotProgress(c, currentTime);
                 break;
         }
     }
 
+    private void drawFirstSlotProgress(Canvas c, long currentTime) {
+        if(!isFirstSlotFree){
+            long elapsedTime = (currentTime - timeAtFirstSlotProcessStart) / 1000000000;
+            float redLineM = redLineMultiplier(elapsedTime);
+            if(elapsedTime < PROCESSING_TIME){
+                c.drawLine(slotsXPosition,
+                        firstSlotLineYPosition,
+                        slotsXPosition + (map.getTileSize() * redLineM),
+                        firstSlotLineYPosition,
+                        redLine);
+            }
+            else{
+                isFirstSlotFree = true;
+            }
+        }
+    }
+
+    private void drawSecondSlotProgress(Canvas c, long currentTime) {
+        if(!isSecondSlotFree){
+            long elapsedTime = (currentTime - timeAtSecondSlotProcessStart) / 1000000000;
+            float redLineM = redLineMultiplier(elapsedTime);
+            if(elapsedTime < PROCESSING_TIME){
+                c.drawLine(slotsXPosition,
+                        secondSlotLineYPosition,
+                        slotsXPosition + (map.getTileSize() * redLineM),
+                        secondSlotLineYPosition,
+                        redLine);
+            }
+            else{
+                isSecondSlotFree = true;
+            }
+        }
+    }
+
+    private void drawThirdSlotProgress(Canvas c, long currentTime) {
+        if(!isThirdSlotFree){
+            long elapsedTime = (currentTime - timeAtThirdSlotProcessStart) / 1000000000;
+            float redLineM = redLineMultiplier(elapsedTime);
+            if(elapsedTime < PROCESSING_TIME){
+                c.drawLine(slotsXPosition,
+                        thirdSlotLineYPosition,
+                        slotsXPosition + (map.getTileSize() * redLineM),
+                        thirdSlotLineYPosition,
+                        redLine);
+            }
+            else{
+                isThirdSlotFree = true;
+            }
+        }
+    }
+
+
+    public float redLineMultiplier(double elapsedTime){
+        return (float)((elapsedTime / (PROCESSING_TIME)) + (1.0 / PROCESSING_TIME));
+    }
 
     // Metodo per effettuare l'upgrade dell'unità
     public boolean upgradeUnit(){

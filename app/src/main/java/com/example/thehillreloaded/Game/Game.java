@@ -108,7 +108,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         map.drawBackground(c);
         GameManager.getInstance().getSunnyPointsCounter().draw(c);
         for(RecycleUnit i : unitsOnScreen){
-            i.drawUnit(c);
+            i.drawUnit(c, System.nanoTime());
         }
         if(GameManager.getInstance().isPaused()){
             int index = 0;
@@ -129,8 +129,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         if(!GameManager.getInstance().isPaused()){
                     if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
                         int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
-                        //itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
-                        itemsOnScreen.add(new GameItem(initialTile, map, context, ItemType.GLASS));
+                        itemsOnScreen.add(new GameItem(initialTile, map, context, values[rand.nextInt(values.length)]));
+                        //itemsOnScreen.add(new GameItem(initialTile, map, context, ItemType.GLASS));
                     }
                     for(GameItem i : itemsOnScreen){
                         if(i != movingItem){
