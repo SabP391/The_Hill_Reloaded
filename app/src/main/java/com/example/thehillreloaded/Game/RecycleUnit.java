@@ -30,7 +30,7 @@ public abstract class RecycleUnit {
     protected int offsetFromLeft = 0;
     protected int offsetFromRight = 0;
     protected int myTiles[];
-    protected RecycleUnitStatus unitStatus = RecycleUnitStatus.UPGRADED_TWICE;
+    protected RecycleUnitStatus unitStatus = RecycleUnitStatus.BASE;
     protected ItemType acceptedItemType;
     protected int currentWearLevel = 0;
 

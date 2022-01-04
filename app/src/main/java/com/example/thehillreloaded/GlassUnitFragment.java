@@ -1,5 +1,8 @@
 package com.example.thehillreloaded;
 
+import static com.example.thehillreloaded.Game.RecycleUnitStatus.UPGRADED_ONCE;
+import static com.example.thehillreloaded.Game.RecycleUnitStatus.UPGRADED_TWICE;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +12,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thehillreloaded.Game.RecycleUnitStatus;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 
 /**
@@ -101,32 +106,38 @@ public class GlassUnitFragment extends Fragment {
         TextView ricavo4 = (TextView) view.findViewById(R.id.glass_ricavo4);
 
         costo1.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable1()));
-        costo1.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+        costo1.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
         costo1.setCompoundDrawablePadding(5);
         ricavo1.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable1()));
-        ricavo1.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
+        ricavo1.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
         ricavo1.setCompoundDrawablePadding(5);
 
-        costo2.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable2()));
-        costo2.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
-        costo2.setCompoundDrawablePadding(5);
-        ricavo2.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable2()));
-        ricavo2.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
-        ricavo2.setCompoundDrawablePadding(5);
+        if (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == UPGRADED_ONCE) {
+            costo2.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable2()));
+            costo2.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_unit_points_mini, 0);
+            costo2.setCompoundDrawablePadding(5);
+            ricavo2.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable2()));
+            ricavo2.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+            ricavo2.setCompoundDrawablePadding(5);
+        }
 
-        costo3.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable3()));
-        costo3.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
-        costo3.setCompoundDrawablePadding(5);
-        ricavo3.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable3()));
-        ricavo3.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
-        ricavo3.setCompoundDrawablePadding(5);
+        if (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == UPGRADED_ONCE) {
+            costo3.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable3()));
+            costo3.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_unit_points_mini, 0);
+            costo3.setCompoundDrawablePadding(5);
+            ricavo3.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable3()));
+            ricavo3.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+            ricavo3.setCompoundDrawablePadding(5);
+        }
 
-        costo4.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable4()));
-        costo4.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
-        costo4.setCompoundDrawablePadding(5);
-        ricavo4.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable4()));
-        ricavo4.setCompoundDrawablesWithIntrinsicBounds(0, 0 ,R.drawable.ic_unit_points_mini, 0);
-        ricavo4.setCompoundDrawablePadding(5);
+        if (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == UPGRADED_TWICE) {
+            costo4.setText(getString(R.string.text_costo_sbloccabili, RecycleUnitsManager.getInstance().getCostOfUnlockable4()));
+            costo4.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_unit_points_mini, 0);
+            costo4.setCompoundDrawablePadding(5);
+            ricavo4.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable4()));
+            ricavo4.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
+            ricavo4.setCompoundDrawablePadding(5);
+        }
 
         // Sblocco oggetti in unità ----------------------------------------------------------------
         ImageButton sblocco1 = (ImageButton) view.findViewById(R.id.glass_unlockable1);
@@ -197,6 +208,18 @@ public class GlassUnitFragment extends Fragment {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
                     toast.show();
+                }
+            }
+        });
+
+        Button upgrade = (Button) view.findViewById(R.id.glass_upgrade_button);
+        upgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(RecycleUnitsManager.getInstance().getGlassUnit().upgradeUnit()){
+                    Toast.makeText(getActivity().getApplicationContext(), "Hai fatto cose.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Non puoi fare cose.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
