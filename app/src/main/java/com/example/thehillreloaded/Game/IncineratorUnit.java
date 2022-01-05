@@ -88,8 +88,6 @@ public class IncineratorUnit extends RecycleUnit{
         if(GameManager.getInstance().getSunnyPoints() < LINE_COST) {
             return 0;
         }else{
-            isFirstSlotFree = false;
-            timeAtFirstSlotProcessStart = System.nanoTime();
             for (GameItem item : itemOnScreenList) {
                 if (item.isTouchingTheBlueLine()) {
                     itemOnFloor++;

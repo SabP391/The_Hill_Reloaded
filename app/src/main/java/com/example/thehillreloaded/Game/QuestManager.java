@@ -1,12 +1,6 @@
 package com.example.thehillreloaded.Game;
 
 public class QuestManager {
-    /*
-    DA FARE
-
-    5 - sblocca livello 3 della unità Vetro
-    6 - guadagna 20 Unit Points sull'unità della Carta
-     */
 
     private static QuestManager instance;
     private boolean quest1 = false; //1 - costruisci tutte le unità di riciclo
@@ -15,13 +9,13 @@ public class QuestManager {
     private int counterQuest3 = 0;
     private boolean quest4 = false; //4 - ricicla 50 oggetti di organico
     private int counterQuest4 = 0;
-    private boolean quest5 = false;
-    private boolean quest6 = false;
+    private boolean quest5 = false; //5 - sblocca livello 3 della unità Vetro
+    private boolean quest6 = false; //6 - guadagna 20 Unit Points sull'unità della Carta
     private int counterQuest6 = 0;
 
-    private static int Q2_COMPLETION = 100;
-    private static int Q4_COMPLETION = 35;
-    private static int Q6_COMPLETION = 20;
+    protected static final int Q2_COMPLETION = 100;
+    protected static final int Q4_COMPLETION = 35;
+    protected static final int Q6_COMPLETION = 20;
 
     private QuestManager(){
     }

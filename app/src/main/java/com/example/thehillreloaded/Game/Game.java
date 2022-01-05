@@ -43,7 +43,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     private Context context;
     private static final String LOGTAG = "surface";
-    private boolean timeToDestroy;
+    private boolean timeToDestroy = false;
     private Handler messageHandler;
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
@@ -56,9 +56,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private int currentIndex = 0;
     private Point spriteSize;
     private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
-    private long timeAtDestroyStart;
+    private long lastUpdate;
 
-    private final static int SHAKE_SENSITIVITY = 14;
+    private final static int SHAKE_SENSITIVITY = 10;
     private float accelerationVal, accelerationLast, shake;
 
 
@@ -143,12 +143,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                             }
                     }
                 }
-            if(timeToDestroy){
-                long currentTime = System.nanoTime();
-                if((timeAtDestroyStart - currentTime) / 1000000000 >= 2){
-                    timeToDestroy = false;
-                }
-            }
         }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
@@ -341,28 +335,31 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            if(!timeToDestroy && !GameManager.getInstance().isPaused()) {
-                timeToDestroy = true;
-                timeAtDestroyStart = System.nanoTime();
-                float x = sensorEvent.values[0];
-                float y = sensorEvent.values[1];
-                float z = sensorEvent.values[2];
-                accelerationLast = accelerationVal;
-                accelerationVal = (float) Math.sqrt((double) (x * x) + (y * y) + (z * z));
-                float delta = accelerationVal - accelerationLast;
-                shake = shake * 0.9f + delta;
+                long curTime = System.currentTimeMillis();
+                if ((curTime - lastUpdate) > 300) {
+                    long diffTime = (curTime - lastUpdate);
+                    lastUpdate = curTime;
 
-                if (shake > SHAKE_SENSITIVITY) {
-                    IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
-                    int inc = incinerator.destroyFirstLine(itemsOnScreen);
-                       if(inc == 0) {
-                           Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
-                       }else if(inc == 1) {
-                           Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
-                       }
+                    float x = sensorEvent.values[0];
+                    float y = sensorEvent.values[1];
+                    float z = sensorEvent.values[2];
+                    accelerationLast = accelerationVal;
+                    accelerationVal = (float) Math.sqrt((double) (x * x) + (y * y) + (z * z));
+                    float delta = accelerationVal - accelerationLast;
+                    shake = shake * 0.9f + delta;
+
+                    if (shake > SHAKE_SENSITIVITY) {
+                        IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
+                        int inc = incinerator.destroyFirstLine(itemsOnScreen);
+                        if (inc == 0) {
+                            Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
+                        } else if (inc == 1) {
+                            Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
                 }
             }
-        }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) { }
