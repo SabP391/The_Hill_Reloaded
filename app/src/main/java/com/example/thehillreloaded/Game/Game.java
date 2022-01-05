@@ -56,7 +56,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private int currentIndex = 0;
     private Point spriteSize;
     private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
-    ItemType values[];
+    private long timeAtDestroyStart;
 
     private final static int SHAKE_SENSITIVITY = 14;
     private float accelerationVal, accelerationLast, shake;
@@ -92,7 +92,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         }
         elapsedTime = 0;
         rand = new Random();
-        values = ItemType.values();
         spriteSize = new Point((int) (map.getTileSize()), (int) (map.getTileSize()));
         unitsOnScreen = RecycleUnitsManager.getInstance().getUnlockedUnits();
 
@@ -144,6 +143,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                             }
                     }
                 }
+            if(timeToDestroy){
+                long currentTime = System.nanoTime();
+                if((timeAtDestroyStart - currentTime) / 1000000000 >= 2){
+                    timeToDestroy = false;
+                }
+            }
         }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
@@ -336,7 +341,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            if(!timeToDestroy) {
+            if(!timeToDestroy && !GameManager.getInstance().isPaused()) {
+                timeToDestroy = true;
+                timeAtDestroyStart = System.nanoTime();
                 float x = sensorEvent.values[0];
                 float y = sensorEvent.values[1];
                 float z = sensorEvent.values[2];
