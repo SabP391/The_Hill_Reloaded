@@ -246,12 +246,18 @@ public class OrganicUnitFragment extends Fragment {
             sblocco4.setImageDrawable(tempSun);
             sblocco4.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             sblocco4.setPadding(25, 25, 25, 25);
+            sblocco2.setEnabled(false);
+            sblocco3.setEnabled(false);
+            sblocco4.setEnabled(false);
         }
 
         if (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == UPGRADED_ONCE) {
             sblocco4.setImageDrawable(tempSun);
             sblocco4.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             sblocco4.setPadding(25, 25, 25, 25);
+            sblocco2.setEnabled(true);
+            sblocco3.setEnabled(true);
+            sblocco4.setEnabled(false);
         }
 
         if (RecycleUnitsManager.getInstance().getCompostUnit().getUnitStatus() == UPGRADED_ONCE
@@ -287,6 +293,7 @@ public class OrganicUnitFragment extends Fragment {
             ricavo4.setText(getString(R.string.text_ricavo_sbloccabili, RecycleUnitsManager.getInstance().getGainOfUnlockable4()));
             ricavo4.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_sole_mini, 0);
             ricavo4.setCompoundDrawablePadding(5);
+            sblocco4.setEnabled(true);
         }
     }
 
