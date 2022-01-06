@@ -345,31 +345,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-                long curTime = System.currentTimeMillis();
-                if ((curTime - lastUpdate) > 300) {
-                    long diffTime = (curTime - lastUpdate);
-                    lastUpdate = curTime;
-
-                    float x = sensorEvent.values[0];
-                    float y = sensorEvent.values[1];
-                    float z = sensorEvent.values[2];
-                    accelerationLast = accelerationVal;
-                    accelerationVal = (float) Math.sqrt((double) (x * x) + (y * y) + (z * z));
-                    float delta = accelerationVal - accelerationLast;
-                    shake = shake * 0.9f + delta;
-
-                    if (shake > SHAKE_SENSITIVITY) {
-                        IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
-                        int inc = incinerator.destroyFirstLine(itemsOnScreen);
-                        if (inc == 0) {
-                            Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
-                        } else if (inc == 1) {
-                            Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+            accelerationLast = accelerationVal;
+            accelerationVal = (float) Math.sqrt((double) (x * x) + (y * y) + (z * z));
+            float delta = accelerationVal - accelerationLast;
+            shake = shake * 0.9f + delta;
+            IncineratorUnit incinerator = RecycleUnitsManager.getInstance().getIncineratorUnit();
+            if (shake > SHAKE_SENSITIVITY) {
+                int inc = incinerator.destroyFirstLine(itemsOnScreen);
+                if (inc == 0) {
+                    Toast.makeText(context, R.string.sunny_non_sufficienti, Toast.LENGTH_SHORT).show();
+                } else if (inc == 1) {
+                    Toast.makeText(context, R.string.nessun_rifiuto, Toast.LENGTH_SHORT).show();
                 }
             }
+
+        }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) { }
