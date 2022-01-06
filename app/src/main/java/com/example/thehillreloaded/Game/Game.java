@@ -135,19 +135,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
             context.startActivity(gameWon);
         }
         if(!GameManager.getInstance().isPaused()){
-                    if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                        GameItemsManager.getInstance().spawnNewObject();
+            if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
+                GameItemsManager.getInstance().spawnNewObject();
+            }
+            for(GameItem i : itemsOnScreen){
+                if(i != movingItem){
+                    if(i.checkForGameOverPosition()){
+                        Intent gameLost = new Intent(context, GameOverActivity.class);
+                        stopDrawThread();
+                        context.startActivity(gameLost);
                     }
-                    for(GameItem i : itemsOnScreen){
-                        if(i != movingItem){
-                            if(i.checkForGameOverPosition()){
-                                Intent gameLost = new Intent(context, GameOverActivity.class);
-                                stopDrawThread();
-                                context.startActivity(gameLost);
-                            }
-                        }
-                        i.fall(System.nanoTime());
+                    i.fall(System.nanoTime());
+                    if(i.checkForBuffDestruction()){
+                        map.setTileValue(i.getCurrentTile(), 0);
+                        itemsOnScreen.remove(i);
                     }
+                }
+            }
         }
     }
 

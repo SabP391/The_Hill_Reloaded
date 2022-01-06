@@ -125,25 +125,25 @@ public class GameItem {
     public void assignSpriteBuff(Context context, Point spriteSize){
         switch (itemType){
             case ALUMINIUM:
-                objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getAlBuff(spriteSize);
                 break;
             case COMPOST:
-                objectSprite = GameAssets.getInstance(context).getRandCompost(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getCompostBuff(spriteSize);
                 break;
             case EWASTE:
-                objectSprite = GameAssets.getInstance(context).getRandEWaste(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getEWasteBuff(spriteSize);
                 break;
             case GLASS:
                 objectSprite = GameAssets.getInstance(context).getGlassBuff(spriteSize);
                 break;
             case PAPER:
-                objectSprite = GameAssets.getInstance(context).getRandPaper(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getPaperBuff(spriteSize);
                 break;
             case PLASTIC:
-                objectSprite = GameAssets.getInstance(context).getRandPlastic(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getPlasticBuff(spriteSize);
                 break;
             case STEEL:
-                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getSteelBuff(spriteSize);
                 break;
             default:
                 throw new IllegalArgumentException("Non esiste questo tipo di item");
@@ -155,30 +155,31 @@ public class GameItem {
     public void assignSpriteDebuff(Context context, Point spriteSize){
         switch (itemType){
             case ALUMINIUM:
-                objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getAlDebuff(spriteSize);
                 break;
             case COMPOST:
-                objectSprite = GameAssets.getInstance(context).getRandCompost(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getCompostDebuff(spriteSize);
                 break;
             case EWASTE:
-                objectSprite = GameAssets.getInstance(context).getRandEWaste(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getEwasteDebuff(spriteSize);
                 break;
             case GLASS:
                 objectSprite = GameAssets.getInstance(context).getGlassDebuff(spriteSize);
                 break;
             case PAPER:
-                objectSprite = GameAssets.getInstance(context).getRandPaper(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getPaperDebuff(spriteSize);
                 break;
             case PLASTIC:
-                objectSprite = GameAssets.getInstance(context).getRandPlastic(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getPlasticDebuff(spriteSize);
                 break;
             case STEEL:
-                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                objectSprite = GameAssets.getInstance(context).getSteelDebuff(spriteSize);
                 break;
             default:
                 throw new IllegalArgumentException("Non esiste questo tipo di item");
         }
     }
+
     // Metodi per la gestione dell'oggetto in gioco ------------------------------------------------
     // Metodo per gestire la caduta dell'oggetto sullo schermo
     // Il metodo permette all'oggetto di cadere solo finchè
@@ -197,6 +198,15 @@ public class GameItem {
             }
             startTime = currentTime;
         }
+    }
+
+    public boolean checkForBuffDestruction(){
+        if(buffType == BuffType.DOUBLE_UNIT_POINTS || buffType == BuffType.REDUCE_PROCESSING_TIME || buffType == BuffType.REDUCE_UNIT_WEAR){
+            if(isTouchingTheBlueLine() || !map.isNextTileFree(currentTile)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean checkForGameOverPosition(){

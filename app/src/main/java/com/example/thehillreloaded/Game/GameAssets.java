@@ -51,6 +51,18 @@ public class GameAssets {
     // Sprite degli oggetti con buff e debuff
     private Bitmap vetroBuff;
     private Bitmap vetroDebuff;
+    private Bitmap alluminioBuff;
+    private Bitmap alluminioDebuff;
+    private Bitmap acciaioBuff;
+    private Bitmap acciaioDebuff;
+    private Bitmap plasticaBuff;
+    private Bitmap plasticaDebuff;
+    private Bitmap cartaBuff;
+    private Bitmap cartaDebuff;
+    private Bitmap eWasteBuff;
+    private Bitmap eWasteDebuff;
+    private Bitmap compostBuff;
+    private Bitmap compostDebuff;
 
     private Random rand;
 
@@ -110,6 +122,18 @@ public class GameAssets {
         // Creazione bitmap per gli oggetti di buff/debuff -----------------------------------------
         vetroBuff = getBitmap(context, R.drawable.asset_vetro_buff);
         vetroDebuff = getBitmap(context, R.drawable.asset_vetro_debuff);
+        alluminioBuff = getBitmap(context, R.drawable.asset_alluminio_buff);
+        alluminioDebuff = getBitmap(context, R.drawable.asset_alluminio_debuff);
+        acciaioBuff = getBitmap(context, R.drawable.asset_acciaio_buff);
+        acciaioDebuff = getBitmap(context, R.drawable.asset_acciaio_debuff);
+        plasticaBuff = getBitmap(context, R.drawable.asset_plastica_buff);
+        plasticaDebuff = getBitmap(context, R.drawable.asset_plastica_debuff);
+        cartaBuff = getBitmap(context, R.drawable.asset_carta_buff);
+        cartaDebuff = getBitmap(context, R.drawable.asset_carta_debuff);
+        eWasteBuff = getBitmap(context, R.drawable.asset_ewaste_buff);
+        eWasteDebuff = getBitmap(context, R.drawable.asset_ewaste_buff);
+        compostBuff = getBitmap(context, R.drawable.asset_umido_buff);
+        compostDebuff = getBitmap(context, R.drawable.asset_umido_debuff);
     };
 
     public static GameAssets getInstance(Context context2){
@@ -185,6 +209,54 @@ public class GameAssets {
 
     Bitmap getGlassDebuff(Point size){
         return(Bitmap.createScaledBitmap(vetroDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getAlBuff(Point size){
+        return(Bitmap.createScaledBitmap(alluminioBuff, size.x, size.y, false));
+    }
+
+    Bitmap getAlDebuff(Point size){
+        return(Bitmap.createScaledBitmap(alluminioDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getSteelBuff(Point size){
+        return(Bitmap.createScaledBitmap(acciaioBuff, size.x, size.y, false));
+    }
+
+    Bitmap getSteelDebuff(Point size){
+        return(Bitmap.createScaledBitmap(acciaioDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getPlasticBuff(Point size){
+        return(Bitmap.createScaledBitmap(plasticaBuff, size.x, size.y, false));
+    }
+
+    Bitmap getPlasticDebuff(Point size){
+        return(Bitmap.createScaledBitmap(plasticaDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getPaperBuff(Point size){
+        return(Bitmap.createScaledBitmap(cartaBuff, size.x, size.y, false));
+    }
+
+    Bitmap getPaperDebuff(Point size){
+        return(Bitmap.createScaledBitmap(cartaDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getEWasteBuff(Point size){
+        return(Bitmap.createScaledBitmap(eWasteBuff, size.x, size.y, false));
+    }
+
+    Bitmap getEwasteDebuff(Point size){
+        return(Bitmap.createScaledBitmap(eWasteDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getCompostBuff(Point size){
+        return(Bitmap.createScaledBitmap(compostBuff, size.x, size.y, false));
+    }
+
+    Bitmap getCompostDebuff(Point size){
+        return(Bitmap.createScaledBitmap(compostDebuff, size.x, size.y, false));
     }
 
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------
