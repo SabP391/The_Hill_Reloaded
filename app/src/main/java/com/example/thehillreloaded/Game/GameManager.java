@@ -52,6 +52,10 @@ public class GameManager {
         }
     }
 
+    public void destroy(){
+        instance = null;
+    }
+
     public boolean isTimeToSpawn(long currentTime){
         // Calcola il tempo trascorso dall'inizio della partita in secondi
         long timeElapsed = (currentTime - timeAtGameStart) / 1000000000;

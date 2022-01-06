@@ -55,6 +55,10 @@ public class RecycleUnitsManager {
         return instance;
     }
 
+    public void destroy(){
+        instance = null;
+    }
+
     public void initInstance(Context context, TileMap map){
         this.context = context;
         this.map = map;

@@ -95,6 +95,10 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
                 break;
         }
         // Inizializzazione vera e propria del GameManager
+        GameManager.getInstance().destroy();
+        QuestManager.getInstance().destroy();
+        RecycleUnitsManager.getInstance().destroy();
+        GameItemsManager.getInstance().destroy();
         GameManager.getInstance().initInstance(gameMode, difficulty, this, map);
 
         // Inizializzazione della classe game e del

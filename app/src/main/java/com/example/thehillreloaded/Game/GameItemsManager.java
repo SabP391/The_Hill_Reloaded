@@ -53,6 +53,10 @@ public class GameItemsManager {
         return instance;
     }
 
+    public void destroy(){
+        instance = null;
+    }
+
     // Metodo per inizializzare la classe
     public void initInstance(Context context, TileMap map){
         this.map = map;

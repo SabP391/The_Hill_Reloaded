@@ -27,6 +27,10 @@ public class QuestManager {
         return instance;
     }
 
+    public void destroy(){
+        instance = null;
+    }
+
     public void increaseCounterQuest3() {
         this.counterQuest3 ++;
     }
