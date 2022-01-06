@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.widget.Toast;
 
 public class SteelRecycleUnit extends RecycleUnit{
 
@@ -33,6 +34,11 @@ public class SteelRecycleUnit extends RecycleUnit{
         }
         secondSlotLineYPosition = firstSlotLineYPosition + (int)grayLine.getStrokeWidth() + 5;
         thirdSlotLineYPosition = secondSlotLineYPosition + (int)grayLine.getStrokeWidth() + 5;
+    }
+
+    @Override
+    public void downgradeMessage() {
+        Toast.makeText(context, "La centrale dell'acciaio ha perso un upgrade.", Toast.LENGTH_SHORT).show();
     }
 
 }

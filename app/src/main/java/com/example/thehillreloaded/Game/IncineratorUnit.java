@@ -59,6 +59,9 @@ public class IncineratorUnit extends RecycleUnit{
     }
 
     @Override
+    public void downgradeMessage() { }
+
+    @Override
     public void setProcessSlotsPosition() {
         slotsXPosition = position.x - (int) map.getTileSize() - 5;
         firstSlotLineYPosition = position.y + (int)((grayLine.getStrokeWidth() / 2) + (map.getTileSize() / 2));

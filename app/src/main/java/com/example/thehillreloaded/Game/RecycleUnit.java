@@ -376,7 +376,10 @@ public abstract class RecycleUnit {
             this.unitStatus = RecycleUnitStatus.BASE;
             this.currentWearLevel = 0;
         }
+        downgradeMessage();
     }
+
+    public abstract void downgradeMessage();
 
     public void wearLevelCalculator(){
         if(unitStatus == RecycleUnitStatus.UPGRADED_ONCE || unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
