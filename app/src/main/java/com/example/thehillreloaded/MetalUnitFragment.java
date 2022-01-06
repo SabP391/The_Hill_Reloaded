@@ -28,12 +28,6 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
  * create an instance of this fragment.
  */
 public class MetalUnitFragment extends Fragment {
-    //controllo oggetti sbloccati
-    private boolean sbloccato1 = false;
-    private boolean sbloccato2 = false;
-    private boolean sbloccato3 = false;
-    private boolean sbloccato4 = false;
-
     //componenti layout
     TextView costo1;
     TextView costo2;
@@ -102,8 +96,6 @@ public class MetalUnitFragment extends Fragment {
         unitWear = (TextView) view.findViewById(R.id.metal_wear);
 
         setUnitDetails();
-        int wear = RecycleUnitsManager.getInstance().getSteelUnit().getCurrentWearLevel();
-        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getSteelUnit().getMaximumWearLevel()));
 
         // Caratteristiche oggetti sbloccabili -----------------------------------------------------
         costo1 = (TextView) view.findViewById(R.id.metal_costo1);
@@ -127,9 +119,11 @@ public class MetalUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockSteelObject(0)) {
-                    if (!sbloccato1){
+                    if (!RecycleUnitsManager.getInstance().getSteelObject(0)){
                         sblocco(1);
-                        sbloccato1 = true;
+                        RecycleUnitsManager.getInstance().setSteelObject(0);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getSteelUnit().getUnitPoints()));
@@ -144,9 +138,11 @@ public class MetalUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockSteelObject(1)) {
-                    if (!sbloccato2){
+                    if (!RecycleUnitsManager.getInstance().getSteelObject(1)){
                         sblocco(2);
-                        sbloccato2 = true;
+                        RecycleUnitsManager.getInstance().setSteelObject(1);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getSteelUnit().getUnitPoints()));
@@ -161,9 +157,11 @@ public class MetalUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockSteelObject(2)) {
-                    if (!sbloccato3){
+                    if (!RecycleUnitsManager.getInstance().getSteelObject(2)){
                         sblocco(3);
-                        sbloccato3 = true;
+                        RecycleUnitsManager.getInstance().setSteelObject(2);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getSteelUnit().getUnitPoints()));
@@ -178,9 +176,11 @@ public class MetalUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockSteelObject(3)) {
-                    if (!sbloccato4){
+                    if (!RecycleUnitsManager.getInstance().getSteelObject(3)){
                         sblocco(4);
-                        sbloccato4 = true;
+                        RecycleUnitsManager.getInstance().setSteelObject(3);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getSteelUnit().getUnitPoints()));
@@ -300,6 +300,8 @@ public class MetalUnitFragment extends Fragment {
     public void setUnitDetails(){
         int uPoints = RecycleUnitsManager.getInstance().getSteelUnit().getUnitPoints();
         unitPoints.setText(getString(R.string.text_unit_points, uPoints));
+        int wear = RecycleUnitsManager.getInstance().getSteelUnit().getCurrentWearLevel();
+        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getSteelUnit().getMaximumWearLevel()));
         switch (RecycleUnitsManager.getInstance().getSteelUnit().getUnitStatus()){
             case BASE: unitStatus.setText(getString(R.string.text_status, 0));
                 break;
