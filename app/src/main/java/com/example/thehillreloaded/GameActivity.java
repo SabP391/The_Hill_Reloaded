@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
 
         // Inizializzazione della classe game e del
         // manager delle centrali ------------------------------------------------------------------
-        GameItemsManager.getInstance().initInstance(map, this, difficulty, gameMode);
+        GameItemsManager.getInstance().initInstance(this, map);
         RecycleUnitsManager.getInstance().initInstance(this, map);
         Game game = new Game(this, map);
 

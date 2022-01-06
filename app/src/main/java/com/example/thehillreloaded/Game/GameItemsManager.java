@@ -1,13 +1,19 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+// Classe che si occupa di gestire gli oggetti a schermo
+// dallo spawn alla loro rimozione
 public class GameItemsManager {
+    // Attributi della classe ----------------------------------------------------------------------
     public static GameItemsManager instance;
     private ConcurrentLinkedQueue<GameItem> itemsOnScreen;
     private TileMap map;
@@ -16,13 +22,28 @@ public class GameItemsManager {
     private Difficulty difficulty;
     private GameMode gameMode;
     private ArrayList<ItemType> itemTypes;
+    private ArrayList<BuffType> buffTypes;
     private int spawnedItemsCounter = 0;
 
+    // Costruttore e metodi di inizializzazione ----------------------------------------------------
+    // Costruttore della clase
     private GameItemsManager(){
         itemsOnScreen = new ConcurrentLinkedQueue<GameItem>();
         rand = new Random();
-        itemTypes = new ArrayList<ItemType>();
+        itemTypes = new ArrayList<ItemType>(8);
         itemTypes.add(ItemType.GLASS);
+        buffTypes = new ArrayList<>(60);
+        // Inizializza l'arraylist degi tipi di buff
+        // Questo array viene inizializzato aggiungendo un numero maggiore
+        // di "NONE" per far si che la probabilità di generare
+        // un buff/debuff sia più bassa di quella di generare un oggetto standard
+        for(int i = 0; i < 50; i++){
+            buffTypes.add(BuffType.NONE);
+        }
+        for(BuffType b : BuffType.values()){
+            buffTypes.add(b);
+        }
+        Collections.shuffle(buffTypes);
     }
 
     public static GameItemsManager getInstance(){
@@ -32,14 +53,20 @@ public class GameItemsManager {
         return instance;
     }
 
-    public void initInstance(TileMap map, Context context, Difficulty difficulty, GameMode gameMode){
+    // Metodo per inizializzare la classe
+    public void initInstance(Context context, TileMap map){
         this.map = map;
         this.context = context;
-        this.difficulty = difficulty;
-        this.gameMode = gameMode;
+        this.difficulty = GameManager.getInstance().getDifficulty();
+        this.gameMode = GameManager.getInstance().getGameMode();
     }
 
+    // Metodi utili --------------------------------------------------------------------------------
+    // Metodo che aggiunge nuovi oggetti a schermo
     public void spawnNewObject(){
+        // Viene effettuato un controllo su quanti ogetti sono stati
+        // generati e aggiunge una nuova categoria
+        // di oggetti ad intervalli specificati
         switch(spawnedItemsCounter){
             case 5:
                 itemTypes.add(ItemType.PAPER);
@@ -67,9 +94,29 @@ public class GameItemsManager {
                     break;
                 }
         }
+        // Viene generata casualmente la tile di partenza
+        // dell'oggetto nel range di tile che determinano
+        // la prima riga della collina
         int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
-        Log.d("arraySize", String.valueOf(itemTypes.size()));
-        itemsOnScreen.add(new GameItem(initialTile, map, context, itemTypes.get(rand.nextInt(itemTypes.size()))));
+        // Viene usato il cotruttore appropriato in base a che la modalità
+        // sia classica o reloaded
+        if(gameMode == GameMode.CLASSIC){
+            itemsOnScreen.add(
+                    new GameItem(initialTile,
+                    map,
+                    context,
+                    itemTypes.get(rand.nextInt(itemTypes.size()))));
+        }
+        // Nel caso la modalità sia reloaded viene generato casualmente
+        // anche il tipo di buff
+        else{
+            itemsOnScreen.add(
+                    new GameItem(initialTile,
+                            map,
+                            context,
+                            itemTypes.get(rand.nextInt(itemTypes.size())),
+                            buffTypes.get(rand.nextInt(buffTypes.size()))));
+        }
         spawnedItemsCounter +=1;
     }
 

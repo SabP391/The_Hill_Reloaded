@@ -9,29 +9,87 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Toast;
 
-
+// Classe degli oggetti di gioco
+// Questa classe contiene il bitmap della sprite dell'oggetto
+// un enum che indica la tipologia dell'oggetto
+// e le variabili necessarie per gestire la posizione dell'oggetto
+// a schermo e per gestire il suo movimento
+// Inoltre, è presente una variabile che indica se l'oggetto è un oggetto
+// normale o è un buff/debuff
 public class GameItem {
     // Membri della classe -------------------------------------------------------------------------
     private final ItemType itemType;
-    private final Bitmap objectSprite;
+    private Bitmap objectSprite;
     private Point position;
     private TileMap map;
     private final int initialTile;
     private int currentTile;
-    private boolean onScreen = false;
-    private boolean isABuff = false;
-    private boolean isADebuff = false;
+    private final BuffType buffType;
     private long startTime = 0;
     private static final int FALLING_SPEED = (int) (1000.0 / 15.0);
 
     // Costruttori di classe -----------------------------------------------------------------------
+
+    // Costruttore per la modalità di gioco classica
+    // gli oggetti vengono inizializzati assegnando come dimensione
+    // al Bitmap la dimensione di una tile della tilemap
     public GameItem(int initialTile, TileMap map, Context context, ItemType itemType){
         this.initialTile = initialTile;
         this.currentTile = initialTile;
         this.position = new Point((int) (initialTile * map.getTileSize()), 0);
         this.map = map;
         this.itemType = itemType;
+        this.buffType = BuffType.NONE;
         Point spriteSize = new Point((int) map.getTileSize(), (int) map.getTileSize());
+        assignSprite(context, spriteSize);
+
+    }
+
+    // Costruttore per la modalità di gioco reloaded
+    // In questo caso il BuffType non è inizializzato di default a none
+    // viene quindi scelta la sprite adatta per l'ogetto
+    // in base al fatto che sia un buff o un debuff
+    public GameItem(int initialTile, TileMap map, Context context, ItemType itemType, BuffType buffType){
+        this.initialTile = initialTile;
+        this.currentTile = initialTile;
+        this.position = new Point((int) (initialTile * map.getTileSize()), 0);
+        this.map = map;
+        this.itemType = itemType;
+        // Viene effettuato un controllo sull'itemType
+        // poichè i rifiuti radiattivi non possono essere buff/debuff
+        if(this.itemType != ItemType.RADIOACTIVE){
+            this.buffType = buffType;
+        }
+        else{
+            this.buffType = BuffType.NONE;
+        }
+        Point spriteSize = new Point((int) map.getTileSize(), (int) map.getTileSize());
+        // Controllo sul buffType
+        switch(this.buffType){
+            // Se l'oggetto non è un buff assegna le sprite standard
+            case NONE:
+                assignSprite(context, spriteSize);
+                break;
+            // Se l'oggetto è un buff assegna le sprite dei buff
+            case DOUBLE_UNIT_POINTS:
+            case REDUCE_PROCESSING_TIME:
+            case REDUCE_UNIT_WEAR:
+                assignSpriteBuff(context, spriteSize);
+                break;
+            // Se l'oggetto è un debuff assegna le spride dei debuff
+            case NO_UNIT_POINTS:
+            case LESS_SUNNY_POINTS:
+            case INCREASE_PROCESSING_TIME:
+                assignSpriteDebuff(context, spriteSize);
+                break;
+        }
+    }
+
+    // Metodo che assegna la giusta sprite in base al tipo dell'oggetto
+    // Questo metodo assegna le sprite degli oggetti standard, scegliendo
+    // casualmente tra le possibili sprite associate al tipo di oggetto
+    // esistenti
+    public void assignSprite(Context context, Point spriteSize){
         switch (itemType){
             case ALUMINIUM:
                 objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
@@ -62,6 +120,65 @@ public class GameItem {
         }
     }
 
+    // Metodo che assegna le sprite in base al tipo di oggetto
+    // Questo metodo assegna le sprite agli oggetti buff
+    public void assignSpriteBuff(Context context, Point spriteSize){
+        switch (itemType){
+            case ALUMINIUM:
+                objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
+                break;
+            case COMPOST:
+                objectSprite = GameAssets.getInstance(context).getRandCompost(spriteSize);
+                break;
+            case EWASTE:
+                objectSprite = GameAssets.getInstance(context).getRandEWaste(spriteSize);
+                break;
+            case GLASS:
+                objectSprite = GameAssets.getInstance(context).getGlassBuff(spriteSize);
+                break;
+            case PAPER:
+                objectSprite = GameAssets.getInstance(context).getRandPaper(spriteSize);
+                break;
+            case PLASTIC:
+                objectSprite = GameAssets.getInstance(context).getRandPlastic(spriteSize);
+                break;
+            case STEEL:
+                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                break;
+            default:
+                throw new IllegalArgumentException("Non esiste questo tipo di item");
+        }
+    }
+
+    // Metodo che assegna le sprite in base al tipo di oggetto
+    // Questo metodo assegna le sprite agli oggetti debuff
+    public void assignSpriteDebuff(Context context, Point spriteSize){
+        switch (itemType){
+            case ALUMINIUM:
+                objectSprite = GameAssets.getInstance(context).getRandAl(spriteSize);
+                break;
+            case COMPOST:
+                objectSprite = GameAssets.getInstance(context).getRandCompost(spriteSize);
+                break;
+            case EWASTE:
+                objectSprite = GameAssets.getInstance(context).getRandEWaste(spriteSize);
+                break;
+            case GLASS:
+                objectSprite = GameAssets.getInstance(context).getGlassDebuff(spriteSize);
+                break;
+            case PAPER:
+                objectSprite = GameAssets.getInstance(context).getRandPaper(spriteSize);
+                break;
+            case PLASTIC:
+                objectSprite = GameAssets.getInstance(context).getRandPlastic(spriteSize);
+                break;
+            case STEEL:
+                objectSprite = GameAssets.getInstance(context).getRandSteel(spriteSize);
+                break;
+            default:
+                throw new IllegalArgumentException("Non esiste questo tipo di item");
+        }
+    }
     // Metodi per la gestione dell'oggetto in gioco ------------------------------------------------
     // Metodo per gestire la caduta dell'oggetto sullo schermo
     // Il metodo permette all'oggetto di cadere solo finchè
@@ -95,9 +212,6 @@ public class GameItem {
     }
 
     // Metodi utili --------------------------------------------------------------------------------
-    public void setOnScreen(boolean bool){
-        onScreen = bool;
-    }
 
     // Metodo che controlla se l'oggetto si trova
     // nell'ultima riga della tilemap

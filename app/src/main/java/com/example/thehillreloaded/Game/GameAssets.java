@@ -15,14 +15,20 @@ import com.example.thehillreloaded.R;
 
 import java.util.Random;
 
+// Classe che gestisce il caricamento delle immagini
+// attraverso questa classe è possibile convertire immagini vettoriali
+// in bitmap e ritornarli scalati in base alle esigenze
 public class GameAssets {
     private static GameAssets instance;
     private static Context context;
+    // Icone della UI
     private Bitmap sunnyPointsIcon;
     private Bitmap gameBackGround;
     private Bitmap misto;
     private Bitmap unitPointsIcon;
     private Bitmap wearWarningIcon;
+
+    // Sprite delle centrali
     private Bitmap inceneritore;
     private Bitmap centraleVetro;
     private Bitmap centraleAlluminio;
@@ -31,6 +37,8 @@ public class GameAssets {
     private Bitmap centraleCarta;
     private Bitmap centraleEWaste;
     private Bitmap centraleUmido;
+
+    // Sprite degli oggetti di gioco
     private Bitmap radioattivo;
     private Bitmap vetro[];
     private Bitmap alluminio[];
@@ -40,8 +48,13 @@ public class GameAssets {
     private Bitmap eWaste[];
     private Bitmap umido[];
 
+    // Sprite degli oggetti con buff e debuff
+    private Bitmap vetroBuff;
+    private Bitmap vetroDebuff;
+
     private Random rand;
 
+    // Costruttore della classe
     private GameAssets(){
         gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
         sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
@@ -94,6 +107,9 @@ public class GameAssets {
             umido[1] = getBitmap(context, R.drawable.asset_umido_2);
         // Creazione di un bitmap per il misto------------------------------------------------------
         misto = getBitmap(context, R.drawable.asset_misto);
+        // Creazione bitmap per gli oggetti di buff/debuff -----------------------------------------
+        vetroBuff = getBitmap(context, R.drawable.asset_vetro_buff);
+        vetroDebuff = getBitmap(context, R.drawable.asset_vetro_debuff);
     };
 
     public static GameAssets getInstance(Context context2){
@@ -163,32 +179,12 @@ public class GameAssets {
         return(Bitmap.createScaledBitmap(umido[rand.nextInt(umido.length)], size.x, size.y, false));
     }
 
-    Bitmap getDefaultGlass(Point size){
-        return(Bitmap.createScaledBitmap(vetro[0], size.x, size.y, false));
+    Bitmap getGlassBuff(Point size){
+        return(Bitmap.createScaledBitmap(vetroBuff, size.x, size.y, false));
     }
 
-    Bitmap getDefaultAl(Point size){
-        return(Bitmap.createScaledBitmap(alluminio[0], size.x, size.y, false));
-    }
-
-    Bitmap getDefaultSteel(Point size){
-        return(Bitmap.createScaledBitmap(acciaio[0], size.x, size.y, false));
-    }
-
-    Bitmap getDefaultPlastic(Point size){
-        return(Bitmap.createScaledBitmap(plastica[0], size.x, size.y, false));
-    }
-
-    Bitmap getDefaultPaper(Point size){
-        return(Bitmap.createScaledBitmap(carta[0], size.x, size.y, false));
-    }
-
-    Bitmap getDefaultEWaste(Point size){
-        return(Bitmap.createScaledBitmap(eWaste[0], size.x, size.y, false));
-    }
-
-    Bitmap getDefaultCompost(Point size){
-        return(Bitmap.createScaledBitmap(umido[0], size.x, size.y, false));
+    Bitmap getGlassDebuff(Point size){
+        return(Bitmap.createScaledBitmap(vetroDebuff, size.x, size.y, false));
     }
 
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------

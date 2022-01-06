@@ -100,10 +100,7 @@ public class GameManager {
         return sunnyPoints;
     }
 
-    public void setSunnyPoints(int points){
-        this.sunnyPoints = points;
-        sunnyPointsCounter.updateCounter(sunnyPoints);
-    }
+    public Difficulty getDifficulty() { return difficulty; }
 
     public GameMode getGameMode(){ return  gameMode; }
 
