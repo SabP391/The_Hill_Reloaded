@@ -126,11 +126,12 @@ public class QuestManager {
 
     public boolean isGameWon(){
         if(GameManager.getInstance().getGameMode() == GameMode.CLASSIC){
-            if(quest1 && quest2 && quest3){
+            if(isQuest1Complete() && isQuest2Complete() && isQuest3Complete()){
                 return true;
             }else return false;
         } else{
-            if(quest1 && quest2 && quest3 && quest4 && quest5 && quest6){
+            if(isQuest1Complete() && isQuest2Complete() && isQuest3Complete()
+                    && isQuest4Complete() && isQuest5Complete() && isQuest6Complete()){
                 return true;
             }else return false;
         }

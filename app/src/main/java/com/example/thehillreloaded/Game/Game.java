@@ -1,6 +1,7 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -19,6 +20,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.thehillreloaded.GameActivity;
+import com.example.thehillreloaded.GameOverActivity;
+import com.example.thehillreloaded.GameWonActivity;
 import com.example.thehillreloaded.R;
 
 import java.lang.reflect.Array;
@@ -125,25 +129,27 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
+        if(QuestManager.getInstance().isGameWon()){
+            Intent gameWon = new Intent(context, GameWonActivity.class);
+            stopDrawThread();
+            context.startActivity(gameWon);
+        }
         if(!GameManager.getInstance().isPaused()){
                     if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
                         GameItemsManager.getInstance().spawnNewObject();
                     }
                     for(GameItem i : itemsOnScreen){
                         if(i != movingItem){
-                                if(i.checkForGameOverPosition()){
-                                    messageHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(context, "Game over", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                                i.fall(System.nanoTime());
+                            if(i.checkForGameOverPosition()){
+                                Intent gameLost = new Intent(context, GameOverActivity.class);
+                                stopDrawThread();
+                                context.startActivity(gameLost);
                             }
+                        }
+                        i.fall(System.nanoTime());
                     }
-                }
         }
+    }
 
     // Override dei metodi di SurfaceView ----------------------------------------------------------
 

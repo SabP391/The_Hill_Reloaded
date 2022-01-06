@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/giallo_scuro_background"
+    tools:context=".GameWonActivity">
+
+    <ImageView
+        android:id="@+id/bg_menu_user2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_main"
+        android:contentDescription="TODO" />
+
+    <android.widget.Button
+        android:id="@+id/bottone_continua"
+        style="@style/StileBottoni"
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="104dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:onClick="backToMainMenu"
+        android:text="@string/bottone_continua_partita"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="384dp"
+        android:layout_height="108dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottone_continua"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.67"
+        app:srcCompat="@drawable/game_won" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

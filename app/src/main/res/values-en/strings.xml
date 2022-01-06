@@ -4,7 +4,7 @@
     <string name="bottone_continua_no_accesso">Continue without login</string>
     <string name="bottone_accesso_google">Log-in with Google</string>
     <string name="bottone_inizia_partita">New game</string>
-    <string name="bottone_continua_partita">Continue game</string>
+    <string name="bottone_continua_partita">Continue</string>
     <string name="bottone_online_game">Multiplayer</string>
     <string name="bottone_impostazioni_menu">Settings</string>
     <string name="modalita_classica">Classic mode</string>
@@ -62,5 +62,6 @@
     <string name="text_status">Upgrade: %1$d</string>
     <string name="text_costo_sbloccabili">Cost: %1$d</string>
     <string name="text_ricavo_sbloccabili">Gain: %1$d</string>
+    <string name="riprova">Try again</string>
 
 </resources>

@@ -27,7 +27,7 @@ public abstract class RecycleUnit {
     protected TileMap map;
     protected Bitmap sprite;
     protected Bitmap wearWarning;
-    protected int unitPoints = 20;
+    protected int unitPoints = 100;
     protected Point size;
     protected Point position;
     protected int offsetFromLeft = 0;

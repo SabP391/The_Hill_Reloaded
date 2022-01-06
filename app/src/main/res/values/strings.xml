@@ -46,12 +46,12 @@
     <string name="unita_riciclo_organico">Organico</string>
     <string name="email_auth" translatable="false">TextView</string>
     <string name="logout" translatable="false">Logout</string>
-<!--<<<<<<< HEAD -->
+    <!--<<<<<<< HEAD -->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="textview">TextView</string>
-<!--<string name="logout">Logout</string>-->
-<!--=======-->
+    <!--<string name="logout">Logout</string>-->
+    <!--=======-->
     <string name="sunny_non_sufficienti">Non hai abbastanza Sunny Points</string>
     <string name="nessun_rifiuto">Nessun rifiuto da incenerire</string>
     <string name="unit_non_sufficienti">Non hai abbastanza Unit Points</string>
@@ -69,5 +69,6 @@
     <string name="text_status">Upgrade: %1$d</string>
     <string name="text_costo_sbloccabili">Costo: %1$d</string>
     <string name="text_ricavo_sbloccabili">Ricavo: %1$d</string>
+    <string name="riprova">Riprova</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>

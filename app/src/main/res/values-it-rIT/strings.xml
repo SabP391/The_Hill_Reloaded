@@ -62,4 +62,5 @@
     <string name="text_status">Upgrade: %1$d</string>
     <string name="text_costo_sbloccabili">Costo: %1$d</string>
     <string name="text_ricavo_sbloccabili">Ricavo: %1$d</string>
+    <string name="riprova">Riprova</string>
 </resources>

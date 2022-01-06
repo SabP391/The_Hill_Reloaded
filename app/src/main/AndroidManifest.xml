@@ -18,6 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHillReloaded">
         <activity
+            android:name=".GameOverActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".GameWonActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".MultiplayerActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
