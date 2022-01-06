@@ -4,10 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.view.MotionEvent;
-import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Toast;
 
 // Classe degli oggetti di gioco
 // Questa classe contiene il bitmap della sprite dell'oggetto
@@ -78,7 +74,7 @@ public class GameItem {
                 break;
             // Se l'oggetto è un debuff assegna le spride dei debuff
             case NO_UNIT_POINTS:
-            case LESS_SUNNY_POINTS:
+            case INCREASE_UNIT_WEAR:
             case INCREASE_PROCESSING_TIME:
                 assignSpriteDebuff(context, spriteSize);
                 break;
@@ -200,8 +196,12 @@ public class GameItem {
         }
     }
 
+    // Metodo che controlla se un oggetto di buff non può più
+    // spostarsi (in tal caso verrà eliminato dallo schermo)
     public boolean checkForBuffDestruction(){
-        if(buffType == BuffType.DOUBLE_UNIT_POINTS || buffType == BuffType.REDUCE_PROCESSING_TIME || buffType == BuffType.REDUCE_UNIT_WEAR){
+        if(buffType == BuffType.DOUBLE_UNIT_POINTS ||
+                buffType == BuffType.REDUCE_PROCESSING_TIME ||
+                buffType == BuffType.REDUCE_UNIT_WEAR){
             if(isTouchingTheBlueLine() || !map.isNextTileFree(currentTile)){
                 return true;
             }
@@ -209,6 +209,9 @@ public class GameItem {
         return false;
     }
 
+    // Metodo che controlla che un oggetto sia in posizione di gameover
+    // controllando che non sia oltre la linea rossa e che non
+    // sia in fase di caduta
     public boolean checkForGameOverPosition(){
         if(isOverTheRedLine() && !map.isNextTileFree(currentTile)){
             return true;
@@ -249,4 +252,6 @@ public class GameItem {
     }
 
     public ItemType getItemType() { return itemType; }
+
+    public BuffType getBuffType() { return buffType; }
 }

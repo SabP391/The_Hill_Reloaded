@@ -27,6 +27,8 @@ public class GameAssets {
     private Bitmap misto;
     private Bitmap unitPointsIcon;
     private Bitmap wearWarningIcon;
+    private Bitmap buffIcon;
+    private Bitmap debuffIcon;
 
     // Sprite delle centrali
     private Bitmap inceneritore;
@@ -72,6 +74,8 @@ public class GameAssets {
         sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
         unitPointsIcon = getBitmap(context, R.drawable.ic_unit_points);
         wearWarningIcon = getBitmap(context, R.drawable.ic_exclamation_mark);
+        buffIcon = getBitmap(context, R.drawable.ic_buff);
+        debuffIcon = getBitmap(context, R.drawable.ic_debuff);
 
         // Creazione delle sprite delle centrali ---------------------------------------------------
         inceneritore = getBitmap(context, R.drawable.asset2_inceneritore);
@@ -146,6 +150,10 @@ public class GameAssets {
 
     // Metodi per ritornare le sprite --------------------------------------------------------------
     Bitmap getGameBackGround(Point size){return Bitmap.createScaledBitmap(gameBackGround, size.x, size.y, false);}
+
+    Bitmap getBuffIcon(Point size){return Bitmap.createScaledBitmap(buffIcon, size.x, size.y, false);}
+
+    Bitmap getDebuffIcon(Point size){return Bitmap.createScaledBitmap(debuffIcon, size.x, size.y, false);}
 
     Bitmap getGlassUnit(Point size){return Bitmap.createScaledBitmap(centraleVetro, size.x, size.y, false);}
 
