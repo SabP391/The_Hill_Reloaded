@@ -285,6 +285,9 @@ public abstract class RecycleUnit {
             case UPGRADED_ONCE:
                 if(gameMode == GameMode.CLASSIC){
                     if(unitPoints >= COST_OF_FIRST_UPGRADE){
+                        if(currentWearLevel>0){
+                            currentWearLevel = 0;
+                        }
                         unitPoints -= COST_OF_FIRST_UPGRADE;
                         unitStatus = RecycleUnitStatus.UPGRADED_TWICE;
                         return true;
@@ -292,6 +295,9 @@ public abstract class RecycleUnit {
                     else return false;
                 }else{
                     if(unitPoints >= COST_OF_SECOND_UPGRADE_RELOADED){
+                        if(currentWearLevel>0){
+                            currentWearLevel = 0;
+                        }
                         unitPoints -= COST_OF_SECOND_UPGRADE_RELOADED;
                         unitStatus = RecycleUnitStatus.UPGRADED_TWICE;
                         return true;
