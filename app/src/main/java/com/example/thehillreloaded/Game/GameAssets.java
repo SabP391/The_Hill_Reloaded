@@ -135,7 +135,7 @@ public class GameAssets {
         cartaBuff = getBitmap(context, R.drawable.asset_carta_buff);
         cartaDebuff = getBitmap(context, R.drawable.asset_carta_debuff);
         eWasteBuff = getBitmap(context, R.drawable.asset_ewaste_buff);
-        eWasteDebuff = getBitmap(context, R.drawable.asset_ewaste_buff);
+        eWasteDebuff = getBitmap(context, R.drawable.asset_ewaste_debuff);
         compostBuff = getBitmap(context, R.drawable.asset_umido_buff);
         compostDebuff = getBitmap(context, R.drawable.asset_umido_debuff);
     };

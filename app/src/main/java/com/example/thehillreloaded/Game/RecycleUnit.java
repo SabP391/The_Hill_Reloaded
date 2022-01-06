@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 
@@ -142,7 +143,6 @@ public abstract class RecycleUnit {
 
     public void drawBuff(Canvas c, long currentTime){
         long elapsedTime = (currentTime - timeAtBuffStart) / 1000000000;
-
         if(isBuffed){
             if(elapsedTime <= MAX_BUFF_TIME){
                 c.drawBitmap(buffIcon,
@@ -160,7 +160,7 @@ public abstract class RecycleUnit {
 
         if(isDebuffed){
             if(elapsedTime <= MAX_BUFF_TIME){
-            c.drawBitmap(debuffIcon,
+                c.drawBitmap(debuffIcon,
                     position.x + (2 * map.getTileSize()) - debuffIcon.getWidth(),
                     position.y,
                     null);
@@ -491,6 +491,7 @@ public abstract class RecycleUnit {
             }
             if(!isBuffed && !isDebuffed) {
                 startBuff(item);
+                startDebuff(item);
             }
 
         }else{
@@ -542,12 +543,15 @@ public abstract class RecycleUnit {
         switch (item.getBuffType()){
             case DOUBLE_UNIT_POINTS:
                 unitPointMultiplier = 2;
+                Toast.makeText(context, "unitPointRaddoppiati", Toast.LENGTH_SHORT).show();
                 break;
             case REDUCE_UNIT_WEAR:
                 wearMultiplier = 0;
+                Toast.makeText(context, "usuraRidotta", Toast.LENGTH_SHORT).show();
                 break;
             case REDUCE_PROCESSING_TIME:
                 processTimeMultiplier = (float) - 1.5;
+                Toast.makeText(context, "tempoRidotto", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return;
@@ -560,12 +564,15 @@ public abstract class RecycleUnit {
         switch (item.getBuffType()){
             case NO_UNIT_POINTS:
                 unitPointMultiplier = 0;
+                Toast.makeText(context, "UnitPointAzzerati", Toast.LENGTH_SHORT).show();
                 break;
             case INCREASE_UNIT_WEAR:
                 wearMultiplier = 2;
+                Toast.makeText(context, "usuraRaddoppiata", Toast.LENGTH_SHORT).show();
                 break;
             case INCREASE_PROCESSING_TIME:
                 processTimeMultiplier = (float) 1.5;
+                Toast.makeText(context, "tempoAumentato", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return;
