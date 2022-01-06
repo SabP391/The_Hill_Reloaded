@@ -30,12 +30,6 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
  * create an instance of this fragment.
  */
 public class GlassUnitFragment extends Fragment {
-    //controllo oggetti sbloccati
-    private boolean sbloccato1 = false;
-    private boolean sbloccato2 = false;
-    private boolean sbloccato3 = false;
-    private boolean sbloccato4 = false;
-
     //componenti layout
     TextView costo1;
     TextView costo2;
@@ -104,8 +98,6 @@ public class GlassUnitFragment extends Fragment {
         unitWear = (TextView) view.findViewById(R.id.glass_wear);
 
         setUnitDetails();
-        int wear = RecycleUnitsManager.getInstance().getGlassUnit().getCurrentWearLevel();
-        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel()));
 
         // Caratteristiche oggetti sbloccabili -----------------------------------------------------
         costo1 = (TextView) view.findViewById(R.id.glass_costo1);
@@ -129,15 +121,17 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(0)) {
-                    if (!sbloccato1) {
+                    if (!RecycleUnitsManager.getInstance().getGlassObject(0)) {
                         sblocco(1);
-                        sbloccato1 = true;
+                        RecycleUnitsManager.getInstance().setGlassObject(0);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -146,15 +140,17 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(1)) {
-                    if (!sbloccato2){
+                    if (!RecycleUnitsManager.getInstance().getGlassObject(1)){
                         sblocco(2);
-                        sbloccato2 = true;
+                        RecycleUnitsManager.getInstance().setGlassObject(1);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -163,15 +159,17 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(2)) {
-                    if (!sbloccato3) {
+                    if (!RecycleUnitsManager.getInstance().getGlassObject(2)) {
                         sblocco(3);
-                        sbloccato3 = true;
+                        RecycleUnitsManager.getInstance().setGlassObject(2);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -180,13 +178,16 @@ public class GlassUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RecycleUnitsManager.getInstance().unlockGlassObject(3)) {
-                    if (!sbloccato4){
+                    if (!RecycleUnitsManager.getInstance().getGlassObject(3)){
                         sblocco(4);
-                        sbloccato4 = true;
+                        RecycleUnitsManager.getInstance().setGlassObject(3);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
                     }
+                    unitPoints.setText(getString(R.string.text_unit_points, RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -301,6 +302,8 @@ public class GlassUnitFragment extends Fragment {
     public void setUnitDetails(){
         int uPoints = RecycleUnitsManager.getInstance().getGlassUnit().getUnitPoints();
         unitPoints.setText(getString(R.string.text_unit_points, uPoints));
+        int wear = RecycleUnitsManager.getInstance().getGlassUnit().getCurrentWearLevel();
+        unitWear.setText(getString(R.string.text_usura, wear, RecycleUnitsManager.getInstance().getGlassUnit().getMaximumWearLevel()));
         switch (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus()){
             case BASE: unitStatus.setText(getString(R.string.text_status, 0));
                 break;

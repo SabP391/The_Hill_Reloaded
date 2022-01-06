@@ -7,6 +7,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RecycleUnitsManager {
     private UnlockableObject unlockable[];
+    //variabili di controllo sullo sblocco degli oggetti
+    private boolean plasticObject[];
+    private boolean glassObject[];
+    private boolean paperObject[];
+    private boolean aluminiumObject[];
+    private boolean steelObject[];
+    private boolean ewasteObject[];
+    private boolean compostObject[];
 
     // Costanti che determinano il prezzo in sunny points
     // delle diverse centrali ----------------------------------------------------------------------
@@ -58,6 +66,35 @@ public class RecycleUnitsManager {
         unlockable[1] = new UnlockableObject(4, 3);
         unlockable[2] = new UnlockableObject(7, 6);
         unlockable[3] = new UnlockableObject(12, 11);
+
+        this.plasticObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            plasticObject[x] = false;
+        }
+        this.glassObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            glassObject[x] = false;
+        }
+        this.paperObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            paperObject[x] = false;
+        }
+        this.ewasteObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            ewasteObject[x] = false;
+        }
+        this.steelObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            steelObject[x] = false;
+        }
+        this.aluminiumObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            aluminiumObject[x] = false;
+        }
+        this.compostObject = new boolean[4];
+        for (int x=0; x<4; x++){
+            compostObject[x] = false;
+        }
     }
 
     public boolean processItemOnScreen(GameItem item){
@@ -243,6 +280,24 @@ public class RecycleUnitsManager {
     public int getGainOfUnlockable4(){
         return unlockable[3].getSpReward();
     }
+
+    //Getter e setter controllo degli oggetti sbloccabili
+    public boolean getPlasticObject(int index) { return plasticObject[index]; }
+    public boolean getGlassObject(int index) { return glassObject[index]; }
+    public boolean getPaperObject(int index) { return paperObject[index]; }
+    public boolean getAluminiumObject(int index) { return aluminiumObject[index]; }
+    public boolean getSteelObject(int index) { return steelObject[index]; }
+    public boolean getEwasteObject(int index) { return ewasteObject[index]; }
+    public boolean getCompostObject(int index) { return compostObject[index]; }
+
+    public boolean setPlasticObject(int index) { return this.plasticObject[index] = true; }
+    public boolean setGlassObject(int index) { return this.glassObject[index] = true; }
+    public boolean setPaperObject(int index) { return this.paperObject[index] = true; }
+    public boolean setAluminiumObject(int index) { return this.aluminiumObject[index] = true; }
+    public boolean setSteelObject(int index) { return this.steelObject[index] = true; }
+    public boolean setEwasteObject(int index) { return this.ewasteObject[index] = true; }
+    public boolean setCompostObject(int index) { return this.compostObject[index] = true; }
+
 
     // Getter e setter -----------------------------------------------------------------------------
 
