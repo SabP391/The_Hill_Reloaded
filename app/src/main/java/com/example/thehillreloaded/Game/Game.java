@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
@@ -120,7 +121,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 index++;
             }
         }else{
-            map.drawTilemap(c);
+            //map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -183,7 +184,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-        // Per ora non fa niente, da implementare
+        // Metodo non necessario, poichè la rotazione del telefono è bloccata
     }
 
     @Override
@@ -291,7 +292,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
            Point touchPosition = new Point((int) x, (int) y);
            // Trova l'indice della tile all'interno della quale è
            // stato rilevto il tocco
-           int tile = map.getTileIndexFromPosition(touchPosition) - 1; // In questo punto bisogna togliere -1 se si vuole avere il touch corretto su EMULATORE, -1 è necessario per avere il touch preciso su smartphone
+           int tile;
+           if(isEmulator()){
+               tile = map.getTileIndexFromPosition(touchPosition);
+           }else{
+               tile = map.getTileIndexFromPosition(touchPosition) - 1;
+           } // In questo punto bisogna togliere -1 se si vuole avere il touch corretto su EMULATORE, -1 è necessario per avere il touch preciso su smartphone
            switch(event.getAction()){
                // Al primo tocco sullo schermo controlla che il tocco
                // sia avvenuto su uno degli oggetti in gioco
@@ -370,5 +376,26 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         public void onAccuracyChanged(Sensor sensor, int i) { }
     };
 
+    // Metodo per controllare se l'applicazione gira su emulatore
+    // per cambiare il metodo che riconosce il tocco
+    private boolean isEmulator() {
+        return (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+                || Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.HARDWARE.contains("goldfish")
+                || Build.HARDWARE.contains("ranchu")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || Build.PRODUCT.contains("sdk_google")
+                || Build.PRODUCT.contains("google_sdk")
+                || Build.PRODUCT.contains("sdk")
+                || Build.PRODUCT.contains("sdk_x86")
+                || Build.PRODUCT.contains("sdk_gphone64_arm64")
+                || Build.PRODUCT.contains("vbox86p")
+                || Build.PRODUCT.contains("emulator")
+                || Build.PRODUCT.contains("simulator");
+    }
 
 }

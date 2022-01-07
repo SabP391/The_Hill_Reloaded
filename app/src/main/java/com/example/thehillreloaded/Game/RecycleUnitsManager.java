@@ -38,6 +38,7 @@ public class RecycleUnitsManager {
     // Attributi della classe ----------------------------------------------------------------------
     private static RecycleUnitsManager instance;
     private Context context;
+    private SoundFx sFX;
     private TileMap map;
     private ConcurrentLinkedQueue<RecycleUnit> unlockedUnits;
 
@@ -62,6 +63,7 @@ public class RecycleUnitsManager {
     public void initInstance(Context context, TileMap map){
         this.context = context;
         this.map = map;
+        sFX = (RecycleUnitsManager.SoundFx) context;
         unlockedUnits.add(new GlassRecycleUnit(map, context));
         unlockedUnits.add(new IncineratorUnit(map, context));
 
@@ -106,6 +108,7 @@ public class RecycleUnitsManager {
         for(RecycleUnit i : unlockedUnits){
             if(i.isOneOfMyTiles(tileToCheck)){
                 if(i.processItem(item)){
+                    sFX.suonoUnità();
                     return true;
                 }
             }
@@ -403,5 +406,9 @@ public class RecycleUnitsManager {
             }
         }
         return null;
+    }
+
+    public interface SoundFx{
+        void suonoUnità();
     }
 }
