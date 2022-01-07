@@ -34,7 +34,7 @@ import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 
-public class GameActivity extends AppCompatActivity{
+public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX{
     private GameMode gameMode;
     private Difficulty difficulty;
     private TileMap map;
@@ -105,6 +105,7 @@ public class GameActivity extends AppCompatActivity{
         // manager delle centrali ------------------------------------------------------------------
         GameItemsManager.getInstance().initInstance(this, map);
         RecycleUnitsManager.getInstance().initInstance(this, map);
+        QuestManager.getInstance().initInstance(this);
         Game game = new Game(this, map);
 
 
@@ -503,4 +504,9 @@ public class GameActivity extends AppCompatActivity{
         finish();
     }
 
+    @Override
+    public void missionFX() {
+        if(SFXattivi){
+            soundService.suonoMissioneCompleta(); }
+    }
 }

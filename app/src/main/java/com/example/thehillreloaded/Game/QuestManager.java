@@ -1,6 +1,10 @@
 package com.example.thehillreloaded.Game;
 
-public class QuestManager {
+import android.content.Context;
+
+import com.example.thehillreloaded.GameActivity;
+
+public class QuestManager{
 
     private static QuestManager instance;
     private boolean quest1 = false; //1 - costruisci tutte le unità di riciclo
@@ -17,6 +21,9 @@ public class QuestManager {
     protected static final int Q4_COMPLETION = 35;
     protected static final int Q6_COMPLETION = 20;
 
+    private SoundFX sfx;
+    private Context context;
+
     private QuestManager(){
     }
 
@@ -25,6 +32,11 @@ public class QuestManager {
             instance = new QuestManager();
         }
         return instance;
+    }
+
+    public void initInstance(Context context){
+        this.context = context;
+        this.sfx = (QuestManager.SoundFX) context;
     }
 
     public void destroy(){
@@ -54,6 +66,7 @@ public class QuestManager {
                         && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
                     quest1 = true;
+                    sfx.missionFX();
                     return true;
                 } else return false;
             } else {
@@ -65,6 +78,7 @@ public class QuestManager {
                         && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
                     quest1 = true;
+                    sfx.missionFX();
                     return true;
                 } else return false;
             }
@@ -75,6 +89,7 @@ public class QuestManager {
         if(!quest2) {
             if (GameManager.getInstance().getSunnyPoints() >= Q2_COMPLETION) {
                 quest2 = true;
+                sfx.missionFX();
                 return true;
             } else return false;
         }else return true;
@@ -93,6 +108,7 @@ public class QuestManager {
         if(!quest4) {
             if (counterQuest4 >= Q4_COMPLETION) {
                 quest4 = true;
+                sfx.missionFX();
                 return true;
             }else return false;
         }else return true;
@@ -102,6 +118,7 @@ public class QuestManager {
         if(!quest5){
             if(RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == RecycleUnitStatus.UPGRADED_TWICE){
                 quest5 = true;
+                sfx.missionFX();
                 return true;
             }else return false;
         }return true;
@@ -111,6 +128,7 @@ public class QuestManager {
         if(!quest6) {
             if (counterQuest6 >= Q6_COMPLETION) {
                 quest6 = true;
+                sfx.missionFX();
                 return true;
             }return false;
         }else return true;
@@ -139,5 +157,9 @@ public class QuestManager {
                 return true;
             }else return false;
         }
+    }
+
+    public interface SoundFX{
+        void missionFX();
     }
 }
