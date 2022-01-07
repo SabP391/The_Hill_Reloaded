@@ -79,5 +79,7 @@
     <string name="pl_perso_upgrade">Plastic unit lost an upgrade</string>
     <string name="st_perso_upgrade">Steel unit lost an upgrade</string>
     <string name="missione_completata">Mission completed</string>
+    <string name="oggetto_sbloccato">Object unlocked!</string>
+    <string name="azione_non_disponibile_upgrade">Upgrade unavailable</string>
 
 </resources>

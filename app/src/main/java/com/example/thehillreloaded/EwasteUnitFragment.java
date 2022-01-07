@@ -128,7 +128,7 @@ public class EwasteUnitFragment extends Fragment {
                         sblocco(1);
                         RecycleUnitsManager.getInstance().setEwasteObject(0);
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.oggetto_sbloccato, Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
@@ -148,7 +148,7 @@ public class EwasteUnitFragment extends Fragment {
                         sblocco(2);
                         RecycleUnitsManager.getInstance().setEwasteObject(1);
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.oggetto_sbloccato, Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
@@ -168,7 +168,7 @@ public class EwasteUnitFragment extends Fragment {
                         sblocco(3);
                         RecycleUnitsManager.getInstance().setEwasteObject(2);
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.oggetto_sbloccato, Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
@@ -188,7 +188,7 @@ public class EwasteUnitFragment extends Fragment {
                         sblocco(4);
                         RecycleUnitsManager.getInstance().setEwasteObject(3);
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Oggetto sbloccato!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.oggetto_sbloccato, Toast.LENGTH_SHORT).show();
                     }
                     unitPoints.setText(getString(R.string.text_unit_points,
                             RecycleUnitsManager.getInstance().getEWasteUnit().getUnitPoints()));
@@ -210,7 +210,7 @@ public class EwasteUnitFragment extends Fragment {
                     setUnitDetails();
                 } else {
                     sfx.suonoBottoni();
-                    Toast.makeText(getActivity().getApplicationContext(), "Non puoi fare cose.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.azione_non_disponibile_upgrade, Toast.LENGTH_SHORT).show();
                 }
             }
         });

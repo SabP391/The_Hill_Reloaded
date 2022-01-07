@@ -79,4 +79,6 @@
     <string name="pl_perso_upgrade">La centrale della plastica ha perso un upgrade</string>
     <string name="st_perso_upgrade">La centrale dell\'acciaio ha perso un upgrade</string>
     <string name="missione_completata">Missione completata</string>
+    <string name="oggetto_sbloccato">Oggetto sbloccato!</string>
+    <string name="azione_non_disponibile_upgrade">Upgrade non disponibile</string>
 </resources>
