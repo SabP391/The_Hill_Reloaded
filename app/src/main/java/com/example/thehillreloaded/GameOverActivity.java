@@ -61,17 +61,20 @@ public class GameOverActivity extends AppCompatActivity {
 
     public void backToMainMenu(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
+        mainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainMenu);
     }
 
     public void replayGame(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
+        mainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(replay);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        mainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainMenu);
     }
 
