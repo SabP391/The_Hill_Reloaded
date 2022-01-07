@@ -109,4 +109,9 @@ public class IncineratorUnit extends RecycleUnit{
             }
         }else return 3;
     }
+
+    @Override
+    public void drawUnitPoints(Canvas c){
+
+    }
 }
