@@ -1,8 +1,13 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.thehillreloaded.GameActivity;
+import com.example.thehillreloaded.R;
+
+import java.util.logging.ConsoleHandler;
 
 public class QuestManager{
 
@@ -23,6 +28,7 @@ public class QuestManager{
 
     private SoundFX sfx;
     private Context context;
+    Handler handler;
 
     private QuestManager(){
     }
@@ -36,6 +42,7 @@ public class QuestManager{
 
     public void initInstance(Context context){
         this.context = context;
+        handler = new android.os.Handler();
         this.sfx = (QuestManager.SoundFX) context;
     }
 
@@ -66,6 +73,14 @@ public class QuestManager{
                         && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
                     quest1 = true;
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                     sfx.missionFX();
                     return true;
                 } else return false;
@@ -78,6 +93,14 @@ public class QuestManager{
                         && RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
                     quest1 = true;
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                     sfx.missionFX();
                     return true;
                 } else return false;
@@ -89,6 +112,14 @@ public class QuestManager{
         if(!quest2) {
             if (GameManager.getInstance().getSunnyPoints() >= Q2_COMPLETION) {
                 quest2 = true;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 sfx.missionFX();
                 return true;
             } else return false;
@@ -99,6 +130,15 @@ public class QuestManager{
         if(!quest3) {
             if (counterQuest3 >= 3) {
                 quest3 = true;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                sfx.missionFX();
                 return true;
             }else return false;
         }else return true;
@@ -108,6 +148,14 @@ public class QuestManager{
         if(!quest4) {
             if (counterQuest4 >= Q4_COMPLETION) {
                 quest4 = true;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 sfx.missionFX();
                 return true;
             }else return false;
@@ -118,6 +166,14 @@ public class QuestManager{
         if(!quest5){
             if(RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == RecycleUnitStatus.UPGRADED_TWICE){
                 quest5 = true;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 sfx.missionFX();
                 return true;
             }else return false;
@@ -128,6 +184,14 @@ public class QuestManager{
         if(!quest6) {
             if (counterQuest6 >= Q6_COMPLETION) {
                 quest6 = true;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 sfx.missionFX();
                 return true;
             }return false;

@@ -78,5 +78,6 @@
     <string name="ca_perso_upgrade">Paper unit lost an upgrade</string>
     <string name="pl_perso_upgrade">Plastic unit lost an upgrade</string>
     <string name="st_perso_upgrade">Steel unit lost an upgrade</string>
+    <string name="missione_completata">Mission completed</string>
 
 </resources>

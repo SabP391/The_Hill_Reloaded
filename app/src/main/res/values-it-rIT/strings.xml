@@ -78,4 +78,5 @@
     <string name="ca_perso_upgrade">La centrale della carta ha perso un upgrade</string>
     <string name="pl_perso_upgrade">La centrale della plastica ha perso un upgrade</string>
     <string name="st_perso_upgrade">La centrale dell\'acciaio ha perso un upgrade</string>
+    <string name="missione_completata">Missione completata</string>
 </resources>

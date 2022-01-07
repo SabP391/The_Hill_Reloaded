@@ -50,12 +50,12 @@ public class MultiplayerActivity extends AppCompatActivity {
 
     private static final String APP_NAME = "TheHillReloaded";
     private static final UUID MY_UUID= UUID.fromString("c1d8f695-0874-443f-9dec-754f5cafe6a4");
-    static final int STATE_LISTENING = 1;
-    static final int STATE_CONNECTING = 2;
-    static final int STATE_CONNECTED = 3;
-    static final int STATE_CONNECTION_FAILED = 4;
-    static final int STATE_MESSAGE_RECEIVED = 5;
-    static final String SMARTPHONE_CODE = "5a020c";
+    private static final int STATE_LISTENING = 1;
+    private static final int STATE_CONNECTING = 2;
+    private static final int STATE_CONNECTED = 3;
+    private static final int STATE_CONNECTION_FAILED = 4;
+    private static final int STATE_MESSAGE_RECEIVED = 5;
+    private static final String SMARTPHONE_CODE = "5a020c";
 
     int REQUEST_ENABLE_BLUETOOTH = 1;
     int DISCOVERABLE_ENABLED = 1;
