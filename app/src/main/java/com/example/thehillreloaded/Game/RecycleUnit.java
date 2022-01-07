@@ -9,6 +9,8 @@ import android.graphics.Point;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.thehillreloaded.R;
+
 import java.lang.reflect.Array;
 
 public abstract class RecycleUnit {
@@ -135,21 +137,30 @@ public abstract class RecycleUnit {
         drawBuff(c, currentTime);
     }
 
+    // Metodo per disegnare l'icona di warning se
+    // il wear level raggiunge livelli critici
     public void drawWearWarning(Canvas c){
-        if(currentWearLevel >= MAXIMUM_WEAR_LEVEL-10) {
+        if(currentWearLevel >= MAXIMUM_WEAR_LEVEL - 5) {
             c.drawBitmap(wearWarning, position.x, position.y, null);
         }
     }
 
+    // Metod per disegnare l'icona di buff o debuff
+    // se sull'unità è presente uno tra i due
     public void drawBuff(Canvas c, long currentTime){
         long elapsedTime = (currentTime - timeAtBuffStart) / 1000000000;
+        // controllo sulla variabile che controlla che ci sia un buff
         if(isBuffed){
+            // Se il tempo trascorso è inferiore alla durata del buff
+            // disegna l'icona
             if(elapsedTime <= MAX_BUFF_TIME){
                 c.drawBitmap(buffIcon,
                         position.x + (2 * map.getTileSize()) - buffIcon.getWidth(),
                         position.y,
                         null);
             }
+            // Altrimenti reimposta a false la variabile
+            // e riporta ad 1 tutti i moltplicatori
             else{
                 isBuffed = false;
                 processTimeMultiplier = 1;
@@ -157,7 +168,7 @@ public abstract class RecycleUnit {
                 unitPointMultiplier = 1;
             }
         }
-
+        // stessa cosa avviene nel caso sia un debuff
         if(isDebuffed){
             if(elapsedTime <= MAX_BUFF_TIME){
                 c.drawBitmap(debuffIcon,
@@ -289,7 +300,7 @@ public abstract class RecycleUnit {
             // tramite il metodo redLineMultiplier
             float redLineM = redLineMultiplier(elapsedTime);
             // Se lo slot di lavoro è occupato disegna la linea rossa
-            if(elapsedTime < PROCESSING_TIME){
+            if(elapsedTime < PROCESSING_TIME * processTimeMultiplier){
                 c.drawLine(slotsXPosition,
                         thirdSlotLineYPosition,
                         slotsXPosition + (map.getTileSize() * redLineM),
@@ -430,10 +441,15 @@ public abstract class RecycleUnit {
     // inizia il processamento, imposta tale slot come occupato
     // e ritorna vero, altrimenti ritorna falso
     public boolean processItemClassic(GameItem item){
+        // Controlla che l'oggetto sia dello stesso tipo dell'unità
         if(item.getItemType() == this.acceptedItemType) {
+            // Controlla che ci siano slot di lavoro liberi
             switch (firstFreeSlot()){
+                // Se non ce ne sono ritorna subito false
                 case 0:
                     return false;
+                // Se ce ne sono, imposta il primo slot disponibile
+                // come occupato e registra il tempo di inizio del processamento
                 case 1:
                     isFirstSlotFree = false;
                     timeAtFirstSlotProcessStart = System.nanoTime();
@@ -458,16 +474,32 @@ public abstract class RecycleUnit {
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
             }
+            // Nel caso in cui venga trovato uno slot libero
+            // ritorna true
             return true;
         }
+        // Viene ritornato false anche nel caso in cui
+        // l'oggetto sia di un tipo differente rispetto a quello dell'unità
         else return false;
     }
 
+    // Metodo per processare gli oggetti nella modalità reloaded
+    // Controlla che ci sia uno slot libero e nel caso cio` sia vero
+    // inizia il processamento, imposta tale slot come occupato
+    // e ritorna vero, altrimenti ritorna falso
+    // In questo caso vengono processati anche gli item di tipo diverso
+    // da quello dell'unità, applicando però un malus
+    // Viene infine effettuato un controllo sui buff e debuff
     public boolean processItemReloaded(GameItem item){
+        // Controlla che l'oggetto sia dello stesso tipo dell'unità
         if(item.getItemType() == this.acceptedItemType) {
+            // Controlla che ci siano slot di lavoro liberi
             switch (firstFreeSlot()){
+                // Se non ce ne sono ritorna subito false
                 case 0:
                     return false;
+                // Se ce ne sono, imposta il primo slot disponibile
+                // come occupato e registra il tempo di inizio del processamento
                 case 1:
                     isFirstSlotFree = false;
                     timeAtFirstSlotProcessStart = System.nanoTime();
@@ -492,33 +524,57 @@ public abstract class RecycleUnit {
                 default:
                     throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
             }
+            // Se sull'unità non sono già presenti buff o debuff
+            // applica l'effetto del buff o debuff dell'oggetto processato, se presente
             if(!isBuffed && !isDebuffed) {
                 startBuff(item);
                 startDebuff(item);
+                // Se l'oggetto presenta un buff ma l'unità
+                // ha già un buff atttivo, l'oggetto viene processato come
+                // un oggetto normale e viene mostrato un messaggio
+            }else if(item.getBuffType() != BuffType.NONE){
+                Toast.makeText(context, R.string.power_up_gia_attivo, Toast.LENGTH_SHORT).show();
             }
-
+        // Se l'oggetto processato non è dello stesso tipo dell'unità
         }else{
+            // Controlla che il giocatore abbia abbastanza unit point
+            // da applicare il malus
             if(unitPoints >= UNIT_POINT_GAIN * 2 && GameManager.getInstance().getSunnyPoints() >= 1){
-                switch (firstFreeSlot()){
-                    case 0:
-                        return false;
-                    case 1:
-                        isFirstSlotFree = false;
-                        timeAtFirstSlotProcessStart = System.nanoTime();
-                        break;
-                    case 2:
-                        isSecondSlotFree = false;
-                        timeAtSecondSlotProcessStart = System.nanoTime();
-                        break;
-                    case 3:
-                        isThirdSlotFree = false;
-                        timeAtThirdSlotProcessStart = System.nanoTime();
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
+                // Controlla che l'oggetto non presenti buff o debuff
+                if(item.getBuffType() == BuffType.NONE) {
+                    // Controlla che ci sia almento uno slot di lavoro libero
+                    switch (firstFreeSlot()) {
+                        // Nel caso non ci siano ritorna subito false
+                        case 0:
+                            return false;
+                        // Altrimenti inizia il processamento sul primo
+                        // slot disponibile
+                        case 1:
+                            isFirstSlotFree = false;
+                            timeAtFirstSlotProcessStart = System.nanoTime();
+                            break;
+                        case 2:
+                            isSecondSlotFree = false;
+                            timeAtSecondSlotProcessStart = System.nanoTime();
+                            break;
+                        case 3:
+                            isThirdSlotFree = false;
+                            timeAtThirdSlotProcessStart = System.nanoTime();
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + firstFreeSlot());
+                    }
+                    // Se l'oggetto viene procesato, rimuove unit points e sunny points
+                    unitPoints -= UNIT_POINT_GAIN * 2;
+                    GameManager.getInstance().subtractSunnyPoints(1);
+                }else {
+                    // Se l'oggetto presenta un buff o debuff e viene
+                    // portato sulla centrale di tipo errato viene mostrato un messaggio
+                    // di errore e viene ritornato false
+                    Toast.makeText(context, R.string.power_up_centrale_sbagliata, Toast.LENGTH_SHORT).show();
+                    return false;
                 }
-                unitPoints -= UNIT_POINT_GAIN * 2;
-                GameManager.getInstance().subtractSunnyPoints(1);
+                // Ritorna false in ogni altro caso
             }else{
                 return false;
             }
@@ -526,6 +582,8 @@ public abstract class RecycleUnit {
         return true;
     }
 
+    // Metodo che applica uno o l'altro dei metodi di processamenti
+    // in base a che la modalità di gioco sia classic o reloaded
     public boolean processItem(GameItem item){
         boolean result;
         if(gameMode == GameMode.CLASSIC){
@@ -542,44 +600,56 @@ public abstract class RecycleUnit {
         return result;
     }
 
+    // Metodo per gestire i buff della centrale
     public void startBuff(GameItem item){
+        // Viene effettuato un controllo sul tipo di buff e
+        // viene modificato il moltiplicatore associato a tale buff
+        // infine viene mostrato un messaggio su quale buff sia stato attivato
         switch (item.getBuffType()){
             case DOUBLE_UNIT_POINTS:
                 unitPointMultiplier = 2;
-                Toast.makeText(context, "unitPointRaddoppiati", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.unit_points_raddoppiati, Toast.LENGTH_SHORT).show();
                 break;
             case REDUCE_UNIT_WEAR:
                 wearMultiplier = 0;
-                Toast.makeText(context, "usuraRidotta", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.usura_ridotta, Toast.LENGTH_SHORT).show();
                 break;
             case REDUCE_PROCESSING_TIME:
                 processTimeMultiplier = (float) - 1.5;
-                Toast.makeText(context, "tempoRidotto", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.processamento_ridotto, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return;
         }
+        // Se viene effettivamente applicato un buff viene
+        // impostata la variabile di controllo a true e viene registrato il tempo
         isBuffed = true;
         timeAtBuffStart = System.nanoTime();
     }
 
+    // Metodo per gestire i debuff della centrale
     public void startDebuff(GameItem item){
         switch (item.getBuffType()){
+            // Viene effettuato un controllo sul tipo di debuff e
+            // viene modificato il moltiplicatore associato a tale debuff
+            // infine viene mostrato un messaggio su quale debuff sia stato attivato
             case NO_UNIT_POINTS:
                 unitPointMultiplier = 0;
-                Toast.makeText(context, "UnitPointAzzerati", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.unit_points_ridotti, Toast.LENGTH_SHORT).show();
                 break;
             case INCREASE_UNIT_WEAR:
                 wearMultiplier = 2;
-                Toast.makeText(context, "usuraRaddoppiata", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.usura_raddoppiata, Toast.LENGTH_SHORT).show();
                 break;
             case INCREASE_PROCESSING_TIME:
                 processTimeMultiplier = (float) 1.5;
-                Toast.makeText(context, "tempoAumentato", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.processamento_aumentato, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return;
         }
+        // Se viene effettivamente applicato un debuff viene
+        // impostata la variabile di controllo a true e viene registrato il tempo
         isDebuffed = true;
         timeAtBuffStart = System.nanoTime();
     }

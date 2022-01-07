@@ -63,4 +63,19 @@
     <string name="text_costo_sbloccabili">Costo: %1$d</string>
     <string name="text_ricavo_sbloccabili">Ricavo: %1$d</string>
     <string name="riprova">Riprova</string>
+    <string name="power_up_centrale_sbagliata">Unità sbagliata</string>
+    <string name="power_up_gia_attivo">C\'è già un power up attivo su questa unità</string>
+    <string name="unit_points_raddoppiati">Unit points guadagnati x2</string>
+    <string name="usura_ridotta">Usura ridotta</string>
+    <string name="processamento_ridotto">Tempo di processamento ridotto</string>
+    <string name="unit_points_ridotti">Unit points guadagnati x0</string>
+    <string name="usura_raddoppiata">Usura aumentata</string>
+    <string name="processamento_aumentato">Tempo di processamento aumentato</string>
+    <string name="al_perso_upgrade">La centrale dell\'alluminio ha perso un upgrade.</string>
+    <string name="or_perso_upgrade">La centrale dell\'organico ha perso un upgrade.</string>
+    <string name="ew_perso_upgrade">La centrale dell\'e-waste ha perso un upgrade</string>
+    <string name="ve_perso_upgrade">La centrale del vetro ha perso un upgrade</string>
+    <string name="ca_perso_upgrade">La centrale della carta ha perso un upgrade</string>
+    <string name="pl_perso_upgrade">La centrale della plastica ha perso un upgrade</string>
+    <string name="st_perso_upgrade">La centrale dell\'acciaio ha perso un upgrade</string>
 </resources>

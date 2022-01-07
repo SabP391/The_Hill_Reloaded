@@ -63,5 +63,20 @@
     <string name="text_costo_sbloccabili">Cost: %1$d</string>
     <string name="text_ricavo_sbloccabili">Gain: %1$d</string>
     <string name="riprova">Try again</string>
+    <string name="power_up_centrale_sbagliata">Wrong unit</string>
+    <string name="power_up_gia_attivo">There is an active power up on this unit</string>
+    <string name="unit_points_raddoppiati">Unit points gained x2</string>
+    <string name="usura_ridotta">Reduced unit wear</string>
+    <string name="processamento_ridotto">Reduced processing time</string>
+    <string name="unit_points_ridotti">Unit points gained x0</string>
+    <string name="usura_raddoppiata">Increased unit wear</string>
+    <string name="processamento_aumentato">Increased processing time</string>
+    <string name="al_perso_upgrade">Alluminium unit lost an upgrade</string>
+    <string name="or_perso_upgrade">Compost unit lost an upgrade</string>
+    <string name="ew_perso_upgrade">E-waste unit lost an upgrade</string>
+    <string name="ve_perso_upgrade">Glass unit lost an upgrade</string>
+    <string name="ca_perso_upgrade">Paper unit lost an upgrade</string>
+    <string name="pl_perso_upgrade">Plastic unit lost an upgrade</string>
+    <string name="st_perso_upgrade">Steel unit lost an upgrade</string>
 
 </resources>

@@ -37,9 +37,9 @@ public class GameItemsManager {
         // Questo array viene inizializzato aggiungendo un numero maggiore
         // di "NONE" per far si che la probabilità di generare
         // un buff/debuff sia più bassa di quella di generare un oggetto standard
-        /*for(int i = 0; i < 50; i++){
+        for(int i = 0; i < 50; i++){
             buffTypes.add(BuffType.NONE);
-        }*/
+        }
         for(BuffType b : BuffType.values()){
             buffTypes.add(b);
         }

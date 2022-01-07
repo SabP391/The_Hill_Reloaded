@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.widget.Toast;
 
+import com.example.thehillreloaded.R;
+
 public class CompostRecycleUnit extends RecycleUnit{
 
     public CompostRecycleUnit(TileMap map, Context context){
@@ -28,7 +30,7 @@ public class CompostRecycleUnit extends RecycleUnit{
 
     @Override
     public void downgradeMessage() {
-        Toast.makeText(context, "La centrale dell'organico ha perso un upgrade.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.or_perso_upgrade, Toast.LENGTH_SHORT).show();
     }
 
 }
