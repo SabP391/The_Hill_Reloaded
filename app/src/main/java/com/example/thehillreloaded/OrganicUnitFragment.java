@@ -31,6 +31,7 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
  */
 public class OrganicUnitFragment extends Fragment {
     private SoundFX sfx;
+
     //componenti layout
     TextView costo1;
     TextView costo2;
@@ -121,6 +122,7 @@ public class OrganicUnitFragment extends Fragment {
         sblocco1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(0)) {
                     if (!RecycleUnitsManager.getInstance().getCompostObject(0)) {
                         sblocco(1);
@@ -132,7 +134,7 @@ public class OrganicUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -140,6 +142,7 @@ public class OrganicUnitFragment extends Fragment {
         sblocco2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(1)) {
                     if (!RecycleUnitsManager.getInstance().getCompostObject(1)) {
                         sblocco(2);
@@ -151,7 +154,7 @@ public class OrganicUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -159,6 +162,7 @@ public class OrganicUnitFragment extends Fragment {
         sblocco3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(2)) {
                     if (!RecycleUnitsManager.getInstance().getCompostObject(2)) {
                         sblocco(3);
@@ -170,7 +174,7 @@ public class OrganicUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -178,6 +182,7 @@ public class OrganicUnitFragment extends Fragment {
         sblocco4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockCompostObject(3)) {
                     if (!RecycleUnitsManager.getInstance().getCompostObject(3)) {
                         sblocco(4);
@@ -189,7 +194,7 @@ public class OrganicUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getCompostUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -200,9 +205,11 @@ public class OrganicUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(RecycleUnitsManager.getInstance().getCompostUnit().upgradeUnit()){
+                    sfx.suonoUpgrade();
                     setLayoutElements();
                     setUnitDetails();
                 } else {
+                    sfx.suonoBottoni();
                     Toast.makeText(getActivity().getApplicationContext(), "Non puoi fare cose.", Toast.LENGTH_SHORT).show();
                 }
             }

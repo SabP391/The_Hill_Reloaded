@@ -122,6 +122,7 @@ public class AluminiumUnitFragment extends Fragment {
         sblocco1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockAluminiumObject(0)) {
                     if (!RecycleUnitsManager.getInstance().getAluminiumObject(0)) {
                         sblocco(1);
@@ -133,7 +134,7 @@ public class AluminiumUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getAluminiumUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -141,6 +142,7 @@ public class AluminiumUnitFragment extends Fragment {
         sblocco2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockAluminiumObject(1)) {
                     if (!RecycleUnitsManager.getInstance().getAluminiumObject(1)) {
                         sblocco(2);
@@ -152,7 +154,7 @@ public class AluminiumUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getAluminiumUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -160,6 +162,7 @@ public class AluminiumUnitFragment extends Fragment {
         sblocco3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockAluminiumObject(2)) {
                     if (!RecycleUnitsManager.getInstance().getAluminiumObject(2)) {
                         sblocco(3);
@@ -171,7 +174,7 @@ public class AluminiumUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getAluminiumUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -179,6 +182,7 @@ public class AluminiumUnitFragment extends Fragment {
         sblocco4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockAluminiumObject(3)) {
                     if (!RecycleUnitsManager.getInstance().getAluminiumObject(3)) {
                         sblocco(4);
@@ -190,7 +194,7 @@ public class AluminiumUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getAluminiumUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -201,9 +205,11 @@ public class AluminiumUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(RecycleUnitsManager.getInstance().getAluminiumUnit().upgradeUnit()){
+                    sfx.suonoUpgrade();
                     setLayoutElements();
                     setUnitDetails();
                 } else {
+                    sfx.suonoBottoni();
                     Toast.makeText(getActivity().getApplicationContext(), "Non puoi fare cose.", Toast.LENGTH_SHORT).show();
                 }
             }

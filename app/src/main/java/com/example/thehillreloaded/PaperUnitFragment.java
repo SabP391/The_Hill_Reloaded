@@ -134,7 +134,7 @@ public class PaperUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -154,7 +154,7 @@ public class PaperUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -174,7 +174,7 @@ public class PaperUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -194,7 +194,7 @@ public class PaperUnitFragment extends Fragment {
                             RecycleUnitsManager.getInstance().getPaperUnit().getUnitPoints()));
                 } else {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_LONG);
+                            getString(R.string.unit_non_sufficienti), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
