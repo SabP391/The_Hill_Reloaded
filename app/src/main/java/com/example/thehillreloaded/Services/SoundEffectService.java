@@ -24,6 +24,9 @@ public class SoundEffectService extends Service {
     private int track4;
     private int track5;
 
+    //test
+    private int traccia2stream;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -61,8 +64,10 @@ public class SoundEffectService extends Service {
     public void suonoBottoni() {
         soundPool.play(track1, 1.0f, 1.0f, 1, 0, 1.0f);
     }
-    public void suonoUnitaInFunzione() { soundPool.play(track2, 1.0f, 1.0f, 1, 0, 1.0f); }
+    public void suonoUnitaInFunzione() { traccia2stream = soundPool.play(track2, 1.0f, 1.0f, 1, 0, 1.0f); }
     public void suonoCostruzioneUpgrade() { soundPool.play(track3, 1.0f, 1.0f, 1, 0, 1.0f); }
     public void suonoGameOver() { soundPool.play(track4, 1.0f, 1.0f, 1, 0, 1.0f); }
     public void suonoMissioneCompleta() { soundPool.play(track5, 1.0f, 1.0f, 1, 0, 1.0f); }
+
+    public void bloccaSuonoUnita() { soundPool.stop(traccia2stream);}
 }
