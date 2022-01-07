@@ -14,11 +14,15 @@ public class SoundEffectService extends Service {
     private IBinder binder = new LocalBinder();
 
     private AudioAttributes audioAttributes;
-    final int SOUND_POOL_MAX = 1;
+    final int SOUND_POOL_MAX = 5;
     private SoundPool soundPool;
 
     //track individuate tramite int
     private int track1;
+    private int track2;
+    private int track3;
+    private int track4;
+    private int track5;
 
     @Override
     public void onCreate() {
@@ -35,6 +39,10 @@ public class SoundEffectService extends Service {
 
         //LOAD TRACKS HERE
         track1 = soundPool.load(getApplicationContext(), R.raw.button_track, 1);
+        track2 = soundPool.load(getApplicationContext(), R.raw.recycle_units_track, 1);
+        track3 = soundPool.load(getApplicationContext(), R.raw.building_track, 1);
+        track4 = soundPool.load(getApplicationContext(), R.raw.game_over_track, 1);
+        track5 = soundPool.load(getApplicationContext(), R.raw.mission_success_track, 1);
     }
 
     //Classe usata per client binder
@@ -53,4 +61,8 @@ public class SoundEffectService extends Service {
     public void suonoBottoni() {
         soundPool.play(track1, 1.0f, 1.0f, 1, 0, 1.0f);
     }
+    public void suonoUnitaInFunzione() { soundPool.play(track2, 1.0f, 1.0f, 1, 0, 1.0f); }
+    public void suonoCostruzioneUpgrade() { soundPool.play(track3, 1.0f, 1.0f, 1, 0, 1.0f); }
+    public void suonoGameOver() { soundPool.play(track4, 1.0f, 1.0f, 1, 0, 1.0f); }
+    public void suonoMissioneCompleta() { soundPool.play(track5, 1.0f, 1.0f, 1, 0, 1.0f); }
 }

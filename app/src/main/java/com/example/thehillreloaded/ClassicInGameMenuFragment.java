@@ -22,8 +22,6 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
  * create an instance of this fragment.
  */
 public class ClassicInGameMenuFragment extends Fragment {
-    private SoundFX sfx;
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,24 +97,5 @@ public class ClassicInGameMenuFragment extends Fragment {
             costo_ewaste.setText(" " + RecycleUnitsManager.getInstance().getCostOfEwasteUnit()); }
 
         return view;
-    }
-
-    interface SoundFX {
-        void suonoBottoni();
-
-        //quando saranno attivi i bottoni, aggiungere -> sfx.suonoBottoni(); <-
-    }
-
-    //override dei metodi onAttach e onDetach
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        sfx = (ClassicInGameMenuFragment.SoundFX) context;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        sfx = null;
     }
 }

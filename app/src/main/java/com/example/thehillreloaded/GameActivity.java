@@ -34,7 +34,7 @@ import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 
-public class GameActivity extends AppCompatActivity implements ClassicInGameMenuFragment.SoundFX{
+public class GameActivity extends AppCompatActivity{
     private GameMode gameMode;
     private Difficulty difficulty;
     private TileMap map;
@@ -317,8 +317,6 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
         }
     };
 
-    @Override
-    public void suonoBottoni() {  if(SFXattivi){ soundService.suonoBottoni(); } }
 
     //Metodi OnClick per le diverse centrali
     public void onClickMenuVetro(View view){
@@ -333,8 +331,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     }
 
     public void onClickMenuCarta(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isPaperUnitUnlocked()) {
+            if(SFXattivi){ soundService.suonoBottoni(); }
             boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
@@ -345,9 +343,11 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.commit();
         } else {
             if (RecycleUnitsManager.getInstance().unlockPaperUnit()){
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
                 getSupportFragmentManager().popBackStackImmediate();
                 GameManager.getInstance().unPause();
             } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -355,8 +355,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     }
 
     public void onClickMenuPlastica(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()) {
+            if(SFXattivi){ soundService.suonoBottoni(); }
             boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
@@ -367,9 +367,11 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.commit();
         } else {
             if (RecycleUnitsManager.getInstance().unlockPlasticUnit()) {
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
                 getSupportFragmentManager().popBackStackImmediate();
                 GameManager.getInstance().unPause();
             } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -377,8 +379,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     }
 
     public void onClickMenuAlluminio(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()) {
+            if(SFXattivi){ soundService.suonoBottoni(); }
             boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
@@ -389,9 +391,11 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.commit();
         } else {
             if (RecycleUnitsManager.getInstance().unlockAluminiumUnit()) {
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
                 getSupportFragmentManager().popBackStackImmediate();
                 GameManager.getInstance().unPause();
             } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -399,8 +403,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     }
 
     public void onClickMenuEwaste(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()) {
+            if(SFXattivi){ soundService.suonoBottoni(); }
             boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
@@ -411,9 +415,11 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.commit();
         } else {
             if (RecycleUnitsManager.getInstance().unlockEWasteUnit()) {
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
                 getSupportFragmentManager().popBackStackImmediate();
                 GameManager.getInstance().unPause();
             } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -421,8 +427,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     }
 
     public void onClickMenuAcciaio(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
+            if(SFXattivi){ soundService.suonoBottoni(); }
             boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
@@ -433,9 +439,11 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.commit();
         } else {
             if (RecycleUnitsManager.getInstance().unlockSteelUnit()) {
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
                 getSupportFragmentManager().popBackStackImmediate();
                 GameManager.getInstance().unPause();
             } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -443,8 +451,8 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
     }
 
     public void onClickMenuOrganico(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
         if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+            if(SFXattivi){ soundService.suonoBottoni(); }
             boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
@@ -455,9 +463,11 @@ public class GameActivity extends AppCompatActivity implements ClassicInGameMenu
             fmt.commit();
         } else {
             if (RecycleUnitsManager.getInstance().unlockCompostUnit()) {
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
                 getSupportFragmentManager().popBackStackImmediate();
                 GameManager.getInstance().unPause();
             } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
                 toast.show();
             }
