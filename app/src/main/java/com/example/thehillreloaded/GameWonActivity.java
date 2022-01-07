@@ -62,15 +62,15 @@ public class GameWonActivity extends AppCompatActivity {
 
     public void backToMainMenu(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
+        mainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainMenu);
-        finish();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        mainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainMenu);
-        finish();
     }
 
     //Necessari per il service binding
