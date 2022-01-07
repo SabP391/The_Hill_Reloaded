@@ -4,9 +4,11 @@ import static com.example.thehillreloaded.Game.RecycleUnitStatus.BASE;
 import static com.example.thehillreloaded.Game.RecycleUnitStatus.UPGRADED_ONCE;
 import static com.example.thehillreloaded.Game.RecycleUnitStatus.UPGRADED_TWICE;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,6 +30,8 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
  * create an instance of this fragment.
  */
 public class AluminiumUnitFragment extends Fragment {
+    private SoundFX sfx;
+
     //componenti layout
     TextView costo1;
     TextView costo2;
@@ -311,5 +315,22 @@ public class AluminiumUnitFragment extends Fragment {
             case UPGRADED_TWICE: unitStatus.setText(getString(R.string.text_status, 2));
                 break;
         }
+    }
+
+    interface SoundFX {
+        void suonoBottoni();
+        void suonoUpgrade();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        sfx = (AluminiumUnitFragment.SoundFX) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        sfx = null;
     }
 }

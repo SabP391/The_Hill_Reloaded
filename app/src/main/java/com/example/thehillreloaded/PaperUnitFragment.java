@@ -122,6 +122,7 @@ public class PaperUnitFragment extends Fragment {
         sblocco1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(0)) {
                     if (!RecycleUnitsManager.getInstance().getPaperObject(0)) {
                         sblocco(1);
@@ -141,6 +142,7 @@ public class PaperUnitFragment extends Fragment {
         sblocco2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(1)) {
                     if (!RecycleUnitsManager.getInstance().getPaperObject(1)) {
                         sblocco(2);
@@ -160,6 +162,7 @@ public class PaperUnitFragment extends Fragment {
         sblocco3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(2)) {
                     if (!RecycleUnitsManager.getInstance().getPaperObject(2)) {
                         sblocco(3);
@@ -179,6 +182,7 @@ public class PaperUnitFragment extends Fragment {
         sblocco4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sfx.suonoBottoni();
                 if (RecycleUnitsManager.getInstance().unlockPaperObject(3)) {
                     if (!RecycleUnitsManager.getInstance().getPaperObject(3)) {
                         sblocco(4);
@@ -201,9 +205,11 @@ public class PaperUnitFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(RecycleUnitsManager.getInstance().getPaperUnit().upgradeUnit()){
+                    sfx.suonoUpgrade();
                     setLayoutElements();
                     setUnitDetails();
                 } else {
+                    sfx.suonoBottoni();
                     Toast.makeText(getActivity().getApplicationContext(), "Non puoi fare cose.", Toast.LENGTH_SHORT).show();
                 }
             }

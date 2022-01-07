@@ -34,7 +34,9 @@ import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 
-public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX{
+public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX, GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
+        PlasticUnitFragment.SoundFX, EwasteUnitFragment.SoundFX, MetalUnitFragment.SoundFX, AluminiumUnitFragment.SoundFX,
+        OrganicUnitFragment.SoundFX{
     private GameMode gameMode;
     private Difficulty difficulty;
     private TileMap map;
@@ -508,5 +510,15 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void missionFX() {
         if(SFXattivi){
             soundService.suonoMissioneCompleta(); }
+    }
+
+    @Override
+    public void suonoBottoni() {
+        if (SFXattivi) { soundService.suonoBottoni(); }
+    }
+
+    @Override
+    public void suonoUpgrade() {
+        if(SFXattivi) { soundService.suonoCostruzioneUpgrade(); }
     }
 }
