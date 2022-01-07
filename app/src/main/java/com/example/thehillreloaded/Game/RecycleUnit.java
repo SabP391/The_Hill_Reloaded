@@ -67,11 +67,15 @@ public abstract class RecycleUnit {
     protected Paint grayLine;
     protected Paint redLine;
     protected Point warningIconSize;
+    protected Point upIconSize;
 
     // Attributi per disegnare a schermo le icone di avviso ----------------------------------------
     protected Bitmap wearWarning;
+    protected Bitmap unitPointsIcon;
     protected Bitmap buffIcon;
     protected Bitmap debuffIcon;
+
+    protected Paint upValue;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -99,10 +103,13 @@ public abstract class RecycleUnit {
         redLine.setStrokeWidth(15);
 
         warningIconSize = new Point((int) map.getTileSize()/2, (int) map.getTileSize()/2);
+        upIconSize = new Point((int) map.getTileSize()/4, (int) map.getTileSize()/4);
         wearWarning = GameAssets.getInstance(context).getWearWarningIcon(warningIconSize);
-
+        unitPointsIcon = GameAssets.getInstance(context).getUnitPointsIcon(upIconSize);
         buffIcon = GameAssets.getInstance(context).getBuffIcon(warningIconSize);
         debuffIcon =  GameAssets.getInstance(context).getDebuffIcon(warningIconSize);
+        upValue = new Paint();
+        upValue.setTextSize(30);
     }
     // Metodi utili --------------------------------------------------------------------------------
 
@@ -134,6 +141,7 @@ public abstract class RecycleUnit {
         c.drawBitmap(sprite, position.x, position.y, null);
         drawProcessSlots(c, currentTime);
         drawWearWarning(c);
+        drawUnitPoints(c);
         drawBuff(c, currentTime);
     }
 
@@ -143,6 +151,11 @@ public abstract class RecycleUnit {
         if(currentWearLevel >= MAXIMUM_WEAR_LEVEL - 5) {
             c.drawBitmap(wearWarning, position.x, position.y, null);
         }
+    }
+
+    public void drawUnitPoints(Canvas c){
+        c.drawBitmap(unitPointsIcon, slotsXPosition , secondSlotLineYPosition + map.getTileSize()/3, null);
+        c.drawText( String.valueOf(unitPoints), slotsXPosition + map.getTileSize()/4, secondSlotLineYPosition + map.getTileSize()/2, upValue);
     }
 
     // Metod per disegnare l'icona di buff o debuff
