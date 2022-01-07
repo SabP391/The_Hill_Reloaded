@@ -120,7 +120,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 index++;
             }
         }else{
-            //map.drawTilemap(c);
+            map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -291,7 +291,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
            Point touchPosition = new Point((int) x, (int) y);
            // Trova l'indice della tile all'interno della quale è
            // stato rilevto il tocco
-           int tile = map.getTileIndexFromPosition(touchPosition);
+           int tile = map.getTileIndexFromPosition(touchPosition) - 1; // In questo punto bisogna togliere -1 se si vuole avere il touch corretto su EMULATORE, -1 è necessario per avere il touch preciso su smartphone
            switch(event.getAction()){
                // Al primo tocco sullo schermo controlla che il tocco
                // sia avvenuto su uno degli oggetti in gioco
@@ -301,6 +301,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                        // la tile in cui è effettuato il tocco con la current tile
                        // di ogniuno degli oggetti in gioco
                        if(i.getCurrentTile() == tile){
+
                            // Se viene trovato un oggetto viene assegnato alla
                            // variabile moving item
                            movingItem = i;
@@ -312,9 +313,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                // nella fase precedente
                case MotionEvent.ACTION_MOVE:
                    if(movingItem != null){
+                       Point movPos = new Point((int) (x - (map.getTileSize()/2)), (int) (y - (map.getTileSize()/2)));
                        // Se un oggetto è in movimento, modifica le sue coordinate
                        // in base alla posizione del dito sullo schermo
-                       movingItem.setPosition(touchPosition);
+                       movingItem.setPosition(movPos);
                    }
                    break;
                // Quando il dito viene sollevato o viene portato fuori dallo schermo
