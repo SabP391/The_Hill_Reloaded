@@ -31,8 +31,7 @@ public class GameWonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_won);
-
-        mainMenu = new Intent(this, GuestMenuActivity.class);
+        effettiSonori = new Intent(this, SoundEffectService.class);
     }
 
     @Override
@@ -44,6 +43,12 @@ public class GameWonActivity extends AppCompatActivity {
         SFXattivi = pref.getBoolean("SFX_attivi", true);
         //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
+        if(pref.getAll().containsKey("account-utente-loggato")){
+            mainMenu = new Intent(this, UserMenuActivity.class);
+        }
+        else{
+            mainMenu = new Intent(this, GuestMenuActivity.class);
+        }
     }
 
     @Override
@@ -58,12 +63,14 @@ public class GameWonActivity extends AppCompatActivity {
     public void backToMainMenu(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         startActivity(mainMenu);
+        finish();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(mainMenu);
+        finish();
     }
 
     //Necessari per il service binding
