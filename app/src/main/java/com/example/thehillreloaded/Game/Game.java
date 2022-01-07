@@ -62,6 +62,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private Point spriteSize;
     private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
     private long lastUpdate;
+    private SoundFx sFX;
 
     private final static int SHAKE_SENSITIVITY = 10;
     private float accelerationVal, accelerationLast, shake;
@@ -74,6 +75,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         super(context);
         this.map = map;
         this.context = context;
+        sFX = (Game.SoundFx) context;
         init();
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), sensorManager.SENSOR_DELAY_GAME);
@@ -144,6 +146,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                     if(i.checkForGameOverPosition()){
                         Intent gameLost = new Intent(context, GameOverActivity.class);
                         stopDrawThread();
+                        sFX.suonoGameOver();
                         context.startActivity(gameLost);
                     }
                     i.fall(System.nanoTime());
@@ -396,6 +399,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 || Build.PRODUCT.contains("vbox86p")
                 || Build.PRODUCT.contains("emulator")
                 || Build.PRODUCT.contains("simulator");
+    }
+
+    public interface SoundFx{
+        void suonoGameOver();
     }
 
 }
