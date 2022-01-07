@@ -33,9 +33,14 @@ public class GameOverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
+        Bundle bundle = new Bundle();
+        bundle.putInt("GAME_MODE", getIntent().getExtras().getInt("GAME_MODE"));
+        bundle.putInt("GAME_DIFF", getIntent().getExtras().getInt("GAME_DIFF"));
+
         effettiSonori = new Intent(this, SoundEffectService.class);
         mainMenu = new Intent(this, GuestMenuActivity.class);
         replay = new Intent(this, GameActivity.class);
+        replay.putExtras(bundle);
     }
 
     @Override

@@ -108,7 +108,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         GameItemsManager.getInstance().initInstance(this, map);
         RecycleUnitsManager.getInstance().initInstance(this, map);
         QuestManager.getInstance().initInstance(this);
-        Game game = new Game(this, map);
+        Game game = new Game(this, map, initInformation);
 
 
 

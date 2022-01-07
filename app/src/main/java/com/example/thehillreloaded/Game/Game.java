@@ -10,6 +10,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
@@ -63,6 +64,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
     private long lastUpdate;
     private SoundFx sFX;
+    private Bundle info;
 
     private final static int SHAKE_SENSITIVITY = 10;
     private float accelerationVal, accelerationLast, shake;
@@ -71,7 +73,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Creazione e inizializzazione della classe Game ----------------------------------------------
 
     // Costruttore per la classe Game
-    public Game(Context context, TileMap map) {
+    public Game(Context context, TileMap map, Bundle bundle) {
         super(context);
         this.map = map;
         this.context = context;
@@ -83,6 +85,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         accelerationVal = SensorManager.GRAVITY_EARTH;
         accelerationLast = SensorManager.GRAVITY_EARTH;
         shake = 0.00f;
+        info = new Bundle();
+        info.putInt("GAME_MODE", bundle.getInt("GAME_MODE"));
+        info.putInt("GAME_DIFF", bundle.getInt("GAME_DIFF"));
     }
 
     // Inizializza la classe Game
@@ -145,6 +150,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 if(i != movingItem){
                     if(i.checkForGameOverPosition()){
                         Intent gameLost = new Intent(context, GameOverActivity.class);
+                        gameLost.putExtras(info);
                         stopDrawThread();
                         sFX.suonoGameOver();
                         context.startActivity(gameLost);
