@@ -81,12 +81,13 @@ public class AccessActivity extends AppCompatActivity {
         Button signInButton = findViewById(R.id.bottone_google);
         //signInButton.setSize(SignInButton.SIZE_STANDARD);
 
+        /*
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn();
             }
-        });
+        });*/
     }
 
     @Override
@@ -203,7 +204,8 @@ public class AccessActivity extends AppCompatActivity {
 
     public void onClickUtente(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
-        //autenticazione.getInstance(this).login(this);
+        Intent intent = new Intent(this, MultiplayerGameActivity.class);
+        startActivity(intent);
     }
 
     public void onClickOspite(View view) {

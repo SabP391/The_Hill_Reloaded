@@ -154,13 +154,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     // metodo che gestisce la logica di gioco
     public void gameLogic(){
+        long timeNow = System.nanoTime();
+
         if(QuestManager.getInstance().isGameWon()){
             Intent gameWon = new Intent(context, GameWonActivity.class);
             stopDrawThread();
             context.startActivity(gameWon);
         }
         if(!GameManager.getInstance().isPaused()){
-            if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
+            if(GameManager.getInstance().isTimeToSpawn(timeNow)){
                 GameItemsManager.getInstance().spawnNewObject();
             }
             for(GameItem i : itemsOnScreen){
@@ -192,6 +194,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                     }
                 }
             }
+        }
+
+        // Aggiornamento del tempo di gioco
+        if((timeNow - elapsedTime) / 1000000000 >= 1){
+            Log.d("eTime", String.valueOf(elapsedTime));
+            Log.d("timeNow", String.valueOf(timeNow));
+            GameManager.getInstance().getPlayTime().increasePlayTime();
+            elapsedTime = timeNow;
         }
     }
 
