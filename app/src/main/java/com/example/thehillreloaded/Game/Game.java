@@ -12,6 +12,7 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.service.quicksettings.Tile;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -37,37 +38,37 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabili necessarie per il rendering e il gamloop ------------------------------------------
 
     // Holder necessario per accedere alla surfaceView in cui verrà renderizzato il gioco
-    private SurfaceHolder holder;
+    protected SurfaceHolder holder;
     // Thread per il rendering
-    private Thread drawThread;
+    protected Thread drawThread;
     // Variabile booleana per controllare che la superficie sia pronta per essere aggiornata
-    private boolean isSurfaceReady = false;
+    protected boolean isSurfaceReady = false;
     // Variabile booleana per tenere sotto controllo lo stato del renderer
-    private boolean isDrawing = false;
+    protected boolean isDrawing = false;
     // Tempo per frame per ottenere i 60 FPS
-    private static final int MAX_FRAME_TIME = (int) (1000.0 / 60.0);
+    protected static final int MAX_FRAME_TIME = (int) (1000.0 / 60.0);
     // Variabile per il context
-    private Context context;
-    private static final String LOGTAG = "surface";
-    private boolean timeToDestroy = false;
-    private Handler messageHandler;
+    protected Context context;
+    protected static final String LOGTAG = "surface";
+    protected boolean timeToDestroy = false;
+    protected Handler messageHandler;
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
-    private TileMap map;
-    private GameItem movingItem = null;
-    private Bitmap mixedArray[];
-    private ConcurrentLinkedQueue<GameItem> itemsOnScreen;
-    private long elapsedTime;
-    private Random rand;
-    private int currentIndex = 0;
-    private Point spriteSize;
-    private ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
-    private long lastUpdate;
-    private SoundFx sFX;
-    private Bundle info;
+    protected TileMap map;
+    protected GameItem movingItem = null;
+    protected Bitmap mixedArray[];
+    protected ConcurrentLinkedQueue<GameItem> itemsOnScreen;
+    protected long elapsedTime;
+    protected Random rand;
+    protected int currentIndex = 0;
+    protected Point spriteSize;
+    protected ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
+    protected long lastUpdate;
+    protected SoundFx sFX;
+    protected Bundle info;
 
-    private final static int SHAKE_SENSITIVITY = 10;
-    private float accelerationVal, accelerationLast, shake;
+    protected final static int SHAKE_SENSITIVITY = 10;
+    protected float accelerationVal, accelerationLast, shake;
 
 
     // Creazione e inizializzazione della classe Game ----------------------------------------------
@@ -75,23 +76,28 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Costruttore per la classe Game
     public Game(Context context, TileMap map, Bundle bundle) {
         super(context);
+        init(context, map);
+        info = new Bundle();
+        info.putInt("GAME_MODE", bundle.getInt("GAME_MODE"));
+        info.putInt("GAME_DIFF", bundle.getInt("GAME_DIFF"));
+    }
+
+    public Game(Context context, TileMap map) {
+        super(context);
+        init(context, map);
+    }
+
+    // Inizializza la classe Game
+    public void init(Context context, TileMap map){
         this.map = map;
         this.context = context;
         sFX = (Game.SoundFx) context;
-        init();
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), sensorManager.SENSOR_DELAY_GAME);
 
         accelerationVal = SensorManager.GRAVITY_EARTH;
         accelerationLast = SensorManager.GRAVITY_EARTH;
         shake = 0.00f;
-        info = new Bundle();
-        info.putInt("GAME_MODE", bundle.getInt("GAME_MODE"));
-        info.putInt("GAME_DIFF", bundle.getInt("GAME_DIFF"));
-    }
-
-    // Inizializza la classe Game
-    public void init(){
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);

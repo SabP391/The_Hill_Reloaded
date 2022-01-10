@@ -23,6 +23,7 @@ import com.example.thehillreloaded.Game.Game;
 import com.example.thehillreloaded.Game.GameItemsManager;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
+import com.example.thehillreloaded.Game.GameMultiplayer;
 import com.example.thehillreloaded.Game.QuestManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.Game.TileMap;
@@ -64,6 +65,8 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         GameManager.getInstance().setMultiplayerGame(true);
         GameItemsManager.getInstance().initInstance(this, map);
         RecycleUnitsManager.getInstance().initInstance(this, map);
+        QuestManager.getInstance().initInstance(this);
+        GameMultiplayer game = new GameMultiplayer(this, map);
 
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
         //dichiarazione layout generale
@@ -112,7 +115,7 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         //aggiunta elementi ai layout (linear)
         inGameMenu.addView(bottoneMenu);
         //aggiunta elementi al layout (frame) -> ordine importante! GAME DEVE ESSERE IL PRIMO!! <-
-        //frame.addView(game);
+        frame.addView(game);
         frame.addView(menuLayout);
         frame.addView(inGameMenu);
 
