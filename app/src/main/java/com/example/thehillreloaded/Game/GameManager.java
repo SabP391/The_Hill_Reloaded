@@ -7,6 +7,7 @@ public class GameManager {
     private boolean isPaused = false;
     private static GameManager instance;
     private long timeAtGameStart;
+    private PlayTime playTime;
     private long timeToGetThingsSpicy;
     private long timeFromLastSpawn;
     private float spawnSpeed;
@@ -22,6 +23,7 @@ public class GameManager {
     private static final int SPAWN_SPEED_INCREASE = 20;
 
     private GameManager(){
+        playTime = new PlayTime();
     }
 
     public static GameManager getInstance(){
@@ -109,4 +111,12 @@ public class GameManager {
     public GameMode getGameMode(){ return  gameMode; }
 
     public SunnyPointsCounter getSunnyPointsCounter() { return sunnyPointsCounter;}
+
+    public PlayTime getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(PlayTime playTime) {
+        this.playTime = playTime;
+    }
 }
