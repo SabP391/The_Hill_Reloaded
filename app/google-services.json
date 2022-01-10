@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561438140433",
+    "project_id": "the-hill-reloaded-f6f3b",
+    "storage_bucket": "the-hill-reloaded-f6f3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561438140433:android:8df50e2b0984d5378ca9b0",
+        "android_client_info": {
+          "package_name": "com.example.thehillreloaded"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561438140433-igga88mmlhf2p1nhtoak6b4be1jr4pcs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1queg_DyHi11upvjdiTkDbsAO6Pu1P2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561438140433-igga88mmlhf2p1nhtoak6b4be1jr4pcs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
