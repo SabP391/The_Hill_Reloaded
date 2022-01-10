@@ -102,15 +102,23 @@ public class GameManager {
 
 
     // Getter e setter -----------------------------------------------------------------------------
-    public int getSunnyPoints(){
-        return sunnyPoints;
+
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
     }
 
-    public Difficulty getDifficulty() { return difficulty; }
+    public static void setInstance(GameManager instance) {
+        GameManager.instance = instance;
+    }
 
-    public GameMode getGameMode(){ return  gameMode; }
+    public long getTimeAtGameStart() {
+        return timeAtGameStart;
+    }
 
-    public SunnyPointsCounter getSunnyPointsCounter() { return sunnyPointsCounter;}
+    public void setTimeAtGameStart(long timeAtGameStart) {
+        this.timeAtGameStart = timeAtGameStart;
+    }
 
     public PlayTime getPlayTime() {
         return playTime;
@@ -118,5 +126,77 @@ public class GameManager {
 
     public void setPlayTime(PlayTime playTime) {
         this.playTime = playTime;
+    }
+
+    public long getTimeToGetThingsSpicy() {
+        return timeToGetThingsSpicy;
+    }
+
+    public void setTimeToGetThingsSpicy(long timeToGetThingsSpicy) {
+        this.timeToGetThingsSpicy = timeToGetThingsSpicy;
+    }
+
+    public long getTimeFromLastSpawn() {
+        return timeFromLastSpawn;
+    }
+
+    public void setTimeFromLastSpawn(long timeFromLastSpawn) {
+        this.timeFromLastSpawn = timeFromLastSpawn;
+    }
+
+    public float getSpawnSpeed() {
+        return spawnSpeed;
+    }
+
+    public void setSpawnSpeed(float spawnSpeed) {
+        this.spawnSpeed = spawnSpeed;
+    }
+
+    public int getSunnyPoints() {
+        return sunnyPoints;
+    }
+
+    public void setSunnyPoints(int sunnyPoints) {
+        this.sunnyPoints = sunnyPoints;
+    }
+
+    public int getTotalSunnyPoints() {
+        return totalSunnyPoints;
+    }
+
+    public void setTotalSunnyPoints(int totalSunnyPoints) {
+        this.totalSunnyPoints = totalSunnyPoints;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public SunnyPointsCounter getSunnyPointsCounter() {
+        return sunnyPointsCounter;
+    }
+
+    public void setSunnyPointsCounter(SunnyPointsCounter sunnyPointsCounter) {
+        this.sunnyPointsCounter = sunnyPointsCounter;
+    }
+
+    public static int getTimeToIncreaseDifficulty() {
+        return TIME_TO_INCREASE_DIFFICULTY;
+    }
+
+    public static int getSpawnSpeedIncrease() {
+        return SPAWN_SPEED_INCREASE;
     }
 }

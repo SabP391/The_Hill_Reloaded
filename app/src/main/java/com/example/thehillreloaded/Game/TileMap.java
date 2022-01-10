@@ -169,9 +169,12 @@ public class TileMap {
     public int getFirstTileOfTheHill(){
         return FIRST_TILE_OF_THE_HILL;
     }
+
     public int getNumberOfTileSOfTheHill(){
         return NUMBER_OF_TILES_OF_THE_HILL;
     }
+
+    public ArrayList<Integer> getTileMap() { return tileMap; }
 
     // Metodi di utility per il debug --------------------------------------------------------------
     // Metodo di debug, serve a disegnare a schermo la tilemap.
