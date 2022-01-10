@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 
 /**
@@ -60,12 +61,14 @@ public class ReloadedInGameMenuFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        FragmentManager childFM = getChildFragmentManager();
-        FragmentTransaction ft = childFM.beginTransaction();
-        ft.replace(R.id.mission_frag_layout_r, new MissionsFragment() );
-        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        ft.addToBackStack(null);
-        ft.commit();
+        if (!GameManager.getInstance().isMultiplayerGame()) {
+            FragmentManager childFM = getChildFragmentManager();
+            FragmentTransaction ft = childFM.beginTransaction();
+            ft.replace(R.id.mission_frag_layout_r, new MissionsFragment());
+            ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            ft.addToBackStack(null);
+            ft.commit();
+        }
     }
 
     @Override
