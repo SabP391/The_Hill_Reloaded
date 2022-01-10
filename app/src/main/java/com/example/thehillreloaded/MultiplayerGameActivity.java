@@ -18,16 +18,22 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
+import com.example.thehillreloaded.Game.GameItemsManager;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Game.QuestManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
+import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Services.SoundEffectService;
 
 public class MultiplayerGameActivity extends AppCompatActivity implements QuestManager.SoundFX, GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
         PlasticUnitFragment.SoundFX, EwasteUnitFragment.SoundFX, MetalUnitFragment.SoundFX, AluminiumUnitFragment.SoundFX,
         OrganicUnitFragment.SoundFX, RecycleUnitsManager.SoundFx, Game.SoundFx{
+
+    //variabili per il gioco
+    private TileMap map;
 
     //variabili per service
     SoundEffectService soundService;
@@ -47,6 +53,17 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         effettiSonori = new Intent(this, SoundEffectService.class);
+
+        //inizializzazione del gioco ---------------------------------------------------------------
+        map = new TileMap(this);
+        GameManager.getInstance().destroy();
+        QuestManager.getInstance().destroy();
+        RecycleUnitsManager.getInstance().destroy();
+        GameItemsManager.getInstance().destroy();
+        GameManager.getInstance().initInstance(GameMode.RELOADED, Difficulty.HARD, this, map);
+        GameManager.getInstance().setMultiplayerGame(true);
+        GameItemsManager.getInstance().initInstance(this, map);
+        RecycleUnitsManager.getInstance().initInstance(this, map);
 
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
         //dichiarazione layout generale
