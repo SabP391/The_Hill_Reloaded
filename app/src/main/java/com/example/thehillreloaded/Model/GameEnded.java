@@ -3,18 +3,16 @@ package com.example.thehillreloaded.Model;
 //classe model che dovrà contenere tutti dati statici da salvare su db firebase a partita conclusa
 //è' una bozza
 public class GameEnded {
-    private String mailUtente;
     private int totalScore;
     private long gameTime;
+    private long actualDate;
+    private String email;
 
-    public GameEnded(String mailUtente, int totalScore, long gameTime) {
-        this.mailUtente = mailUtente;
+    public GameEnded(int totalScore, long gameTime, long actualDate, String email) {
         this.totalScore = totalScore;
         this.gameTime = gameTime;
-    }
-
-    public String getMailUtente() {
-        return mailUtente;
+        this.actualDate = actualDate;
+        this.email = email;
     }
 
     public int getTotalScore() {
@@ -23,5 +21,13 @@ public class GameEnded {
 
     public long getGameTime() {
         return gameTime;
+    }
+
+    public long getActualDate() {
+        return actualDate;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

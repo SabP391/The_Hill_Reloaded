@@ -16,9 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import com.example.thehillreloaded.Game.GameManager;
+import com.example.thehillreloaded.Model.GameSuspended;
 import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
+import com.google.gson.Gson;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +39,8 @@ public class PauseMenuFragment extends Fragment {
     //variabili per le SharedPreferences
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    //creo oggetto di tipo Gson (dove salvo la partita che potrà poi essere ripresa dagli shared)
+    Gson gson = new Gson();
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -42,9 +48,15 @@ public class PauseMenuFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    //Stringa per accedere al bundle
+    private static final String GAME_PAUSE = "game-pause";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //variabile stringa per ricevere il bundle
+    private String gamePause;
 
     public PauseMenuFragment() {
         // Required empty public constructor
@@ -74,6 +86,8 @@ public class PauseMenuFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            //Prendo l'oggetto GameSupended dal Bundle
+            gamePause = getArguments().getString(GAME_PAUSE);
         }
     }
 
@@ -97,6 +111,14 @@ public class PauseMenuFragment extends Fragment {
             }
         });
 
+        //Salvataggio partita
+        Button salva = (Button) view.findViewById(R.id.b_salva_partita);
+        salva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveGame(v);
+            }
+        });
         return view;
     }
 
@@ -149,5 +171,18 @@ public class PauseMenuFragment extends Fragment {
             }
         });
 
+    }
+
+    //Metodo per il salvataggio negli shared preferences di GameSuspended della partita.
+    public void saveGame(View v) {
+        //calcolare qui il TimeAtEndStart?
+        //Salvataggio in SharedPreferences dati oggetti GameManager, RecycleUnitsManager e QuestManager
+        editor.putString("game-pause", gamePause);
+        editor.commit();
+
+        //Codice da usare per riprendere l'oggeto dagli shared preferences usare la seguente
+        GameSuspended test = gson.fromJson(pref.getString("game-pause", null), GameSuspended.class);
+
+        Toast.makeText(getActivity(), "Salvataggio eseguito correttamente!", Toast.LENGTH_SHORT).show();
     }
 }

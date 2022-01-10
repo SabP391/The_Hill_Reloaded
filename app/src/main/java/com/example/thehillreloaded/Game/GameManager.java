@@ -109,4 +109,9 @@ public class GameManager {
     public GameMode getGameMode(){ return  gameMode; }
 
     public SunnyPointsCounter getSunnyPointsCounter() { return sunnyPointsCounter;}
+
+    //Getter per prendere l'inizio della partita
+    public long getTimeAtGameStart() {
+        return timeAtGameStart;
+    }
 }

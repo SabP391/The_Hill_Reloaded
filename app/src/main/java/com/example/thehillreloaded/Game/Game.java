@@ -2,6 +2,7 @@ package com.example.thehillreloaded.Game;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -25,10 +26,16 @@ import androidx.annotation.NonNull;
 import com.example.thehillreloaded.GameActivity;
 import com.example.thehillreloaded.GameOverActivity;
 import com.example.thehillreloaded.GameWonActivity;
+import com.example.thehillreloaded.Model.GameEnded;
+import com.example.thehillreloaded.Model.GoogleLoggedDataAccount;
 import com.example.thehillreloaded.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -69,6 +76,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     private final static int SHAKE_SENSITIVITY = 10;
     private float accelerationVal, accelerationLast, shake;
 
+    //Inizializzo gli shared e il Gson
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    Gson gson = new Gson();
+    //FIREBASE
+    FirebaseDatabase mDatabase;
 
     // Creazione e inizializzazione della classe Game ----------------------------------------------
 
@@ -109,6 +122,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
         messageHandler = new Handler();
 
+        //inizializzo gli shared
+        pref = this.context.getSharedPreferences("HillR_pref", 0);
+        //Inizializzo istanza di firebase
+        mDatabase = FirebaseDatabase.getInstance("https://the-hill-reloaded-f6f3b-default-rtdb.europe-west1.firebasedatabase.app");
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -154,6 +171,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         stopDrawThread();
                         sFX.suonoGameOver();
                         context.startActivity(gameLost);
+
+                        //Verifico se l'utente è loggato, se si procedo a salvare i dati su firebase
+                        if(pref.getAll().containsKey("account-utente-loggato")) {
+                            GameEnded gameEnded = new GameEnded(GameManager.getInstance().getSunnyPoints(),
+                                    (System.nanoTime() - GameManager.getInstance().getTimeAtGameStart()), System.nanoTime(),
+                                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), GoogleLoggedDataAccount.class).getPersonEmail());
+                            //Scrivo sul db prendendo il riferimento a tutti i nodi (non a uno specifico)
+                            DatabaseReference myRef= mDatabase.getReference();
+                            //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -
+                            //col secondo child punto al valore  chiave quindi creo un nuovo record email
+                            //col terzo child scrivo l'oggetto
+                            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), GoogleLoggedDataAccount.class).getPersonId()).push().setValue(gameEnded);
+                        }
                     }
                     i.fall(System.nanoTime());
                     if(i.checkForBuffDestruction()){

@@ -31,7 +31,12 @@ import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Game.QuestManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.Game.TileMap;
+import com.example.thehillreloaded.Model.GameSuspended;
 import com.example.thehillreloaded.Services.SoundEffectService;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX, GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
@@ -55,6 +60,9 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     int menuPausaID;
 
     Intent effettiSonori;
+
+    //creo oggetto Gson con codice per esclusione errori
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,12 +234,14 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                 if (!GameManager.getInstance().isPaused()){
                     GameManager.getInstance().pause();
                     pauseFragment.setVisibility(View.VISIBLE);
-                    creaMenuPausa(pauseFragment, new PauseMenuFragment());
+                    //Richiamo il metodo che torna il bundle con l'oggetto GameSuspended
+                    creaMenuPausa(pauseFragment, new PauseMenuFragment(), setBundleOnPausedGame());
                 } else {
                     if(pauseFragment.getVisibility() == View.GONE) {
                         //gioco in pausa e fragment di pausa non attivo = chiude altri fragment e apre menu di pausa
                         pauseFragment.setVisibility(View.VISIBLE);
-                        creaMenuPausa(pauseFragment, new PauseMenuFragment());
+                        //Richiamo il metodo che torna il bundle con l'oggetto GameSuspended
+                        creaMenuPausa(pauseFragment, new PauseMenuFragment(), setBundleOnPausedGame());
                     } else if(pauseFragment.getVisibility() == View.VISIBLE) {
                         //gioco in pausa e fragment attivo = chiude fragment e toglie pausa
                         pauseFragment.setVisibility(View.GONE);
@@ -282,7 +292,10 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         fmt.commit();
     }
 
-    public void creaMenuPausa(FragmentContainerView container, PauseMenuFragment fragment){
+    //Ho aggiunto il Bundle (che contiene l'oggetto GameSuspended) da passare al fragment PauseMenuFragment
+    public void creaMenuPausa(FragmentContainerView container, PauseMenuFragment fragment, Bundle bundle){
+        // Setto l'argomento da passare al fragment contenente il bundle
+        fragment.setArguments(bundle);
         FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
         fmt.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fmt.replace(container.getId(), fragment, "pauseFrag");
@@ -301,7 +314,8 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         } else {
             GameManager.getInstance().pause();
             findViewById(menuPausaID).setVisibility(View.VISIBLE);
-            creaMenuPausa(findViewById(menuPausaID), new PauseMenuFragment());
+            //Richiamo il metodo che torna il bundle con l'oggetto GameSuspended
+            creaMenuPausa(findViewById(menuPausaID), new PauseMenuFragment(), setBundleOnPausedGame());
             //super.onBackPressed();
         }
     }
@@ -530,4 +544,20 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
 
     @Override
     public void suonoGameOver() { if(SFXattivi) { soundService.suonoGameOver(); } }
+
+    //Setto il bundle per il salvataggio degli oggetti da passare al fragment PauseMenuFragment
+    public Bundle setBundleOnPausedGame() {
+        Bundle bundle = new Bundle();
+        bundle.putString("game-pause", gson.toJson(new GameSuspended(GameManager.getInstance().isPaused(), GameManager.getInstance().getSunnyPoints(), GameManager.getInstance().getTimeAtGameStart(),
+                RecycleUnitsManager.getInstance().isPaperUnitUnlocked(), RecycleUnitsManager.getInstance().isCompostUnlocked(),
+                RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked(), RecycleUnitsManager.getInstance().isSteelUnitUnlocked(),
+                RecycleUnitsManager.getInstance().isPlasticUnitUnlocked(), RecycleUnitsManager.getInstance().isEwasteUnitUnlocked(),
+                RecycleUnitsManager.getInstance().isGlassUnitUnlocked(),
+                QuestManager.getInstance().isQuest1Complete(), QuestManager.getInstance().isQuest2Complete(),
+                QuestManager.getInstance().isQuest3Complete(), QuestManager.getInstance().getCounterQuest3(),
+                QuestManager.getInstance().isQuest4Complete(), QuestManager.getInstance().getCounterQuest4(),
+                QuestManager.getInstance().isQuest5Complete(), QuestManager.getInstance().isQuest6Complete(),
+                QuestManager.getInstance().getCounterQuest6(), GameManager.getInstance())));
+        return bundle;
+    }
 }
