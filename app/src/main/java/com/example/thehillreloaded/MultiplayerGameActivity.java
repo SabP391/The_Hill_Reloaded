@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.FragmentContainer;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +50,7 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     Intent effettiSonori;
     int menuFragID;
     int menuBottID;
+    int endFragID;
 
 
     @Override
@@ -98,6 +100,15 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         manageFragment.setLayoutParams(pr4);
         manageFragment.setVisibility(View.GONE);
         manageLayout.addView(manageFragment);
+        //fragment fine partita
+        LinearLayout endLayout = new LinearLayout(this);
+        FragmentContainerView endFragment = new FragmentContainerView(this);
+        endFragment.setId(View.generateViewId());
+        endFragID = endFragment.getId();
+        LinearLayout.LayoutParams par = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        endFragment.setLayoutParams(par);
+        endLayout.addView(endFragment);
 
         // PARAMETRI BOTTONI -----------------------------------------------------------------------
         //parametri bottoneMenu
@@ -119,6 +130,7 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         frame.addView(game);
         frame.addView(menuLayout);
         frame.addView(inGameMenu);
+        frame.addView(endLayout);
 
         //impostazione contentView al FrameLayout (contiene gli altri elementi)
         setContentView(frame);
@@ -368,5 +380,11 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         Log.d("Perso", "non hai");
         Log.d("Il fragment", "aprire devo");
 
+        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+        EndMultiplayerFragment end = new EndMultiplayerFragment();
+        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+        fmt.replace(endFragID, end);
+        fmt.addToBackStack("endFrag");
+        fmt.commit();
     }
 }
