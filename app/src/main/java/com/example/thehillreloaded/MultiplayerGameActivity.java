@@ -52,6 +52,8 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     int menuBottID;
     int endFragID;
 
+    private boolean didIfinish = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -375,16 +377,20 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     }
 
     @Override
-    public void gameEndChecker() {
+    public boolean gameEndChecker() {
         //Apre il fragment
-        Log.d("Perso", "non hai");
-        Log.d("Il fragment", "aprire devo");
+        if (!didIfinish) {
+            didIfinish = true;
+            Log.d("Perso", "non hai");
+            Log.d("Il fragment", "aprire devo");
 
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        EndMultiplayerFragment end = new EndMultiplayerFragment();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(endFragID, end);
-        fmt.addToBackStack("endFrag");
-        fmt.commit();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            EndMultiplayerFragment end = new EndMultiplayerFragment();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(endFragID, end);
+            fmt.addToBackStack("endFrag");
+            fmt.commit();
+            return true;
+        }else return false;
     }
 }

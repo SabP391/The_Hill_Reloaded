@@ -2,11 +2,19 @@ package com.example.thehillreloaded;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+
+import com.example.thehillreloaded.Game.GameManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +67,24 @@ public class EndMultiplayerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_end_multiplayer, container, false);
+        View view = inflater.inflate(R.layout.fragment_end_multiplayer, container, false);
+        RotateAnimation animazioneSole = new RotateAnimation(0.0f, 360.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        animazioneSole.setInterpolator(new LinearInterpolator());
+        // setRepeatCount è impostato su Animation.INFINITE per ripetere l'animazione in loop
+        animazioneSole.setRepeatCount(Animation.INFINITE);
+        animazioneSole.setDuration(7000);
+
+        // Inizia l'animazione del sole che ruota
+        final ImageView soleRotante = (ImageView) view.findViewById(R.id.sole_rotante_sp2);
+        soleRotante.startAnimation(animazioneSole);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }

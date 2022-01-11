@@ -34,9 +34,10 @@ public class GameMultiplayer extends Game {
             }
             for(GameItem i : itemsOnScreen){
                 if(i != movingItem){
-                    if(i.checkForGameOverPosition() || GameManager.getInstance().getPlayTime().getMinutes() >= TIME_TO_PLAY){
+                    if(i.checkForGameOverPosition() || GameManager.getInstance().getPlayTime().getSeconds() >= 20){
                         stopDrawThread();
                         frag.gameEndChecker();
+
                     }
                     i.fall(System.nanoTime());
                     if(i.checkForBuffDestruction()){
@@ -54,6 +55,6 @@ public class GameMultiplayer extends Game {
     }
 
     public interface GameEndFrag {
-        void gameEndChecker();
+        boolean gameEndChecker();
     }
 }
