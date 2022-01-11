@@ -174,8 +174,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
         // Aggiornamento del tempo di gioco
         if((timeNow - elapsedTime) / 1000000000 >= 1){
-            Log.d("eTime", String.valueOf(elapsedTime));
-            Log.d("timeNow", String.valueOf(timeNow));
             GameManager.getInstance().getPlayTime().increasePlayTime();
             elapsedTime = timeNow;
         }

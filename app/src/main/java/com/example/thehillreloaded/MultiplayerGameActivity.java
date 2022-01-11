@@ -11,6 +11,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -31,7 +32,7 @@ import com.example.thehillreloaded.Services.SoundEffectService;
 
 public class MultiplayerGameActivity extends AppCompatActivity implements QuestManager.SoundFX, GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
         PlasticUnitFragment.SoundFX, EwasteUnitFragment.SoundFX, MetalUnitFragment.SoundFX, AluminiumUnitFragment.SoundFX,
-        OrganicUnitFragment.SoundFX, RecycleUnitsManager.SoundFx, Game.SoundFx{
+        OrganicUnitFragment.SoundFX, RecycleUnitsManager.SoundFx, Game.SoundFx, GameMultiplayer.GameEndFrag {
 
     //variabili per il gioco
     private TileMap map;
@@ -359,5 +360,13 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     @Override
     public void suonoUpgrade()  {
         if(SFXattivi) { soundService.suonoCostruzioneUpgrade(); }
+    }
+
+    @Override
+    public void gameEndChecker() {
+        //Apre il fragment
+        Log.d("Perso", "non hai");
+        Log.d("Il fragment", "aprire devo");
+
     }
 }

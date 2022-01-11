@@ -27,6 +27,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.thehillreloaded.Game.GameMultiplayer;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -278,6 +281,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     break;
                 case STATE_CONNECTED:
                     connectionStatus.setText(R.string.connection_connected);
+
                     break;
                 case STATE_CONNECTION_FAILED:
                     connectionStatus.setText(R.string.connection_failed);
