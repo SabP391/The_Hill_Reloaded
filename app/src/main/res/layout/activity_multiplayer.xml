@@ -53,6 +53,7 @@
         android:id="@+id/stato_connessione"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_black"
         android:textColor="@color/verde_scuro"
         app:layout_constraintBottom_toTopOf="@+id/bottone_hostMatch"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +76,8 @@
         android:id="@+id/box_risultato_match"
         android:layout_width="230dp"
         android:layout_height="140dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
         android:background="@drawable/bottoni_personalizzati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
@@ -86,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/titolo_lista_host"
+        android:fontFamily="@font/roboto_black"
         android:textColor="@color/verde_scuro"
         app:layout_constraintBottom_toTopOf="@+id/lista_host"
         app:layout_constraintEnd_toEndOf="@+id/lista_host"
@@ -99,6 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/titolo_risultato_partita"
+        android:fontFamily="@font/roboto_black"
         android:textColor="@color/verde_scuro"
         app:layout_constraintBottom_toTopOf="@+id/box_risultato_match"
         app:layout_constraintEnd_toEndOf="@+id/box_risultato_match"
@@ -107,12 +112,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.982" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/button_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="320dp"
         android:layout_marginBottom="48dp"
+        android:background="@drawable/bottoni_personalizzati"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/verde_scuro"
         android:text="Invia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

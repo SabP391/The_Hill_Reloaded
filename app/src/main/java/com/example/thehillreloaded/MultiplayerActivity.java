@@ -94,6 +94,7 @@ public class MultiplayerActivity extends AppCompatActivity {
         titoloResultBox = (TextView) findViewById(R.id.titolo_risultato_partita);
         titoloResultBox.setVisibility(View.INVISIBLE);
         matchResultBox = (TextView) findViewById(R.id.box_risultato_match);
+        matchResultBox.setPadding(10,6,10,6);
         matchResultBox.setVisibility(View.INVISIBLE);
         connectionStatus = (TextView) findViewById(R.id.stato_connessione);
 
