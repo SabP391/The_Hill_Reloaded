@@ -204,7 +204,7 @@ public class AccessActivity extends AppCompatActivity {
 
     public void onClickUtente(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
-        Intent intent = new Intent(this, MultiplayerGameActivity.class);
+        Intent intent = new Intent(this, MultiplayerActivity.class);
         startActivity(intent);
     }
 

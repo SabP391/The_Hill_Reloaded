@@ -1,6 +1,7 @@
 package com.example.thehillreloaded;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +39,7 @@ import java.util.UUID;
 
 public class MultiplayerActivity extends AppCompatActivity {
 
-    int punteggio;
+    private int punteggio = 0;
 
     // Elementi del layout
     private Button bottoneHost, bottoneJoin, send;
@@ -63,6 +64,8 @@ public class MultiplayerActivity extends AppCompatActivity {
     int REQUEST_ENABLE_BLUETOOTH = 1;
     int DISCOVERABLE_ENABLED = 1;
 
+    private static final int MP_GAME_ACTIVITY_REQUEST_CODE = 0;
+
 
 
 
@@ -81,7 +84,7 @@ public class MultiplayerActivity extends AppCompatActivity {
         // Tutte le findViewById per gli elementi nell'activity
         bottoneHost = (Button) findViewById(R.id.bottone_hostMatch);
         bottoneJoin = (Button) findViewById(R.id.bottone_joinMatch);
-        //send = (Button) findViewById(R.id.button_send);
+        send = (Button) findViewById(R.id.button_send);
 
         titoloDeviceList = (TextView) findViewById(R.id.titiolo_lista_host);
         titoloDeviceList.setVisibility(View.INVISIBLE);
@@ -192,14 +195,13 @@ public class MultiplayerActivity extends AppCompatActivity {
             Servendosi della classe sendReceive invia il proprio punteggio
             al dispositivo con cui si è giocata la partita
          */
-        /*send.setOnClickListener(new View.OnClickListener() {
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int punteggioGenerato = punteggio;
-                String string = String.valueOf(punteggioGenerato);
+                String string = String.valueOf(punteggio);
                 sendReceive.write(string.getBytes());
             }
-        });*/
+        });
         // FINE LISTENER DEI BOTTONI----------------------------------------------------------------
     }
 
@@ -232,9 +234,20 @@ public class MultiplayerActivity extends AppCompatActivity {
         unregisterReceiver(mBroadcastReceiver);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == MP_GAME_ACTIVITY_REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                punteggio = data.getIntExtra("Result", 0);
+            }
+        }
+    }
+
     /*
-        Metodo che mostra la finestra di attivazione del GPS.
-     */
+            Metodo che mostra la finestra di attivazione del GPS.
+         */
     private void showGPSDisabledAlertToUser(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(R.string.messaggio_gps)
@@ -281,7 +294,8 @@ public class MultiplayerActivity extends AppCompatActivity {
                     break;
                 case STATE_CONNECTED:
                     connectionStatus.setText(R.string.connection_connected);
-
+                    Intent startMPGame = new Intent(getApplicationContext(), MultiplayerGameActivity.class);
+                    startActivityForResult(startMPGame, MP_GAME_ACTIVITY_REQUEST_CODE);
                     break;
                 case STATE_CONNECTION_FAILED:
                     connectionStatus.setText(R.string.connection_failed);
@@ -290,8 +304,11 @@ public class MultiplayerActivity extends AppCompatActivity {
                     byte[] readBuffer = (byte[]) msg.obj;
                     String tempMsg = new String(readBuffer, 0, msg.arg1);
                     int punteggioP1 = punteggio;
+                    Log.d("Punteggio P1:", String.valueOf(punteggioP1));
                     int punteggioP2 = Integer.parseInt(tempMsg);
+                    Log.d("Punteggio P2:", String.valueOf(punteggioP2));
                     String risultato = matchResult(punteggioP1, punteggioP2);
+                    matchResultBox.setVisibility(View.VISIBLE);
                     matchResultBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
                     break;
             }
@@ -314,6 +331,9 @@ public class MultiplayerActivity extends AppCompatActivity {
                     break;
                 case STATE_CONNECTED:
                     connectionStatus.setText(R.string.connection_connected);
+                    connectionStatus.setText(R.string.connection_connected);
+                    Intent startMPGame = new Intent(getApplicationContext(), MultiplayerGameActivity.class);
+                    startActivityForResult(startMPGame, MP_GAME_ACTIVITY_REQUEST_CODE);
                     break;
                 case STATE_CONNECTION_FAILED:
                     connectionStatus.setText(R.string.connection_failed);
@@ -324,6 +344,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     int punteggioP2 = punteggio;
                     int punteggioP1 = Integer.parseInt(tempMsg);
                     String risultato = matchResult(punteggioP1, punteggioP2);
+                    matchResultBox.setVisibility(View.VISIBLE);
                     matchResultBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
                     break;
             }
@@ -332,6 +353,7 @@ public class MultiplayerActivity extends AppCompatActivity {
         }
     });
     // Fine handler server--------------------------------------------------------------------------
+
 
     // Inizio classe Server-------------------------------------------------------------------------
     private class ServerClass extends Thread{
@@ -430,6 +452,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                 tempOut = bluetoothSocket.getOutputStream();
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.d("SendReceive:", "connection lost");
             }
 
             inputStream = tempIn;
@@ -450,7 +473,8 @@ public class MultiplayerActivity extends AppCompatActivity {
                         handlerServer.obtainMessage(STATE_MESSAGE_RECEIVED, bytes, -1, buffer).sendToTarget();
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    matchResultBox.setVisibility(View.VISIBLE);
+                    matchResultBox.setText("Il tuo avversario ha abbandonato la partita");
                 }
 
             }

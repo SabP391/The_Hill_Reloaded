@@ -19,7 +19,8 @@
         android:theme="@style/Theme.TheHillReloaded">
         <activity
             android:name=".MultiplayerGameActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".GameOverActivity"
             android:exported="false"

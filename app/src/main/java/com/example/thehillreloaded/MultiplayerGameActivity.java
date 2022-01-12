@@ -1,7 +1,9 @@
 package com.example.thehillreloaded;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.FragmentContainer;
@@ -351,6 +353,15 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         }
     }
 
+    public void onClickEsciDaMenu(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        findViewById(menuBottID).setVisibility(View.VISIBLE);
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+            GameManager.getInstance().unPause();
+        }
+    }
+
     //METODI EFFETTI SONORI PER LE INTERFACCE ------------------------------------------------------
     @Override
     public void suonoGameOver() { if(SFXattivi) { soundService.suonoGameOver(); } }
@@ -400,5 +411,20 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         gameEndIntent.putExtra("Result", GameManager.getInstance().getTotalSunnyPoints());
         setResult(RESULT_OK, gameEndIntent);
         finish();
+    }
+
+    //metodo per la chiusura dei fragment innestati
+    public void closeChildFrag(View view){
+        //chiusura fragment fattibile solo da activity, gestione del backstack sconsigliata nei fragment
+        FragmentManager fm = getSupportFragmentManager();
+        for (Fragment frag : fm.getFragments()) {
+            if (frag.isVisible()) {
+                FragmentManager childFm = frag.getChildFragmentManager();
+                if (childFm.getBackStackEntryCount() > 0) {
+                    childFm.popBackStack();
+                    return;
+                }
+            }
+        }
     }
 }
