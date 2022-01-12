@@ -393,4 +393,12 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
             return true;
         }else return false;
     }
+
+    @Override
+    public void endGame() {
+        Intent gameEndIntent = new Intent(this, UserMenuActivity.class);
+        gameEndIntent.putExtra("Result", GameManager.getInstance().getTotalSunnyPoints());
+        setResult(RESULT_OK, gameEndIntent);
+        finish();
+    }
 }

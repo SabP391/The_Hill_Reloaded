@@ -1,5 +1,6 @@
 package com.example.thehillreloaded;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -80,11 +81,5 @@ public class EndMultiplayerFragment extends Fragment {
         final ImageView soleRotante = (ImageView) view.findViewById(R.id.sole_rotante_sp2);
         soleRotante.startAnimation(animazioneSole);
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 }

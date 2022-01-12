@@ -16,6 +16,8 @@ public class GameManager {
     private GameMode gameMode;
     private Difficulty difficulty;
     private SunnyPointsCounter sunnyPointsCounter;
+
+    // Variabili per il gioco multiplayer
     private boolean isMultiplayerGame = false;
 
     // Intervallo di tempo in cui aumenterà la difficoltà della partita
@@ -208,4 +210,5 @@ public class GameManager {
     public void setMultiplayerGame(boolean multiplayerGame) {
         isMultiplayerGame = multiplayerGame;
     }
+
 }
