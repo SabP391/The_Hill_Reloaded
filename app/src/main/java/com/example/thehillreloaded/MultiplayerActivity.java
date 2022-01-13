@@ -233,10 +233,15 @@ public class MultiplayerActivity extends AppCompatActivity {
         if(requestCode == MP_GAME_ACTIVITY_REQUEST_CODE){
             if(resultCode == RESULT_OK){
                 myScore = data.getIntExtra("Result", 0);
-
                 if(!isClient){
-                    String string = String.valueOf(myScore);
-                    sendReceive.write(string.getBytes());
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            String string = String.valueOf(myScore);
+                            sendReceive.write(string.getBytes());}
+                    }, 2000);
+
                 }
 
             }
