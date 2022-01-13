@@ -136,6 +136,8 @@ public class MultiplayerActivity extends AppCompatActivity {
         bottoneJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                titoloResultBox.setVisibility(View.INVISIBLE);
+                matchResultBox.setVisibility(View.INVISIBLE);
                 if (bluetoothAdapter.isDiscovering()){
                     devicesList.setVisibility(View.VISIBLE);
                     titoloDeviceList.setVisibility(View.VISIBLE);
@@ -168,6 +170,8 @@ public class MultiplayerActivity extends AppCompatActivity {
         bottoneHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                titoloResultBox.setVisibility(View.INVISIBLE);
+                matchResultBox.setVisibility(View.INVISIBLE);
                 devicesList.setVisibility(View.INVISIBLE);
                 titoloDeviceList.setVisibility(View.INVISIBLE);
                 Intent discoverableIntent =
