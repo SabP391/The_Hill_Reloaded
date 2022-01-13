@@ -29,8 +29,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.thehillreloaded.Game.GameMultiplayer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -39,18 +37,23 @@ import java.util.UUID;
 
 public class MultiplayerActivity extends AppCompatActivity {
 
-    private int punteggio = 0;
+    private int myScore = 0;
+    private int receivedScore = -1;
+
 
     // Elementi del layout
-    private Button bottoneHost, bottoneJoin, send;
+    private Button bottoneHost, bottoneJoin;
     private ListView devicesList;
     private TextView matchResultBox, connectionStatus, titoloDeviceList, titoloResultBox;
+    private boolean isClient;
 
     private BluetoothAdapter bluetoothAdapter;
     public ArrayList<BluetoothDevice> mBTDevices;
     private BTDeviceListAdapter mDeviceListAdapter;
     private SendReceive sendReceive;
     private IntentFilter discoverDevicesIntent;
+    private ClientClass clientClass;
+    private ServerClass serverClass;
 
     private static final String APP_NAME = "TheHillReloaded";
     private static final UUID MY_UUID= UUID.fromString("c1d8f695-0874-443f-9dec-754f5cafe6a4");
@@ -84,7 +87,6 @@ public class MultiplayerActivity extends AppCompatActivity {
         // Tutte le findViewById per gli elementi nell'activity
         bottoneHost = (Button) findViewById(R.id.bottone_hostMatch);
         bottoneJoin = (Button) findViewById(R.id.bottone_joinMatch);
-        send = (Button) findViewById(R.id.button_send);
 
         titoloDeviceList = (TextView) findViewById(R.id.titiolo_lista_host);
         titoloDeviceList.setVisibility(View.INVISIBLE);
@@ -123,7 +125,7 @@ public class MultiplayerActivity extends AppCompatActivity {
             Qui dovrebbe essere avviato il metodo che fa
             iniziare la partita e restituisce un intero.
          */
-        punteggio = (int) (Math.random() * 201);
+        myScore = (int) (Math.random() * 201);
 
         // IMPLEMENTAZIONE LISTENER DEI BOTTONI-----------------------------------------------------
         /*
@@ -172,7 +174,8 @@ public class MultiplayerActivity extends AppCompatActivity {
                         new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 60);
                 startActivityForResult(discoverableIntent, DISCOVERABLE_ENABLED);
-                ServerClass serverClass = new ServerClass();
+                isClient = false;
+                serverClass = new ServerClass();
                 serverClass.start();
             }
         });
@@ -185,22 +188,10 @@ public class MultiplayerActivity extends AppCompatActivity {
         devicesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ClientClass clientClass = new ClientClass(mBTDevices.get(i));
+                isClient = true;
+                clientClass = new ClientClass(mBTDevices.get(i));
                 clientClass.start();
                 connectionStatus.setText("Connecting");
-            }
-        });
-
-        /*
-            ---Pulsante per inviare il punteggio---
-            Servendosi della classe sendReceive invia il proprio punteggio
-            al dispositivo con cui si è giocata la partita
-         */
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String string = String.valueOf(punteggio);
-                sendReceive.write(string.getBytes());
             }
         });
         // FINE LISTENER DEI BOTTONI----------------------------------------------------------------
@@ -241,7 +232,13 @@ public class MultiplayerActivity extends AppCompatActivity {
 
         if(requestCode == MP_GAME_ACTIVITY_REQUEST_CODE){
             if(resultCode == RESULT_OK){
-                punteggio = data.getIntExtra("Result", 0);
+                myScore = data.getIntExtra("Result", 0);
+
+                if(!isClient){
+                    String string = String.valueOf(myScore);
+                    sendReceive.write(string.getBytes());
+                }
+
             }
         }
     }
@@ -304,19 +301,38 @@ public class MultiplayerActivity extends AppCompatActivity {
                 case STATE_MESSAGE_RECEIVED:
                     byte[] readBuffer = (byte[]) msg.obj;
                     String tempMsg = new String(readBuffer, 0, msg.arg1);
-                    int punteggioP1 = punteggio;
-                    Log.d("Punteggio P1:", String.valueOf(punteggioP1));
-                    int punteggioP2 = Integer.parseInt(tempMsg);
-                    Log.d("Punteggio P2:", String.valueOf(punteggioP2));
-                    String risultato = matchResult(punteggioP1, punteggioP2);
+                    receivedScore = Integer.parseInt(tempMsg);
+                    String risultato = matchResult(myScore, receivedScore);
                     matchResultBox.setVisibility(View.VISIBLE);
-                    matchResultBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
+                    matchResultBox.setText(risultato + "\n" + "Tu: " + myScore + "\n" + "Avversario: " + receivedScore);
+                    closeConnection(isClient);
                     break;
             }
 
             return true;
         }
     });
+
+    private void closeConnection(boolean flag) {
+        if(flag){
+            try {
+                sendReceive.join(3000);
+                clientClass.socket.close();
+                clientClass.join(3000);
+            } catch (InterruptedException | IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                sendReceive.join(3000);
+                serverClass.serverSocket.close();
+                serverClass.join(3000);
+            } catch (InterruptedException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        connectionStatus.setText("Connessione terminata");
+    }
     // Fine handler server--------------------------------------------------------------------------
 
     // Handler del client per cambiare il messaggio di stato a schermo (Connesso, Non connesso, ecc...)
@@ -342,18 +358,21 @@ public class MultiplayerActivity extends AppCompatActivity {
                 case STATE_MESSAGE_RECEIVED:
                     byte[] readBuffer = (byte[]) msg.obj;
                     String tempMsg = new String(readBuffer, 0, msg.arg1);
-                    int punteggioP2 = punteggio;
-                    int punteggioP1 = Integer.parseInt(tempMsg);
-                    String risultato = matchResult(punteggioP1, punteggioP2);
+                    receivedScore = Integer.parseInt(tempMsg);
+                    String risultato = matchResult(myScore, receivedScore);
                     matchResultBox.setVisibility(View.VISIBLE);
-                    matchResultBox.setText(risultato + "\n" + "P1: " + punteggioP1 + "\n" + "P2: " + punteggioP2);
+                    matchResultBox.setText(risultato + "\n" + "Tu: " + myScore + "\n" + "Avversario: " + receivedScore);
+
+                    String string = String.valueOf(myScore);
+                    sendReceive.write(string.getBytes());
+                    closeConnection(isClient);
                     break;
             }
 
             return true;
         }
     });
-    // Fine handler server--------------------------------------------------------------------------
+    // Fine handler client--------------------------------------------------------------------------
 
 
     // Inizio classe Server-------------------------------------------------------------------------
@@ -390,7 +409,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     message.what = STATE_CONNECTED;
                     handlerServer.sendMessage(message);
 
-                    sendReceive = new SendReceive(socket, 0);
+                    sendReceive = new SendReceive(socket);
                     sendReceive.start();
 
                     break;
@@ -422,7 +441,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                 message.what = STATE_CONNECTED;
                 handlerClient.sendMessage(message);
 
-                sendReceive = new SendReceive(socket, 1);
+                sendReceive = new SendReceive(socket);
                 sendReceive.start();
 
             } catch (IOException e) {
@@ -440,10 +459,8 @@ public class MultiplayerActivity extends AppCompatActivity {
         private final BluetoothSocket bluetoothSocket;
         private final InputStream inputStream;
         private final OutputStream outputStream;
-        private int isClient;
 
-        public SendReceive(BluetoothSocket socket, int flag){
-            isClient = 0;
+        public SendReceive(BluetoothSocket socket){
             bluetoothSocket = socket;
             InputStream tempIn = null;
             OutputStream tempOut = null;
@@ -468,14 +485,16 @@ public class MultiplayerActivity extends AppCompatActivity {
             while (true){
                 try {
                     bytes = inputStream.read(buffer);
-                    if(isClient == 1) {
+                    if(isClient) {
                         handlerClient.obtainMessage(STATE_MESSAGE_RECEIVED, bytes, -1, buffer).sendToTarget();
                     }else {
                         handlerServer.obtainMessage(STATE_MESSAGE_RECEIVED, bytes, -1, buffer).sendToTarget();
                     }
                 } catch (IOException e) {
-                    matchResultBox.setVisibility(View.VISIBLE);
-                    matchResultBox.setText("Il tuo avversario ha abbandonato la partita");
+                    if(receivedScore == -1) {
+                        matchResultBox.setVisibility(View.VISIBLE);
+                        matchResultBox.setText("Il tuo avversario ha abbandonato la partita");
+                    }
                 }
 
             }

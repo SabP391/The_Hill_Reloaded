@@ -35,7 +35,7 @@ public class GameMultiplayer extends Game {
             }
             for(GameItem i : itemsOnScreen){
                 if(i != movingItem){
-                    if(i.checkForGameOverPosition() || GameManager.getInstance().getPlayTime().getSeconds() >= 20){
+                    if(i.checkForGameOverPosition()){
                         frag.gameEndChecker();
 
                     }
@@ -52,7 +52,8 @@ public class GameMultiplayer extends Game {
             GameManager.getInstance().getPlayTime().increasePlayTime();
             elapsedTime = timeNow;
         }
-        if(GameManager.getInstance().getPlayTime().getSeconds() > 30 && GameManager.getInstance().getPlayTime().getMinutes() >= 0){
+        if(GameManager.getInstance().getPlayTime().getSeconds() > 20 && GameManager.getInstance().getPlayTime().getMinutes() >= 0){
+            frag.gameEndChecker();
             stopDrawThread();
             frag.endGame();
         }

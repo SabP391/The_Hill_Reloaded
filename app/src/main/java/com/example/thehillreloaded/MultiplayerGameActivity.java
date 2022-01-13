@@ -392,9 +392,6 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         //Apre il fragment
         if (!didIfinish) {
             didIfinish = true;
-            Log.d("Perso", "non hai");
-            Log.d("Il fragment", "aprire devo");
-
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
             EndMultiplayerFragment end = new EndMultiplayerFragment();
             fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
