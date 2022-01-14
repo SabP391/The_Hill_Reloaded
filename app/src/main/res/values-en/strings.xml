@@ -81,5 +81,12 @@
     <string name="missione_completata">Mission completed</string>
     <string name="oggetto_sbloccato">Object unlocked!</string>
     <string name="azione_non_disponibile_upgrade">Upgrade unavailable</string>
+    <string name="giocatore_disconnesso">Player disconnected</string>
+    <string name="tuo_punteggio">Your score</string>
+    <string name="suo_punteggio">Opponent score</string>
+    <string name="hai_vinto">You won</string>
+    <string name="hai_perso">You lost</string>
+    <string name="pareggio">Draw</string>
+    <string name="processo_punteggi">Please wait while scores are processed</string>
 
 </resources>

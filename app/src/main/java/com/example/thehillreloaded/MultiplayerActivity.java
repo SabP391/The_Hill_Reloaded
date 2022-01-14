@@ -214,7 +214,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 BluetoothClass deviceClass = device.getBluetoothClass();
                 if(deviceClass.toString().equals(SMARTPHONE_CODE) && !mBTDevices.contains(device)) {
-                    Log.d("Dispositivo trovato: ", device.getName() + " " + deviceClass.toString() + " " + device.getAddress());
+                    //Log.d("Dispositivo trovato: ", device.getName() + " " + deviceClass.toString() + " " + device.getAddress());
                     mBTDevices.add(device);
                 }
                 mDeviceListAdapter = new BTDeviceListAdapter(getApplicationContext(), R.layout.device_adapter_view, mBTDevices);
@@ -280,11 +280,11 @@ public class MultiplayerActivity extends AppCompatActivity {
     // Metodo che confronta i risultati della partita
     public String matchResult(int punteggioP1, int punteggioP2){
         if(punteggioP1 > punteggioP2){
-            return "Hai vinto";
+            return getString(R.string.hai_vinto);
         }else if (punteggioP2 > punteggioP1){
-            return "Hai perso";
+            return getString(R.string.hai_perso);
         }else{
-            return "Pareggio";
+            return getString(R.string.pareggio);
         }
     }
 
@@ -313,7 +313,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     receivedScore = Integer.parseInt(tempMsg);
                     String risultato = matchResult(myScore, receivedScore);
                     matchResultBox.setVisibility(View.VISIBLE);
-                    matchResultBox.setText(risultato + "\n" + "Tu: " + myScore + "\n" + "Avversario: " + receivedScore);
+                    matchResultBox.setText("\t" + risultato + "\n\t" + R.string.tuo_punteggio+ "\t" + myScore + "\n\t" + R.string.suo_punteggio + "\t" + receivedScore);
                     closeConnection(isClient);
                     break;
             }
@@ -370,7 +370,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     receivedScore = Integer.parseInt(tempMsg);
                     String risultato = matchResult(myScore, receivedScore);
                     matchResultBox.setVisibility(View.VISIBLE);
-                    matchResultBox.setText(risultato + "\n" + "Tu: " + myScore + "\n" + "Avversario: " + receivedScore);
+                    matchResultBox.setText("\t" + risultato + "\n\t" + R.string.tuo_punteggio + "\t" + myScore + "\n\t" + R.string.suo_punteggio + "\t" + receivedScore);
 
                     String string = String.valueOf(myScore);
                     sendReceive.write(string.getBytes());
@@ -502,7 +502,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     if(receivedScore == -1) {
                         matchResultBox.setVisibility(View.VISIBLE);
-                        matchResultBox.setText("Il tuo avversario ha abbandonato la partita");
+                        matchResultBox.setText(R.string.giocatore_disconnesso);
                     }
                 }
 
