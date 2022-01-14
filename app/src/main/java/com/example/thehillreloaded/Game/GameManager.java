@@ -184,12 +184,12 @@ public class GameManager {
         return difficulty;
     }
 
+    public SunnyPointsCounter getSunnyPointsCounter() { return sunnyPointsCounter;}
+
+    //Getter per prendere l'inizio della partita
+
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
-    }
-
-    public SunnyPointsCounter getSunnyPointsCounter() {
-        return sunnyPointsCounter;
     }
 
     public void setSunnyPointsCounter(SunnyPointsCounter sunnyPointsCounter) {

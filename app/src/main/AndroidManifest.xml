@@ -22,6 +22,9 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".GameStatisticsActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameOverActivity"
             android:exported="false"
             android:screenOrientation="landscape" />

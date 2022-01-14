@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
@@ -51,10 +52,10 @@ public class SettingsActivity extends AppCompatActivity{
 
         tornaAdAccesso = new Intent(this, AccessActivity.class);
         //if(!autenticazione.getInstance(this).isLogged(this)){
-        if(!authFragment.checkIfUserIsLogged()){
+        /*if(!pref.getAll().containsKey("account-utente-loggato")){
             View bottoneImpostazioni = findViewById(R.id.bottone_esci);
             bottoneImpostazioni.setVisibility(View.GONE);
-        }
+        }*/
 
     }
 
@@ -106,6 +107,10 @@ public class SettingsActivity extends AppCompatActivity{
                 }
             }
         });
+        if(!pref.getAll().containsKey("account-utente-loggato")){
+            View bottoneImpostazioni = findViewById(R.id.bottone_esci);
+            bottoneImpostazioni.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -126,7 +131,13 @@ public class SettingsActivity extends AppCompatActivity{
     public void onClickEsci(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
         //autenticazione.getInstance(this).logout();
-        authFragment.logout(view);
+        //authFragment.logout(view);
+        //Ripulisce gli shared preferences al logout
+        editor = pref.edit();
+        editor.remove("account-utente-loggato");
+        editor.commit();
+        Toast.makeText(this, "Logout Eseguito Correttamente!", Toast.LENGTH_SHORT).show();
+
         startActivity(tornaAdAccesso);
     }
 

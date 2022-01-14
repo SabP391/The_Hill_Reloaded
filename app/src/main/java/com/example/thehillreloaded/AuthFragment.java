@@ -1,6 +1,7 @@
 package com.example.thehillreloaded;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -30,11 +31,13 @@ public class AuthFragment extends Fragment {
     String email = "";
     TextView emailText;
     TextView logoutText;
+    Intent tornaAdAccesso;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pref = this.getActivity().getSharedPreferences("HillR_pref", 0);
+        tornaAdAccesso = new Intent(getActivity(), AccessActivity.class);
     }
 
     @Override
@@ -77,10 +80,10 @@ public class AuthFragment extends Fragment {
         editor = pref.edit();
         editor.remove("account-utente-loggato");
         editor.commit();
-        boolean test = pref.getAll().containsKey("account-utente-loggato");
         Toast.makeText(getActivity(), "Logout Eseguito Correttamente!", Toast.LENGTH_SHORT).show();
         //Redirect al menu
-        //getActivity().getSupportFragmentManager().popBackStack();
+        getActivity().getSupportFragmentManager().popBackStack();
+        startActivity(tornaAdAccesso);
     }
 
     public boolean checkIfUserIsLogged() {
