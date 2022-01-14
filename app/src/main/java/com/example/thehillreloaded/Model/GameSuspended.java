@@ -6,6 +6,7 @@ import com.example.thehillreloaded.Game.RecycleUnit;
 import com.example.thehillreloaded.Game.TileMap;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 //classe model che dovrà contenere tutti dati da salvare poi come oggetto su shared preferences
@@ -51,11 +52,13 @@ public class GameSuspended {
     private boolean quest6;
     private int counterQuest6;
 
+    private List<RecycleUnitSave> recycleUnitSave;
+
     public GameSuspended(boolean isPaused,int sunnyPoints, long timeAtGameStart, boolean isPaperUnitUnlocked, boolean isCompostUnlocked,
                          boolean isAluminiumUnitUnlocked, boolean isSteelUnitUnlocked, boolean isPlasticUnitUnlocked,
                          boolean isEwasteUnitUnlocked, boolean isGlassUnitUnlocked, boolean quest1, boolean quest2,
                          boolean quest3, int counterQuest3, boolean quest4, int counterQuest4, boolean quest5,
-                         boolean quest6, int counterQuest6, GameManager instance) {
+                         boolean quest6, int counterQuest6, GameManager instance, List<RecycleUnitSave> recycleUnitSave) {
         this.isPaused =isPaused;
         this.sunnyPoints = sunnyPoints;
         this.timeAtGameStart = timeAtGameStart;
@@ -76,6 +79,7 @@ public class GameSuspended {
         this.quest6 = quest6;
         this.counterQuest6 = counterQuest6;
         this.instance = instance;
+        this.recycleUnitSave = recycleUnitSave;
     }
 
 }

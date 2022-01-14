@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
 import com.example.thehillreloaded.Model.GoogleLoggedDataAccount;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 //è un fragment contenente la mail dell'utente loggato  e il pulsante di logout
@@ -61,7 +63,7 @@ public class AuthFragment extends Fragment {
         emailText = (TextView) view.findViewById(R.id.user_id);
         logoutText = (TextView) view.findViewById(R.id.logout_btn);
         if(checkIfUserIsLogged()) {
-            email = getUser().getPersonEmail().concat(", ");
+            email = getUser().getEmail().concat(", ");
             emailText.setText(email);
             emailText.setVisibility(View.VISIBLE);
             logoutText.setVisibility(View.VISIBLE);
@@ -90,7 +92,7 @@ public class AuthFragment extends Fragment {
         return (pref.getAll().containsKey("account-utente-loggato")) ? true : false;
     }
 
-    public GoogleLoggedDataAccount getUser() {
-        return gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), GoogleLoggedDataAccount.class);
+    public FirebaseUserDataAccount getUser() {
+        return gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class);
     }
 }

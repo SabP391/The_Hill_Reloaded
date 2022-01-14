@@ -84,6 +84,7 @@
         android:layout_marginEnd="48dp"
         android:background="@drawable/bottoni_personalizzati"
         android:contentDescription="@string/bottone_punteggi"
+        android:onClick="btViewPunteggi"
         android:padding="10dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/bottone_impostazioni"

@@ -688,4 +688,6 @@ public abstract class RecycleUnit {
     public RecycleUnitStatus getUnitStatus() {
         return unitStatus;
     }
+
+    public ItemType getAcceptedItemType() { return acceptedItemType;}
 }

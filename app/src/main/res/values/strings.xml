@@ -120,5 +120,10 @@
     <string name="str_vetro2">É possibile produrre nuove bottiglie dal vetro riciclato</string>
     <string name="str_vetro3">É possibile produrre vasi decorativi in vetro dal vetro riciclato</string>
     <string name="str_vetro4">É possibile produrre pannelli in vetro dal vetro riciclato</string>
+    <string name="utente" translatable="false">Utente</string>
+    <string name="score" translatable="false">Score</string>
+    <string name="gametime" translatable="false">GameTime</string>
+    <string name="user" translatable="false">User</string>
+    <string name="signin" translatable="false">SignIn</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>

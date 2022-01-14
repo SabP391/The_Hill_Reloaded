@@ -8,7 +8,8 @@
     tools:context=".GameStatisticsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStatistics"
+        android:id="@+id/rv_statistics"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/giallo_scuro_background" />
 </LinearLayout>
