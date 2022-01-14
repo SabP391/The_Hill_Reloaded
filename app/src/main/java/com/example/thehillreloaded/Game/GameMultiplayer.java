@@ -14,7 +14,7 @@ import com.example.thehillreloaded.UserMenuActivity;
 
 public class GameMultiplayer extends Game {
 
-    private static final int TIME_TO_PLAY = 1;
+    private static final int TIME_TO_PLAY = 4;
     private GameEndFrag frag;
 
     public GameMultiplayer(Context context, TileMap map, Bundle bundle) {
@@ -31,7 +31,7 @@ public class GameMultiplayer extends Game {
         long timeNow = System.nanoTime();
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(System.nanoTime())){
-                GameItemsManager.getInstance().spawnNewObject();
+                GameItemsManager.getInstance().spawnNewObjectMultiplayer();
             }
             for(GameItem i : itemsOnScreen){
                 if(i != movingItem){
@@ -52,7 +52,7 @@ public class GameMultiplayer extends Game {
             GameManager.getInstance().getPlayTime().increasePlayTime();
             elapsedTime = timeNow;
         }
-        if(GameManager.getInstance().getPlayTime().getSeconds() > 20 && GameManager.getInstance().getPlayTime().getMinutes() >= 0){
+        if(GameManager.getInstance().getPlayTime().getMinutes() >= TIME_TO_PLAY){
             frag.gameEndChecker();
             stopDrawThread();
             frag.endGame();

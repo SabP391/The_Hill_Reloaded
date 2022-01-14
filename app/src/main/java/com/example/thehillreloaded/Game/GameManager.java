@@ -11,7 +11,7 @@ public class GameManager {
     private long timeToGetThingsSpicy;
     private long timeFromLastSpawn;
     private float spawnSpeed;
-    private int sunnyPoints;
+    private int sunnyPoints = 0;
     private int totalSunnyPoints = 0;
     private GameMode gameMode;
     private Difficulty difficulty;
@@ -41,18 +41,21 @@ public class GameManager {
         this.difficulty = difficulty;
         timeAtGameStart = System.nanoTime();
         timeFromLastSpawn = (long)spawnSpeed;
-        sunnyPoints = 1000;
         sunnyPointsCounter = new SunnyPointsCounter(map, context);
         timeToGetThingsSpicy = 0;
 
         // Imposta l'intervallo di spawn degli oggetti in base alla difficoltà
         if(difficulty == Difficulty.EASY){
-            spawnSpeed = (float) (800.0);
+            spawnSpeed = (float) (1000.0);
         }
         if(difficulty == Difficulty.NORMAL){
-            spawnSpeed = (float) (600.0);
+            spawnSpeed = (float) (750.0);
         }
         if(difficulty == Difficulty.HARD){
+            spawnSpeed = (float) (500.0);
+        }
+        // Per il multiplayer la velocità è più alta
+        if(isMultiplayerGame){
             spawnSpeed = (float) (400.0);
         }
     }
@@ -70,8 +73,6 @@ public class GameManager {
             timeToGetThingsSpicy += TIME_TO_INCREASE_DIFFICULTY;
             // Aumenta la velocità di spawn
             spawnSpeed -= SPAWN_SPEED_INCREASE;
-            Log.d("Time elapsed", String.valueOf(timeToGetThingsSpicy));
-            Log.d( "Current Spanw speed", String.valueOf(spawnSpeed));
         }
         if((currentTime - timeFromLastSpawn) / 10000000 >= spawnSpeed){
             timeFromLastSpawn = currentTime;

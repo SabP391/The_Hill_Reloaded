@@ -65,39 +65,21 @@ public class GameItemsManager {
         this.gameMode = GameManager.getInstance().getGameMode();
     }
 
+    public void initInstanceMultyplayer(Context context, TileMap map){
+        itemTypes.add(ItemType.PAPER);
+        itemTypes.add(ItemType.COMPOST);
+        itemTypes.add(ItemType.PLASTIC);
+        itemTypes.add(ItemType.STEEL);
+        itemTypes.add(ItemType.ALUMINIUM);
+        itemTypes.add(ItemType.EWASTE);
+    }
     // Metodi utili --------------------------------------------------------------------------------
     // Metodo che aggiunge nuovi oggetti a schermo
     public void spawnNewObject(){
         // Viene effettuato un controllo su quanti ogetti sono stati
         // generati e aggiunge una nuova categoria
         // di oggetti ad intervalli specificati
-        switch(spawnedItemsCounter){
-            case 5:
-                itemTypes.add(ItemType.PAPER);
-                break;
-            case 15:
-                if(gameMode == GameMode.RELOADED){
-                    itemTypes.add(ItemType.COMPOST);
-                }
-                break;
-            case 20:
-                itemTypes.add(ItemType.ALUMINIUM);
-                break;
-            case 25:
-                itemTypes.add(ItemType.STEEL);
-                break;
-            case 30:
-                itemTypes.add(ItemType.PLASTIC);
-                break;
-            case 35:
-                itemTypes.add(ItemType.EWASTE);
-                break;
-            case 40:
-                if(difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD){
-                    itemTypes.add(ItemType.RADIOACTIVE);
-                    break;
-                }
-        }
+        addItemType();
         // Viene generata casualmente la tile di partenza
         // dell'oggetto nel range di tile che determinano
         // la prima riga della collina
@@ -110,6 +92,63 @@ public class GameItemsManager {
                     map,
                     context,
                     itemTypes.get(rand.nextInt(itemTypes.size()))));
+        }
+        // Nel caso la modalità sia reloaded viene generato casualmente
+        // anche il tipo di buff
+        else{
+            itemsOnScreen.add(
+                    new GameItem(initialTile,
+                            map,
+                            context,
+                            itemTypes.get(rand.nextInt(itemTypes.size())),
+                            buffTypes.get(rand.nextInt(buffTypes.size()))));
+        }
+        spawnedItemsCounter +=1;
+    }
+
+    public void addItemType() {
+        switch (spawnedItemsCounter) {
+            case 15:
+                itemTypes.add(ItemType.PAPER);
+                break;
+            case 25:
+                if (gameMode == GameMode.RELOADED) {
+                    itemTypes.add(ItemType.COMPOST);
+                }
+                break;
+            case 30:
+                itemTypes.add(ItemType.ALUMINIUM);
+                break;
+            case 35:
+                itemTypes.add(ItemType.STEEL);
+                break;
+            case 40:
+                itemTypes.add(ItemType.PLASTIC);
+                break;
+            case 45:
+                itemTypes.add(ItemType.EWASTE);
+                break;
+            case 90:
+                if (difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) {
+                    itemTypes.add(ItemType.RADIOACTIVE);
+                    break;
+                }
+        }
+    }
+
+    public void spawnNewObjectMultiplayer(){
+        // Viene generata casualmente la tile di partenza
+        // dell'oggetto nel range di tile che determinano
+        // la prima riga della collina
+        int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
+        // Viene usato il cotruttore appropriato in base a che la modalità
+        // sia classica o reloaded
+        if(gameMode == GameMode.CLASSIC){
+            itemsOnScreen.add(
+                    new GameItem(initialTile,
+                            map,
+                            context,
+                            itemTypes.get(rand.nextInt(itemTypes.size()))));
         }
         // Nel caso la modalità sia reloaded viene generato casualmente
         // anche il tipo di buff

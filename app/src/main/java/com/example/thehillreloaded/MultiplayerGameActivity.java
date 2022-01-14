@@ -70,8 +70,8 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
         GameItemsManager.getInstance().destroy();
         GameManager.getInstance().initInstance(GameMode.RELOADED, Difficulty.HARD, this, map);
         GameManager.getInstance().setMultiplayerGame(true);
-        GameItemsManager.getInstance().initInstance(this, map);
-        RecycleUnitsManager.getInstance().initInstance(this, map);
+        GameItemsManager.getInstance().initInstanceMultyplayer(this, map);
+        RecycleUnitsManager.getInstance().initInstanceMultiplayer(this, map);
         QuestManager.getInstance().initInstance(this);
         GameMultiplayer game = new GameMultiplayer(this, map);
 

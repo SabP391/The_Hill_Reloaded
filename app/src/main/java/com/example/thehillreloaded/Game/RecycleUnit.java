@@ -29,7 +29,7 @@ public abstract class RecycleUnit {
     protected Context context;
     protected TileMap map;
     protected Bitmap sprite;
-    protected int unitPoints = 100;
+    protected int unitPoints = 0;
     protected Point size;
     protected Point position;
     protected int offsetFromLeft = 0;
@@ -628,7 +628,7 @@ public abstract class RecycleUnit {
                 Toast.makeText(context, R.string.usura_ridotta, Toast.LENGTH_SHORT).show();
                 break;
             case REDUCE_PROCESSING_TIME:
-                processTimeMultiplier = (float) - 1.5;
+                processTimeMultiplier = (float) 0.5;
                 Toast.makeText(context, R.string.processamento_ridotto, Toast.LENGTH_SHORT).show();
                 break;
             default:

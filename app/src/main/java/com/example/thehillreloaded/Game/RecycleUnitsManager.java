@@ -103,6 +103,16 @@ public class RecycleUnitsManager {
         }
     }
 
+    public void initInstanceMultiplayer(Context context, TileMap map){
+        initInstance(context, map);
+        unlockedUnits.add(new PaperRecycleUnit(map, context));
+        unlockedUnits.add(new PlasticRecycleUnit(map, context));
+        unlockedUnits.add(new CompostRecycleUnit(map, context));
+        unlockedUnits.add(new SteelRecycleUnit(map, context));
+        unlockedUnits.add(new EWasteRecycleUnit(map, context));
+        unlockedUnits.add(new AluminiumRecycleUnit(map, context));
+    }
+
     public boolean processItemOnScreen(GameItem item){
         int tileToCheck = map.getTileIndexFromPosition(item.getPosition());
         for(RecycleUnit i : unlockedUnits){
