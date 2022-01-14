@@ -147,8 +147,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
         if(QuestManager.getInstance().isGameWon()){
             Intent gameWon = new Intent(context, GameWonActivity.class);
-            stopDrawThread();
             context.startActivity(gameWon);
+            stopDrawThread();
         }
         if(!GameManager.getInstance().isPaused()){
             if(GameManager.getInstance().isTimeToSpawn(timeNow)){
@@ -159,9 +159,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                     if(i.checkForGameOverPosition()){
                         Intent gameLost = new Intent(context, GameOverActivity.class);
                         gameLost.putExtras(info);
-                        stopDrawThread();
                         sFX.suonoGameOver();
                         context.startActivity(gameLost);
+                        stopDrawThread();
                     }
                     i.fall(System.nanoTime());
                     if(i.checkForBuffDestruction()){
