@@ -5,6 +5,7 @@
     android:id="@+id/unlockable_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#1A000000"
     tools:context=".UnlockablesFragment">
 
     <ImageView
@@ -34,6 +35,11 @@
         android:layout_height="156dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto_black"
+        android:paddingVertical="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/verde_scuro"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/unlockable_img"
         app:layout_constraintTop_toTopOf="@+id/unlockable_bg" />
 

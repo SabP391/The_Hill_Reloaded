@@ -88,5 +88,30 @@
     <string name="hai_perso">You lost</string>
     <string name="pareggio">Draw</string>
     <string name="processo_punteggi">Please wait while scores are processed</string>
+    <string name="str_acciaio1">It is possible to make nails from recycled metal</string>
+    <string name="str_acciaio2">It is possible to make kitchenware (pots, mokas) from recycled metal</string>
+    <string name="str_acciaio3">It is possible to make gym equipment (weights, dumbbells) from recycled metal</string>
+    <string name="str_acciaio4">It is possible to make construction materials (steel beams) from recycled metal</string>
+    <string name="str_alluminio1">It is possible to make new tin cans from recycled aluminium</string>
+    <string name="str_alluminio2">It is possible to make everyday obejcts (travel mugs, bottles) from recycled aluminium</string>
+    <string name="str_alluminio3">It is possible to make houshold objects (stepladder, chairs) from recycled aluminium</string>
+    <string name="str_alluminio4">It is possible to make car components (rims, engine block) from recycled aluminium</string>
+    <string name="str_carta1">It is possible to make paper sheets and newspapers from recycled paper</string>
+    <string name="str_carta2">It is possible to make notebooks and books from recycled paper</string>
+    <string name="str_carta3">It is possible to make paper bags and envelopes from recycled paper</string>
+    <string name="str_carta4">It is possible to make paper boxes from recycled paper</string>
+    <string name="str_ewaste1">It is possible to salvage copper from electronic waste</string>
+    <string name="str_ewaste2">It is possible to salvage aluminium from electronic waste</string>
+    <string name="str_ewaste3">It is possible to salvage silver from electronic waste</string>
+    <string name="str_ewaste4">It is possible to salvage gold from electronic waste</string>
+    <string name="str_plastica1">It is possible to make plastic cups from recycled plastic</string>
+    <string name="str_plastica2">It is possible to make bottles and containers from recycled plastic</string>
+    <string name="str_plastica3">It is possible to make shells for electroinic devices from recycled plastic</string>
+    <string name="str_plastica4">It is possible to make ordinary objects (chairs, boxes) from recycled plastic</string>
+    <string name="str_umido">It is possible to produce fertilizer from organic waste</string>
+    <string name="str_vetro1">"It is possible to make jars and glass containers from recycled glass "</string>
+    <string name="str_vetro2">"It is possible to make new glass bottles from recycled glass "</string>
+    <string name="str_vetro3">"It is possible to make decorative glass vases from recycled glass "</string>
+    <string name="str_vetro4">"It is possible to make glass panels from recycled glass "</string>
 
 </resources>

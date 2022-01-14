@@ -95,5 +95,30 @@
     <string name="hai_perso">Hai perso</string>
     <string name="pareggio">Pareggio</string>
     <string name="processo_punteggi">Attendi mentre vengono elaborati i risultati</string>
+    <string name="str_acciaio1">É possibile produrre chiodi da metalli riciclati</string>
+    <string name="str_acciaio2">É possibile produrre utensili da cucina (pentole, moka) da metalli riciclati</string>
+    <string name="str_acciaio3">É possibile produrre attrezzi da palestra (pesi, manubri) da metalli riciclati</string>
+    <string name="str_acciaio4">É possibile produrre materiale da costruzione (travi in acciaio) da metalli riciclati</string>
+    <string name="str_alluminio1">É possibile produrre nuove lattine da alluminio riciclato</string>
+    <string name="str_alluminio2">É possibile produrre oggetti di uso quotidiano (tazze da viaggio, bottiglie) da alluminio riciclato</string>
+    <string name="str_alluminio3">É possibile produrre oggetti di uso domestico (scale, sedie) da alluminio riciclato</string>
+    <string name="str_alluminio4">É possibile produrre componenti per automobili (cerchioni, blocco motore) da alluminio riciclato</string>
+    <string name="str_carta1">É possibile produrre fogli e giornali dalla carta riciclata</string>
+    <string name="str_carta2">É possibile produrre quaderni e libri dalla carta riciclata</string>
+    <string name="str_carta3">É possibile produrre sacchetti e bustine di carta dalla carta riciclata</string>
+    <string name="str_carta4">É possibile produrre scatole di cartone dalla carta riciclata</string>
+    <string name="str_ewaste1">É possibile recuperare rame dai rifiuti elettronici</string>
+    <string name="str_ewaste2">É possibile recuperare alluminio dai rifiuti elettronici</string>
+    <string name="str_ewaste3">É possibile recuperare argento dai rifiuti elettronici</string>
+    <string name="str_ewaste4">É possibile recuperare oro dai rifiuti elettronici</string>
+    <string name="str_plastica1">É possibile produrre bicchieri dalla plastica riciclata</string>
+    <string name="str_plastica2">É possibile produrre bottiglie e contenitori dalla plastica riciclata</string>
+    <string name="str_plastica3">É possibile produrre scocche di apparecchi elettronici dalla plastica riciclata</string>
+    <string name="str_plastica4">É possibile produrre oggetti di uso comune (sedie, scatole) dalla plastica riciclata</string>
+    <string name="str_umido">É possibile produrre fertilizzante di rifiuti organici riciclata</string>
+    <string name="str_vetro1">É possibile produrre barattoli e contenitori in vetro dal vetro riciclato</string>
+    <string name="str_vetro2">É possibile produrre nuove bottiglie dal vetro riciclato</string>
+    <string name="str_vetro3">É possibile produrre vasi decorativi in vetro dal vetro riciclato</string>
+    <string name="str_vetro4">É possibile produrre pannelli in vetro dal vetro riciclato</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>

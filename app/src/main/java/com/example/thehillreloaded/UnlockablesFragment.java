@@ -74,19 +74,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("PLASTICA")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_plastica1));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_plastica2));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_plastica3));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_plastica4));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_plastica_4));
                     break;
             }
@@ -95,19 +95,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("CARTA")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_carta1));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_carta2));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_carta3));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_carta4));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_carta_4));
                     break;
             }
@@ -116,19 +116,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("VETRO")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_vetro1));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_vetro2));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_vetro3));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_vetro4));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_vetro_4));
                     break;
             }
@@ -137,19 +137,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("ALLUMINIO")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_alluminio1));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_alluminio2));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_alluminio3));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_alluminio4));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_alluminio_4));
                     break;
             }
@@ -158,19 +158,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("ACCIAIO")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_acciaio1));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_acciaio2));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_acciaio3));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_acciaio4));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_acciaio_4));
                     break;
             }
@@ -179,19 +179,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("EWASTE")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_ewaste1));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_ewaste2));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_ewaste3));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_ewaste4));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_ewaste_4));
                     break;
             }
@@ -200,19 +200,19 @@ public class UnlockablesFragment extends Fragment {
         if (tipo_unita.equals("ORGANICO")) {
             switch (num_unlockable) {
                 case 1:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_umido));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_1));
                     break;
                 case 2:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_umido));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_2));
                     break;
                 case 3:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_umido));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_3));
                     break;
                 case 4:
-                    testo.setText("Testo da inserire");
+                    testo.setText(getString(R.string.str_umido));
                     img.setImageDrawable(getResources().getDrawable(R.drawable.asset3_unlockable_umido_4));
                     break;
             }
