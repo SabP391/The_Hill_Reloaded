@@ -29,14 +29,20 @@ import com.example.thehillreloaded.Game.GameItemsManager;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Game.QuestManager;
+import com.example.thehillreloaded.Game.RecycleUnit;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Model.GameSuspended;
+import com.example.thehillreloaded.Model.RecycleUnitSave;
 import com.example.thehillreloaded.Services.SoundEffectService;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX, GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
@@ -546,6 +552,12 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
 
     //Setto il bundle per il salvataggio degli oggetti da passare al fragment PauseMenuFragment
     public Bundle setBundleOnPausedGame() {
+        List<RecycleUnitSave> listaRu = new ArrayList<>();
+        for(RecycleUnit recycleUnit : RecycleUnitsManager.getInstance().getUnlockedUnits()){
+            RecycleUnitSave rus = new RecycleUnitSave(recycleUnit.getUnitStatus(),recycleUnit.getAcceptedItemType(),recycleUnit.getCurrentWearLevel(),recycleUnit.getUnitPoints());
+            listaRu.add(rus);
+        }
+
         Bundle bundle = new Bundle();
         bundle.putString("game-pause", gson.toJson(new GameSuspended(GameManager.getInstance().isPaused(), GameManager.getInstance().getSunnyPoints(), GameManager.getInstance().getTimeAtGameStart(),
                 RecycleUnitsManager.getInstance().isPaperUnitUnlocked(), RecycleUnitsManager.getInstance().isCompostUnlocked(),
@@ -556,7 +568,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                 QuestManager.getInstance().isQuest3Complete(), QuestManager.getInstance().getCounterQuest3(),
                 QuestManager.getInstance().isQuest4Complete(), QuestManager.getInstance().getCounterQuest4(),
                 QuestManager.getInstance().isQuest5Complete(), QuestManager.getInstance().isQuest6Complete(),
-                QuestManager.getInstance().getCounterQuest6(), GameManager.getInstance())));
+                QuestManager.getInstance().getCounterQuest6(), GameManager.getInstance(),listaRu)));
         return bundle;
     }
 }

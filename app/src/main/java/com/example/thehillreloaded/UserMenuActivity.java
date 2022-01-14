@@ -131,4 +131,8 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
 
     @Override
     public void suonoBottoni() { if(SFXattivi){ soundService.suonoBottoni(); }}
+
+    public void btViewPunteggi(View view) {
+        Intent viewPunteggi = new Intent(this, GameStatisticsActivity.class);
+    }
 }

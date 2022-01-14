@@ -88,5 +88,10 @@
     <string name="missione_completata">Missione completata</string>
     <string name="oggetto_sbloccato">Oggetto sbloccato!</string>
     <string name="azione_non_disponibile_upgrade">Upgrade non disponibile</string>
+    <string name="utente" translatable="false">Utente</string>
+    <string name="score" translatable="false">Score</string>
+    <string name="gametime" translatable="false">GameTime</string>
+    <string name="user" translatable="false">User</string>
+    <string name="signin" translatable="false">SignIn</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>

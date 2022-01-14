@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import com.example.thehillreloaded.GameActivity;
 import com.example.thehillreloaded.GameOverActivity;
 import com.example.thehillreloaded.GameWonActivity;
+import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
 import com.example.thehillreloaded.Model.GameEnded;
 import com.example.thehillreloaded.Model.GoogleLoggedDataAccount;
 import com.example.thehillreloaded.R;
@@ -178,13 +179,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                         if(pref.getAll().containsKey("account-utente-loggato")) {
                             GameEnded gameEnded = new GameEnded(GameManager.getInstance().getSunnyPoints(),
                                     (System.nanoTime() - GameManager.getInstance().getTimeAtGameStart()), System.nanoTime(),
-                                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), GoogleLoggedDataAccount.class).getPersonEmail());
+                                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getEmail());
                             //Scrivo sul db prendendo il riferimento a tutti i nodi (non a uno specifico)
                             DatabaseReference myRef= mDatabase.getReference();
                             //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -
                             //col secondo child punto al valore  chiave quindi creo un nuovo record email
                             //col terzo child scrivo l'oggetto
-                            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), GoogleLoggedDataAccount.class).getPersonId()).push().setValue(gameEnded);
+                            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getuId()).push().setValue(gameEnded);
                         }
                     }
                     i.fall(System.nanoTime());

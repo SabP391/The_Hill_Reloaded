@@ -33,6 +33,7 @@ public class AccessActivity extends AppCompatActivity {
     SoundEffectService soundService;
     boolean soundServiceBound = false;
     Intent effettiSonori;
+    Intent intentLog;
 
     //variabili per le SharedPreferences
     SharedPreferences pref;
@@ -58,6 +59,7 @@ public class AccessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_access);
 
         effettiSonori = new Intent(this, SoundEffectService.class);
+        intentLog= new Intent(this, LogInActivity.class);
         // Creazione degli intent per accedere alle schermate successive
         menuUtente = new Intent(this, UserMenuActivity.class);
         menuOspite = new Intent(this, GuestMenuActivity.class);
@@ -81,13 +83,13 @@ public class AccessActivity extends AppCompatActivity {
         Button signInButton = findViewById(R.id.bottone_google);
         //signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        /*
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn();
             }
-        });*/
+        });
     }
 
     @Override
@@ -228,4 +230,9 @@ public class AccessActivity extends AppCompatActivity {
         }
     };
 
+    //accesso activity Login
+    public void btnAccessoClick(View view) {
+        Intent intentLog = new Intent(this, LogInActivity.class);
+        startActivity(intentLog);
+    }
 }
