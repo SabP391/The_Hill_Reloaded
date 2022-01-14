@@ -19,20 +19,20 @@
         android:theme="@style/Theme.TheHillReloaded">
         <activity
             android:name=".LogInActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GameStatisticsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MultiplayerGameActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".GameStatisticsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MultiplayerGameActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".GameOverActivity"
             android:exported="false"
