@@ -113,4 +113,11 @@
     <string name="str_vetro2">É possibile produrre nuove bottiglie dal vetro riciclato</string>
     <string name="str_vetro3">É possibile produrre vasi decorativi in vetro dal vetro riciclato</string>
     <string name="str_vetro4">É possibile produrre pannelli in vetro dal vetro riciclato</string>
+    <string name="form_nome">Nome</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_conferma_password">Conferma password</string>
+    <string name="reg_esistente">Già registrato?</string>
+    <string name="reg_non_esistente">Non hai ancora un account?</string>
+    <string name="form_registra">Registrati</string>
 </resources>

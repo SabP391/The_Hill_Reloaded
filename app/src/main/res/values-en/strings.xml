@@ -113,5 +113,12 @@
     <string name="str_vetro2">"It is possible to make new glass bottles from recycled glass "</string>
     <string name="str_vetro3">"It is possible to make decorative glass vases from recycled glass "</string>
     <string name="str_vetro4">"It is possible to make glass panels from recycled glass "</string>
+    <string name="form_nome">Name</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_conferma_password">Confirm password</string>
+    <string name="reg_esistente">Already registered?</string>
+    <string name="reg_non_esistente">Don\'t have an account yet?</string>
+    <string name="form_registra">Sign in</string>
 
 </resources>

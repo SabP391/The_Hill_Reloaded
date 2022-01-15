@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/giallo_scuro_background"
@@ -13,7 +14,6 @@
         android:id="@+id/imageView2"
         android:layout_width="731dp"
         android:layout_height="372dp"
-        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,13 +34,13 @@
 
     <LinearLayout
         android:id="@+id/lay_nome"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView4"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="60dp"
-        android:orientation="vertical">
+        android:layout_marginEnd="60dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Name"
+                android:hint="@string/form_nome"
                 android:maxLines="1"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -68,16 +68,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_weight="1"
-                android:background="@color/teal_700" />
+                android:layout_height="4dp"
+                android:background="@color/verde_scuro" />
         </LinearLayout>
 
 
@@ -85,13 +84,13 @@
 
     <LinearLayout
         android:id="@+id/lay_email"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:layout_below="@+id/lay_nome"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lay_nome">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,8 +110,8 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Email"
-                android:inputType="textPersonName"
+                android:hint="@string/form_email"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
@@ -120,7 +119,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -128,21 +127,19 @@
                 android:id="@+id/view_email"
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:layout_weight="1"
-                android:background="@color/teal_700" />
+                android:background="@color/verde_scuro" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lay_password"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_below="@+id/lay_email"
-
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lay_email">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,9 +151,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:src="@drawable/login_ic_form_lock"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="267dp" />
+                android:src="@drawable/login_ic_form_lock" />
 
             <EditText
                 android:id="@+id/etRegPass"
@@ -164,7 +159,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Password"
+                android:hint="@string/form_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -173,29 +168,28 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <View
                 android:id="@+id/view_pass"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_weight="1"
-                android:background="@color/teal_700" />
+                android:layout_height="4dp"
+                android:background="@color/verde_scuro" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lay_passwordConfirm"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_below="@+id/lay_password"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lay_password">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -207,9 +201,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:src="@drawable/login_ic_form_lock"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="267dp" />
+                android:src="@drawable/login_ic_form_lock" />
 
             <EditText
                 android:id="@+id/etRegPassConf"
@@ -217,7 +209,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Conferma Password"
+                android:hint="@string/form_conferma_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -226,16 +218,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <View
                 android:id="@+id/view_passconf"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_weight="1"
-                android:background="@color/teal_700" />
+                android:layout_height="4dp"
+                android:background="@color/verde_scuro" />
         </LinearLayout>
 
     </LinearLayout>
@@ -246,52 +237,43 @@
         style="@style/StileBottoni"
         android:layout_width="120dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/lay_passwordConfirm"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="130dp"
         android:background="@drawable/bottoni_personalizzati"
         android:onClick="btnSignInClick"
-        android:text="SIGNIN"
+        android:text="@string/form_registra"
+        android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintTop_toBottomOf="@+id/lay_passwordConfirm" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signin_button"
-        android:layout_alignStart="@+id/signin_button"
-        android:layout_alignLeft="@+id/signin_button"
-        android:layout_marginStart="-121dp"
-        android:layout_marginLeft="-121dp"
-        android:layout_marginTop="110dp"
-        android:text="Already registered?"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="387dp" />
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/reg_esistente"
+        app:layout_constraintEnd_toStartOf="@+id/tvLogin"
+        app:layout_constraintTop_toBottomOf="@+id/signin_button" />
 
     <TextView
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignEnd="@+id/signin_button"
-        android:layout_alignRight="@+id/signin_button"
-        android:layout_marginTop="-6dp"
-        android:layout_marginEnd="-122dp"
-        android:layout_marginRight="-122dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="120dp"
         android:clickable="true"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
+        android:fontFamily="@font/roboto_black"
         android:onClick="tvLoginClick"
-        android:text="Login"
+        android:text="@string/form_login"
         android:textColor="@color/arancione_sole"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_button"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

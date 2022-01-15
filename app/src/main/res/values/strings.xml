@@ -125,5 +125,13 @@
     <string name="gametime" translatable="false">GameTime</string>
     <string name="user" translatable="false">User</string>
     <string name="signin" translatable="false">SignIn</string>
+    <string name="form_nome">Nome</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_conferma_password">Conferma password</string>
+    <string name="reg_esistente">Già registrato?</string>
+    <string name="form_login" translatable="false">Login</string>
+    <string name="reg_non_esistente">Non hai ancora un account?</string>
+    <string name="form_registra">Registrati</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>
