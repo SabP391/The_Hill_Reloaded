@@ -112,6 +112,7 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
     public void onClickGioco(View view) {
         if(SFXattivi){ soundService.suonoBottoni(); }
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("IS_NEW_GAME", false);
         startActivity(intent);
     }
 

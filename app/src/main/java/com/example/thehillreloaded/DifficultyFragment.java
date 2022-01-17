@@ -81,6 +81,7 @@ public class DifficultyFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getBaseContext(), GameActivity.class);
                 intent.putExtra("GAME_MODE",gameMode);
                 intent.putExtra("GAME_DIFF", 1);
+                intent.putExtra("IS_NEW_GAME", true);
                 startActivity(intent);
                 Log.v("GAME MODE", " "+gameMode);
             }
@@ -94,6 +95,7 @@ public class DifficultyFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getBaseContext(), GameActivity.class);
                 intent.putExtra("GAME_MODE",gameMode);
                 intent.putExtra("GAME_DIFF", 2);
+                intent.putExtra("IS_NEW_GAME", true);
                 startActivity(intent);
                 Log.v("GAME MODE", " "+gameMode);
             }
@@ -107,6 +109,7 @@ public class DifficultyFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getBaseContext(), GameActivity.class);
                 intent.putExtra("GAME_MODE",gameMode);
                 intent.putExtra("GAME_DIFF", 3);
+                intent.putExtra("IS_NEW_GAME", true);
                 startActivity(intent);
                 Log.v("GAME MODE", " "+gameMode);
             }

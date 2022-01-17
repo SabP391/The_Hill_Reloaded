@@ -51,6 +51,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     private GameMode gameMode;
     private Difficulty difficulty;
     private TileMap map;
+    private Game game;
 
     //variabili per service
     SoundEffectService soundService;
@@ -59,7 +60,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     //boolean per controllare lo stato degli effetti sonori nelle shared preferences
-    boolean SFXattivi;
+    private boolean SFXattivi;
 
     int menuFragID;
     int menuBottID;
@@ -74,56 +75,66 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         effettiSonori = new Intent(this, SoundEffectService.class);
-        map = new TileMap(this);
 
-        // Inizializzazione del GameManager --------------------------------------------------------
-        // Recupero della modalità di gioco e della
-        // difficoltà dall'intent lanciato nel menu
         Intent intent = getIntent();
         Bundle initInformation = intent.getExtras();
-        int mode = initInformation.getInt("GAME_MODE");
-        int diff = initInformation.getInt("GAME_DIFF");
+        boolean isNewGame = initInformation.getBoolean("IS_NEW_GAME");
 
-        // Assegnazione della modalità di gioco
-        switch(mode){
-            case 24:
-                gameMode = GameMode.CLASSIC;
-                break;
-            case 42:
-                gameMode = GameMode.RELOADED;
-                break;
-            default:
-                break;
-        }
-
-        // Assegnazione della difficoltà di gioco
-        switch(diff){
-            case 1:
-                difficulty = Difficulty.EASY;
-                break;
-            case 2:
-                difficulty = Difficulty.NORMAL;
-                break;
-            case 3:
-                difficulty = Difficulty.HARD;
-                break;
-            default:
-                break;
-        }
-        // Inizializzazione vera e propria del GameManager
         GameManager.getInstance().destroy();
         QuestManager.getInstance().destroy();
         RecycleUnitsManager.getInstance().destroy();
         GameItemsManager.getInstance().destroy();
-        GameManager.getInstance().initInstance(gameMode, difficulty, this, map);
 
-        // Inizializzazione della classe game e del
-        // manager delle centrali ------------------------------------------------------------------
-        GameItemsManager.getInstance().initInstance(this, map);
-        RecycleUnitsManager.getInstance().initInstance(this, map);
-        QuestManager.getInstance().initInstance(this);
-        Game game = new Game(this, map, initInformation);
+        if (isNewGame) {
+            map = new TileMap(this);
 
+            // Inizializzazione del GameManager ----------------------------------------------------
+            // Recupero della modalità di gioco e della
+            // difficoltà dall'intent lanciato nel menu
+
+            int mode = initInformation.getInt("GAME_MODE");
+            int diff = initInformation.getInt("GAME_DIFF");
+
+            // Assegnazione della modalità di gioco
+            switch (mode) {
+                case 24:
+                    gameMode = GameMode.CLASSIC;
+                    break;
+                case 42:
+                    gameMode = GameMode.RELOADED;
+                    break;
+                default:
+                    break;
+            }
+
+            // Assegnazione della difficoltà di gioco
+            switch (diff) {
+                case 1:
+                    difficulty = Difficulty.EASY;
+                    break;
+                case 2:
+                    difficulty = Difficulty.NORMAL;
+                    break;
+                case 3:
+                    difficulty = Difficulty.HARD;
+                    break;
+                default:
+                    break;
+            }
+            // Inizializzazione vera e propria del GameManager
+
+            GameManager.getInstance().initInstance(gameMode, difficulty, this, map);
+
+            // Inizializzazione della classe game e del
+            // manager delle centrali --------------------------------------------------------------
+            GameItemsManager.getInstance().initInstance(this, map);
+            RecycleUnitsManager.getInstance().initInstance(this, map);
+            QuestManager.getInstance().initInstance(this);
+            game = new Game(this, map, initInformation);
+        } else {
+            //In questo else vanno fatte cose
+            game = new Game(this, map);
+        }
 
 
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
