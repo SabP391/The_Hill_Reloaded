@@ -13,31 +13,24 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.service.quicksettings.Tile;
 import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.thehillreloaded.GameActivity;
 import com.example.thehillreloaded.GameOverActivity;
 import com.example.thehillreloaded.GameWonActivity;
 import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
 import com.example.thehillreloaded.Model.GameEnded;
-import com.example.thehillreloaded.Model.GoogleLoggedDataAccount;
 import com.example.thehillreloaded.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

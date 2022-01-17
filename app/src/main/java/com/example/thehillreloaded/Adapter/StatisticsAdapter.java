@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thehillreloaded.Model.GameEnded;
 import com.example.thehillreloaded.Model.GameStatistics;
 import com.example.thehillreloaded.R;
 import com.google.firebase.database.ChildEventListener;
@@ -18,99 +20,55 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
-public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.StatisticsViewHolder>{
+public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.MyViewHolder>{
 
-    private Activity mActivity;
-    private DatabaseReference  mDatabaseReference;
-    private String mDisplayName;
-    private ArrayList <DataSnapshot> mdataSnapshots;
+    Context context;
+    ArrayList<GameEnded> gameEndeds;
 
-    private ChildEventListener mListener = new ChildEventListener() {
-        @Override
-        //ogni volta che un figlio viene aggiunto al nodo Padre Utenti, viene chiamato questo metodo
-        public void onChildAdded(DataSnapshot dataSnapshot,String previousChildName) {
-            mdataSnapshots.add(dataSnapshot);
-            notifyDataSetChanged();
-
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot snapshot,  String previousChildName) {
-
-        }
-
-        @Override
-        public void onChildRemoved( DataSnapshot snapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot snapshot,String previousChildName) {
-
-        }
-
-        @Override
-        public void onCancelled(DatabaseError error) {
-
-        }
-    };
-
-    public StatisticsAdapter(Activity activity, DatabaseReference ref, String name){
-        mActivity = activity;
-        mDatabaseReference = ref.child("Utenti");
-        mDisplayName = name;
-        mdataSnapshots = new ArrayList<>();
-
-        //collego il db
-        mDatabaseReference.addChildEventListener(mListener);
+    public StatisticsAdapter(Context context, ArrayList<GameEnded> gameEndeds) {
+        this.context = context;
+        this.gameEndeds = gameEndeds;
     }
 
-    public class StatisticsViewHolder extends RecyclerView.ViewHolder{
-        TextView user;
-        TextView score;
-        TextView gameTime;
-        LinearLayout.LayoutParams params;
-
-        public StatisticsViewHolder(View itemView) {
-            super(itemView);
-            user= (TextView)itemView.findViewById(R.id.tv_user);
-            score = (TextView)itemView.findViewById(R.id.tv_score);
-            gameTime = (TextView)itemView.findViewById(R.id.tv_time);
-            params = (LinearLayout.LayoutParams) user.getLayoutParams();
-        }
-
-    }
-
-    //metodi implementati in automatico dopo l'extends
+    @NonNull
     @Override
-    public StatisticsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //recupero il layout inflater
-        LayoutInflater inflater = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.statistics_game_row, parent, false);
-        StatisticsViewHolder vh = new StatisticsViewHolder(v);
-        return vh;
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.statistics_game_row, parent, false);
+        return new MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(StatisticsViewHolder holder, int position) {
-        //Ricevo da firebase il vettore mdataSnapshots contenente i dati
-        DataSnapshot snapshot = mdataSnapshots.get(position);
-        //salvo il contenuto di DataSanpshot all'interno dell'oggetto gameSatistics
-        GameStatistics gameStatistics = snapshot.getValue(GameStatistics.class);
-
-        holder.user.setText(gameStatistics.getUser());
-        holder.gameTime.setText((int) gameStatistics.getGameTime());
-        holder.score.setText(gameStatistics.getScore());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        GameEnded game = gameEndeds.get(position);
+        holder.email.setText(game.getEmail());
+        holder.score.setText(String.valueOf(game.getTotalScore()));
+        holder.time.setText(convertTime(game.getGameTime()));
     }
-
 
     @Override
     public int getItemCount() {
-        return mdataSnapshots.size();
+        return gameEndeds.size();
     }
 
-    public void clean(){
-        mDatabaseReference.removeEventListener(mListener);
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView email, score, time;
+
+        public MyViewHolder(@NonNull View itemView){
+            super(itemView);
+
+            email = itemView.findViewById(R.id.tv_user);
+            score = itemView.findViewById(R.id.tv_score);
+            time = itemView.findViewById(R.id.tv_time);
+
+        }
+
     }
+
+    private String convertTime(long time) {
+        return String.valueOf(TimeUnit.NANOSECONDS.toSeconds(time)).concat(" s.");
+    }
+
 }

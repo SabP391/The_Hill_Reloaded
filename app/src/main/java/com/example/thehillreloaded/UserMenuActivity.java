@@ -134,5 +134,6 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
 
     public void btViewPunteggi(View view) {
         Intent viewPunteggi = new Intent(this, GameStatisticsActivity.class);
+        startActivity(viewPunteggi);
     }
 }

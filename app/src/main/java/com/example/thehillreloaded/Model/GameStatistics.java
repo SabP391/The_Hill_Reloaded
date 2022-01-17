@@ -1,18 +1,22 @@
 package com.example.thehillreloaded.Model;
 
 public class GameStatistics {
-    private String user;
+
+    private String email;
     private int score;
     private long gameTime;
 
-    public GameStatistics(String user, int score, long gameTime) {
-        this.user = user;
+    public GameStatistics() {
+    }
+
+    public GameStatistics(String email, int score, long gameTime) {
+        this.email = email;
         this.score = score;
         this.gameTime = gameTime;
     }
 
-    public String getUser() {
-        return user;
+    public String getEmail() {
+        return email;
     }
 
     public int getScore() {

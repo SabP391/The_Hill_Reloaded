@@ -33,7 +33,6 @@ public class SettingsActivity extends AppCompatActivity{
     Intent tornaAdAccesso;
     Intent effettiSonori;
     Intent avviaMusica;
-    GoogleSignInWrapper autenticazione;
     private Switch musicaBottone;
     boolean statoMusica;
     private Switch effettiBottone;

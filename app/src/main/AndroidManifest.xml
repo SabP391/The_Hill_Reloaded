@@ -60,10 +60,6 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".GoogleSignInActivity"
-            android:exported="false"
-            android:theme="@style/TransparentActivity" />
-        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:screenOrientation="landscape" />

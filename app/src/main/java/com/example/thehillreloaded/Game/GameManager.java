@@ -1,7 +1,12 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.example.thehillreloaded.Model.GameEnded;
+import com.example.thehillreloaded.Model.GameSuspended;
+import com.google.gson.Gson;
 
 public class GameManager {
     private boolean isPaused = false;

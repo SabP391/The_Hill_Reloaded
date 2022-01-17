@@ -1,11 +1,17 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.widget.Toast;
 
 import com.example.thehillreloaded.GameActivity;
+import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
+import com.example.thehillreloaded.Model.GameEnded;
 import com.example.thehillreloaded.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import java.util.logging.ConsoleHandler;
 
@@ -30,6 +36,12 @@ public class QuestManager{
     private Context context;
     Handler handler;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    Gson gson = new Gson();
+    //FIREBASE
+    FirebaseDatabase mDatabase;
+
     private QuestManager(){
     }
 
@@ -44,6 +56,11 @@ public class QuestManager{
         this.context = context;
         handler = new android.os.Handler();
         this.sfx = (QuestManager.SoundFX) context;
+
+        //inizializzo gli shared
+        pref = this.context.getSharedPreferences("HillR_pref", 0);
+        //Inizializzo istanza di firebase
+        mDatabase = FirebaseDatabase.getInstance("https://the-hill-reloaded-f6f3b-default-rtdb.europe-west1.firebasedatabase.app");
     }
 
     public void destroy(){
@@ -213,13 +230,29 @@ public class QuestManager{
     public boolean isGameWon(){
         if(GameManager.getInstance().getGameMode() == GameMode.CLASSIC){
             if(isQuest1Complete() && isQuest2Complete() && isQuest3Complete()){
+                saveFirebaseGame();
                 return true;
             }else return false;
         } else{
             if(isQuest1Complete() && isQuest2Complete() && isQuest3Complete()
                     && isQuest4Complete() && isQuest5Complete() && isQuest6Complete()){
+                saveFirebaseGame();
                 return true;
             }else return false;
+        }
+    }
+
+    public void saveFirebaseGame() {
+        if(pref.getAll().containsKey("account-utente-loggato")) {
+            GameEnded gameEnded = new GameEnded(GameManager.getInstance().getSunnyPoints(),
+                    (System.nanoTime() - GameManager.getInstance().getTimeAtGameStart()), System.nanoTime(),
+                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getEmail());
+            //Scrivo sul db prendendo il riferimento a tutti i nodi (non a uno specifico)
+            DatabaseReference myRef= mDatabase.getReference();
+            //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -
+            //col secondo child punto al valore  chiave quindi creo un nuovo record email
+            //col terzo child scrivo l'oggetto
+            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getuId()).push().setValue(gameEnded);
         }
     }
 

@@ -122,7 +122,4 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent1);
     }
 
-
-
-
 }
