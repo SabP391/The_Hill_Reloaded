@@ -65,6 +65,36 @@ public class GameManager {
         }
     }
 
+
+    public void gameManagerReload(boolean isPaused,int sunnyPoints, long timeAtGameStart,
+                                  GameManager instance, Difficulty difficulty, GameMode gameMode, Context context, TileMap map){
+        this.isPaused = isPaused;
+        this.sunnyPoints = sunnyPoints;
+        this.timeAtGameStart = timeAtGameStart;
+        this.instance = instance;
+        this.difficulty = difficulty;
+        this.gameMode = gameMode;
+
+        sunnyPointsCounter = new SunnyPointsCounter(map, context);
+        timeToGetThingsSpicy = 0;
+
+        // Imposta l'intervallo di spawn degli oggetti in base alla difficoltà
+        if(difficulty == Difficulty.EASY){
+            spawnSpeed = (float) (1000.0);
+        }
+        if(difficulty == Difficulty.NORMAL){
+            spawnSpeed = (float) (750.0);
+        }
+        if(difficulty == Difficulty.HARD){
+            spawnSpeed = (float) (500.0);
+        }
+        // Per il multiplayer la velocità è più alta
+        if(isMultiplayerGame){
+            spawnSpeed = (float) (400.0);
+        }
+    }
+
+
     public void destroy(){
         instance = null;
     }

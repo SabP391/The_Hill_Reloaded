@@ -2,7 +2,11 @@ package com.example.thehillreloaded.Game;
 
 import android.content.Context;
 
+import com.example.thehillreloaded.Model.GameSuspended;
+import com.example.thehillreloaded.Model.RecycleUnitSave;
+
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RecycleUnitsManager {
@@ -103,6 +107,36 @@ public class RecycleUnitsManager {
         }
     }
 
+
+    public void recycleUnitsManagerReload(boolean isPaperUnitUnlocked, boolean isCompostUnlocked, boolean isAluminiumUnitUnlocked,
+                                          boolean isSteelUnitUnlocked, boolean isPlasticUnitUnlocked, boolean isEwasteUnitUnlocked,
+                                          boolean isGlassUnitUnlocked, Context context, TileMap map, List<RecycleUnitSave> listaRu){
+        this.isPaperUnitUnlocked = isPaperUnitUnlocked;
+        this.isCompostUnlocked = isCompostUnlocked;
+        this.isAluminiumUnitUnlocked = isAluminiumUnitUnlocked;
+        this.isSteelUnitUnlocked = isSteelUnitUnlocked;
+        this.isPlasticUnitUnlocked = isPlasticUnitUnlocked;
+        this.isEwasteUnitUnlocked = isEwasteUnitUnlocked;
+        this.isGlassUnitUnlocked = isGlassUnitUnlocked;
+        initInstance(context, map);
+        unlockedUnits.remove();
+        unlockedUnits.remove();
+
+        for(RecycleUnitSave i: listaRu){
+            switch (i.getAcceptedItemType()){
+                case GLASS:
+                    unlockedUnits.add(new GlassRecycleUnit(map,context));
+                case STEEL:
+                    unlockedUnits.add(new SteelRecycleUnit(map,context));
+                    //finire i case
+
+            }
+
+        }
+    }
+
+
+
     public void initInstanceMultiplayer(Context context, TileMap map){
         initInstance(context, map);
         unlockedUnits.add(new PaperRecycleUnit(map, context));
@@ -112,6 +146,8 @@ public class RecycleUnitsManager {
         unlockedUnits.add(new EWasteRecycleUnit(map, context));
         unlockedUnits.add(new AluminiumRecycleUnit(map, context));
     }
+
+
 
     public boolean processItemOnScreen(GameItem item){
         int tileToCheck = map.getTileIndexFromPosition(item.getPosition());
@@ -421,4 +457,6 @@ public class RecycleUnitsManager {
     public interface SoundFx{
         void suonoUnità();
     }
+
+
 }

@@ -132,8 +132,32 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
             QuestManager.getInstance().initInstance(this);
             game = new Game(this, map, initInformation);
         } else {
+            //SharedPreferences
+            GameSuspended gameSuspended = gson.fromJson(pref.getString("game-pause", null), GameSuspended.class);
+            map=new TileMap(this, gameSuspended.getTileMap());
+
+            //da GameManager
+            GameManager.getInstance().gameManagerReload(gameSuspended.isPaused(),gameSuspended.getSunnyPoints(),
+                    gameSuspended.getTimeAtGameStart(),gameSuspended.getInstance(),gameSuspended.getDifficulty(),
+                    gameSuspended.getGameMode(), this, map);
+            //da RecycleUnitsManager
+            RecycleUnitsManager.getInstance().recycleUnitsManagerReload(gameSuspended.isPaperUnitUnlocked(),
+                    gameSuspended.isCompostUnlocked(),gameSuspended.isAluminiumUnitUnlocked(),gameSuspended.isSteelUnitUnlocked(),
+                    gameSuspended.isPlasticUnitUnlocked(),gameSuspended.isEwasteUnitUnlocked(),gameSuspended.isGlassUnitUnlocked(),
+                    this, map,gameSuspended.getRecycleUnitSave());
+            ;
+            //da QuestManager
+            QuestManager.getInstance().questManagerReload(gameSuspended.isQuest1(),gameSuspended.isQuest2(),gameSuspended.isQuest3(),
+                    gameSuspended.getCounterQuest3(), gameSuspended.isQuest4(),gameSuspended.getCounterQuest4(),gameSuspended.isQuest5(),
+                    gameSuspended.isQuest6(),gameSuspended.getCounterQuest6());
+
+
+
+
+
+
             //In questo else vanno fatte cose
-            game = new Game(this, map);
+           // game = new Game(this, map);
         }
 
 
@@ -580,7 +604,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                 QuestManager.getInstance().isQuest4Complete(), QuestManager.getInstance().getCounterQuest4(),
                 QuestManager.getInstance().isQuest5Complete(), QuestManager.getInstance().isQuest6Complete(),
                 QuestManager.getInstance().getCounterQuest6(), GameManager.getInstance(), listaRu, map.getTileMap(),
-                GameManager.getInstance().getDifficulty())));
+                GameManager.getInstance().getDifficulty(),GameManager.getInstance().getGameMode())));
         return bundle;
     }
 }

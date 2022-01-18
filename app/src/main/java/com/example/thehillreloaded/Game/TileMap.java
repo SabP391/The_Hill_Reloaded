@@ -53,6 +53,44 @@ public class TileMap {
     private final Paint tileGridPaint;
     private final Paint occupiedTilePaint;
 
+
+    public TileMap(Context context, ArrayList<Integer> tileMap ){
+        // Inizializzazione della tilemap ----------------------------------------------------------
+        this.context = context;
+        Point screenSize = new Point();
+        mapSize = new Point();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        display.getSize(screenSize);
+        tileSize = (float) ((screenSize.y / HORIZONTAL_TILE_COUNT) - OFFSET_FROM_BOTTOM);
+        this.mapSize.y = HORIZONTAL_TILE_COUNT;
+        this.mapSize.x = Math.round((screenSize.x / tileSize));
+        this.tileMap= tileMap;
+        FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (NUMBER_OF_TILES_OF_THE_HILL / 2));
+        backGround = GameAssets.getInstance(context).getGameBackGround(screenSize);
+
+        // Inizializzazione delle costanti di tipo Paint necessarie
+        // a disegnare gli elementi statici della collina ------------------------------------------
+        hillRectanglePaint = new Paint();
+        hillRectanglePaint.setColor(Color.DKGRAY);
+        hillRectanglePaint.setStyle(Paint.Style.FILL);
+        hillRectanglePaint.setAlpha(50);
+        blueLinePaint = new Paint();
+        blueLinePaint.setColor(Color.BLUE);
+        blueLinePaint.setStrokeWidth(LINE_THICKNESS);
+        redLinePaint = new Paint();
+        redLinePaint.setColor(Color.RED);
+        redLinePaint.setStrokeWidth(LINE_THICKNESS);
+        // Variabili necessare per il metodo drawTilemap,
+        // utili principalmente in fase di debug
+        tileGridPaint = new Paint();
+        tileGridPaint.setStyle(Paint.Style.STROKE);
+        occupiedTilePaint = new Paint();
+        occupiedTilePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+
+
+    }
+
     // Costruttore della classe, prende in input il numero di tile
     // orizzontali richieste (cioé il numero di righe)
     // e la dimensione dello schermo

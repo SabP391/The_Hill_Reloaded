@@ -52,11 +52,24 @@ public class QuestManager{
         return instance;
     }
 
+    public void questManagerReload(boolean quest1, boolean quest2, boolean quest3, int counterQuest3, boolean quest4,
+                                   int counterQuest4, boolean quest5, boolean quest6, int counterQuest6){
+        this.quest1 = quest1;
+        this.quest2 = quest2;
+        this.quest3 = quest3;
+        this.counterQuest3 = counterQuest3;
+        this.quest4 = quest4;
+        this.counterQuest4 = counterQuest4;
+        this.quest5=quest5;
+        this.quest6=quest6;
+        this.counterQuest6= counterQuest6;
+    }
+
+    //init per salvataggio su db in caso di vittoria
     public void initInstance(Context context){
         this.context = context;
         handler = new android.os.Handler();
         this.sfx = (QuestManager.SoundFX) context;
-
         //inizializzo gli shared
         pref = this.context.getSharedPreferences("HillR_pref", 0);
         //Inizializzo istanza di firebase
@@ -78,6 +91,7 @@ public class QuestManager{
     public void increaseCounterQuest6() {
         this.counterQuest6 ++;
     }
+
 
     //Chiamato quando viene costruita una centrale
     public boolean isQuest1Complete(){

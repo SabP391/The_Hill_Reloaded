@@ -3,6 +3,7 @@ package com.example.thehillreloaded.Model;
 import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.GameItem;
 import com.example.thehillreloaded.Game.GameManager;
+import com.example.thehillreloaded.Game.GameMode;
 import com.example.thehillreloaded.Game.RecycleUnit;
 import com.example.thehillreloaded.Game.TileMap;
 
@@ -11,24 +12,16 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 //classe model che dovrà contenere tutti dati da salvare poi come oggetto su shared preferences
-//è' una bozza
 public class GameSuspended {
-    //dati dinamici - verranno sovrascritti al momento in cui la prtita verrà ripresa -
+    //dati dinamici - verranno sovrascritti al momento in cui la partita verrà ripresa -
 
-    //GameManager
     private int sunnyPoints;
     private boolean isPaused;
     private long timeAtGameStart;
     private long timeAtGamePause;
     private GameManager instance;
-
-    //Manca il getter
-    //private int totalSunnyPoints;
-
-    //RecycleUnitsManager
-    //Da problemi sul Gson errore di riferimento circolare (proponeva l'ident transient)
-    //private ConcurrentLinkedQueue<RecycleUnit> unlockedUnits;
-    //private ConcurrentLinkedQueue<GameItem> itemsOnScreen;
+    private GameMode gameMode;
+    private Difficulty difficulty;
     private boolean isPaperUnitUnlocked;
     private boolean isCompostUnlocked;
     private boolean isAluminiumUnitUnlocked;
@@ -36,11 +29,7 @@ public class GameSuspended {
     private boolean isPlasticUnitUnlocked;
     private boolean isEwasteUnitUnlocked;
     private boolean isGlassUnitUnlocked;
-
-    //Non c'è il metodo getter per prendere la tileMap
     private ArrayList<Integer> tileMap;
-
-    //QuestManager
     private boolean quest1;
     private boolean quest2;
     private boolean quest3;
@@ -50,7 +39,6 @@ public class GameSuspended {
     private boolean quest5;
     private boolean quest6;
     private int counterQuest6;
-    private Difficulty difficulty;
     private List<RecycleUnitSave> recycleUnitSave;
 
     public GameSuspended(boolean isPaused,int sunnyPoints, long timeAtGameStart, long timeAtGamePause, boolean isPaperUnitUnlocked, boolean isCompostUnlocked,
@@ -58,7 +46,7 @@ public class GameSuspended {
                          boolean isEwasteUnitUnlocked, boolean isGlassUnitUnlocked, boolean quest1, boolean quest2,
                          boolean quest3, int counterQuest3, boolean quest4, int counterQuest4, boolean quest5,
                          boolean quest6, int counterQuest6, GameManager instance, List<RecycleUnitSave> recycleUnitSave,
-                         ArrayList<Integer> tileMap, Difficulty difficulty) {
+                         ArrayList<Integer> tileMap, Difficulty difficulty, GameMode gameMode) {
         this.isPaused =isPaused;
         this.sunnyPoints = sunnyPoints;
         this.timeAtGameStart = timeAtGameStart;
@@ -83,6 +71,7 @@ public class GameSuspended {
         this.recycleUnitSave = recycleUnitSave;
         this.tileMap = tileMap;
         this.difficulty = difficulty;
+        this.gameMode = gameMode;
     }
 
     public int getSunnyPoints() {
@@ -180,4 +169,9 @@ public class GameSuspended {
     public List<RecycleUnitSave> getRecycleUnitSave() {
         return recycleUnitSave;
     }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
 }
