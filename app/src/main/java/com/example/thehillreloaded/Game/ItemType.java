@@ -8,5 +8,6 @@ public enum ItemType {
     PLASTIC,
     STEEL,
     COMPOST,
-    RADIOACTIVE;
+    RADIOACTIVE,
+    ALL;
 }

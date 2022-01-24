@@ -1,11 +1,10 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.example.thehillreloaded.Model.GameSuspended;
 import com.example.thehillreloaded.Model.RecycleUnitSave;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -70,7 +69,10 @@ public class RecycleUnitsManager {
         sFX = (RecycleUnitsManager.SoundFx) context;
         unlockedUnits.add(new GlassRecycleUnit(map, context));
         unlockedUnits.add(new IncineratorUnit(map, context));
+        initUnlockableObjects();
+    }
 
+    private void initUnlockableObjects() {
         this.unlockable = new UnlockableObject[4];
         unlockable[0] = new UnlockableObject(2, 1);
         unlockable[1] = new UnlockableObject(4, 3);
@@ -118,21 +120,52 @@ public class RecycleUnitsManager {
         this.isPlasticUnitUnlocked = isPlasticUnitUnlocked;
         this.isEwasteUnitUnlocked = isEwasteUnitUnlocked;
         this.isGlassUnitUnlocked = isGlassUnitUnlocked;
-        initInstance(context, map);
-        unlockedUnits.remove();
-        unlockedUnits.remove();
-
-        for(RecycleUnitSave i: listaRu){
-            switch (i.getAcceptedItemType()){
-                case GLASS:
-                    unlockedUnits.add(new GlassRecycleUnit(map,context));
-                case STEEL:
-                    unlockedUnits.add(new SteelRecycleUnit(map,context));
-                    //finire i case
-
+        this.context = context;
+        this.map = map;
+        sFX = (RecycleUnitsManager.SoundFx) context;
+        initUnlockableObjects();
+        for(RecycleUnitSave savedUnit : listaRu){
+            if(savedUnit.getAcceptedItemType() != null){
+                Log.d("itemType", String.valueOf(savedUnit.getAcceptedItemType()));
             }
-
         }
+
+        for(RecycleUnitSave savedUnit : listaRu){
+            RecycleUnit unitToAdd;
+            switch (savedUnit.getAcceptedItemType()){
+                case ALUMINIUM:
+                    unitToAdd = new AluminiumRecycleUnit(map,context);
+                    break;
+                case EWASTE:
+                    unitToAdd = new EWasteRecycleUnit(map,context);
+                    break;
+                case GLASS:
+                    unitToAdd = new GlassRecycleUnit(map,context);
+                    break;
+                case PAPER:
+                    unitToAdd = new PaperRecycleUnit(map,context);
+                    break;
+                case PLASTIC:
+                    unitToAdd = new PlasticRecycleUnit(map,context);
+                    break;
+                case STEEL:
+                    unitToAdd = new SteelRecycleUnit(map,context);
+                    break;
+                case COMPOST:
+                    unitToAdd = new CompostRecycleUnit(map,context);
+                    break;
+                case ALL:
+                    unitToAdd = new IncineratorUnit(map,context);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + savedUnit.getAcceptedItemType());
+            }
+            unitToAdd.setUnitStatus(savedUnit.getUnitStatus());
+            unitToAdd.setUnitPoints(savedUnit.getUnitPoints());
+            unitToAdd.setCurrentWearLevel(savedUnit.getCurrentWearLevel());
+            unlockedUnits.add(unitToAdd);
+        }
+
     }
 
 

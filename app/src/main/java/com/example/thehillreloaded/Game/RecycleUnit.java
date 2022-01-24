@@ -690,4 +690,10 @@ public abstract class RecycleUnit {
     }
 
     public ItemType getAcceptedItemType() { return acceptedItemType;}
+
+    public void setCurrentWearLevel(int currentWearLevel) { this.currentWearLevel = currentWearLevel; }
+
+    public void setUnitStatus(RecycleUnitStatus unitStatus) { this.unitStatus = unitStatus; }
+
+
 }

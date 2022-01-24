@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.thehillreloaded.Model.RecycleUnitSave;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -65,6 +68,23 @@ public class GameItemsManager {
         this.gameMode = GameManager.getInstance().getGameMode();
     }
 
+    public void gameItemsManagerReload(Context context, TileMap map){
+        this.map = map;
+        this.context = context;
+        this.difficulty = GameManager.getInstance().getDifficulty();
+        this.gameMode = GameManager.getInstance().getGameMode();
+
+        for(int i = 0; i < map.getTileMap().size(); i++){
+            if(map.getTileValue(i) == 1){
+                spawnObjectInATile(i);
+            }
+        }
+
+        for(GameItem i : itemsOnScreen){
+            Log.d("tile", String.valueOf(i.getInitialTile()));
+        }
+    }
+
     public void initInstanceMultyplayer(Context context, TileMap map){
         itemTypes.add(ItemType.PAPER);
         itemTypes.add(ItemType.COMPOST);
@@ -74,24 +94,30 @@ public class GameItemsManager {
         itemTypes.add(ItemType.EWASTE);
     }
     // Metodi utili --------------------------------------------------------------------------------
-    // Metodo che aggiunge nuovi oggetti a schermo
+    // Metodo che aggiunge nuovi oggetti a schermo, generando automaticamente
+    // la tile da cui inizia
     public void spawnNewObject(){
-        // Viene effettuato un controllo su quanti ogetti sono stati
-        // generati e aggiunge una nuova categoria
-        // di oggetti ad intervalli specificati
-        addItemType();
         // Viene generata casualmente la tile di partenza
         // dell'oggetto nel range di tile che determinano
         // la prima riga della collina
         int initialTile = rand.nextInt(map.getNumberOfTileSOfTheHill()) + map.getFirstTileOfTheHill();
+        spawnObjectInATile(initialTile);
+    }
+
+    // Metodo per generare un oggetto in una determinata tile
+    public void spawnObjectInATile(int initialTile){
+        // Viene effettuato un controllo su quanti ogetti sono stati
+        // generati e aggiunge una nuova categoria
+        // di oggetti ad intervalli specificati
+        addItemType();
         // Viene usato il cotruttore appropriato in base a che la modalità
         // sia classica o reloaded
         if(gameMode == GameMode.CLASSIC){
             itemsOnScreen.add(
                     new GameItem(initialTile,
-                    map,
-                    context,
-                    itemTypes.get(rand.nextInt(itemTypes.size()))));
+                            map,
+                            context,
+                            itemTypes.get(rand.nextInt(itemTypes.size()))));
         }
         // Nel caso la modalità sia reloaded viene generato casualmente
         // anche il tipo di buff
@@ -106,6 +132,8 @@ public class GameItemsManager {
         spawnedItemsCounter +=1;
     }
 
+    // Metodo per aggiungere gli item type ogni intervallo prefissato di oggetti
+    // generati.
     public void addItemType() {
         switch (spawnedItemsCounter) {
             case 15:

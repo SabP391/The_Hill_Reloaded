@@ -128,6 +128,7 @@ public class TileMap {
         tileGridPaint.setStyle(Paint.Style.STROKE);
         occupiedTilePaint = new Paint();
         occupiedTilePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        occupiedTilePaint.setAlpha(50);
     }
 
     // Metodi utili --------------------------------------------------------------------------------
@@ -155,6 +156,10 @@ public class TileMap {
     // la posizione della tile con tale indice
     public Point getPositionFromTileIndex(int index){
         return new Point((int)((index % mapSize.x) * tileSize), (int)((index / mapSize.x) * tileSize));
+    }
+
+    public float getBlueLineYPosition(){
+        return tileSize * mapSize.y;
     }
 
     // Metodo che disegna un rettangolo semi trasparente
@@ -238,7 +243,6 @@ public class TileMap {
                             tileGridPaint);
                 }
             }
-
         }
     }
 }

@@ -134,6 +134,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         map.drawBackground(c);
+        //map.drawTilemap(c);
         GameManager.getInstance().getSunnyPointsCounter().draw(c);
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c, System.nanoTime());
@@ -145,7 +146,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                 index++;
             }
         }else{
-            //map.drawTilemap(c);
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }

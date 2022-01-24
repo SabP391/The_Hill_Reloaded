@@ -75,6 +75,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         effettiSonori = new Intent(this, SoundEffectService.class);
+        pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
 
         Intent intent = getIntent();
         Bundle initInformation = intent.getExtras();
@@ -134,17 +135,22 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         } else {
             //SharedPreferences
             GameSuspended gameSuspended = gson.fromJson(pref.getString("game-pause", null), GameSuspended.class);
-            map=new TileMap(this, gameSuspended.getTileMap());
+            map = new TileMap(this, gameSuspended.getTileMap());
 
+            gameMode = gameSuspended.getGameMode();
+            difficulty = gameSuspended.getDifficulty();
             //da GameManager
-            GameManager.getInstance().gameManagerReload(gameSuspended.isPaused(),gameSuspended.getSunnyPoints(),
-                    gameSuspended.getTimeAtGameStart(),gameSuspended.getInstance(),gameSuspended.getDifficulty(),
+            GameManager.getInstance().gameManagerReload(gameSuspended.getSunnyPoints(),
+                    gameSuspended.getTimeAtGameStart(),gameSuspended.getDifficulty(),
                     gameSuspended.getGameMode(), this, map);
+
+            // Inizializzazione del GameItemsManager
+            GameItemsManager.getInstance().gameItemsManagerReload(this, map);
             //da RecycleUnitsManager
             RecycleUnitsManager.getInstance().recycleUnitsManagerReload(gameSuspended.isPaperUnitUnlocked(),
                     gameSuspended.isCompostUnlocked(),gameSuspended.isAluminiumUnitUnlocked(),gameSuspended.isSteelUnitUnlocked(),
                     gameSuspended.isPlasticUnitUnlocked(),gameSuspended.isEwasteUnitUnlocked(),gameSuspended.isGlassUnitUnlocked(),
-                    this, map,gameSuspended.getRecycleUnitSave());
+                    this, map, gameSuspended.getRecycleUnitSave());
             ;
             //da QuestManager
             QuestManager.getInstance().questManagerReload(gameSuspended.isQuest1(),gameSuspended.isQuest2(),gameSuspended.isQuest3(),
@@ -152,12 +158,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                     gameSuspended.isQuest6(),gameSuspended.getCounterQuest6());
 
 
-
-
-
-
-            //In questo else vanno fatte cose
-           // game = new Game(this, map);
+            game = new Game(this, map);
         }
 
 
@@ -299,7 +300,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     protected void onStart() {
         super.onStart();
         //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
-        pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
+        //pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
         //binding del service per gli effetti sonori

@@ -32,7 +32,7 @@ public class GameItem {
     public GameItem(int initialTile, TileMap map, Context context, ItemType itemType){
         this.initialTile = initialTile;
         this.currentTile = initialTile;
-        this.position = new Point((int) (initialTile * map.getTileSize()), 0);
+        this.position = map.getPositionFromTileIndex(initialTile);
         this.map = map;
         this.itemType = itemType;
         this.buffType = BuffType.NONE;
@@ -48,7 +48,7 @@ public class GameItem {
     public GameItem(int initialTile, TileMap map, Context context, ItemType itemType, BuffType buffType){
         this.initialTile = initialTile;
         this.currentTile = initialTile;
-        this.position = new Point((int) (initialTile * map.getTileSize()), 0);
+        this.position = map.getPositionFromTileIndex(initialTile);
         this.map = map;
         this.itemType = itemType;
         // Viene effettuato un controllo sull'itemType
@@ -229,7 +229,7 @@ public class GameItem {
     // Metodo che controlla se l'oggetto si trova
     // nell'ultima riga della tilemap
     public boolean isTouchingTheBlueLine(){
-        return !(currentTile < (map.getMapSize().y * map.getMapSize().x) - (map.getMapSize().x - initialTile));
+        return (position.y >= map.getBlueLineYPosition() - map.getTileSize());
     }
 
     public boolean isOverTheRedLine(){
@@ -251,7 +251,10 @@ public class GameItem {
         return currentTile;
     }
 
+    public int getInitialTile() { return  initialTile; }
+
     public ItemType getItemType() { return itemType; }
 
     public BuffType getBuffType() { return buffType; }
+
 }
