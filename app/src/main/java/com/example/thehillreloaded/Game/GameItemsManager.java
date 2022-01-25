@@ -79,10 +79,6 @@ public class GameItemsManager {
                 spawnObjectInATile(i);
             }
         }
-
-        for(GameItem i : itemsOnScreen){
-            Log.d("tile", String.valueOf(i.getInitialTile()));
-        }
     }
 
     public void initInstanceMultyplayer(Context context, TileMap map){
@@ -136,25 +132,39 @@ public class GameItemsManager {
     // generati.
     public void addItemType() {
         switch (spawnedItemsCounter) {
-            case 15:
+            case 10:
+                itemTypes.add(ItemType.GLASS);
                 itemTypes.add(ItemType.PAPER);
                 break;
-            case 25:
+            case 15:
                 if (gameMode == GameMode.RELOADED) {
+                    itemTypes.add(ItemType.PAPER);
                     itemTypes.add(ItemType.COMPOST);
+                    Collections.shuffle(itemTypes);
                 }
                 break;
             case 30:
+                if (gameMode == GameMode.RELOADED) {
+                    itemTypes.add(ItemType.COMPOST);
+                }else{
+                    itemTypes.add(ItemType.PAPER);
+                }
                 itemTypes.add(ItemType.ALUMINIUM);
+                Collections.shuffle(itemTypes);
                 break;
             case 35:
+                itemTypes.add(ItemType.ALUMINIUM);
                 itemTypes.add(ItemType.STEEL);
+                Collections.shuffle(itemTypes);
                 break;
             case 40:
                 itemTypes.add(ItemType.PLASTIC);
+                itemTypes.add(ItemType.STEEL);
+                Collections.shuffle(itemTypes);
                 break;
             case 45:
                 itemTypes.add(ItemType.EWASTE);
+                Collections.shuffle(itemTypes);
                 break;
             case 90:
                 if (difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) {

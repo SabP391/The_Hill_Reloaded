@@ -21,12 +21,12 @@ public class RecycleUnitsManager {
 
     // Costanti che determinano il prezzo in sunny points
     // delle diverse centrali ----------------------------------------------------------------------
-    private static final int COST_OF_PAPER_UNIT = 12;
-    private static final int COST_OF_COMPOST_UNIT = 20;
-    private static final int COST_OF_ALUMINIUM_UNIT = 25;
-    private static final int COST_OF_STEEL_UNIT = 30;
-    private static final int COST_OF_PLASTIC_UNIT = 35;
-    private static final int COST_OF_EWASTE_UNIT = 40;
+    private static final int COST_OF_PAPER_UNIT = 6;
+    private static final int COST_OF_COMPOST_UNIT = 10;
+    private static final int COST_OF_ALUMINIUM_UNIT = 15;
+    private static final int COST_OF_STEEL_UNIT = 20;
+    private static final int COST_OF_PLASTIC_UNIT = 28;
+    private static final int COST_OF_EWASTE_UNIT = 36;
 
     // Variabili che controllano quali centrali
     // siano state sbloccate -----------------------------------------------------------------------
