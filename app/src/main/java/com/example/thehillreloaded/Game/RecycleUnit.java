@@ -408,7 +408,7 @@ public abstract class RecycleUnit {
     public void wearLevelCalculator(){
         if(unitStatus == RecycleUnitStatus.UPGRADED_ONCE || unitStatus == RecycleUnitStatus.UPGRADED_TWICE) {
             currentWearLevel += (WEAR_LEVEL_INCREASE * wearMultiplier);
-            if (currentWearLevel == MAXIMUM_WEAR_LEVEL) {
+            if (currentWearLevel >= MAXIMUM_WEAR_LEVEL) {
                 downgradeUnit();
             }
         }
