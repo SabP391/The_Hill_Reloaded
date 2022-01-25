@@ -120,5 +120,6 @@
     <string name="reg_esistente">Already registered?</string>
     <string name="reg_non_esistente">Don\'t have an account yet?</string>
     <string name="form_registra">Sign in</string>
+    <string name="bottone_accesso">Login</string>
 
 </resources>

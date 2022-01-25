@@ -103,10 +103,6 @@ public class AccessActivity extends AppCompatActivity {
     }
 
     private void continuaComeOspiteFragment(Fragment fragment){
-        Button google = findViewById(R.id.bottone_google);
-        google.setVisibility(View.INVISIBLE);
-        Button ospite = findViewById(R.id.bottone_ospite);
-        ospite.setVisibility(View.INVISIBLE);
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
@@ -116,20 +112,12 @@ public class AccessActivity extends AppCompatActivity {
     }
 
     public void chiudiFragment(View view){
-        Button google = findViewById(R.id.bottone_google);
-        google.setVisibility(View.VISIBLE);
-        Button ospite = findViewById(R.id.bottone_ospite);
-        ospite.setVisibility(View.VISIBLE);
         getSupportFragmentManager().popBackStackImmediate();
     }
 
     @Override
     public void onBackPressed(){
         if (getSupportFragmentManager().getBackStackEntryCount() > 0){
-            Button google = findViewById(R.id.bottone_google);
-            google.setVisibility(View.VISIBLE);
-            Button ospite = findViewById(R.id.bottone_ospite);
-            ospite.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStackImmediate();
         }
         else super.onBackPressed();
