@@ -4,6 +4,7 @@ import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.GameItem;
 import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.GameMode;
+import com.example.thehillreloaded.Game.PlayTime;
 import com.example.thehillreloaded.Game.RecycleUnit;
 import com.example.thehillreloaded.Game.TileMap;
 
@@ -40,13 +41,14 @@ public class GameSuspended {
     private boolean quest6;
     private int counterQuest6;
     private List<RecycleUnitSave> recycleUnitSave;
+    private PlayTime playTime;
 
     public GameSuspended(boolean isPaused,int sunnyPoints, long timeAtGameStart, long timeAtGamePause, boolean isPaperUnitUnlocked, boolean isCompostUnlocked,
                          boolean isAluminiumUnitUnlocked, boolean isSteelUnitUnlocked, boolean isPlasticUnitUnlocked,
                          boolean isEwasteUnitUnlocked, boolean isGlassUnitUnlocked, boolean quest1, boolean quest2,
                          boolean quest3, int counterQuest3, boolean quest4, int counterQuest4, boolean quest5,
                          boolean quest6, int counterQuest6, GameManager instance, List<RecycleUnitSave> recycleUnitSave,
-                         ArrayList<Integer> tileMap, Difficulty difficulty, GameMode gameMode) {
+                         ArrayList<Integer> tileMap, Difficulty difficulty, GameMode gameMode, PlayTime playtime) {
         this.isPaused =isPaused;
         this.sunnyPoints = sunnyPoints;
         this.timeAtGameStart = timeAtGameStart;
@@ -72,6 +74,7 @@ public class GameSuspended {
         this.tileMap = tileMap;
         this.difficulty = difficulty;
         this.gameMode = gameMode;
+        this.playTime =playtime;
     }
 
     public int getSunnyPoints() {
@@ -174,4 +177,11 @@ public class GameSuspended {
         return gameMode;
     }
 
+    public PlayTime getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(PlayTime playTime) {
+        this.playTime = playTime;
+    }
 }

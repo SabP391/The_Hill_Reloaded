@@ -140,9 +140,10 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
             gameMode = gameSuspended.getGameMode();
             difficulty = gameSuspended.getDifficulty();
             //da GameManager
-            GameManager.getInstance().gameManagerReload(gameSuspended.getSunnyPoints(),
-                    gameSuspended.getTimeAtGameStart(),gameSuspended.getDifficulty(),
-                    gameSuspended.getGameMode(), this, map);
+            GameManager.getInstance().gameManagerReload(gameSuspended.isPaused(),gameSuspended.getSunnyPoints(),
+                    gameSuspended.getTimeAtGameStart(),gameSuspended.getInstance(),gameSuspended.getDifficulty(),
+                    gameSuspended.getGameMode(), gameSuspended.getPlayTime(), this, map);
+
 
             // Inizializzazione del GameItemsManager
             GameItemsManager.getInstance().gameItemsManagerReload(this, map);
@@ -608,7 +609,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                 QuestManager.getInstance().isQuest4Complete(), QuestManager.getInstance().getCounterQuest4(),
                 QuestManager.getInstance().isQuest5Complete(), QuestManager.getInstance().isQuest6Complete(),
                 QuestManager.getInstance().getCounterQuest6(), GameManager.getInstance(), listaRu, map.getTileMap(),
-                GameManager.getInstance().getDifficulty(),GameManager.getInstance().getGameMode())));
+                GameManager.getInstance().getDifficulty(),GameManager.getInstance().getGameMode(),GameManager.getInstance().getPlayTime())));
         return bundle;
     }
 }

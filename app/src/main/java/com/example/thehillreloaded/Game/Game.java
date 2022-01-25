@@ -185,7 +185,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                             //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -
                             //col secondo child punto al valore  chiave quindi creo un nuovo record email
                             //col terzo child scrivo l'oggetto
-                            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getuId()).push().setValue(gameEnded);
+                            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(),
+                                    FirebaseUserDataAccount.class).getuId()).push().setValue(gameEnded);
                         }
                     }
                     i.fall(System.nanoTime());

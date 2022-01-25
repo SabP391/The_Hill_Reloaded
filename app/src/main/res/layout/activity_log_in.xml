@@ -171,6 +171,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="130dp"
         android:background="@drawable/bottoni_personalizzati"
+        android:onClick="btnLoginClick"
         android:text="@string/form_login"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat"

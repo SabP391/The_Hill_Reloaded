@@ -42,7 +42,6 @@ public class GameStatisticsActivity extends AppCompatActivity {
     StatisticsAdapter statisticsAdapter;
     ArrayList<GameEnded> gameEndeds;
     FirebaseDatabase mDatabase;
-    ImageButton buttonShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +73,6 @@ public class GameStatisticsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-
-        buttonShare = (ImageButton) findViewById(R.id.bt_share);
-        buttonShare.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // The value which we will sending through data via
-                // other applications is defined
-                // via the Intent.ACTION_SEND
-                Intent intent2 = new Intent();
-                intent2.setAction(Intent.ACTION_SEND);
-                // setting type of data shared as text
-                intent2.setType("text/plain");
-                intent2.putExtra(Intent.EXTRA_SUBJECT, "Ranking");
-
-                // Adding the text to share using putExtra
-                intent2.putExtra(Intent.EXTRA_TEXT, generatePlainText());
-                startActivity(Intent.createChooser(intent2, "Share Via"));
             }
         });
     }
@@ -143,4 +123,18 @@ public class GameStatisticsActivity extends AppCompatActivity {
     }
 
 
+    public void btnShareClick(View view) {
+        // The value which we will sending through data via
+        // other applications is defined
+        // via the Intent.ACTION_SEND
+        Intent intent2 = new Intent();
+        intent2.setAction(Intent.ACTION_SEND);
+        // setting type of data shared as text
+        intent2.setType("text/plain");
+        intent2.putExtra(Intent.EXTRA_SUBJECT, "Ranking");
+
+        // Adding the text to share using putExtra
+        intent2.putExtra(Intent.EXTRA_TEXT, generatePlainText());
+        startActivity(Intent.createChooser(intent2, "Share Via"));
+    }
 }
