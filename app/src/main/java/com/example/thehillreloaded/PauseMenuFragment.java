@@ -166,7 +166,7 @@ public class PauseMenuFragment extends Fragment {
                     //disattiva gli effetti sonori e salva la scelta nelle SharedPreferences
                     editor.putBoolean("SFX_attivi", false);
                     editor.apply();
-                    SFXattivi = pref.getBoolean("SFX_attivi", true);
+                    SFXattivi = pref.getBoolean("SFX_attivi", false);
                 }
             }
         });

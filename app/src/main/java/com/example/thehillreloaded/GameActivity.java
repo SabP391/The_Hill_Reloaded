@@ -290,6 +290,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                         if(getSupportFragmentManager().getBackStackEntryCount() == 0){
                             GameManager.getInstance().unPause();
                         }
+                        SFXattivi = pref.getBoolean("SFX_attivi", true);
                     }
                 }
             }
@@ -359,6 +360,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
             creaMenuPausa(findViewById(menuPausaID), new PauseMenuFragment(), setBundleOnPausedGame());
             //super.onBackPressed();
         }
+        SFXattivi = pref.getBoolean("SFX_attivi", true);
     }
 
     //Necessari per il service binding
@@ -539,6 +541,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
             getSupportFragmentManager().popBackStackImmediate();
             GameManager.getInstance().unPause();
         }
+        SFXattivi = pref.getBoolean("SFX_attivi", true);
     }
 
     //metodo per la chiusura dei fragment innestati
