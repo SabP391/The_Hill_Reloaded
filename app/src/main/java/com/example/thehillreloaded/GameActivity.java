@@ -158,7 +158,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                     gameSuspended.isQuest6(),gameSuspended.getCounterQuest6());
 
 
-            game = new Game(this, map);
+            game = new Game(this, map, initInformation);
         }
 
 

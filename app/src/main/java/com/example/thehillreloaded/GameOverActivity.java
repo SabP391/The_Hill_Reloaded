@@ -34,6 +34,7 @@ public class GameOverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         Bundle bundle = new Bundle();
+        bundle.putBoolean("IS_NEW_GAME", getIntent().getExtras().getBoolean("IS_NEW_GAME"));
         bundle.putInt("GAME_MODE", getIntent().getExtras().getInt("GAME_MODE"));
         bundle.putInt("GAME_DIFF", getIntent().getExtras().getInt("GAME_DIFF"));
 

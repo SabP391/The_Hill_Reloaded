@@ -85,6 +85,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         super(context);
         init(context, map);
         info = new Bundle();
+        info.putBoolean("IS_NEW_GAME", bundle.getBoolean("IS_NEW_GAME"));
         info.putInt("GAME_MODE", bundle.getInt("GAME_MODE"));
         info.putInt("GAME_DIFF", bundle.getInt("GAME_DIFF"));
     }
