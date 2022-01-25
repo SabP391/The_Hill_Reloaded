@@ -53,7 +53,7 @@ public class QuestManager{
     }
 
     public void questManagerReload(boolean quest1, boolean quest2, boolean quest3, int counterQuest3, boolean quest4,
-                                   int counterQuest4, boolean quest5, boolean quest6, int counterQuest6){
+                                   int counterQuest4, boolean quest5, boolean quest6, int counterQuest6, Context context){
         this.quest1 = quest1;
         this.quest2 = quest2;
         this.quest3 = quest3;
@@ -63,6 +63,7 @@ public class QuestManager{
         this.quest5=quest5;
         this.quest6=quest6;
         this.counterQuest6= counterQuest6;
+        initInstance(context);
     }
 
     //init per salvataggio su db in caso di vittoria

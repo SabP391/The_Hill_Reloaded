@@ -155,7 +155,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
             //da QuestManager
             QuestManager.getInstance().questManagerReload(gameSuspended.isQuest1(),gameSuspended.isQuest2(),gameSuspended.isQuest3(),
                     gameSuspended.getCounterQuest3(), gameSuspended.isQuest4(),gameSuspended.getCounterQuest4(),gameSuspended.isQuest5(),
-                    gameSuspended.isQuest6(),gameSuspended.getCounterQuest6());
+                    gameSuspended.isQuest6(),gameSuspended.getCounterQuest6(), this);
 
 
             game = new Game(this, map, initInformation);
