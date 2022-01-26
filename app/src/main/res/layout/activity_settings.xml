@@ -27,19 +27,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titolo_main" />
 
-    <ImageButton
+    <android.widget.Button
         android:id="@+id/bottone_torna_indietro"
-        android:layout_width="125dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="24dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/torna_indietro"
+        style="@style/StileBottoni"
+        android:layout_width="135dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bottoni_personalizzati"
         android:contextClickable="false"
+        android:fontFamily="@font/roboto_b"
         android:onClick="OnClickTornaIndietro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_freccia_indietro" />
+        android:text="@string/torna_indietro"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toEndOf="@+id/bg_menu_user"
+        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintStart_toStartOf="@+id/bg_menu_user"
+        app:layout_constraintTop_toBottomOf="@+id/bottone_riconoscimenti" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -54,26 +57,11 @@
         app:layout_constraintVertical_bias="0.171" />
 
     <android.widget.Button
-        android:id="@+id/bottone_esci"
-        style="@style/StileBottoni"
-        android:layout_width="135dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/bottoni_personalizzati"
-        android:onClick="onClickEsci"
-        android:text="@string/bottone_uscita"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.793"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_riconoscimenti" />
-
-    <android.widget.Button
         android:id="@+id/bottone_riconoscimenti"
         style="@style/StileBottoni"
         android:layout_width="135dp"
         android:layout_height="55dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bottoni_personalizzati"
         android:text="@string/bottone_riconoscimenti"
         android:textAppearance="@style/TextAppearance.AppCompat"

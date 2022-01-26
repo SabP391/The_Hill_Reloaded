@@ -106,10 +106,6 @@ public class SettingsActivity extends AppCompatActivity{
                 }
             }
         });
-        if(!pref.getAll().containsKey("account-utente-loggato")){
-            View bottoneImpostazioni = findViewById(R.id.bottone_esci);
-            bottoneImpostazioni.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -125,19 +121,6 @@ public class SettingsActivity extends AppCompatActivity{
     public void OnClickTornaIndietro(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         finish();
-    }
-
-    public void onClickEsci(View view) {
-        if(SFXattivi){ soundService.suonoBottoni(); }
-        //autenticazione.getInstance(this).logout();
-        //authFragment.logout(view);
-        //Ripulisce gli shared preferences al logout
-        editor = pref.edit();
-        editor.remove("account-utente-loggato");
-        editor.commit();
-        Toast.makeText(this, "Logout Eseguito Correttamente!", Toast.LENGTH_SHORT).show();
-
-        startActivity(tornaAdAccesso);
     }
 
     //Binding Service
