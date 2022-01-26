@@ -52,6 +52,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.My
         return gameEndeds.size();
     }
 
+    //Inner Class
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView email, score, time;
