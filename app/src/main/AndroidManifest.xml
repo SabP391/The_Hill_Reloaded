@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHillReloaded">
         <activity
+            android:name=".CreditsActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".LogInActivity"
             android:exported="false"
             android:screenOrientation="landscape" />

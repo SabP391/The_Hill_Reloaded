@@ -33,6 +33,7 @@ public class SettingsActivity extends AppCompatActivity{
     Intent tornaAdAccesso;
     Intent effettiSonori;
     Intent avviaMusica;
+    Intent riconoscimenti;
     private Switch musicaBottone;
     boolean statoMusica;
     private Switch effettiBottone;
@@ -48,6 +49,7 @@ public class SettingsActivity extends AppCompatActivity{
         avviaMusica = new Intent(this, BGMusicService.class);
         effettiBottone = (Switch) findViewById(R.id.switch_effetti);
         musicaBottone = (Switch) findViewById(R.id.switch_musica);
+        riconoscimenti = new Intent(this, CreditsActivity.class);
 
         tornaAdAccesso = new Intent(this, AccessActivity.class);
         //if(!autenticazione.getInstance(this).isLogged(this)){
@@ -121,6 +123,11 @@ public class SettingsActivity extends AppCompatActivity{
     public void OnClickTornaIndietro(View view){
         if(SFXattivi){ soundService.suonoBottoni(); }
         finish();
+    }
+
+    public void OnClickRiconoscimenti(View view){
+        if(SFXattivi){ soundService.suonoBottoni(); }
+        startActivity(riconoscimenti);
     }
 
     //Binding Service
