@@ -261,7 +261,7 @@ public class QuestManager{
         if(pref.getAll().containsKey("account-utente-loggato")) {
             GameEnded gameEnded = new GameEnded(GameManager.getInstance().getSunnyPoints(),
                     (System.nanoTime() - GameManager.getInstance().getTimeAtGameStart()), System.nanoTime(),
-                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getEmail());
+                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getEmail(),GameManager.getInstance().getPlayTime().getMinutes(), GameManager.getInstance().getPlayTime().getSeconds());
             //Scrivo sul db prendendo il riferimento a tutti i nodi (non a uno specifico)
             DatabaseReference myRef= mDatabase.getReference();
             //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -

@@ -44,7 +44,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.My
         GameEnded game = gameEndeds.get(position);
         holder.email.setText(game.getEmail());
         holder.score.setText(String.valueOf(game.getTotalScore()));
-        holder.time.setText(convertTime(game.getGameTime()));
+        //holder.time.setText(convertTime(game.getGameTime()));
+        holder.time.setText(String.valueOf(game.getMinutes()).concat("m.").concat(String.valueOf(game.getMinutes())).concat("s."));
     }
 
     @Override

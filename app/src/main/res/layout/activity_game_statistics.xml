@@ -72,7 +72,7 @@
                 android:id="@+id/textView14"
                 android:layout_width="210dp"
                 android:layout_height="match_parent"
-                android:paddingLeft="135dp"
+                android:paddingLeft="125dp"
                 android:text="Time"
                 android:textSize="20sp"
                 android:textStyle="bold" />

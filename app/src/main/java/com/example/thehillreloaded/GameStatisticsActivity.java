@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 
 import com.example.thehillreloaded.Adapter.StatisticsAdapter;
 import com.example.thehillreloaded.Game.Game;
+import com.example.thehillreloaded.Game.PlayTime;
 import com.example.thehillreloaded.Model.GameEnded;
 import com.example.thehillreloaded.Model.GameStatistics;
 import com.google.firebase.database.DataSnapshot;
@@ -95,8 +96,9 @@ public class GameStatisticsActivity extends AppCompatActivity {
         for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
             Map<String, GameEnded> map = (Map<String, GameEnded>) entry.getValue();
             Object[] array = map.values().toArray();
-            GameEnded obj = new GameEnded((long)array[2],(long)array[0],(long)array[1],(String)array[3]);
-            if(i==0) {
+            GameEnded obj = new GameEnded((long)array[4],(long)array[1],(long)array[3],(String)array[5],(long) array[2],
+                    (long)array[0]);
+            if(i==4) {
                 gameEnded = obj;
             } else {
                 if(gameEnded.getTotalScore()<obj.getTotalScore()) {
