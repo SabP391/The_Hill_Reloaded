@@ -421,14 +421,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                case MotionEvent.ACTION_OUTSIDE:
                    if(movingItem != null){
                        // Se c'era un oggetto in movimento,
-                       // lo riporta alla tile in cui si trovava prima del tocco
-                       // e reimposta a null la variabile movingItem
-
+                       // controlla che sia stato lasciato su una centrale
+                       // e che questa lo abbia accettato
                        if(RecycleUnitsManager.getInstance().processItemOnScreen(movingItem)){
+                           // Se l'oggetto è stato accettato dalla centrale
+                           // lo rimuove dagli oggetti presenti a schermo
+                           // e libera la variabile movingItem
                            map.setTileValue(movingItem.getCurrentTile(), 0);
                            itemsOnScreen.remove(movingItem);
                            movingItem = null;
                        }else{
+                           // Altrimenti lo riporta alla posizione da cui
+                           // era stato preso e libera la variabile movingItem
                            movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
                            movingItem = null;
                        }
