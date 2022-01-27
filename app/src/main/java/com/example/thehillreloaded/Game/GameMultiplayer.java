@@ -1,16 +1,7 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.example.thehillreloaded.GameOverActivity;
-import com.example.thehillreloaded.GameWonActivity;
-import com.example.thehillreloaded.MultiplayerActivity;
-import com.example.thehillreloaded.MultiplayerGameActivity;
-import com.example.thehillreloaded.UserMenuActivity;
 
 public class GameMultiplayer extends Game {
 

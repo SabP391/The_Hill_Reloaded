@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout14"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReloadedInGameMenuFragment" >
+    tools:context=".Fragments.ReloadedInGameMenuFragment" >
 
     <ImageView
         android:id="@+id/bg_reloaded_igm"

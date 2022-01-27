@@ -18,35 +18,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHillReloaded">
         <activity
-            android:name=".CreditsActivity"
+            android:name=".Activities.CreditsActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".Activities.LogInActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".GameStatisticsActivity"
+            android:name=".Activities.GameStatisticsActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MultiplayerGameActivity"
+            android:name=".Activities.MultiplayerGameActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".GameOverActivity"
+            android:name=".Activities.GameOverActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".GameWonActivity"
+            android:name=".Activities.GameWonActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MultiplayerActivity"
+            android:name=".Activities.MultiplayerActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
 
@@ -60,27 +60,27 @@
             android:exported="true" />
 
         <activity
-            android:name=".GameActivity"
+            android:name=".Activities.GameActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activities.SettingsActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".GuestMenuActivity"
+            android:name=".Activities.GuestMenuActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".UserMenuActivity"
+            android:name=".Activities.UserMenuActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".AccessActivity"
+            android:name=".Activities.AccessActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>

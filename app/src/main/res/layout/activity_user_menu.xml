@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/giallo_scuro_background"
-    tools:context=".UserMenuActivity">
+    tools:context=".Activities.UserMenuActivity">
 
     <ImageView
         android:id="@+id/imageView2"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#1A000000"
-    tools:context=".UnlockablesFragment">
+    tools:context=".Fragments.UnlockablesFragment">
 
     <ImageView
         android:id="@+id/unlockable_bg"

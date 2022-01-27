@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AluminiumUnitFragment" >
+    tools:context=".Fragments.AluminiumUnitFragment" >
 
     <ImageView
         android:id="@+id/bg_aluminium_frag"

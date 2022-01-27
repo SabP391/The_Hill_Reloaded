@@ -6,11 +6,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/giallo_scuro_background"
-    tools:context=".GameStatisticsActivity">
+    tools:context=".Activities.GameStatisticsActivity">
 
+    <ImageView
+        android:id="@+id/bg_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_main" />
 
     <TextView
         android:id="@+id/textView12"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CLASSIFICHE"
@@ -21,29 +31,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_statistics"
-        android:layout_width="693dp"
-        android:layout_height="274dp"
-        android:layout_marginTop="75dp"
-        android:paddingTop="5dp"
-        android:scrollbars="vertical"
-        android:verticalScrollbarPosition="right"
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/titolo_classifiche" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bottoni_personalizzati"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_statistics"
+        app:layout_constraintEnd_toEndOf="@+id/rv_statistics"
+        app:layout_constraintStart_toStartOf="@+id/rv_statistics"
+        app:layout_constraintTop_toTopOf="@+id/table_row" />
 
     <TableRow
+        android:id="@+id/table_row"
         android:layout_width="729dp"
         android:layout_height="29dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/rv_statistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView12">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,6 +97,19 @@
 
     </TableRow>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_statistics"
+        android:layout_width="693dp"
+        android:layout_height="230dp"
+        android:paddingTop="5dp"
+        android:scrollbars="vertical"
+        android:verticalScrollbarPosition="right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table_row">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <ImageButton
         android:id="@+id/bt_share"
         android:layout_width="wrap_content"
@@ -89,6 +119,7 @@
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:onClick="btnShareClick"
+        app:tint="@color/verde_scuro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.972"
         app:layout_constraintStart_toStartOf="parent"

@@ -12,7 +12,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -21,8 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.thehillreloaded.GameOverActivity;
-import com.example.thehillreloaded.GameWonActivity;
+import com.example.thehillreloaded.Activities.GameOverActivity;
+import com.example.thehillreloaded.Activities.GameWonActivity;
 import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
 import com.example.thehillreloaded.Model.GameEnded;
 import com.example.thehillreloaded.R;

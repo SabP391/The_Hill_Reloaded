@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#CCCC63"
     android:onClick="btnAccessoClick"
-    tools:context=".AccessActivity">
+    tools:context=".Activities.AccessActivity">
 
     <ImageView
         android:id="@+id/bg_accesso"

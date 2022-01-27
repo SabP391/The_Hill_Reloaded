@@ -5,15 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.example.thehillreloaded.GameActivity;
 import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
 import com.example.thehillreloaded.Model.GameEnded;
 import com.example.thehillreloaded.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
-
-import java.util.logging.ConsoleHandler;
 
 public class QuestManager{
 
