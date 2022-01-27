@@ -70,6 +70,7 @@ public class GameAssets {
 
     // Costruttore della classe
     private GameAssets(){
+        // Creazione delle sprite per background e icone -------------------------------------------
         gameBackGround = getBitmap(context, R.drawable.ic_bg_ingame);
         sunnyPointsIcon = getBitmap(context, R.drawable.ic_sole);
         unitPointsIcon = getBitmap(context, R.drawable.ic_unit_points);

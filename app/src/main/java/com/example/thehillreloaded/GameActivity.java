@@ -44,9 +44,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-
-public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX, GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
-        PlasticUnitFragment.SoundFX, EwasteUnitFragment.SoundFX, MetalUnitFragment.SoundFX, AluminiumUnitFragment.SoundFX,
+// Activity che ospita il gioco vero e proprio
+public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX,
+        GlassUnitFragment.SoundFX, PaperUnitFragment.SoundFX,
+        PlasticUnitFragment.SoundFX, EwasteUnitFragment.SoundFX,
+        MetalUnitFragment.SoundFX, AluminiumUnitFragment.SoundFX,
         OrganicUnitFragment.SoundFX, RecycleUnitsManager.SoundFx, Game.SoundFx{
     private GameMode gameMode;
     private Difficulty difficulty;
@@ -86,13 +88,15 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         RecycleUnitsManager.getInstance().destroy();
         GameItemsManager.getInstance().destroy();
 
+        // Inizializzazione della partita ----------------------------------------------------------
+
+        // Controlla che si stia iniziando una nuova partita
         if (isNewGame) {
+            // Se è una nuova partita crea una nupva tilemap
             map = new TileMap(this);
 
-            // Inizializzazione del GameManager ----------------------------------------------------
             // Recupero della modalità di gioco e della
             // difficoltà dall'intent lanciato nel menu
-
             int mode = initInformation.getInt("GAME_MODE");
             int diff = initInformation.getInt("GAME_DIFF");
 
@@ -122,43 +126,47 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                 default:
                     break;
             }
-            // Inizializzazione vera e propria del GameManager
 
+            // Inizializzazione dei manager di gioco
             GameManager.getInstance().initInstance(gameMode, difficulty, this, map);
-
-            // Inizializzazione della classe game e del
-            // manager delle centrali --------------------------------------------------------------
             GameItemsManager.getInstance().initInstance(this, map);
             RecycleUnitsManager.getInstance().initInstance(this, map);
             QuestManager.getInstance().initInstance(this);
+
+            // Creazione della partita
             game = new Game(this, map, initInformation);
         } else {
-            //SharedPreferences
-            GameSuspended gameSuspended = gson.fromJson(pref.getString("game-pause", null), GameSuspended.class);
+            // Se si sta invece continuando una partita salvata
+            // Recupero dalle SharedPreferences del salvataggio
+            GameSuspended gameSuspended = gson.fromJson(pref.getString("game-pause", null),
+                    GameSuspended.class);
+
+            // Caricamento della tilemap
             map = new TileMap(this, gameSuspended.getTileMap());
 
+            // Caricamento di difficoltà e modalità di gioco
             gameMode = gameSuspended.getGameMode();
             difficulty = gameSuspended.getDifficulty();
-            //da GameManager
-            GameManager.getInstance().gameManagerReload(gameSuspended.isPaused(),gameSuspended.getSunnyPoints(),
-                    gameSuspended.getTimeAtGameStart(),gameSuspended.getInstance(),gameSuspended.getDifficulty(),
+            // Caericamento del game manager
+            GameManager.getInstance().gameManagerReload(gameSuspended.getSunnyPoints(),
+                    gameSuspended.getTimeAtGameStart(),gameSuspended.getDifficulty(),
                     gameSuspended.getGameMode(), gameSuspended.getPlayTime(), this, map);
-
-
-            // Inizializzazione del GameItemsManager
+            // Caricamento del GameItemsManager
             GameItemsManager.getInstance().gameItemsManagerReload(this, map);
-            //da RecycleUnitsManager
+            // Caricamentro del RecycleUnitsManager
             RecycleUnitsManager.getInstance().recycleUnitsManagerReload(gameSuspended.isPaperUnitUnlocked(),
-                    gameSuspended.isCompostUnlocked(),gameSuspended.isAluminiumUnitUnlocked(),gameSuspended.isSteelUnitUnlocked(),
-                    gameSuspended.isPlasticUnitUnlocked(),gameSuspended.isEwasteUnitUnlocked(),gameSuspended.isGlassUnitUnlocked(),
+                    gameSuspended.isCompostUnlocked(),gameSuspended.isAluminiumUnitUnlocked(),
+                    gameSuspended.isSteelUnitUnlocked(),
+                    gameSuspended.isPlasticUnitUnlocked(),gameSuspended.isEwasteUnitUnlocked(),
+                    gameSuspended.isGlassUnitUnlocked(),
                     this, map, gameSuspended.getRecycleUnitSave());
-            ;
-            //da QuestManager
-            QuestManager.getInstance().questManagerReload(gameSuspended.isQuest1(),gameSuspended.isQuest2(),gameSuspended.isQuest3(),
-                    gameSuspended.getCounterQuest3(), gameSuspended.isQuest4(),gameSuspended.getCounterQuest4(),gameSuspended.isQuest5(),
+            // Caricamento del QuestManager
+            QuestManager.getInstance().questManagerReload(gameSuspended.isQuest1(),gameSuspended.isQuest2(),
+                    gameSuspended.isQuest3(), gameSuspended.getCounterQuest3(),
+                    gameSuspended.isQuest4(),gameSuspended.getCounterQuest4(),gameSuspended.isQuest5(),
                     gameSuspended.isQuest6(),gameSuspended.getCounterQuest6(), this);
 
-
+            // Creazione della partita
             game = new Game(this, map, initInformation);
         }
 
