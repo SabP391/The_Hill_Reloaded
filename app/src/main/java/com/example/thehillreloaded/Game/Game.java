@@ -51,8 +51,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // Variabile per il context
     protected Context context;
     protected static final String LOGTAG = "surface";
-    protected boolean timeToDestroy = false;
-    protected Handler messageHandler;
 
     // Variabili relative al gioco e alla sua logica -----------------------------------------------
     protected TileMap map;
@@ -61,10 +59,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     protected ConcurrentLinkedQueue<GameItem> itemsOnScreen;
     protected long elapsedTime;
     protected Random rand;
-    protected int currentIndex = 0;
     protected Point spriteSize;
     protected ConcurrentLinkedQueue<RecycleUnit> unitsOnScreen;
-    protected long lastUpdate;
     protected SoundFx sFX;
     protected Bundle info;
 
@@ -90,6 +86,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         info.putInt("GAME_DIFF", bundle.getInt("GAME_DIFF"));
     }
 
+    // Costruttore utile per la modalità multiplayer, in cui non
+    // sono necessarie informazioni riguardanti difficoltà e modalità
     public Game(Context context, TileMap map) {
         super(context);
         init(context, map);
@@ -100,28 +98,40 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         this.map = map;
         this.context = context;
         sFX = (Game.SoundFx) context;
-        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), sensorManager.SENSOR_DELAY_GAME);
 
+        // Inizializzazione dei sensori
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                sensorManager.SENSOR_DELAY_GAME);
+
+        // Variabili necessarie per gestire lo shake del telefono
         accelerationVal = SensorManager.GRAVITY_EARTH;
         accelerationLast = SensorManager.GRAVITY_EARTH;
         shake = 0.00f;
+
+        // Assegnazione dell'holder della surface view
         this.holder = getHolder();
         this.holder.addCallback(this);
         setFocusable(true);
 
-        mixedArray = new Bitmap[60];
+        // Concurrent linked queue degli oggetti presenti a schermo
         itemsOnScreen = GameItemsManager.getInstance().getItemsOnScreen();
+
+        // Array di immagini per sostituire gli oggetti a schermo
+        // quando il gioco è in pausa
+        mixedArray = new Bitmap[60];
+        // Inizializzazione di mixed array
         Point tileSize = new Point((int)map.getTileSize(), (int)map.getTileSize());
         for(int i = 0; i < Array.getLength(mixedArray); i++){
             mixedArray[i] = GameAssets.getInstance(context).getMixed(tileSize);
         }
         elapsedTime = 0;
         rand = new Random();
+        // La dimensione degli oggetti a schermo è gestita in base
+        // alla dimensione delle tile della tilemap
         spriteSize = new Point((int) (map.getTileSize()), (int) (map.getTileSize()));
+        // Concurrent linked queue delle centrali di riciclo sbloccate
         unitsOnScreen = RecycleUnitsManager.getInstance().getUnlockedUnits();
-
-        messageHandler = new Handler();
 
         //inizializzo gli shared
         pref = this.context.getSharedPreferences("HillR_pref", 0);
@@ -135,18 +145,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     // inserite le cose da mostrare a schermo
     public void render(@NonNull Canvas c){
         map.drawBackground(c);
-        //map.drawTilemap(c);
         GameManager.getInstance().getSunnyPointsCounter().draw(c);
+        // Disegna a schermo le unità di riciclo
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c, System.nanoTime());
         }
+        // Se il giocoè in pausa disegna a schermo gli oggetti
+        // nel mixedArray nelle posizioni in cui si trovano gli oggetti
+        // in itemsOnScreen
         if(GameManager.getInstance().isPaused()){
             int index = 0;
             for(GameItem i : itemsOnScreen){
                 c.drawBitmap(mixedArray[index], i.getPosition().x, i.getPosition().y, null);
                 index++;
             }
-        }else{
+        }
+        // Se il gioco non è in pausa disegna a schermo gli oggetti
+        // in itemsOnScreen
+        else{
             for(GameItem i : itemsOnScreen){
                 i.drawObject(c);
             }
@@ -157,40 +173,39 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void gameLogic(){
         long timeNow = System.nanoTime();
 
+        // Controlla se la partita sia vinta e in tal caso
+        // apri l'activity corretta e blocca il thread di disegno
         if(QuestManager.getInstance().isGameWon()){
             Intent gameWon = new Intent(context, GameWonActivity.class);
             context.startActivity(gameWon);
             stopDrawThread();
         }
+
+        // Se il gioco non è in pausa aggiorna la logica di gioco
         if(!GameManager.getInstance().isPaused()){
+            // Se è il momento di farlo, fa apparire un nuovo oggetto
             if(GameManager.getInstance().isTimeToSpawn(timeNow)){
                 GameItemsManager.getInstance().spawnNewObject();
             }
-            for(GameItem i : itemsOnScreen){
-                if(i != movingItem){
-                    if(i.checkForGameOverPosition()){
-                        Intent gameLost = new Intent(context, GameOverActivity.class);
-                        gameLost.putExtras(info);
-                        sFX.suonoGameOver();
-                        context.startActivity(gameLost);
-                        stopDrawThread();
 
-                        //Verifico se l'utente è loggato, se si procedo a salvare i dati su firebase
-                        if(pref.getAll().containsKey("account-utente-loggato")) {
-                            GameEnded gameEnded = new GameEnded(GameManager.getInstance().getSunnyPoints(),
-                                    (System.nanoTime() - GameManager.getInstance().getTimeAtGameStart()), System.nanoTime(),
-                                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getEmail(),
-                                    GameManager.getInstance().getPlayTime().getMinutes(), GameManager.getInstance().getPlayTime().getSeconds());
-                            //Scrivo sul db prendendo il riferimento a tutti i nodi (non a uno specifico)
-                            DatabaseReference myRef= mDatabase.getReference();
-                            //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -
-                            //col secondo child punto al valore  chiave quindi creo un nuovo record email
-                            //col terzo child scrivo l'oggetto
-                            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(),
-                                    FirebaseUserDataAccount.class).getuId()).push().setValue(gameEnded);
-                        }
+            // Aggiorna tutti gli oggetti sullo schermo
+            for(GameItem i : itemsOnScreen){
+                // Se l'oggetto attuale sta venendo trascinato
+                // dal giocatore non viene aggiornato
+                if(i != movingItem){
+                    // Controlla che nessun oggetto sia al di sopra
+                    // della linea rossa, altrimenti termina la partita
+                    if(i.checkForGameOverPosition()){
+                        gameLost();
                     }
+
+                    // Aggiorna la posizione di gioco di tutti gli
+                    // oggetti presenti a schermo
                     i.fall(System.nanoTime());
+
+                    // Nel caso l'oggetto in caduta sia un oggetto di buff
+                    // controlla che non tocchi altri oggetti
+                    // altrimenti l'oggetto viene rimosso dallo schermo
                     if(i.checkForBuffDestruction()){
                         map.setTileValue(i.getCurrentTile(), 0);
                         itemsOnScreen.remove(i);
@@ -203,6 +218,30 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         if((timeNow - elapsedTime) / 1000000000 >= 1){
             GameManager.getInstance().getPlayTime().increasePlayTime();
             elapsedTime = timeNow;
+        }
+    }
+
+    // Metodo per la gestione della partita persa
+    private void gameLost() {
+        Intent gameLost = new Intent(context, GameOverActivity.class);
+        gameLost.putExtras(info);
+        sFX.suonoGameOver();
+        context.startActivity(gameLost);
+        stopDrawThread();
+
+        //Verifico se l'utente è loggato, se si procedo a salvare i dati su firebase
+        if(pref.getAll().containsKey("account-utente-loggato")) {
+            GameEnded gameEnded = new GameEnded(GameManager.getInstance().getSunnyPoints(),
+                    (System.nanoTime() - GameManager.getInstance().getTimeAtGameStart()), System.nanoTime(),
+                    gson.fromJson(pref.getAll().get("account-utente-loggato").toString(), FirebaseUserDataAccount.class).getEmail(),
+                    GameManager.getInstance().getPlayTime().getMinutes(), GameManager.getInstance().getPlayTime().getSeconds());
+            //Scrivo sul db prendendo il riferimento a tutti i nodi (non a uno specifico)
+            DatabaseReference myRef= mDatabase.getReference();
+            //con il primo child punto al nodo Utenti - che rappresenta il nome della Tabella -
+            //col secondo child punto al valore  chiave quindi creo un nuovo record email
+            //col terzo child scrivo l'oggetto
+            myRef.child("Utenti").child(gson.fromJson(pref.getAll().get("account-utente-loggato").toString(),
+                    FirebaseUserDataAccount.class).getuId()).push().setValue(gameEnded);
         }
     }
 

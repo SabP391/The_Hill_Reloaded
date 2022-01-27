@@ -18,7 +18,6 @@ public class GameItem {
     private Bitmap objectSprite;
     private Point position;
     private TileMap map;
-    private final int initialTile;
     private int currentTile;
     private final BuffType buffType;
     private long startTime = 0;
@@ -30,7 +29,6 @@ public class GameItem {
     // gli oggetti vengono inizializzati assegnando come dimensione
     // al Bitmap la dimensione di una tile della tilemap
     public GameItem(int initialTile, TileMap map, Context context, ItemType itemType){
-        this.initialTile = initialTile;
         this.currentTile = initialTile;
         this.position = map.getPositionFromTileIndex(initialTile);
         this.map = map;
@@ -38,7 +36,6 @@ public class GameItem {
         this.buffType = BuffType.NONE;
         Point spriteSize = new Point((int) map.getTileSize(), (int) map.getTileSize());
         assignSprite(context, spriteSize);
-
     }
 
     // Costruttore per la modalità di gioco reloaded
@@ -46,7 +43,6 @@ public class GameItem {
     // viene quindi scelta la sprite adatta per l'ogetto
     // in base al fatto che sia un buff o un debuff
     public GameItem(int initialTile, TileMap map, Context context, ItemType itemType, BuffType buffType){
-        this.initialTile = initialTile;
         this.currentTile = initialTile;
         this.position = map.getPositionFromTileIndex(initialTile);
         this.map = map;
@@ -233,7 +229,8 @@ public class GameItem {
     }
 
     public boolean isOverTheRedLine(){
-        if((currentTile >= map.getFirstTileOfTheHill()) && (currentTile <= map.getFirstTileOfTheHill() + map.getNumberOfTileSOfTheHill())){
+        if((currentTile >= map.getFirstTileOfTheHill()) &&
+                (currentTile <= map.getFirstTileOfTheHill() + map.getNumberOfTileSOfTheHill())){
             return true;
         }else return false;
     }
@@ -250,8 +247,6 @@ public class GameItem {
     public int getCurrentTile(){
         return currentTile;
     }
-
-    public int getInitialTile() { return  initialTile; }
 
     public ItemType getItemType() { return itemType; }
 

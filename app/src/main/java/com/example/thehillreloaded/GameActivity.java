@@ -1,11 +1,6 @@
 package com.example.thehillreloaded;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,15 +8,18 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.thehillreloaded.Game.Difficulty;
 import com.example.thehillreloaded.Game.Game;
@@ -35,14 +33,10 @@ import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Model.GameSuspended;
 import com.example.thehillreloaded.Model.RecycleUnitSave;
 import com.example.thehillreloaded.Services.SoundEffectService;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 // Activity che ospita il gioco vero e proprio
 public class GameActivity extends AppCompatActivity implements QuestManager.SoundFX,
@@ -53,7 +47,6 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     private GameMode gameMode;
     private Difficulty difficulty;
     private TileMap map;
-    private Game game;
 
     //variabili per service
     SoundEffectService soundService;
@@ -73,6 +66,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     //creo oggetto Gson con codice per esclusione errori
     Gson gson = new Gson();
 
+    @SuppressLint("RtlHardcoded")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +77,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         Bundle initInformation = intent.getExtras();
         boolean isNewGame = initInformation.getBoolean("IS_NEW_GAME");
 
+        // Distruzione dei manager eventualmente presenti ancora in memoria
         GameManager.getInstance().destroy();
         QuestManager.getInstance().destroy();
         RecycleUnitsManager.getInstance().destroy();
@@ -91,6 +86,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         // Inizializzazione della partita ----------------------------------------------------------
 
         // Controlla che si stia iniziando una nuova partita
+        Game game;
         if (isNewGame) {
             // Se è una nuova partita crea una nupva tilemap
             map = new TileMap(this);
@@ -134,7 +130,6 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
             QuestManager.getInstance().initInstance(this);
 
             // Creazione della partita
-            game = new Game(this, map, initInformation);
         } else {
             // Se si sta invece continuando una partita salvata
             // Recupero dalle SharedPreferences del salvataggio
@@ -167,8 +162,8 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
                     gameSuspended.isQuest6(),gameSuspended.getCounterQuest6(), this);
 
             // Creazione della partita
-            game = new Game(this, map, initInformation);
         }
+        game = new Game(this, map, initInformation);
 
 
         // ELEMENTI DEL LAYOUT ---------------------------------------------------------------------
@@ -255,7 +250,6 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
 
         // AZIONI DEI BOTTONI ----------------------------------------------------------------------
         bottoneMenu.setOnClickListener(new View.OnClickListener() {
-            //gameMode == GameMode.CLASSIC oppure gameMode == GameMode.RELOADED
             @Override
             public void onClick(View v) {
                 if(SFXattivi){ soundService.suonoBottoni(); }
@@ -373,7 +367,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     }
 
     //Necessari per il service binding
-    private ServiceConnection soundServiceConnection = new ServiceConnection() {
+    private final ServiceConnection soundServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             SoundEffectService.LocalBinder binder = (SoundEffectService.LocalBinder) service;
