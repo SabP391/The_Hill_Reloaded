@@ -63,6 +63,8 @@ public class GameStatisticsActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //prelevo i dati dal firebase e creo la mappa, dopodichè creo la lista dalla mappa filtrata
+                //tramite il metodo filterHashMap ed eseguo il sort su essa per score
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     Object hashMap = dataSnapshot.getValue();
                     HashMap<String, Object> map = (HashMap<String, Object>) hashMap;
@@ -79,6 +81,7 @@ public class GameStatisticsActivity extends AppCompatActivity {
         });
     }
 
+    //genera il testo da visualizzare
     private String generatePlainText() {
         String ranking = "";
         int i = 0;
@@ -91,6 +94,7 @@ public class GameStatisticsActivity extends AppCompatActivity {
         return ranking;
     }
 
+    //metodo per filtrare la mappa, prendo la partita con punteggio maggiore per singolo utente
     public GameEnded filterHashMap(HashMap<String, Object> hashMap) {
         GameEnded gameEnded = new GameEnded();
         int i = 0;
@@ -110,6 +114,7 @@ public class GameStatisticsActivity extends AppCompatActivity {
         return gameEnded;
     }
 
+    //Eseguo il sort della classifica per score
     private List<GameEnded> sortList(List<GameEnded> list) {
         for (int i = 1; i < list.size(); i++) {
             GameEnded current = list.get(i);
@@ -125,11 +130,11 @@ public class GameStatisticsActivity extends AppCompatActivity {
         return list;
     }
 
-
+    //metodo che si lancia al click del bottone share per condividere le classifiche
     public void btnShareClick(View view) {
         // The value which we will sending through data via
         // other applications is defined
-        // via the Intent.ACTION_SEND
+        // via the Intent.ACTION_SEND (Intent implicito)
         Intent intent2 = new Intent();
         intent2.setAction(Intent.ACTION_SEND);
         // setting type of data shared as text

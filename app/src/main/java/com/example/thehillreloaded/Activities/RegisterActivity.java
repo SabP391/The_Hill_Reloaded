@@ -75,29 +75,23 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-
-    // TODO: Salvare il campo nome all'interno delle SharedPreferences
-    private void salvaNome(){
-        String nome = mEmail.getText().toString();
-        SharedPreferences prefs = getSharedPreferences(CHAT_PREFS, 0);
-        prefs.edit().putString(EMAIL_KEY, nome).apply();
-    }
-
-
     public void btnSignInClick(View view) {
         Log.d("Register Activity","Button SignIn clicked");
         String nome = mNome.getText().toString();
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
+        String passwordConfirmed = mConfermaPassword.getText().toString();
         //validazione dati
         if(!nomeValido(nome))
             Toast.makeText(RegisterActivity.this,"Nome non valido.", Toast.LENGTH_SHORT).show();
         else if (!emailValida(email)){
             Toast.makeText(RegisterActivity.this,"Email non valida.", Toast.LENGTH_SHORT).show();
         }
-        else if(! passwordValida(password)){
+        else if(!passwordValida(password)){
             Toast.makeText(RegisterActivity.this,"Password non valida.", Toast.LENGTH_SHORT).show();
-        }else{
+        } else if(!checkPasswordConfirmed(password, passwordConfirmed)){
+            Toast.makeText(RegisterActivity.this,"Le due password devono coincidere.", Toast.LENGTH_SHORT).show();
+        } else{
             createFirebaseUser(email, password);
             Toast.makeText(RegisterActivity.this,"Registration success.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LogInActivity.class);
@@ -115,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //funzioni di validazione input activity di registrazione
     private boolean nomeValido (String nome){
-        if(nome.length()>3){
+        if(nome.length()>=3){
             return true;
         }else{
             return false;
@@ -127,7 +121,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean passwordValida (String password){
-        String confermaPassword = mConfermaPassword.getText().toString();
-        return confermaPassword.equals(password) && password.length()>7;
+        return password.length()>7;
+    }
+
+    private boolean checkPasswordConfirmed(String password, String confirmedPassword){
+        return (password.equals(confirmedPassword) ? true : false);
     }
 }

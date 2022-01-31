@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.thehillreloaded.Activities.AccessActivity;
 import com.example.thehillreloaded.Model.FirebaseUserDataAccount;
 import com.example.thehillreloaded.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 //è un fragment contenente la mail dell'utente loggato  e il pulsante di logout
@@ -73,6 +74,7 @@ public class AuthFragment extends Fragment {
     }
 
     public void logout(View v) {
+        FirebaseAuth.getInstance().signOut();
         emailText = getActivity().findViewById(R.id.user_id);
         logoutText = getActivity().findViewById(R.id.logout_btn);
         emailText.setVisibility(View.INVISIBLE);

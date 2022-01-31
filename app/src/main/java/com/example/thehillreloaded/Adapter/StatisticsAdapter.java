@@ -39,12 +39,12 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.My
         return new MyViewHolder(v);
     }
 
+    //Mostra i dati
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         GameEnded game = gameEndeds.get(position);
         holder.email.setText(game.getEmail());
         holder.score.setText(String.valueOf(game.getTotalScore()));
-        //holder.time.setText(convertTime(game.getGameTime()));
         holder.time.setText(String.valueOf(game.getMinutes()).concat("m.").concat(String.valueOf(game.getMinutes())).concat("s."));
     }
 
@@ -66,11 +66,6 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.My
             time = itemView.findViewById(R.id.tv_time);
 
         }
-
-    }
-
-    private String convertTime(long time) {
-        return String.valueOf(TimeUnit.NANOSECONDS.toSeconds(time)).concat(" s.");
     }
 
 }
