@@ -40,7 +40,6 @@ public class GameOverActivity extends AppCompatActivity {
         bundle.putInt("GAME_DIFF", getIntent().getExtras().getInt("GAME_DIFF"));
 
         effettiSonori = new Intent(this, SoundEffectService.class);
-        mainMenu = new Intent(this, GuestMenuActivity.class);
         replay = new Intent(this, GameActivity.class);
         replay.putExtras(bundle);
     }
@@ -55,6 +54,12 @@ public class GameOverActivity extends AppCompatActivity {
         SFXattivi = pref.getBoolean("SFX_attivi", true);
         //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
+        if(pref.getAll().containsKey("account-utente-loggato")){
+            mainMenu = new Intent(this, UserMenuActivity.class);
+        }
+        else{
+            mainMenu = new Intent(this, GuestMenuActivity.class);
+        }
     }
 
     @Override

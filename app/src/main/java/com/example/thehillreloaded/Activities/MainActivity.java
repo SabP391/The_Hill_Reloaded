@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     //boolean per controllare lo stato della musica nelle shared preferences
     boolean statoMusica;
+    Intent nuovaActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
         // Inizia l'animazione del sole che ruota
         final ImageView soleRotante = (ImageView) findViewById(R.id.sole_rotante_sp);
         soleRotante.startAnimation(animazioneSole);
-
-        //Creazione dell'intent per lanciare la schermata successiva
-        Intent nuovaActivity = new Intent(this, AccessActivity.class);
 
         //funzione temporanea che serve a passare alla schermata successiva
         //tappando sul sole
@@ -71,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
          */
         statoMusica = pref.getBoolean("Musica_attiva", true);
         if(statoMusica) { startService(avviaMusica); }
+        // Creazione dell'intent per avviare l'activity successiva
+        // Se un utente è già loggato salta la schermata di accesso
+        if(pref.getAll().containsKey("account-utente-loggato")){
+            nuovaActivity = new Intent(this, UserMenuActivity.class);
+        }
+        else{
+            nuovaActivity = new Intent(this, AccessActivity.class);
+        }
     }
 
 }

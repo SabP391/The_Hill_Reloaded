@@ -374,18 +374,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public boolean onTouchEvent(MotionEvent event){
        if(!GameManager.getInstance().isPaused()){
            // Recupera le coordinate su cui è stato effettuato il tocco
-           float x = event.getRawX();
-           float y = event.getRawY();
+           float x = event.getX();
+           float y = event.getY();
            // Incapsula le coordinate del tocco in un point
            Point touchPosition = new Point((int) x, (int) y);
            // Trova l'indice della tile all'interno della quale è
            // stato rilevto il tocco
            int tile;
-           if(isEmulator()){
-               tile = map.getTileIndexFromPosition(touchPosition);
-           }else{
-               tile = map.getTileIndexFromPosition(touchPosition) - 1;
-           } // In questo punto bisogna togliere -1 se si vuole avere il touch corretto su EMULATORE, -1 è necessario per avere il touch preciso su smartphone
+           tile = map.getTileIndexFromPosition(touchPosition);
            switch(event.getAction()){
                // Al primo tocco sullo schermo controlla che il tocco
                // sia avvenuto su uno degli oggetti in gioco
@@ -467,28 +463,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) { }
     };
-
-    // Metodo per controllare se l'applicazione gira su emulatore
-    // per cambiare il metodo che riconosce il tocco
-    private boolean isEmulator() {
-        return (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
-                || Build.FINGERPRINT.startsWith("generic")
-                || Build.FINGERPRINT.startsWith("unknown")
-                || Build.HARDWARE.contains("goldfish")
-                || Build.HARDWARE.contains("ranchu")
-                || Build.MODEL.contains("google_sdk")
-                || Build.MODEL.contains("Emulator")
-                || Build.MODEL.contains("Android SDK built for x86")
-                || Build.MANUFACTURER.contains("Genymotion")
-                || Build.PRODUCT.contains("sdk_google")
-                || Build.PRODUCT.contains("google_sdk")
-                || Build.PRODUCT.contains("sdk")
-                || Build.PRODUCT.contains("sdk_x86")
-                || Build.PRODUCT.contains("sdk_gphone64_arm64")
-                || Build.PRODUCT.contains("vbox86p")
-                || Build.PRODUCT.contains("emulator")
-                || Build.PRODUCT.contains("simulator");
-    }
 
     public interface SoundFx{
         void suonoGameOver();
