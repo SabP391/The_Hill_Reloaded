@@ -123,13 +123,6 @@ public class MultiplayerActivity extends AppCompatActivity {
             showGPSDisabledAlertToUser();
         }
 
-        /*
-            Genero un punteggio casuale.
-            Qui dovrebbe essere avviato il metodo che fa
-            iniziare la partita e restituisce un intero.
-         */
-        myScore = (int) (Math.random() * 201);
-
         // IMPLEMENTAZIONE LISTENER DEI BOTTONI-----------------------------------------------------
         /*
             ---Pulsante per la ricerca dei dispositivi---
