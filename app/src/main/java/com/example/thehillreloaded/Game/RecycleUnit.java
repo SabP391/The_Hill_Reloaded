@@ -337,7 +337,7 @@ public abstract class RecycleUnit {
     // della linea rossa
     public float redLineMultiplier(double elapsedTime){
         return (float)((elapsedTime / (PROCESSING_TIME * processTimeMultiplier)) +
-                (1.0 / (PROCESSING_TIME * processTimeMultiplier)));
+                (1.0 * processTimeMultiplier / (PROCESSING_TIME * processTimeMultiplier)));
     }
 
     // Metodi per l'upgrade delle centrali ---------------------------------------------------------
