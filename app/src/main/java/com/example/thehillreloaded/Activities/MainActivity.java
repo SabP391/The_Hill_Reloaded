@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -44,16 +45,15 @@ public class MainActivity extends AppCompatActivity {
         final ImageView soleRotante = (ImageView) findViewById(R.id.sole_rotante_sp);
         soleRotante.startAnimation(animazioneSole);
 
-        //funzione temporanea che serve a passare alla schermata successiva
-        //tappando sul sole
-        soleRotante.setOnClickListener(new View.OnClickListener() {
+        // Fa partire l'activity successiva dopo un tot di millisecondi
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
+            public void run() {
                 startActivity(nuovaActivity);
                 finish();
             }
-        });
-
+        }, 3000);
     }
 
     @Override
