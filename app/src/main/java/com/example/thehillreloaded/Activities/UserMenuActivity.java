@@ -49,7 +49,7 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction tx = fm.beginTransaction();
-        //fragment credenziali utente logato
+        //fragment credenziali utente loggato
         AuthFragment authFragment = new AuthFragment();
         tx.add(R.id.fragment_auth_container, authFragment);
         tx.commit();
@@ -59,7 +59,6 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
     protected void onStart() {
         super.onStart();
 
-        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
@@ -71,7 +70,7 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
             public void onClick(View view) {
                 if(SFXattivi){ soundService.suonoBottoni(); }
                 modalitaGiocoF = new GameModeFragment();
-                selezionaModalitàFragment(modalitaGiocoF);
+                selezionaModalitaFragment(modalitaGiocoF);
             }
         });
     }
@@ -86,7 +85,7 @@ public class UserMenuActivity extends AppCompatActivity implements GameModeFragm
         }
     }
 
-    private void selezionaModalitàFragment(Fragment fragment) {
+    private void selezionaModalitaFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)

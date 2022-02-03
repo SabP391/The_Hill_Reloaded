@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.example.thehillreloaded.Fragments.AuthFragment;
 import com.example.thehillreloaded.R;
 import com.example.thehillreloaded.Services.BGMusicService;
 import com.example.thehillreloaded.Services.SoundEffectService;
@@ -36,7 +35,6 @@ public class SettingsActivity extends AppCompatActivity{
     boolean statoMusica;
     private Switch effettiBottone;
     boolean SFXattivi;
-    AuthFragment authFragment = new AuthFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +43,17 @@ public class SettingsActivity extends AppCompatActivity{
 
         effettiSonori = new Intent(this, SoundEffectService.class);
         avviaMusica = new Intent(this, BGMusicService.class);
-        effettiBottone = (Switch) findViewById(R.id.switch_effetti);
-        musicaBottone = (Switch) findViewById(R.id.switch_musica);
+        effettiBottone = findViewById(R.id.switch_effetti);
+        musicaBottone = findViewById(R.id.switch_musica);
         riconoscimenti = new Intent(this, CreditsActivity.class);
 
         tornaAdAccesso = new Intent(this, AccessActivity.class);
-        //if(!autenticazione.getInstance(this).isLogged(this)){
-        /*if(!pref.getAll().containsKey("account-utente-loggato")){
-            View bottoneImpostazioni = findViewById(R.id.bottone_esci);
-            bottoneImpostazioni.setVisibility(View.GONE);
-        }*/
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         //binding del service per gli effetti sonori

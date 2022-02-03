@@ -15,7 +15,6 @@ import android.view.View;
 import com.example.thehillreloaded.Fragments.NoLoginAccessFragment;
 import com.example.thehillreloaded.R;
 import com.example.thehillreloaded.Services.SoundEffectService;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.gson.Gson;
 
 public class AccessActivity extends AppCompatActivity {
@@ -33,11 +32,6 @@ public class AccessActivity extends AppCompatActivity {
     //boolean per controllare lo stato degli effetti sonori nelle shared preferences
     boolean SFXattivi;
 
-    //costante per l'autenticazione
-    //GoogleSignInWrapper autenticazione;
-    GoogleSignInClient mGoogleSignInClient;
-    private static int RC_SIGN_IN = 100;
-
     //Creazione dell'intent per lanciare il menu con autenticazione
     Intent menuUtente;
     //Creazione dell'intent per lanciare il menu senza autenticazione
@@ -53,32 +47,18 @@ public class AccessActivity extends AppCompatActivity {
         // Creazione degli intent per accedere alle schermate successive
         menuUtente = new Intent(this, UserMenuActivity.class);
         menuOspite = new Intent(this, GuestMenuActivity.class);
-        
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
 
         //binding del service per gli effetti sonori
         bindService(effettiSonori, soundServiceConnection, Context.BIND_AUTO_CREATE);
-        // Se l'utente ha già effettuato l'accesso viene reindirizzato al menu
-        // per utenti registrati
-        /*if(autenticazione.getInstance(this).isLogged(this)){
-            startActivity(menuUtente);
-            finish();
-        }*/
     }
 
     @Override
@@ -115,12 +95,6 @@ public class AccessActivity extends AppCompatActivity {
             getSupportFragmentManager().popBackStackImmediate();
         }
         else super.onBackPressed();
-    }
-
-    public void onClickUtente(View view) {
-        if(SFXattivi){ soundService.suonoBottoni(); }
-        Intent intent = new Intent(this, MultiplayerActivity.class);
-        startActivity(intent);
     }
 
     public void onClickOspite(View view) {

@@ -1,7 +1,5 @@
 package com.example.thehillreloaded.Game;
 
-import android.graphics.Bitmap;
-
 public class UnlockableObject {
     private final int upCost;
     private final int spReward;

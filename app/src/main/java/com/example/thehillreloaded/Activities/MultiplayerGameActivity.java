@@ -380,7 +380,7 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     }
 
     @Override
-    public void suonoUnità() { if (SFXattivi) {
+    public void suonoUnita() { if (SFXattivi) {
         soundService.bloccaSuonoUnita();
         soundService.suonoUnitaInFunzione();
     } }

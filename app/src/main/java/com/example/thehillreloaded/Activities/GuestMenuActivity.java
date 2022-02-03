@@ -50,7 +50,6 @@ public class GuestMenuActivity extends AppCompatActivity implements GameModeFrag
     protected void onStart() {
         super.onStart();
 
-        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
@@ -62,7 +61,7 @@ public class GuestMenuActivity extends AppCompatActivity implements GameModeFrag
             public void onClick(View view) {
                 if(SFXattivi){ soundService.suonoBottoni(); }
                 modalitaGioco = new GameModeFragment();
-                selezionaModalitàFragment(modalitaGioco);
+                selezionaModalitaFragment(modalitaGioco);
             }
         });
     }
@@ -77,7 +76,7 @@ public class GuestMenuActivity extends AppCompatActivity implements GameModeFrag
         }
     }
 
-    private void selezionaModalitàFragment(Fragment fragment){
+    private void selezionaModalitaFragment(Fragment fragment){
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)

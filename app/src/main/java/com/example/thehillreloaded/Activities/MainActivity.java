@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         animazioneSole.setDuration(7000);
 
         // Inizia l'animazione del sole che ruota
-        final ImageView soleRotante = (ImageView) findViewById(R.id.sole_rotante_sp);
+        final ImageView soleRotante = findViewById(R.id.sole_rotante_sp);
         soleRotante.startAnimation(animazioneSole);
 
         // Fa partire l'activity successiva dopo un tot di millisecondi
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
         pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
         editor = pref.edit();
         /* se nelle shared preferences c'è un valore per la key "Musica_attiva"

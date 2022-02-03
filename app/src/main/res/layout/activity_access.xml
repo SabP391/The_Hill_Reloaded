@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CCCC63"
-    android:onClick="btnAccessoClick"
     tools:context=".Activities.AccessActivity">
 
     <ImageView
@@ -43,9 +42,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi" />
+        app:layout_constraintTop_toBottomOf="@+id/bottone_accedi"
+        app:layout_constraintVertical_bias="0.265" />
 
     <android.widget.Button
         android:id="@+id/bottone_accedi"
@@ -66,7 +65,7 @@
         android:layout_width="429dp"
         android:layout_height="178dp"
         android:translationZ="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bg_accesso"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/bg_accesso"

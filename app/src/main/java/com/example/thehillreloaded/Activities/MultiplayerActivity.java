@@ -88,20 +88,20 @@ public class MultiplayerActivity extends AppCompatActivity {
         discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
         // Tutte le findViewById per gli elementi nell'activity
-        bottoneHost = (Button) findViewById(R.id.bottone_hostMatch);
-        bottoneJoin = (Button) findViewById(R.id.bottone_joinMatch);
+        bottoneHost = findViewById(R.id.bottone_hostMatch);
+        bottoneJoin = findViewById(R.id.bottone_joinMatch);
 
-        titoloDeviceList = (TextView) findViewById(R.id.titiolo_lista_host);
+        titoloDeviceList = findViewById(R.id.titiolo_lista_host);
         titoloDeviceList.setVisibility(View.INVISIBLE);
-        devicesList = (ListView) findViewById(R.id.lista_host);
+        devicesList = findViewById(R.id.lista_host);
         devicesList.setVisibility(View.INVISIBLE);
 
-        titoloResultBox = (TextView) findViewById(R.id.titolo_risultato_partita);
+        titoloResultBox = findViewById(R.id.titolo_risultato_partita);
         titoloResultBox.setVisibility(View.INVISIBLE);
-        matchResultBox = (TextView) findViewById(R.id.box_risultato_match);
+        matchResultBox = findViewById(R.id.box_risultato_match);
         matchResultBox.setPadding(10,6,10,6);
         matchResultBox.setVisibility(View.INVISIBLE);
-        connectionStatus = (TextView) findViewById(R.id.stato_connessione);
+        connectionStatus = findViewById(R.id.stato_connessione);
 
         // Inizializzo l'ArrayList dei dispositivi bluetooth
         mBTDevices = new ArrayList<BluetoothDevice>();

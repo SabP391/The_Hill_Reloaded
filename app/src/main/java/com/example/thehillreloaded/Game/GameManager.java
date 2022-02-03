@@ -1,12 +1,6 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.example.thehillreloaded.Model.GameEnded;
-import com.example.thehillreloaded.Model.GameSuspended;
-import com.google.gson.Gson;
 
 public class GameManager {
     private boolean isPaused = false;
@@ -145,12 +139,6 @@ public class GameManager {
 
 
     // Getter e setter -----------------------------------------------------------------------------
-
-
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
     public static void setInstance(GameManager instance) {
         GameManager.instance = instance;
     }
@@ -159,56 +147,16 @@ public class GameManager {
         return timeAtGameStart;
     }
 
-    public void setTimeAtGameStart(long timeAtGameStart) {
-        this.timeAtGameStart = timeAtGameStart;
-    }
-
     public PlayTime getPlayTime() {
         return playTime;
-    }
-
-    public void setPlayTime(PlayTime playTime) {
-        this.playTime = playTime;
-    }
-
-    public long getTimeToGetThingsSpicy() {
-        return timeToGetThingsSpicy;
-    }
-
-    public void setTimeToGetThingsSpicy(long timeToGetThingsSpicy) {
-        this.timeToGetThingsSpicy = timeToGetThingsSpicy;
-    }
-
-    public long getTimeFromLastSpawn() {
-        return timeFromLastSpawn;
-    }
-
-    public void setTimeFromLastSpawn(long timeFromLastSpawn) {
-        this.timeFromLastSpawn = timeFromLastSpawn;
-    }
-
-    public float getSpawnSpeed() {
-        return spawnSpeed;
-    }
-
-    public void setSpawnSpeed(float spawnSpeed) {
-        this.spawnSpeed = spawnSpeed;
     }
 
     public int getSunnyPoints() {
         return sunnyPoints;
     }
 
-    public void setSunnyPoints(int sunnyPoints) {
-        this.sunnyPoints = sunnyPoints;
-    }
-
     public int getTotalSunnyPoints() {
         return totalSunnyPoints;
-    }
-
-    public void setTotalSunnyPoints(int totalSunnyPoints) {
-        this.totalSunnyPoints = totalSunnyPoints;
     }
 
     public GameMode getGameMode() {
@@ -224,22 +172,6 @@ public class GameManager {
     }
 
     public SunnyPointsCounter getSunnyPointsCounter() { return sunnyPointsCounter;}
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public void setSunnyPointsCounter(SunnyPointsCounter sunnyPointsCounter) {
-        this.sunnyPointsCounter = sunnyPointsCounter;
-    }
-
-    public static int getTimeToIncreaseDifficulty() {
-        return TIME_TO_INCREASE_DIFFICULTY;
-    }
-
-    public static int getSpawnSpeedIncrease() {
-        return SPAWN_SPEED_INCREASE;
-    }
 
     public boolean isMultiplayerGame() {
         return isMultiplayerGame;

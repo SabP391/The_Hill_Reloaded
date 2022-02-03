@@ -34,7 +34,6 @@ public class QuestManager{
     Handler handler;
 
     SharedPreferences pref;
-    SharedPreferences.Editor editor;
     Gson gson = new Gson();
     //FIREBASE
     FirebaseDatabase mDatabase;

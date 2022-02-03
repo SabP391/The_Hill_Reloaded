@@ -187,7 +187,7 @@ public class RecycleUnitsManager {
         for(RecycleUnit i : unlockedUnits){
             if(i.isOneOfMyTiles(tileToCheck)){
                 if(i.processItem(item)){
-                    sFX.suonoUnità();
+                    sFX.suonoUnita();
                     return true;
                 }
             }
@@ -488,7 +488,7 @@ public class RecycleUnitsManager {
     }
 
     public interface SoundFx{
-        void suonoUnità();
+        void suonoUnita();
     }
 
 

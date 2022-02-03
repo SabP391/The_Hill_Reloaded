@@ -314,8 +314,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     @Override
     protected void onStart() {
         super.onStart();
-        //getSharedPreferences può essere chiamato solo DOPO l'onCreate di un'attività
-        //pref = getApplicationContext().getSharedPreferences("HillR_pref", MODE_PRIVATE);
+
         editor = pref.edit();
         SFXattivi = pref.getBoolean("SFX_attivi", true);
         //binding del service per gli effetti sonori
@@ -407,7 +406,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void onClickMenuCarta(View view){
         if (RecycleUnitsManager.getInstance().isPaperUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
-            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -431,7 +430,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void onClickMenuPlastica(View view){
         if (RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
-            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -455,7 +454,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void onClickMenuAlluminio(View view){
         if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
-            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -479,7 +478,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void onClickMenuEwaste(View view){
         if (RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
-            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -503,7 +502,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void onClickMenuAcciaio(View view){
         if (RecycleUnitsManager.getInstance().isSteelUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
-            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -527,7 +526,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     public void onClickMenuOrganico(View view){
         if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
-            boolean quest1Status = QuestManager.getInstance().isQuest1Complete();
+            QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();
             FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
@@ -594,7 +593,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     }
 
     @Override
-    public void suonoUnità() { if (SFXattivi) {
+    public void suonoUnita() { if (SFXattivi) {
         soundService.bloccaSuonoUnita();
         soundService.suonoUnitaInFunzione();
     } }

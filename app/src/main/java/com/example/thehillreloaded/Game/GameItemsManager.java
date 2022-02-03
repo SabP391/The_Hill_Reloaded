@@ -1,15 +1,9 @@
 package com.example.thehillreloaded.Game;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-
-import com.example.thehillreloaded.Model.RecycleUnitSave;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

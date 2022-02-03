@@ -10,7 +10,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -68,7 +67,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
     //Inizializzo gli shared e il Gson
     SharedPreferences pref;
-    SharedPreferences.Editor editor;
     Gson gson = new Gson();
     //FIREBASE
     FirebaseDatabase mDatabase;
@@ -101,7 +99,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         // Inizializzazione dei sensori
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                sensorManager.SENSOR_DELAY_GAME);
+                SensorManager.SENSOR_DELAY_GAME);
 
         // Variabili necessarie per gestire lo shake del telefono
         accelerationVal = SensorManager.GRAVITY_EARTH;
@@ -260,7 +258,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
             isDrawing = false;
             try{
                 drawThread.join();
-            } catch(InterruptedException e){}
+            } catch(InterruptedException e){ Log.d(LOGTAG,"Eccezione"); }
         }
 
         isSurfaceReady = true;
@@ -363,7 +361,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
             if(frameTime < MAX_FRAME_TIME){
                 try {
                     Thread.sleep(MAX_FRAME_TIME - frameTime);
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e) { Log.d(LOGTAG, "Eccezione"); }
             }
         }
         Log.d(LOGTAG, "fine del gameloop");
@@ -424,13 +422,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
                            // e libera la variabile movingItem
                            map.setTileValue(movingItem.getCurrentTile(), 0);
                            itemsOnScreen.remove(movingItem);
-                           movingItem = null;
                        }else{
                            // Altrimenti lo riporta alla posizione da cui
                            // era stato preso e libera la variabile movingItem
                            movingItem.setPosition(map.getPositionFromTileIndex(movingItem.getCurrentTile()));
-                           movingItem = null;
                        }
+                       movingItem = null;
                    }
                    break;
            }
