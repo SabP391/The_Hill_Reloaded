@@ -87,7 +87,7 @@
     <string name="hai_vinto">Hai vinto</string>
     <string name="hai_perso">Hai perso</string>
     <string name="pareggio">Pareggio</string>
-    <string name="processo_punteggi">Attendi mentre vengono elaborati i risultati</string>
+    <string name="processo_punteggi">Attendi mentre vengono elaborati i risultati \n o che il tuo avversaio termini la partita.</string>
     <string name="str_acciaio1">É possibile produrre chiodi da metalli riciclati</string>
     <string name="str_acciaio2">É possibile produrre utensili da cucina (pentole, moka) da metalli riciclati</string>
     <string name="str_acciaio3">É possibile produrre attrezzi da palestra (pesi, manubri) da metalli riciclati</string>

@@ -76,6 +76,8 @@ public class GameItemsManager {
     }
 
     public void initInstanceMultyplayer(Context context, TileMap map){
+        this.map = map;
+        this.context = context;
         itemTypes.add(ItemType.PAPER);
         itemTypes.add(ItemType.COMPOST);
         itemTypes.add(ItemType.PLASTIC);

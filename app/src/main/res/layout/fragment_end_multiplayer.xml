@@ -32,14 +32,13 @@
 
     <TextView
         android:id="@+id/processing_scores"
-        android:layout_width="456dp"
-        android:layout_height="27dp"
+        android:layout_width="491dp"
+        android:layout_height="67dp"
         android:text="@string/processo_punteggi"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/sole_rotante_sp2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687" />
+        app:layout_constraintVertical_bias="0.771" />
 </androidx.constraintlayout.widget.ConstraintLayout>

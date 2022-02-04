@@ -297,6 +297,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                     break;
                 case STATE_CONNECTED:
                     connectionStatus.setText(R.string.connection_connected);
+                    matchResultBox.setVisibility(View.VISIBLE);
                     Intent startMPGame = new Intent(getApplicationContext(), MultiplayerGameActivity.class);
                     startActivityForResult(startMPGame, MP_GAME_ACTIVITY_REQUEST_CODE);
                     break;
@@ -354,6 +355,7 @@ public class MultiplayerActivity extends AppCompatActivity {
                 case STATE_CONNECTED:
                     connectionStatus.setText(R.string.connection_connected);
                     connectionStatus.setText(R.string.connection_connected);
+                    matchResultBox.setVisibility(View.VISIBLE);
                     Intent startMPGame = new Intent(getApplicationContext(), MultiplayerGameActivity.class);
                     startActivityForResult(startMPGame, MP_GAME_ACTIVITY_REQUEST_CODE);
                     break;
@@ -497,7 +499,6 @@ public class MultiplayerActivity extends AppCompatActivity {
                     }
                 } catch (IOException e) {
                     if(receivedScore == -1) {
-                        matchResultBox.setVisibility(View.VISIBLE);
                         matchResultBox.setText(R.string.giocatore_disconnesso);
                     }
                 }

@@ -87,7 +87,7 @@
     <string name="hai_vinto">You won</string>
     <string name="hai_perso">You lost</string>
     <string name="pareggio">Draw</string>
-    <string name="processo_punteggi">Please wait while scores are processed</string>
+    <string name="processo_punteggi">Please wait while scores are processed \nor your opponent to complete the game.</string>
     <string name="str_acciaio1">It is possible to make nails from recycled metal</string>
     <string name="str_acciaio2">It is possible to make kitchenware (pots, mokas) from recycled metal</string>
     <string name="str_acciaio3">It is possible to make gym equipment (weights, dumbbells) from recycled metal</string>
