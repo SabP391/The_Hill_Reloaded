@@ -86,9 +86,9 @@ public class GameStatisticsActivity extends AppCompatActivity {
         String ranking = "";
         int i = 0;
         for (GameEnded gameEnded: gameEndeds) {
-            ranking = ranking + i +"°: " + gameEnded.getEmail() +
+            ranking = ranking + (i+1) +"°: " + gameEnded.getEmail() +
                     ", score: " + gameEnded.getTotalScore() +
-                    ", time: " + TimeUnit.NANOSECONDS.toMinutes(gameEnded.getGameTime()) + " m.\n";
+                    ", time: "+ String.valueOf(gameEnded.getMinutes()).concat("m.").concat(String.valueOf(gameEnded.getMinutes())).concat("s.\n");
             i++;
         }
         return ranking;
@@ -143,6 +143,7 @@ public class GameStatisticsActivity extends AppCompatActivity {
 
         // Adding the text to share using putExtra
         intent2.putExtra(Intent.EXTRA_TEXT, generatePlainText());
+        //Adding Chooser
         startActivity(Intent.createChooser(intent2, "Share Via"));
     }
 }
