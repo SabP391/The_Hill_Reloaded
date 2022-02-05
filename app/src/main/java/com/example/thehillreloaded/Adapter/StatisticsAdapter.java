@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thehillreloaded.Model.GameEnded;
-import com.example.thehillreloaded.Model.GameStatistics;
 import com.example.thehillreloaded.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
