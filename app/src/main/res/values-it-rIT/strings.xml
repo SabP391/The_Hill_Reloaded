@@ -123,4 +123,5 @@
     <string name="bottone_accesso">Accedi</string>
     <string name="txt_riconoscimenti">Basato su: The (H)ill \n\nSviluppato per l\'esame di \nSviluppo di Mobile Software \nAnno 2021/22 \n\nAlessandro Rossi - Mat.: 709241 \nAndrea Tarulli - Mat.: 704224 \nSabrina Pinto - Mat.: 707173 \nFederica Pellegrino - Mat.: 656874</string>
     <string name="bottone_indietro">Torna indietro</string>
+    <string name="messaggio_permessi">Per avviare una partita multiplayer autorizzare il dispositivo ad accedere al bluetooth e alla posizione</string>
 </resources>

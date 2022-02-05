@@ -123,5 +123,6 @@
     <string name="bottone_accesso">Login</string>
     <string name="txt_riconoscimenti">Based on: The (H)ill \n\nDeveloped for \nSviluppo di Mobile Software \nYear 2021/22 \n\nAlessandro Rossi - Mat.: 709241 \nAndrea Tarulli - Mat.: 704224 \nSabrina Pinto - Mat.: 707173 \nFederica Pellegrino - Mat.: 656874</string>
     <string name="bottone_indietro">Go back</string>
+    <string name="messaggio_permessi">To start a multiplayer match bluetooth and location permissions are required</string>
 
 </resources>

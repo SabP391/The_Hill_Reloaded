@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
@@ -16,6 +18,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,6 +60,7 @@ public class MultiplayerActivity extends AppCompatActivity {
     private IntentFilter discoverDevicesIntent;
     private ClientClass clientClass;
     private ServerClass serverClass;
+    private LocationManager locationManager;
 
     private static final String APP_NAME = "TheHillReloaded";
     private static final UUID MY_UUID= UUID.fromString("c1d8f695-0874-443f-9dec-754f5cafe6a4");
@@ -66,6 +70,7 @@ public class MultiplayerActivity extends AppCompatActivity {
     private static final int STATE_CONNECTION_FAILED = 4;
     private static final int STATE_MESSAGE_RECEIVED = 5;
     private static final String SMARTPHONE_CODE = "5a020c";
+    private static final int REQUEST_CODE = 1000;
 
     int REQUEST_ENABLE_BLUETOOTH = 1;
     int DISCOVERABLE_ENABLED = 1;
@@ -80,10 +85,47 @@ public class MultiplayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN,
-                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
+        // Inizializzo l'ArrayList dei dispositivi bluetooth
+        mBTDevices = new ArrayList<BluetoothDevice>();
+        // Inizializzo il BluetoothAdapter per la gestione del BT
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        // Inizializzo il LocationManager per gestire il GPS
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage(R.string.messaggio_permessi);
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        R.string.bottone_conferma,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                requestPermissions(new String[]{Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        R.string.annulla,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                finish();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+        }
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+
 
         discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
@@ -102,26 +144,6 @@ public class MultiplayerActivity extends AppCompatActivity {
         matchResultBox.setPadding(10,6,10,6);
         matchResultBox.setVisibility(View.INVISIBLE);
         connectionStatus = findViewById(R.id.stato_connessione);
-
-        // Inizializzo l'ArrayList dei dispositivi bluetooth
-        mBTDevices = new ArrayList<BluetoothDevice>();
-        // Inizializzo il BluetoothAdapter per la gestione del BT
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        // Inizializzo il LocationManager per gestire il GPS
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        // Se il BT non è attivo chiede all'utente se vuole attivarlo
-        if(!bluetoothAdapter.isEnabled()){
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BLUETOOTH);
-        }
-
-        // Se il GPS non è attivo chiede al'utente se vuole attivarlo
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            Toast.makeText(this, "Il GPS è attivo", Toast.LENGTH_SHORT).show();
-        }else{
-            showGPSDisabledAlertToUser();
-        }
 
         // IMPLEMENTAZIONE LISTENER DEI BOTTONI-----------------------------------------------------
         /*
@@ -197,12 +219,51 @@ public class MultiplayerActivity extends AppCompatActivity {
         // FINE LISTENER DEI BOTTONI----------------------------------------------------------------
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean permissionsGranted = false;
+        for(int i = 0; i<grantResults.length; i++){
+            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                permissionsGranted = true;
+            }else {
+                permissionsGranted = false;
+                break;
+            }
+        }
+        switch(requestCode){
+            case REQUEST_CODE:
+                if(permissionsGranted) {
+                    if(!bluetoothAdapter.isEnabled()){
+                    // Se il BT non è attivo chiede all'utente se vuole attivarlo
+                        Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                        startActivityForResult(enableIntent, REQUEST_ENABLE_BLUETOOTH);
+                    }
+                    // Se il GPS non è attivo chiede al'utente se vuole attivarlo
+                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        showGPSDisabledAlertToUser();
+                    }
+                } else {
+                    finish();
+                }
+                break;
+            default:
+                break;
+        }
+
+
+
+
+
+
+    }
+
     /*
-        BroadcastReceiver è responsabile di recepire un cambiamento nel bluetooth.
-        In questo caso nel caso in cui viene trovato un nuovo dispositivo disponibile
-        lo aggiunge all'ArrayList dei dispositivi bluetooth a cui è possibile connettersi.
-        Infine chiama il DeviceListAdapter per mostrare nella ListView i dispositivi trovati.
-     */
+            BroadcastReceiver è responsabile di recepire un cambiamento nel bluetooth.
+            In questo caso nel caso in cui viene trovato un nuovo dispositivo disponibile
+            lo aggiunge all'ArrayList dei dispositivi bluetooth a cui è possibile connettersi.
+            Infine chiama il DeviceListAdapter per mostrare nella ListView i dispositivi trovati.
+         */
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
@@ -222,8 +283,12 @@ public class MultiplayerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Don't forget to unregister the ACTION_FOUND receiver.
-        unregisterReceiver(mBroadcastReceiver);
+        try {
+            unregisterReceiver(mBroadcastReceiver);
+        } catch (Exception e){
+            Log.d("Exception", e.toString());
+        }
+
     }
 
     @Override
