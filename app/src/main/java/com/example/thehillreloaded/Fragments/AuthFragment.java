@@ -46,13 +46,6 @@ public class AuthFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_auth, container, false);
-        logoutText = (TextView) view.findViewById(R.id.logout_btn);
-        logoutText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout(v);
-            }
-        });
         return view;
     }
 
@@ -71,6 +64,12 @@ public class AuthFragment extends Fragment {
             emailText.setVisibility(View.INVISIBLE);
             logoutText.setVisibility(View.INVISIBLE);
         }
+        logoutText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout(v);
+            }
+        });
     }
 
     public void logout(View v) {

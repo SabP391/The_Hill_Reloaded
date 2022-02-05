@@ -6,36 +6,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.example.thehillreloaded.Adapter.StatisticsAdapter;
-import com.example.thehillreloaded.Game.Game;
-import com.example.thehillreloaded.Game.PlayTime;
 import com.example.thehillreloaded.Model.GameEnded;
-import com.example.thehillreloaded.Model.GameStatistics;
 import com.example.thehillreloaded.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class GameStatisticsActivity extends AppCompatActivity {
 
@@ -84,9 +71,9 @@ public class GameStatisticsActivity extends AppCompatActivity {
     //genera il testo da visualizzare
     private String generatePlainText() {
         String ranking = "";
-        int i = 0;
+        int i = 1;
         for (GameEnded gameEnded: gameEndeds) {
-            ranking = ranking + (i+1) +"°: " + gameEnded.getEmail() +
+            ranking = ranking + i +"°: " + gameEnded.getEmail() +
                     ", score: " + gameEnded.getTotalScore() +
                     ", time: "+ String.valueOf(gameEnded.getMinutes()).concat("m.").concat(String.valueOf(gameEnded.getMinutes())).concat("s.\n");
             i++;
