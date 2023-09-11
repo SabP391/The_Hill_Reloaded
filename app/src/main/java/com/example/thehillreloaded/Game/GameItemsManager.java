@@ -27,8 +27,15 @@ public class GameItemsManager {
     private GameItemsManager(){
         itemsOnScreen = new ConcurrentLinkedQueue<GameItem>();
         rand = new Random();
-        itemTypes = new ArrayList<ItemType>(8);
+        itemTypes = new ArrayList<ItemType>(20);
         itemTypes.add(ItemType.GLASS);
+        itemTypes.add(ItemType.PAPER);
+        if(gameMode == GameMode.CLASSIC){
+            itemTypes.add(ItemType.ALUMINIUM);
+        } else {
+            itemTypes.add(ItemType.COMPOST);
+        }
+
         buffTypes = new ArrayList<>(60);
         // Inizializza l'arraylist degi tipi di buff
         // Questo array viene inizializzato aggiungendo un numero maggiore
@@ -133,6 +140,7 @@ public class GameItemsManager {
                 itemTypes.add(ItemType.PAPER);
                 break;
             case 15:
+                itemTypes.add(ItemType.GLASS);
                 if (gameMode == GameMode.RELOADED) {
                     itemTypes.add(ItemType.PAPER);
                     itemTypes.add(ItemType.COMPOST);
@@ -140,6 +148,8 @@ public class GameItemsManager {
                 }
                 break;
             case 30:
+                itemTypes.add(ItemType.GLASS);
+                itemTypes.add(ItemType.PAPER);
                 if (gameMode == GameMode.RELOADED) {
                     itemTypes.add(ItemType.COMPOST);
                 }else{
@@ -148,21 +158,22 @@ public class GameItemsManager {
                 itemTypes.add(ItemType.ALUMINIUM);
                 Collections.shuffle(itemTypes);
                 break;
-            case 35:
-                itemTypes.add(ItemType.ALUMINIUM);
-                itemTypes.add(ItemType.STEEL);
-                Collections.shuffle(itemTypes);
-                break;
             case 40:
-                itemTypes.add(ItemType.PLASTIC);
+                itemTypes.add(ItemType.ALUMINIUM);
+                itemTypes.add(ItemType.PAPER);
                 itemTypes.add(ItemType.STEEL);
                 Collections.shuffle(itemTypes);
                 break;
             case 45:
+                itemTypes.add(ItemType.PLASTIC);
+                itemTypes.add(ItemType.STEEL);
+                Collections.shuffle(itemTypes);
+                break;
+            case 50:
                 itemTypes.add(ItemType.EWASTE);
                 Collections.shuffle(itemTypes);
                 break;
-            case 90:
+            case 95:
                 if (difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) {
                     itemTypes.add(ItemType.RADIOACTIVE);
                     break;
