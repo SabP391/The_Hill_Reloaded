@@ -16,8 +16,8 @@
     <string name="mod_facile">Easy</string>
     <string name="mod_normale">Normal</string>
     <string name="mod_difficile">Hard</string>
-    <string name="classic_description">Classic mode to enjoy The Hill Reloaded as it was intended</string>
-    <string name="reloaded_description">A new game mode with powerups!!</string>
+    <string name="classic_description">Classic mode, 6 units + 1 incinerator</string>
+    <string name="reloaded_description">Reloaded mode, 7 units + 1 incinerator and powerup</string>
     <string name="accesso_senza_login">Guest accounts has limited app functions. Are you sure to continue as guest?</string>
     <string name="continua_ospite">Continue as guest</string>
     <string name="back_to_login">Back to login</string>

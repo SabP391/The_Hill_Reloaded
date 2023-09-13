@@ -89,7 +89,7 @@ public class IncineratorUnit extends RecycleUnit{
     // Distrugge gli oggetti sulla linea blu
     public int destroyFirstLine(ConcurrentLinkedQueue<GameItem> itemOnScreenList){
         int itemOnFloor = 0;
-        if(GameManager.getInstance().getSunnyPoints() < LINE_COST) {
+        if(GameManager.getInstance().getSunnyPoints() < LINE_COST && !isFirstSlotFree) {
             return 0;
         }else if(isFirstSlotFree){
             isFirstSlotFree = false;

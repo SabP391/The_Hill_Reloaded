@@ -29,6 +29,8 @@ public class GameItemsManager {
         rand = new Random();
         itemTypes = new ArrayList<ItemType>(20);
         itemTypes.add(ItemType.GLASS);
+        itemTypes.add(ItemType.GLASS);
+        itemTypes.add(ItemType.GLASS);
         itemTypes.add(ItemType.PAPER);
         if(gameMode == GameMode.CLASSIC){
             itemTypes.add(ItemType.ALUMINIUM);
