@@ -339,7 +339,7 @@ public class MultiplayerGameActivity extends AppCompatActivity implements QuestM
     }
 
     public void onClickMenuOrganico(View view){
-        if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+        if (RecycleUnitsManager.getInstance().isCompostUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
             findViewById(menuBottID).setVisibility(View.GONE);
             getSupportFragmentManager().popBackStackImmediate();

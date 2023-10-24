@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thehillreloaded.Game.GameManager;
@@ -77,6 +78,10 @@ public class ReloadedInGameMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_reloaded_in_game_menu, container, false);
 
+        if (!RecycleUnitsManager.getInstance().isGlassUnitUnlocked()) {
+            TextView costo_vetro = (TextView) view.findViewById(R.id.txt_costo8_r);
+            costo_vetro.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_vetro.setText(" " + RecycleUnitsManager.getInstance().getCostOfGlassUnit()); }
         if (!RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()) {
             TextView costo_plastica = (TextView) view.findViewById(R.id.txt_costo_r);
             costo_plastica.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
@@ -97,11 +102,18 @@ public class ReloadedInGameMenuFragment extends Fragment {
             TextView costo_ewaste = (TextView) view.findViewById(R.id.txt_costo3_r);
             costo_ewaste.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
             costo_ewaste.setText(" " + RecycleUnitsManager.getInstance().getCostOfEwasteUnit()); }
-        if (!RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+        if (!RecycleUnitsManager.getInstance().isCompostUnitUnlocked()) {
             TextView costo_organico = (TextView) view.findViewById(R.id.txt_costo7_r);
             costo_organico.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
             costo_organico.setText(" " + RecycleUnitsManager.getInstance().getCostOfCompostUnit()); }
 
+        switch (GameManager.getInstance().getTutorialState()) {
+            case STARTED:
+                TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_build_txt_r);
+                tutorial_label.setVisibility(View.VISIBLE);
+                ImageView tutorial_img = (ImageView) view.findViewById(R.id.tut_glass_build_img_r);
+                tutorial_img.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 }

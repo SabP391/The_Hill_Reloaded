@@ -21,8 +21,9 @@ public class RecycleUnitsManager {
 
     // Costanti che determinano il prezzo in sunny points
     // delle diverse centrali ----------------------------------------------------------------------
-    private static final int COST_OF_PAPER_UNIT = 6;
-    private static final int COST_OF_COMPOST_UNIT = 10;
+    private static final int COST_OF_GLASS_UNIT = 1;
+    private static final int COST_OF_PAPER_UNIT = 4;
+    private static final int COST_OF_COMPOST_UNIT = 8;
     private static final int COST_OF_ALUMINIUM_UNIT = 15;
     private static final int COST_OF_STEEL_UNIT = 20;
     private static final int COST_OF_PLASTIC_UNIT = 28;
@@ -31,12 +32,12 @@ public class RecycleUnitsManager {
     // Variabili che controllano quali centrali
     // siano state sbloccate -----------------------------------------------------------------------
     private boolean isPaperUnitUnlocked = false;
-    private boolean isCompostUnlocked = false;
+    private boolean isCompostUnitUnlocked = false;
     private boolean isAluminiumUnitUnlocked = false;
     private boolean isSteelUnitUnlocked = false;
     private boolean isPlasticUnitUnlocked = false;
     private boolean isEwasteUnitUnlocked = false;
-    private boolean isGlassUnitUnlocked = true;
+    private boolean isGlassUnitUnlocked = false;
 
     // Attributi della classe ----------------------------------------------------------------------
     private static RecycleUnitsManager instance;
@@ -67,8 +68,18 @@ public class RecycleUnitsManager {
         this.context = context;
         this.map = map;
         sFX = (RecycleUnitsManager.SoundFx) context;
-        unlockedUnits.add(new GlassRecycleUnit(map, context));
         unlockedUnits.add(new IncineratorUnit(map, context));
+        /*
+
+        unlockedUnits.add(new GlassRecycleUnit(map, context));
+        unlockedUnits.add(new PaperRecycleUnit(map, context));
+        unlockedUnits.add(new CompostRecycleUnit(map, context));
+        unlockedUnits.add(new SteelRecycleUnit(map, context));
+        unlockedUnits.add(new EWasteRecycleUnit(map, context));
+        unlockedUnits.add(new AluminiumRecycleUnit(map, context));
+        unlockedUnits.add(new PlasticRecycleUnit(map, context));
+
+         */
         initUnlockableObjects();
     }
 
@@ -114,7 +125,7 @@ public class RecycleUnitsManager {
                                           boolean isSteelUnitUnlocked, boolean isPlasticUnitUnlocked, boolean isEwasteUnitUnlocked,
                                           boolean isGlassUnitUnlocked, Context context, TileMap map, List<RecycleUnitSave> listaRu){
         this.isPaperUnitUnlocked = isPaperUnitUnlocked;
-        this.isCompostUnlocked = isCompostUnlocked;
+        this.isCompostUnitUnlocked = isCompostUnlocked;
         this.isAluminiumUnitUnlocked = isAluminiumUnitUnlocked;
         this.isSteelUnitUnlocked = isSteelUnitUnlocked;
         this.isPlasticUnitUnlocked = isPlasticUnitUnlocked;
@@ -196,6 +207,18 @@ public class RecycleUnitsManager {
     }
 
     // Metodi per sbloccare le centrali-------------------------------------------------------------
+    public boolean unlockGlassUnit(){
+        int sunnyPoints = GameManager.getInstance().getSunnyPoints() - COST_OF_GLASS_UNIT;
+        if(sunnyPoints >= 0){
+            GlassRecycleUnit unitToAdd = new GlassRecycleUnit(map, context);
+            unlockedUnits.add(unitToAdd);
+            GameManager.getInstance().subtractSunnyPoints(COST_OF_GLASS_UNIT);
+            isGlassUnitUnlocked = true;
+            return true;
+        }
+        return false;
+    }
+
     public boolean unlockPlasticUnit(){
         int sunnyPoints = GameManager.getInstance().getSunnyPoints() - COST_OF_PLASTIC_UNIT;
         if(sunnyPoints >= 0){
@@ -262,7 +285,7 @@ public class RecycleUnitsManager {
             CompostRecycleUnit unitToAdd = new CompostRecycleUnit(map, context);
             unlockedUnits.add(unitToAdd);
             GameManager.getInstance().subtractSunnyPoints(COST_OF_COMPOST_UNIT);
-            isCompostUnlocked = true;
+            isCompostUnitUnlocked = true;
             return true;
         }
         return false;
@@ -389,6 +412,7 @@ public class RecycleUnitsManager {
 
     public ConcurrentLinkedQueue<RecycleUnit> getUnlockedUnits(){ return unlockedUnits; }
 
+    public static int getCostOfGlassUnit() { return COST_OF_GLASS_UNIT; }
     public static int getCostOfCompostUnit() { return COST_OF_COMPOST_UNIT; }
 
     public static int getCostOfAluminiumUnit() { return COST_OF_ALUMINIUM_UNIT; }
@@ -403,7 +427,7 @@ public class RecycleUnitsManager {
 
     public boolean isPaperUnitUnlocked() { return isPaperUnitUnlocked; }
 
-    public boolean isCompostUnlocked() { return isCompostUnlocked; }
+    public boolean isCompostUnitUnlocked() { return isCompostUnitUnlocked; }
 
     public boolean isAluminiumUnitUnlocked() { return isAluminiumUnitUnlocked; }
 

@@ -9,8 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.R;
 
@@ -73,6 +75,10 @@ public class ClassicInGameMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_classic_in_game_menu, container, false);
 
+        if (!RecycleUnitsManager.getInstance().isGlassUnitUnlocked()){
+            TextView costo_vetro = (TextView) view.findViewById(R.id.txt_costo7_c);
+            costo_vetro.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
+            costo_vetro.setText(" " + RecycleUnitsManager.getInstance().getCostOfGlassUnit()); }
         if (!RecycleUnitsManager.getInstance().isPlasticUnitUnlocked()){
             TextView costo_plastica = (TextView) view.findViewById(R.id.txt_costo_c);
             costo_plastica.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
@@ -94,6 +100,13 @@ public class ClassicInGameMenuFragment extends Fragment {
             costo_ewaste.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sole_mini, 0,0, 0);
             costo_ewaste.setText(" " + RecycleUnitsManager.getInstance().getCostOfEwasteUnit()); }
 
+        switch (GameManager.getInstance().getTutorialState()) {
+            case STARTED:
+                TextView tutorial_label = (TextView) view.findViewById(R.id.txt_glass_build_tut);
+                tutorial_label.setVisibility(View.VISIBLE);
+                ImageView tutorial_img = (ImageView) view.findViewById(R.id.img_glass_build_tut);
+                tutorial_img.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 }

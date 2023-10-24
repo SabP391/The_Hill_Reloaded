@@ -24,7 +24,7 @@ public class IncineratorUnit extends RecycleUnit{
         this.sprite = GameAssets.getInstance(context).getIncineratorUnit(size);
         this.acceptedItemType = ItemType.ALL;
         position = new Point((int)((map.getMapSize().x * map.getTileSize()) -
-                (2 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 6));
+                (2 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 8));
         initMyTiles();
         setProcessSlotsPosition();
 

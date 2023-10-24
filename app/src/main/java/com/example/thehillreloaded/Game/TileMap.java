@@ -31,8 +31,8 @@ public class TileMap {
     // Costanti che determinano la dimensione delle collina su cui
     // cadono gli oggetti
     private final int FIRST_TILE_OF_THE_HILL;
-    private final int NUMBER_OF_TILES_OF_THE_HILL = 5;
-    private final int HORIZONTAL_TILE_COUNT = 8;
+    private int NUMBER_OF_TILES_OF_THE_HILL = 5;
+    private final int HORIZONTAL_TILE_COUNT = 10;
 
     // Costante per determinare lo spessore delle linee
     private static final float LINE_THICKNESS = 5;

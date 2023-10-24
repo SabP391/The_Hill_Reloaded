@@ -114,7 +114,7 @@ public class QuestManager{
                 } else return false;
             } else {
                 if (RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked()
-                        && RecycleUnitsManager.getInstance().isCompostUnlocked()
+                        && RecycleUnitsManager.getInstance().isCompostUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isEwasteUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isGlassUnitUnlocked()
                         && RecycleUnitsManager.getInstance().isPaperUnitUnlocked()
@@ -192,19 +192,21 @@ public class QuestManager{
 
     public boolean isQuest5Complete(){
         if(!quest5){
-            if(RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == RecycleUnitStatus.UPGRADED_TWICE){
-                quest5 = true;
+            if(RecycleUnitsManager.getInstance().isGlassUnitUnlocked()) {
+                if (RecycleUnitsManager.getInstance().getGlassUnit().getUnitStatus() == RecycleUnitStatus.UPGRADED_TWICE) {
+                    quest5 = true;
 
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, R.string.missione_completata, Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                sfx.missionFX();
-                return true;
-            }else return false;
+                    sfx.missionFX();
+                    return true;
+                } else return false;
+            } else return false;
         }return true;
     }
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ import com.example.thehillreloaded.Game.RecycleUnitsManager;
 import com.example.thehillreloaded.Game.TileMap;
 import com.example.thehillreloaded.Fragments.GlassUnitFragment;
 import com.example.thehillreloaded.Fragments.MetalUnitFragment;
+import com.example.thehillreloaded.Game.TutorialState;
 import com.example.thehillreloaded.Model.GameSuspended;
 import com.example.thehillreloaded.Model.RecycleUnitSave;
 import com.example.thehillreloaded.Fragments.OrganicUnitFragment;
@@ -233,6 +235,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         bottoneMenu.setLayoutParams(pr2);
         bottoneMenu.setId(View.generateViewId());
         menuBottID = bottoneMenu.getId();
+
         //parametri bottonePausa
         LinearLayout.LayoutParams pr3 = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -393,14 +396,30 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
 
     //Metodi OnClick per le diverse centrali
     public void onClickMenuVetro(View view){
-        if(SFXattivi){ soundService.suonoBottoni(); }
-        findViewById(menuBottID).setVisibility(View.GONE);
-        getSupportFragmentManager().popBackStackImmediate();
-        FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
-        fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
-        fmt.replace(menuFragID, new GlassUnitFragment());
-        fmt.addToBackStack("vetro");
-        fmt.commit();
+        if(RecycleUnitsManager.getInstance().isGlassUnitUnlocked()) {
+            if (SFXattivi) { soundService.suonoBottoni(); }
+            findViewById(menuBottID).setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStackImmediate();
+            FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+            fmt.setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
+            fmt.replace(menuFragID, new GlassUnitFragment());
+            fmt.addToBackStack("vetro");
+            fmt.commit();
+        } else {
+            if (RecycleUnitsManager.getInstance().unlockGlassUnit()){
+                if(SFXattivi){ soundService.suonoCostruzioneUpgrade(); }
+                getSupportFragmentManager().popBackStackImmediate();
+                GameManager.getInstance().unPause();
+            } else {
+                if(SFXattivi){ soundService.suonoBottoni(); }
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.sunny_non_sufficienti, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+        switch (GameManager.getInstance().getTutorialState()){
+            case STARTED:
+                GameManager.getInstance().setTutorialState(TutorialState.GLASS_BUILT);
+        }
     }
 
     public void onClickMenuCarta(View view){
@@ -524,7 +543,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
     }
 
     public void onClickMenuOrganico(View view){
-        if (RecycleUnitsManager.getInstance().isCompostUnlocked()) {
+        if (RecycleUnitsManager.getInstance().isCompostUnitUnlocked()) {
             if(SFXattivi){ soundService.suonoBottoni(); }
             QuestManager.getInstance().isQuest1Complete();
             findViewById(menuBottID).setVisibility(View.GONE);
@@ -612,7 +631,7 @@ public class GameActivity extends AppCompatActivity implements QuestManager.Soun
         Bundle bundle = new Bundle();
         bundle.putString("game-pause", gson.toJson(new GameSuspended(GameManager.getInstance().isPaused(), GameManager.getInstance().getSunnyPoints(),
                 GameManager.getInstance().getTimeAtGameStart(), System.nanoTime(),
-                RecycleUnitsManager.getInstance().isPaperUnitUnlocked(), RecycleUnitsManager.getInstance().isCompostUnlocked(),
+                RecycleUnitsManager.getInstance().isPaperUnitUnlocked(), RecycleUnitsManager.getInstance().isCompostUnitUnlocked(),
                 RecycleUnitsManager.getInstance().isAluminiumUnitUnlocked(), RecycleUnitsManager.getInstance().isSteelUnitUnlocked(),
                 RecycleUnitsManager.getInstance().isPlasticUnitUnlocked(), RecycleUnitsManager.getInstance().isEwasteUnitUnlocked(),
                 RecycleUnitsManager.getInstance().isGlassUnitUnlocked(),

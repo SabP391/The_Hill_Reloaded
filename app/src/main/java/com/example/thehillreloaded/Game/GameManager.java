@@ -3,6 +3,7 @@ package com.example.thehillreloaded.Game;
 import android.content.Context;
 
 public class GameManager {
+    private TutorialState tutorialState = TutorialState.STARTED;
     private boolean isPaused = false;
     private static GameManager instance;
     private long timeAtGameStart;
@@ -10,7 +11,7 @@ public class GameManager {
     private long timeToGetThingsSpicy;
     private long timeFromLastSpawn;
     private float spawnSpeed;
-    private int sunnyPoints = 0;
+    private int sunnyPoints = 3;
     private int totalSunnyPoints = 0;
     private GameMode gameMode;
     private Difficulty difficulty;
@@ -139,6 +140,10 @@ public class GameManager {
 
 
     // Getter e setter -----------------------------------------------------------------------------
+    public TutorialState getTutorialState() { return tutorialState; }
+
+    public void setTutorialState(TutorialState tutorialState) { this.tutorialState = tutorialState; }
+
     public static void setInstance(GameManager instance) {
         GameManager.instance = instance;
     }

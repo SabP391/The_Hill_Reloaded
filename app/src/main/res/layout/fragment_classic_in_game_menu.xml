@@ -192,6 +192,15 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_plastica_c" />
 
     <TextView
+        android:id="@+id/txt_costo7_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/bottone_vetro_c"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vetro_c" />
+
+    <TextView
         android:id="@+id/txt_costo3_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -233,5 +242,29 @@
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_glass_build_tut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/giallo_scuro_background"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/tut_glass_build"
+        android:textColor="@color/verde_scuro"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/img_glass_build_tut"
+        app:layout_constraintStart_toStartOf="@+id/img_glass_build_tut" />
+
+    <ImageView
+        android:id="@+id/img_glass_build_tut"
+        android:layout_width="119dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/arrow"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/bottone_vetro_c"
+        app:layout_constraintTop_toTopOf="@+id/bottone_vetro_c" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

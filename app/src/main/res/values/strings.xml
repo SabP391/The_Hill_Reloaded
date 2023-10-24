@@ -48,8 +48,8 @@
     <string name="logout" translatable="false">Logout</string>
     <!--<<<<<<< HEAD -->
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textview">TextView</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="textview" translatable="false">TextView</string>
     <!--<string name="logout">Logout</string>-->
     <!--=======-->
     <string name="sunny_non_sufficienti">Non hai abbastanza Sunny Points</string>
@@ -137,5 +137,6 @@
     <string name="txt_riconoscimenti">Basato su: The (H)ill \n\nSviluppato per l\'esame di \nSviluppo di Mobile Software \nAnno 2021/22 \n\nAlessandro Rossi - Mat.: 709241 \nAndrea Tarulli - Mat.: 704224 \nSabrina Pinto - Mat.: 707173 \nFederica Pellegrino - Mat.: 656874</string>
     <string name="bottone_indietro">Torna indietro</string>
     <string name="messaggio_permessi">Per avviare una partita multiplayer autorizzare il dispositivo ad accedere al bluetooth e alla posizione</string>
+    <string name="tut_glass_build">Seleziona la centrale del vetro per acquistarla</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>

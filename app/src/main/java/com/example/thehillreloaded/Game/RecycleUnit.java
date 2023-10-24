@@ -81,13 +81,13 @@ public abstract class RecycleUnit {
         this.context = context;
         this.map = map;
         this.myTiles = new int[4];
-        this.offsetFromLeft = (int) (((map.getFirstTileOfTheHill() - 4) * map.getTileSize()) - map.getTileSize());
+        this.offsetFromLeft = (int) (((map.getFirstTileOfTheHill() - 7) * map.getTileSize()) - map.getTileSize());
         if(this.offsetFromLeft < 0){
             this.offsetFromLeft = 0;
         }
         size = new Point((int) (map.getTileSize() * 2), (int) (map.getTileSize() * 2));
 
-        this.offsetFromRight = (int) ((((map.getMapSize().x - (map.getFirstTileOfTheHill() + map.getNumberOfTileSOfTheHill())) - 4) * map.getTileSize()) - map.getTileSize());
+        this.offsetFromRight = (int) ((((map.getMapSize().x - (map.getFirstTileOfTheHill() + map.getNumberOfTileSOfTheHill())) - 7) * map.getTileSize()) - map.getTileSize());
         if(this.offsetFromRight < 0){
             this.offsetFromRight = 0;
         }
