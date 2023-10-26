@@ -65,6 +65,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     protected final static int SHAKE_SENSITIVITY = 10;
     protected float accelerationVal, accelerationLast, shake;
 
+    // Classe del tutorial
+    protected TutorialOverlay tutorialOverlay;
+
     //Inizializzo gli shared e il Gson
     SharedPreferences pref;
     Gson gson = new Gson();
@@ -134,6 +137,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
         pref = this.context.getSharedPreferences("HillR_pref", 0);
         //Inizializzo istanza di firebase
         mDatabase = FirebaseDatabase.getInstance("https://the-hill-reloaded-f6f3b-default-rtdb.europe-west1.firebasedatabase.app");
+
+        tutorialOverlay = new TutorialOverlay(map, context);
     }
 
     // Metodi per la gestione del rendering e della logica di gioco --------------------------------
@@ -143,6 +148,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
     public void render(@NonNull Canvas c){
         map.drawBackground(c);
         GameManager.getInstance().getSunnyPointsCounter().draw(c);
+        // Disegna il tutorial
+        if(GameManager.getInstance().getTutorialState() != TutorialState.FINISHED){
+            tutorialOverlay.draw(c);
+        }
         // Disegna a schermo le unità di riciclo
         for(RecycleUnit i : unitsOnScreen){
             i.drawUnit(c, System.nanoTime());

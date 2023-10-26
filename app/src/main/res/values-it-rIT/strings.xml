@@ -126,5 +126,11 @@
     <string name="messaggio_permessi">Per avviare una partita multiplayer autorizzare il dispositivo ad accedere al bluetooth e alla posizione</string>
     <string name="tut_glass_build">Seleziona la centrale del vetro per acquistarla</string>
     <string name="tut_glass_open">Seleziona la centrale del vetro per aprire il suo menu</string>
-    <string name="tut_glass_up">Aggiorna l\'unità per sbloccare un nuovo slot di processamento \ne nuovi oggetti riciclati</string>
+    <string name="tut_glass_up">Aggiorna l\'unità per sbloccare \nun nuovo slot di processamento \ne nuovi oggetti riciclati</string>
+    <string name="benvenuto_tut">Benvenuto in the hill reloaded</string>
+    <string name="dovrai_tut">Il tuo obiettivo sarà riciclare i rifiuti che cadono \nprima che raggiungano la linea rossa</string>
+    <string name="proviamo_tut">Ora prova a costruire la prima unità</string>
+    <string name="apri_menu_tut">Clicca qui per aprire \nil menu di gestione delle unità</string>
+    <string name="trascina_tut">Ora prova a riciclare.  \nTracina il vetro sull\'unità appena costruita</string>
+    <string name="gestisci_tut">Quando la centrale avrà terminato \ndi processare l\'ogetto \navrai abbastanza unit points \nper eseguire un upgrade. \nApri il menu delle centrali per farlo.</string>
 </resources>

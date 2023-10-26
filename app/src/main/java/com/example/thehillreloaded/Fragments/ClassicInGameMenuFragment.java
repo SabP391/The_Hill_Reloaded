@@ -108,7 +108,7 @@ public class ClassicInGameMenuFragment extends Fragment {
                 tutorial_img.setVisibility(View.VISIBLE);
                 break;
             }
-            case GLASS_BUILT: {
+            case FIRST_ITEM_RECYCLED: {
                 TextView tutorial_label = (TextView) view.findViewById(R.id.txt_glass_build_tut);
                 tutorial_label.setVisibility(View.VISIBLE);
                 tutorial_label.setText(R.string.tut_glass_open);

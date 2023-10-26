@@ -249,10 +249,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginBottom="36dp"
-        android:background="@color/giallo_scuro_background"
+        android:background="#8000"
         android:fontFamily="@font/roboto_black"
         android:text="@string/tut_glass_build"
-        android:textColor="@color/verde_scuro"
+        android:textColor="@color/white"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/img_glass_build_tut"
         app:layout_constraintStart_toStartOf="@+id/img_glass_build_tut" />

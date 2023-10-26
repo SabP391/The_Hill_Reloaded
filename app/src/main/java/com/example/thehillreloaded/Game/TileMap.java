@@ -216,6 +216,8 @@ public class TileMap {
         return NUMBER_OF_TILES_OF_THE_HILL;
     }
 
+    public int getHorizontalTileCount() { return HORIZONTAL_TILE_COUNT; };
+
     public ArrayList<Integer> getTileMap() { return tileMap; }
 
     // Metodi di utility per il debug --------------------------------------------------------------

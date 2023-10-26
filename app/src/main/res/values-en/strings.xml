@@ -126,6 +126,12 @@
     <string name="messaggio_permessi">To start a multiplayer match bluetooth and location permissions are required</string>
     <string name="tut_glass_build">Select glass unit to build it</string>
     <string name="tut_glass_open">Select glass unit to open its menu</string>
-    <string name="tut_glass_up">Upgrade this unit to unlock a new processing slot \nand better recycled objects</string>
+    <string name="tut_glass_up">Upgrade this unit to unlock \na new processing slot \nand better recycled objects</string>
+    <string name="benvenuto_tut">Welcom to the hill reloaded</string>
+    <string name="dovrai_tut">Your goal will be to recycle the litter falling on the hill \nbefore they reach the red line</string>
+    <string name="proviamo_tut">Now try to build the first unit</string>
+    <string name="apri_menu_tut">Click here to open \nthe units menu</string>
+    <string name="trascina_tut">Now let\'s try to recycle. \nDrag some glass to the newly built unit.</string>
+    <string name="gestisci_tut">As soon as the unit \nwill have finished processing the item \nyou will have enough unit points to upgrade it. \nOpen the units menu to do so.</string>
 
 </resources>

@@ -609,6 +609,9 @@ public abstract class RecycleUnit {
                 QuestManager.getInstance().increaseCounterQuest4();
             }
         }
+        if(GameManager.getInstance().getTutorialState() == TutorialState.GLASS_BUILT){
+            GameManager.getInstance().setTutorialState(TutorialState.FIRST_ITEM_RECYCLED);
+        }
         return result;
     }
 

@@ -66,6 +66,9 @@ public class GameAssets {
     private Bitmap compostBuff;
     private Bitmap compostDebuff;
 
+    // Bitmap freccia tutorial
+    private Bitmap arrowImg;
+
     private Random rand;
 
     // Costruttore della classe
@@ -139,6 +142,8 @@ public class GameAssets {
         eWasteDebuff = getBitmap(context, R.drawable.asset_ewaste_debuff);
         compostBuff = getBitmap(context, R.drawable.asset_umido_buff);
         compostDebuff = getBitmap(context, R.drawable.asset_umido_debuff);
+
+        arrowImg = getBitmap(context, R.drawable.arrow);
     };
 
     public static GameAssets getInstance(Context context2){
@@ -266,6 +271,10 @@ public class GameAssets {
 
     Bitmap getCompostDebuff(Point size){
         return(Bitmap.createScaledBitmap(compostDebuff, size.x, size.y, false));
+    }
+
+    Bitmap getArrowBitmap(Point size){
+        return(Bitmap.createScaledBitmap(arrowImg, size.x, size.y, false));
     }
 
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------

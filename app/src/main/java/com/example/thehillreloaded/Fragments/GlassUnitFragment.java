@@ -210,7 +210,7 @@ public class GlassUnitFragment extends Fragment {
                     sfx.suonoUpgrade();
                     setLayoutElements();
                     setUnitDetails();
-                    if(GameManager.getInstance().getTutorialState() == TutorialState.GLASS_BUILT){
+                    if(GameManager.getInstance().getTutorialState() == TutorialState.FIRST_ITEM_RECYCLED){
                         GameManager.getInstance().setTutorialState(TutorialState.UPGRADE_BUILT);
                         TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_up_txt);
                         tutorial_label.setVisibility(View.GONE);
@@ -226,7 +226,7 @@ public class GlassUnitFragment extends Fragment {
 
         // codice relativo al tutorial
         switch(GameManager.getInstance().getTutorialState()){
-            case GLASS_BUILT: {
+            case FIRST_ITEM_RECYCLED: {
                 TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_up_txt);
                 tutorial_label.setVisibility(View.VISIBLE);
                 ImageView tutorial_img = (ImageView) view.findViewById(R.id.tut_glass_up_img);
