@@ -101,11 +101,21 @@ public class ClassicInGameMenuFragment extends Fragment {
             costo_ewaste.setText(" " + RecycleUnitsManager.getInstance().getCostOfEwasteUnit()); }
 
         switch (GameManager.getInstance().getTutorialState()) {
-            case STARTED:
+            case STARTED: {
                 TextView tutorial_label = (TextView) view.findViewById(R.id.txt_glass_build_tut);
                 tutorial_label.setVisibility(View.VISIBLE);
                 ImageView tutorial_img = (ImageView) view.findViewById(R.id.img_glass_build_tut);
                 tutorial_img.setVisibility(View.VISIBLE);
+                break;
+            }
+            case GLASS_BUILT: {
+                TextView tutorial_label = (TextView) view.findViewById(R.id.txt_glass_build_tut);
+                tutorial_label.setVisibility(View.VISIBLE);
+                tutorial_label.setText(R.string.tut_glass_open);
+                ImageView tutorial_img = (ImageView) view.findViewById(R.id.img_glass_build_tut);
+                tutorial_img.setVisibility(View.VISIBLE);
+                break;
+            }
         }
         return view;
     }

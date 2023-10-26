@@ -125,5 +125,7 @@
     <string name="bottone_indietro">Go back</string>
     <string name="messaggio_permessi">To start a multiplayer match bluetooth and location permissions are required</string>
     <string name="tut_glass_build">Select glass unit to build it</string>
+    <string name="tut_glass_open">Select glass unit to open its menu</string>
+    <string name="tut_glass_up">Upgrade this unit to unlock a new processing slot \nand better recycled objects</string>
 
 </resources>

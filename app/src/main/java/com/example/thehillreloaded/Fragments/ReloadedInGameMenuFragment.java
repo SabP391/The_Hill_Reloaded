@@ -108,11 +108,21 @@ public class ReloadedInGameMenuFragment extends Fragment {
             costo_organico.setText(" " + RecycleUnitsManager.getInstance().getCostOfCompostUnit()); }
 
         switch (GameManager.getInstance().getTutorialState()) {
-            case STARTED:
+            case STARTED: {
                 TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_build_txt_r);
                 tutorial_label.setVisibility(View.VISIBLE);
                 ImageView tutorial_img = (ImageView) view.findViewById(R.id.tut_glass_build_img_r);
                 tutorial_img.setVisibility(View.VISIBLE);
+                break;
+            }
+            case GLASS_BUILT: {
+                TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_build_txt_r);
+                tutorial_label.setVisibility(View.VISIBLE);
+                tutorial_label.setText(R.string.tut_glass_open);
+                ImageView tutorial_img = (ImageView) view.findViewById(R.id.tut_glass_build_img_r);
+                tutorial_img.setVisibility(View.VISIBLE);
+                break;
+            }
         }
         return view;
     }

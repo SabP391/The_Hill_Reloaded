@@ -16,7 +16,7 @@ public abstract class RecycleUnit {
 
     // Costanti relative alla logica di gioco ------------------------------------------------------
     protected static final int COST_OF_FIRST_UPGRADE = 4;
-    protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 8;
+    protected static final int COST_OF_SECOND_UPGRADE_RELOADED = 4;
     protected static final int UNIT_POINT_GAIN = 1;
     protected static final int MAXIMUM_WEAR_LEVEL = 15;
     protected static final int WEAR_LEVEL_INCREASE = 1;

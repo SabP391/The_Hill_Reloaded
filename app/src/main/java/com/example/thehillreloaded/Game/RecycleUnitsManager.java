@@ -69,8 +69,8 @@ public class RecycleUnitsManager {
         this.map = map;
         sFX = (RecycleUnitsManager.SoundFx) context;
         unlockedUnits.add(new IncineratorUnit(map, context));
-        /*
 
+        /*
         unlockedUnits.add(new GlassRecycleUnit(map, context));
         unlockedUnits.add(new PaperRecycleUnit(map, context));
         unlockedUnits.add(new CompostRecycleUnit(map, context));
@@ -78,8 +78,8 @@ public class RecycleUnitsManager {
         unlockedUnits.add(new EWasteRecycleUnit(map, context));
         unlockedUnits.add(new AluminiumRecycleUnit(map, context));
         unlockedUnits.add(new PlasticRecycleUnit(map, context));
+        */
 
-         */
         initUnlockableObjects();
     }
 

@@ -125,4 +125,6 @@
     <string name="bottone_indietro">Torna indietro</string>
     <string name="messaggio_permessi">Per avviare una partita multiplayer autorizzare il dispositivo ad accedere al bluetooth e alla posizione</string>
     <string name="tut_glass_build">Seleziona la centrale del vetro per acquistarla</string>
+    <string name="tut_glass_open">Seleziona la centrale del vetro per aprire il suo menu</string>
+    <string name="tut_glass_up">Aggiorna l\'unità per sbloccare un nuovo slot di processamento \ne nuovi oggetti riciclati</string>
 </resources>

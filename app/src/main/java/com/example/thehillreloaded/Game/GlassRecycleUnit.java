@@ -12,6 +12,7 @@ public class GlassRecycleUnit extends RecycleUnit{
     public GlassRecycleUnit(TileMap map, Context context){
         super(map, context);
         this.acceptedItemType = ItemType.GLASS;
+        this.unitPoints = 3;
         if(gameMode == GameMode.RELOADED) {
             this.sprite = GameAssets.getInstance(context).getGlassUnit(size);
             position = new Point((0 + offsetFromLeft), (int) (map.getTileSize()));

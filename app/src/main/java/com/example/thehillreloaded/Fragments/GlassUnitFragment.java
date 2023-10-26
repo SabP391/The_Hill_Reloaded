@@ -22,7 +22,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thehillreloaded.Game.GameManager;
 import com.example.thehillreloaded.Game.RecycleUnitsManager;
+import com.example.thehillreloaded.Game.TutorialState;
 import com.example.thehillreloaded.R;
 
 /**
@@ -208,12 +210,30 @@ public class GlassUnitFragment extends Fragment {
                     sfx.suonoUpgrade();
                     setLayoutElements();
                     setUnitDetails();
+                    if(GameManager.getInstance().getTutorialState() == TutorialState.GLASS_BUILT){
+                        GameManager.getInstance().setTutorialState(TutorialState.UPGRADE_BUILT);
+                        TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_up_txt);
+                        tutorial_label.setVisibility(View.GONE);
+                        ImageView tutorial_img = (ImageView) view.findViewById(R.id.tut_glass_up_img);
+                        tutorial_img.setVisibility(View.GONE);
+                    }
                 } else {
                     sfx.suonoBottoni();
                     Toast.makeText(getActivity().getApplicationContext(), R.string.azione_non_disponibile_upgrade, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        // codice relativo al tutorial
+        switch(GameManager.getInstance().getTutorialState()){
+            case GLASS_BUILT: {
+                TextView tutorial_label = (TextView) view.findViewById(R.id.tut_glass_up_txt);
+                tutorial_label.setVisibility(View.VISIBLE);
+                ImageView tutorial_img = (ImageView) view.findViewById(R.id.tut_glass_up_img);
+                tutorial_img.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
 
         return view;
     }

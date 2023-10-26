@@ -223,6 +223,30 @@
         app:layout_constraintStart_toEndOf="@+id/ic_glass_unit"
         app:layout_constraintTop_toBottomOf="@+id/glass_status" />
 
+    <ImageView
+        android:id="@+id/tut_glass_up_img"
+        android:layout_width="186dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="-20dp"
+        android:scaleY="-1"
+        android:src="@drawable/arrow"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/glass_upgrade_button"
+        app:layout_constraintStart_toStartOf="@+id/glass_upgrade_button" />
+
+    <TextView
+        android:id="@+id/tut_glass_up_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-80dp"
+        android:background="@color/giallo_scuro_background"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/tut_glass_up"
+        android:textColor="@color/verde_scuro"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tut_glass_up_img"
+        app:layout_constraintStart_toEndOf="@+id/tut_glass_up_img" />
+
     <FrameLayout
         android:id="@+id/unlockable_glass"
         android:layout_width="match_parent"
@@ -230,8 +254,10 @@
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
