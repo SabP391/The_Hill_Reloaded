@@ -76,6 +76,9 @@ public class IncineratorUnit extends RecycleUnit{
             isFirstSlotFree = false;
             timeAtFirstSlotProcessStart = System.nanoTime();
             GameManager.getInstance().subtractSunnyPoints(SINGLE_ITEM_COST);
+            if(GameManager.getInstance().getTutorialState() == TutorialState.UPGRADE_BUILT){
+                GameManager.getInstance().setTutorialState(TutorialState.FINISHED);
+            }
             return true;
         }
         return false;
@@ -102,6 +105,9 @@ public class IncineratorUnit extends RecycleUnit{
                 }
             }
             if(itemOnFloor == 0){
+                if(GameManager.getInstance().getTutorialState() == TutorialState.UPGRADE_BUILT){
+                    GameManager.getInstance().setTutorialState(TutorialState.FINISHED);
+                }
                 return 1;
             }else {
                 GameManager.getInstance().subtractSunnyPoints(LINE_COST);

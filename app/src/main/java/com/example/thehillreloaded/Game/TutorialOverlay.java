@@ -54,7 +54,16 @@ public class TutorialOverlay {
                 break;
             }
             case UPGRADE_BUILT:{
+                int secondTextPosition = (int)((map.getFirstTileOfTheHill() * map.getTileSize())
+                        + (map.getTileSize() * map.getNumberOfTileSOfTheHill())
+                        + 20);
 
+                drawTextMultiline((String) context.getText(R.string.sunny_tut),
+                        25, 400, c) ;
+                drawTextMultiline((String) context.getText(R.string.inc_tut),
+                        secondTextPosition, 200, c) ;
+                drawTextMultiline((String) context.getText(R.string.inc_tut_2),
+                        secondTextPosition, 700, c) ;
             }
             default: break;
         }

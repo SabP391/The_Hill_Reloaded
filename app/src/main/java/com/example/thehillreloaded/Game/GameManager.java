@@ -11,7 +11,7 @@ public class GameManager {
     private long timeToGetThingsSpicy;
     private long timeFromLastSpawn;
     private float spawnSpeed;
-    private int sunnyPoints = 3;
+    private int sunnyPoints = 4;
     private int totalSunnyPoints = 0;
     private GameMode gameMode;
     private Difficulty difficulty;
@@ -106,7 +106,8 @@ public class GameManager {
         // Se é il momento di aggiungere un oggetto a schermo
         // aggiorna il tempo registrato all'ultimo spawn
         // e ritorna true
-        if((currentTime - timeFromLastSpawn) / 10000000 >= spawnSpeed){
+        if((currentTime - timeFromLastSpawn) / 10000000 >= spawnSpeed
+            && tutorialState != TutorialState.STARTED){
             timeFromLastSpawn = currentTime;
             return true;
         }

@@ -31,7 +31,7 @@ public class TileMap {
     // Costanti che determinano la dimensione delle collina su cui
     // cadono gli oggetti
     private final int FIRST_TILE_OF_THE_HILL;
-    private int NUMBER_OF_TILES_OF_THE_HILL = 5;
+    private int numberOfTilesOfTheHill = 5;
     private final int HORIZONTAL_TILE_COUNT = 10;
 
     // Costante per determinare lo spessore delle linee
@@ -65,7 +65,7 @@ public class TileMap {
         this.mapSize.y = HORIZONTAL_TILE_COUNT;
         this.mapSize.x = Math.round((screenSize.x / tileSize));
         this.tileMap= tileMap;
-        FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (NUMBER_OF_TILES_OF_THE_HILL / 2));
+        FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (numberOfTilesOfTheHill / 2));
         backGround = GameAssets.getInstance(context).getGameBackGround(screenSize);
 
         // Inizializzazione delle costanti di tipo Paint necessarie
@@ -106,7 +106,7 @@ public class TileMap {
         this.mapSize.y = HORIZONTAL_TILE_COUNT;
         this.mapSize.x = Math.round((screenSize.x / tileSize));
         tileMap = new ArrayList<Integer>(Collections.nCopies(mapSize.x * mapSize.y, 0));
-        FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (NUMBER_OF_TILES_OF_THE_HILL / 2));
+        FIRST_TILE_OF_THE_HILL = (int)((mapSize.x / 2) - (numberOfTilesOfTheHill / 2));
         backGround = GameAssets.getInstance(context).getGameBackGround(screenSize);
 
         // Inizializzazione delle costanti di tipo Paint necessarie
@@ -167,7 +167,7 @@ public class TileMap {
     // l'idice della tile da cui far partire il rettangolo
     // e il numero di colonne per cui si vuole che il rettangolo si estenda
     public void drawBackground(Canvas c){
-        int rectWidth = (int) (NUMBER_OF_TILES_OF_THE_HILL * tileSize);
+        int rectWidth = (int) (numberOfTilesOfTheHill * tileSize);
         int rectHeight = (int) (tileSize) * mapSize.y;
         // Disegna il background
         c.drawBitmap(backGround, 0, 0, null);
@@ -213,7 +213,7 @@ public class TileMap {
     }
 
     public int getNumberOfTileSOfTheHill(){
-        return NUMBER_OF_TILES_OF_THE_HILL;
+        return numberOfTilesOfTheHill;
     }
 
     public int getHorizontalTileCount() { return HORIZONTAL_TILE_COUNT; };

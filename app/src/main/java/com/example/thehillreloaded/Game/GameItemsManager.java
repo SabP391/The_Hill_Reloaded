@@ -1,5 +1,6 @@
 package com.example.thehillreloaded.Game;
 
+import android.content.ClipData;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -131,6 +132,19 @@ public class GameItemsManager {
                             buffTypes.get(rand.nextInt(buffTypes.size()))));
         }
         spawnedItemsCounter +=1;
+    }
+
+    public void spawnSpecificItem(ItemType type, int initialTile){
+        itemsOnScreen.add(
+                new GameItem(initialTile,
+                        map,
+                        context,
+                        type,
+                        buffTypes.get(rand.nextInt(buffTypes.size()))));
+    }
+
+    public void spawnBlock(int initialTile, BlockShape shape){
+
     }
 
     // Metodo per aggiungere gli item type ogni intervallo prefissato di oggetti

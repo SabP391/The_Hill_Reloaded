@@ -133,5 +133,8 @@
     <string name="apri_menu_tut">Click here to open \nthe units menu</string>
     <string name="trascina_tut">Now let\'s try to recycle. \nDrag some glass to the newly built unit.</string>
     <string name="gestisci_tut">As soon as the unit \nwill have finished processing the item \nyou will have enough unit points to upgrade it. \nOpen the units menu to do so.</string>
+    <string name="sunny_tut">Recycled items will produce sunny points. \nYou can spend these \nto build new units \nor use the inciniretor</string>
+    <string name="inc_tut">The incinerator is a special unit: \nIt will process any type of litter \nat the cost of 2 sunny points. \nSpending 3 sunny points \nyou will be able to use \nit\'s special ability: \nshake your phone to burn \nall the litter at the base of the hill</string>
+    <string name="inc_tut_2">Now try to shake the phone \nor drag an item on the incinerator</string>
 
 </resources>

@@ -146,5 +146,8 @@
     <string name="apri_menu_tut">Clicca qui per aprire \nil menu di gestione delle unità</string>
     <string name="trascina_tut">Ora prova a riciclare.  \nTracina il vetro sull\'unità appena costruita</string>
     <string name="gestisci_tut">Quando la centrale avrà terminato \ndi processare l\'ogetto \navrai abbastanza unit points \nper eseguire un upgrade. \nApri il menu delle centrali per farlo.</string>
+    <string name="sunny_tut">Gli oggetti riciclati dalle unità \nti permetteranno di ottenere sunny point \nche potrai spendere per acquistare nuove unità \no usare l\'inceneritore.</string>
+    <string name="inc_tut">L\'inceneritore è un\'unità speciale \nche può processare qualsiasi tipo di rifiuto \nal costo di 2 sunny points. \nSpendendo 3 sunny points \npotrai attivare il suo potere speciale: \nscuotendo il telefono potrai \nincenerire tutti i rifiuti \nalla base della collina.</string>
+    <string name="inc_tut_2">Ora prova a scuotere il telefono \no a trascinare un oggetto sull\'inceneritore</string>
     <!-->>>>>>> 2223db7c14c673551c2dc95e9c558e656c054185-->
 </resources>

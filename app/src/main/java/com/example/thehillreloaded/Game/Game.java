@@ -116,6 +116,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback, Runnabl
 
         // Concurrent linked queue degli oggetti presenti a schermo
         itemsOnScreen = GameItemsManager.getInstance().getItemsOnScreen();
+        //GameItemsManager.getInstance().spawnSpecificItem(ItemType.GLASS, map.getFirstTileOfTheHill());
+        GameItemsManager.getInstance().spawnBlock(map.getFirstTileOfTheHill(), BlockShape.SQUARE);
 
         // Array di immagini per sostituire gli oggetti a schermo
         // quando il gioco è in pausa
