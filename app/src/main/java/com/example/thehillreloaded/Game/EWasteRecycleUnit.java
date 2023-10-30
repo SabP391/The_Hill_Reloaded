@@ -17,6 +17,7 @@ public class EWasteRecycleUnit extends RecycleUnit{
                 (2 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 2));
         initMyTiles();
         setProcessSlotsPosition();
+        initBubble();
     }
 
     @Override

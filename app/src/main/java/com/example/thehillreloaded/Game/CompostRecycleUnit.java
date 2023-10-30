@@ -18,6 +18,7 @@ public class CompostRecycleUnit extends RecycleUnit{
         }
         initMyTiles();
         setProcessSlotsPosition();
+        initBubble();
     }
 
     @Override

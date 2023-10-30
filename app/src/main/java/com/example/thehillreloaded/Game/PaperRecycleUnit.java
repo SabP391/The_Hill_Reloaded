@@ -17,7 +17,7 @@ public class PaperRecycleUnit extends RecycleUnit{
                 (4 * map.getTileSize() + offsetFromRight)), (int)((map.getTileSize())));
         initMyTiles();
         setProcessSlotsPosition();
-
+        initBubble();
     }
 
     @Override

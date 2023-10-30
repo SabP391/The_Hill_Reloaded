@@ -22,6 +22,7 @@ public class SteelRecycleUnit extends RecycleUnit{
         }
         initMyTiles();
         setProcessSlotsPosition();
+        initBubble();
     }
 
     @Override

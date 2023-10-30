@@ -21,6 +21,7 @@ public class PlasticRecycleUnit extends RecycleUnit{
         }
         initMyTiles();
         setProcessSlotsPosition();
+        initBubble();
     }
 
     @Override

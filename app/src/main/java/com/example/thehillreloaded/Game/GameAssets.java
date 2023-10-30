@@ -68,6 +68,8 @@ public class GameAssets {
 
     // Bitmap freccia tutorial
     private Bitmap arrowImg;
+    // Bitmap per le bubble
+    private Bitmap bubble;
 
     private Random rand;
 
@@ -144,6 +146,7 @@ public class GameAssets {
         compostDebuff = getBitmap(context, R.drawable.asset_umido_debuff);
 
         arrowImg = getBitmap(context, R.drawable.arrow);
+        bubble = getBitmap(context, R.drawable.bubble);
     };
 
     public static GameAssets getInstance(Context context2){
@@ -275,6 +278,10 @@ public class GameAssets {
 
     Bitmap getArrowBitmap(Point size){
         return(Bitmap.createScaledBitmap(arrowImg, size.x, size.y, false));
+    }
+
+    Bitmap getBubbleBitmap(Point size){
+        return(Bitmap.createScaledBitmap(bubble, size.x, size.y, false));
     }
 
     // Metodi per convertire i file vettoriali in bitmap--------------------------------------------

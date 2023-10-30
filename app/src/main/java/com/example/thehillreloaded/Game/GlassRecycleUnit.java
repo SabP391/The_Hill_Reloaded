@@ -22,6 +22,7 @@ public class GlassRecycleUnit extends RecycleUnit{
         }
         initMyTiles();
         setProcessSlotsPosition();
+        initBubble();
     }
 
     @Override

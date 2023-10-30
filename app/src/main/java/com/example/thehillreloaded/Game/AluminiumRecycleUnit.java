@@ -17,6 +17,7 @@ public class AluminiumRecycleUnit extends RecycleUnit{
                 (4 * map.getTileSize() + offsetFromRight)), (int)(map.getTileSize() * 4));
         initMyTiles();
         setProcessSlotsPosition();
+        initBubble();
     }
 
     @Override

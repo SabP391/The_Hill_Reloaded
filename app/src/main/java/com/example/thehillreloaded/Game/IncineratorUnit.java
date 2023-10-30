@@ -33,6 +33,7 @@ public class IncineratorUnit extends RecycleUnit{
         pollutionPaint.setStyle(Paint.Style.FILL);
         pollutionPaint.setColor(Color.BLACK);
         pollutionPaint.setAlpha(100);
+        initBubble();
     }
 
     @Override

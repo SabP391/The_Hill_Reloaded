@@ -73,8 +73,8 @@ public abstract class RecycleUnit {
     protected Bitmap unitPointsIcon;
     protected Bitmap buffIcon;
     protected Bitmap debuffIcon;
-
     protected Paint upValue;
+    protected FeedbackBubble feedbackBubble;
 
     public RecycleUnit(TileMap map, Context context){
         this.gameMode = GameManager.getInstance().getGameMode();
@@ -142,6 +142,7 @@ public abstract class RecycleUnit {
         drawWearWarning(c);
         drawUnitPoints(c);
         drawBuff(c, currentTime);
+        feedbackBubble.drawBubble(c, currentTime, 1);
     }
 
     // Metodo per disegnare l'icona di warning se
@@ -667,6 +668,13 @@ public abstract class RecycleUnit {
         // impostata la variabile di controllo a true e viene registrato il tempo
         isDebuffed = true;
         timeAtBuffStart = System.nanoTime();
+    }
+
+    // Funzione per inizializzare correttamente la bubble di feedback
+    protected void initBubble(){
+        Point bubbleSize = new Point(size.x/4, size.y/4);
+        Point bubblePosition = new Point(position.x, position.y + 10);
+        feedbackBubble = new FeedbackBubble(bubbleSize, context, bubblePosition);
     }
 
     // Getter e setter------------------------------------------------------------------------------
